@@ -124,8 +124,7 @@ you have to change them also in the file |"common.w"|.
   must be less than 10240; used in |"common.w"| */
 @d max_sections 2000 /* greater than the total number of sections */
 @d buf_size 100 /* maximum length of input line, plus one */
-@d longest_name 10000 /* section name and section documentation text shouldn't
-                         be longer than this */
+@d longest_name 10000 /* FIXME: maximum length of what does this determine? */
 @d long_buf_size (buf_size+longest_name)
 @d line_length 80 /* lines of \TEX/ output have at most this many characters;
   should be less than 256 */

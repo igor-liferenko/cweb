@@ -115,8 +115,7 @@ change them in the file |"common.w"|.
 @d max_names 4000 /* number of identifiers, strings, section names;
   must be less than 10240; used in |"common.w"| */
 @d max_texts 2500 /* number of replacement texts, must be less than 10240 */
-@d longest_name 10000 /* section name and section documentation text shouldn't
-                         be longer than this */
+@d longest_name 10000 /* FIXME: maximum length of what does this determine? */
 @d stack_size 50 /* number of simultaneous levels of macro expansion */
 
 @ First comes general stuff:

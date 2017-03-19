@@ -151,8 +151,7 @@ some of \.{CWEB}'s routines use the fact that it is safe to refer to
 |*(limit+2)| without overstepping the bounds of the array.
 
 @d buf_size 100 /* for \.{CWEAVE} */
-@d longest_name 10000 /* section name and section documentation text shouldn't
-                         be longer than this */
+@d longest_name 10000 /* FIXME: maximum length of what does this determine? */
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
 @d xisspace(c) (isspace(c)&&((unsigned char)c<0200))
 @d xisupper(c) (isupper(c)&&((unsigned char)c<0200))
