@@ -44,7 +44,7 @@ document under the conditions for verbatim copying, provided that the
 entire resulting derived work is given a different name and distributed
 under the terms of a permission notice identical to this one.
 }
-\pageno=\contentspagenumber \advance\pageno by 1
+\let\lheader\rheader
 \let\maybe=\iftrue
 @s not_eq normal
 

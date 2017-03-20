@@ -1,0 +1,24 @@
+diff --git a/cwebman.tex b/cwebman.tex
+index 2e4ec65..1b58338 100644
+--- a/cwebman.tex
++++ b/cwebman.tex
+@@ -3,6 +3,10 @@
+ 
+ \def\tangref{3} % where the main explanation of CTANGLing is given
+ \input cwebmac
++\hoffset=12.29mm % purely empirical - change if needed
++\pageshift=210mm \advance\pageshift by-6.5in \advance\pageshift by-\hoffset
++\advance\hoffset by-1in
++\advance\pageshift by-1in
+ \acrofalse\pdffalse\pdftexfalse
+ \def\page{\box255 } \normalbottom
+ \parskip 0pt plus 1pt
+@@ -87,7 +91,7 @@ for their own personal use.
+ Internet page \.{http://www-cs-faculty.stanford.edu/\char`\~knuth/cweb.html}
+ contains current info about \.{CWEB} and related topics.
+ 
+-\pageno=0 \titletrue\eject
++\pageno=1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
+ 
+ \titletrue
+ \centerline{\titlefont The {\ttitlefont CWEB} System of
