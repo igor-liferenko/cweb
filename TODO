@@ -1,1 +1,2 @@
-search @+else in common.w and ctangle.w and remove @+
+remove @+ from @+else in cweave.w and ctangle.w
+(only to check that parsing works OK - after that revert back)

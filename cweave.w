@@ -2797,7 +2797,7 @@ else squash(pp,1,int_like,-2,30);
 @ @<Cases for |colcol|@>=
 if (cat1==exp||cat1==int_like) {
   app(qualifier); squash(pp,2,cat1,-2,31);
-} else if (cat1==colcol) squash(pp,2,colcol,-1,32);
+}@+else if (cat1==colcol) squash(pp,2,colcol,-1,32);
 
 @ @<Cases for |decl_head|@>=
 if (cat1==comma) {
@@ -2931,7 +2931,7 @@ else if (cat1==stmt) {
     big_app1(pp+1); big_app(outdent); big_app(force); big_app1(pp+2);
     if (cat3==if_like) {
       big_app(' '); big_app1(pp+3); reduce(pp,4,if_like,0,63);
-    } else reduce(pp,3,else_like,0,64);
+    }@+else reduce(pp,3,else_like,0,64);
   }
   else squash(pp,1,else_like,0,65);
 }
@@ -2943,7 +2943,7 @@ if (cat1==stmt || cat1==exp) {
     big_app(cancel); big_app1(pp+1); big_app(force); big_app1(pp+2);
     if (cat3==if_like) {
       big_app(' '); big_app1(pp+3); reduce(pp,4,if_like,0,66);
-    } else reduce(pp,3,else_like,0,67);
+    }@+else reduce(pp,3,else_like,0,67);
   }
   else squash(pp,1,else_head,0,68);
 }
@@ -3837,7 +3837,7 @@ output_C() /* outputs the current token list */
   if (make_pb) {
     out_str("\\PB{"); make_output(); out('}');
 @.\\PB@>
-  } else make_output(); /* output the list */
+  }@+else make_output(); /* output the list */
   if (text_ptr>max_text_ptr) max_text_ptr=text_ptr;
   if (tok_ptr>max_tok_ptr) max_tok_ptr=tok_ptr;
   text_ptr=save_text_ptr; tok_ptr=save_tok_ptr; /* forget the tokens */
@@ -3919,10 +3919,10 @@ if (a==identifier) {
   }
 @.\\\\@>
 @.\\.@>
-} else if (cur_name->ilk==alfop) {
+}@+else if (cur_name->ilk==alfop) {
   out('X');
   goto custom_out;
-} else out('&'); /* |a==res_word| */
+}@+else out('&'); /* |a==res_word| */
 @.\\\&@>
 if (is_tiny(cur_name)) {
   if (isxalpha((cur_name->byte_start)[0]))
@@ -4491,7 +4491,7 @@ else {
   @<Output all the section names@>;
   finish_line(); fclose(active_file); /* finished with |scn_file| */
   active_file=tex_file;
-  if (group_found) out_str("\\con"); else out_str("\\end");
+  if (group_found) out_str("\\con");@+else out_str("\\end");
 @.\\con@>
 @.\\end@>
   finish_line();
