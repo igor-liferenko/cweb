@@ -15,7 +15,7 @@ sudo -u user cp /usr/local/cweb-git/* .
 sudo -u user cweave cweave.w >/dev/null
 sudo -u user cweave ctangle.w >/dev/null
 sudo -u user cweave common.w >/dev/null
-sudo -u user tex cweave.tex # >/dev/null
+sudo -u user tex cweave.tex >/dev/null
 sudo -u user tex ctangle.tex >/dev/null
 sudo -u user tex common.tex >/dev/null
 sudo -u user tex cwebman.tex >/dev/null
