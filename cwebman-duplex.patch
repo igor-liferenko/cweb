@@ -18,7 +18,7 @@ index 2e4ec65..1b58338 100644
  contains current info about \.{CWEB} and related topics.
  
 -\pageno=0 \titletrue\eject
-+\pageno=1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
++\pageno=-1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
  
  \titletrue
  \centerline{\titlefont The {\ttitlefont CWEB} System of
