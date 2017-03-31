@@ -27,7 +27,7 @@ prnt:
 	@tex cweave.tex >/dev/null
 	@tex ctangle.tex >/dev/null
 	@tex common.tex >/dev/null
-	@patch -o cwebman-duplex.tex cwebman.tex cwebman-duplex.patch
+	@patch -s -o cwebman-duplex.tex cwebman.tex cwebman-duplex.patch
 	@tex cwebman-duplex.tex >/dev/null
 	@dvips ctangle.dvi -o ctangle.ps
 	@dvips common.dvi -o common.ps
