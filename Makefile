@@ -9,9 +9,9 @@ all:
 	gcc -g -o cweave cweave.o common.o
 
 scrn:
-	@cweave cweave.w >/dev/null
-	@cweave ctangle.w >/dev/null
-	@cweave common.w >/dev/null
+	@cw cweave.w >/dev/null
+	@cw ctangle.w >/dev/null
+	@cw common.w >/dev/null
 	@tex cweave.tex >/dev/null
 	@tex ctangle.tex >/dev/null
 	@tex common.tex >/dev/null
@@ -20,10 +20,11 @@ scrn:
 	@dvips ctangle.dvi -o ctangle.ps
 	@dvips common.dvi -o common.ps
 	@dvips cweave.dvi -o cweave.ps
+
 prnt:
-	@cweave cweave.w cweave.dpl >/dev/null
-	@cweave ctangle.w ctangle.dpl >/dev/null
-	@cweave common.w common.dpl >/dev/null
+	@cw cweave.w cweave.dpl >/dev/null
+	@cw ctangle.w ctangle.dpl >/dev/null
+	@cw common.w common.dpl >/dev/null
 	@tex cweave.tex >/dev/null
 	@tex ctangle.tex >/dev/null
 	@tex common.tex >/dev/null
