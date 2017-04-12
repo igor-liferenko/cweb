@@ -16,10 +16,10 @@ scrn:
 	@tex ctangle.tex >/dev/null
 	@tex common.tex >/dev/null
 	@tex cwebman.tex >/dev/null
-	@dvips cwebman.dvi -o cwebman.ps
-	@dvips ctangle.dvi -o ctangle.ps
-	@dvips common.dvi -o common.ps
-	@dvips cweave.dvi -o cweave.ps
+	@dvips -u /dev/null -q cwebman.dvi
+	@dvips -u /dev/null -q ctangle.dvi
+	@dvips -u /dev/null -q common.dvi
+	@dvips -u /dev/null -q cweave.dvi
 
 prnt:
 	@cw cweave.w cweave.dpl >/dev/null
@@ -30,7 +30,7 @@ prnt:
 	@tex common.tex >/dev/null
 	@patch -s -o cwebman-duplex.tex cwebman.tex cwebman-duplex.patch
 	@tex cwebman-duplex.tex >/dev/null
-	@dvips ctangle.dvi -o ctangle.ps
-	@dvips common.dvi -o common.ps
-	@dvips cweave.dvi -o cweave.ps
-	@dvips cwebman-duplex.dvi -o cwebman.ps
+	@dvips -u /dev/null -q ctangle.dvi
+	@dvips -u /dev/null -q common.dvi
+	@dvips -u /dev/null -q cweave.dvi
+	@dvips -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
