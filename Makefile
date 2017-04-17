@@ -8,19 +8,6 @@ all:
 	gcc -g -w -c cweave.c
 	gcc -g -o cweave cweave.o common.o
 
-scrn:
-	@cw cweave.w >/dev/null
-	@cw ctangle.w >/dev/null
-	@cw common.w >/dev/null
-	@tex cweave.tex >/dev/null
-	@tex ctangle.tex >/dev/null
-	@tex common.tex >/dev/null
-	@tex cwebman.tex >/dev/null
-	@dvips -u /dev/null -q cwebman.dvi
-	@dvips -u /dev/null -q ctangle.dvi
-	@dvips -u /dev/null -q common.dvi
-	@dvips -u /dev/null -q cweave.dvi
-
 prnt:
 	@cw cweave.w cweave.dpl >/dev/null
 	@cw ctangle.w ctangle.dpl >/dev/null
