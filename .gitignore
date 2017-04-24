@@ -35,3 +35,6 @@ cwebman.dvi
 cwebman.log
 cwebman.ps
 cwebman.toc
+lhplain.ini
+tex.fmt
+tex.log

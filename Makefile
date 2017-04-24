@@ -12,8 +12,8 @@ prnt:
 	@cw cweave.w cweave.dpl >/dev/null
 	@cw ctangle.w ctangle.dpl >/dev/null
 	@cw common.w common.dpl >/dev/null
-	@grep -p a4 /etc/papersize || ( echo ERROR: run \"sudo paperconfig -p a4\"; false )
-	@wget --no-verbose http://raw.github.com/igor-liferenko/lhplain/master/lhplain.ini
+	@grep -q a4 /etc/papersize || ( echo ERROR: run \"sudo paperconfig -p a4\"; false )
+	@wget --quiet -nc https://raw.github.com/igor-liferenko/lhplain/master/lhplain.ini
 	@tex -ini -jobname tex lhplain.ini >/dev/null
 	@tex cweave.tex >/dev/null
 	@tex ctangle.tex >/dev/null
