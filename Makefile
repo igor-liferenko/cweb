@@ -21,3 +21,6 @@ prnt:
 	@dvips -u /dev/null -q common.dvi
 	@dvips -u /dev/null -q cweave.dvi
 	@dvips -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
+
+utf8:
+	UNIWEB=/usr/local/uniweb/uniweb.w ./build.sh
