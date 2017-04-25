@@ -8,7 +8,7 @@
 # part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" after running cw.
 
 DIR=/home/user/0000-git/cweb/utf8
-[ -d $DIR ] || DIR="/media/cdrom/utf8" # for post-install.sh
+[ -d $DIR ] || DIR="/usr/local/cweb-git/utf8" # for post-install.sh
 
 # NOTE: if you want to make temporary changes (for example, for adding printfs for tracing), remove the first part from this file and edit /usr/local/cweb/ directly
 
