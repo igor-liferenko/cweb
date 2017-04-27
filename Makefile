@@ -25,6 +25,3 @@ prnt:
 	@dvips -t a4 -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
 	@lpoptions -o media=a4 -o sides=two-sided-long-edge
 	@echo everything is ready - use \"lp\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
-
-utf8:
-	utf8/build.sh
