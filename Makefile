@@ -27,4 +27,4 @@ prnt:
 	@echo everything is ready - use \"lp\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
 
 utf8:
-	UNIWEB=/usr/local/uniweb/uniweb.w utf8/build.sh
+	utf8/build.sh

@@ -7,8 +7,7 @@
 # If you want to test cw, remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
 # part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" after running cw.
 
-DIR=/home/user/0000-git/cweb/utf8
-[ -d $DIR ] || DIR="/usr/local/cweb-git/utf8" # for post-install.sh
+DIR=/usr/local/cweb-git/utf8
 
 # NOTE: if you want to make temporary changes (for example, for adding printfs for tracing), remove the first part from this file and edit /usr/local/cweb/ directly
 
@@ -23,7 +22,7 @@ gcc -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 gcc -g -w -c common.c
 gcc -g -o ctangle ctangle.o common.o
-if ! ./ctangle $UNIWEB > build-cweb.out; then cat build-cweb.out; exit; fi
+if ! ./ctangle /usr/local/uniweb/uniweb.w > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -c uniweb.c
 if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
