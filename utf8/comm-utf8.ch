@@ -4,6 +4,7 @@
 #include <wchar.h>
 #include <limits.h>
 @<Include files@>@/
+#include <errno.h>
 #include "uniweb.h"
 char *encTeX[256];
 @z
