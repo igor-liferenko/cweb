@@ -138,18 +138,12 @@ FILE *fp; /* what file to read from */
 {
   register wint_t c; /* character read */
   register wchar_t *k;  /* where next character goes */
+  if (feof(fp)) return(0);  /* we have hit end-of-file */
   wlimit = k = wbuffer;  /* beginning of buffer */
   while (k<=wbuffer_end && (c=getwc(fp)) != WEOF && c!=L'\n')
     if ((*(k++) = c) != L' ') wlimit = k;
 
-  if (c==WEOF) {
-    if (!feof(fp)) {
-      printf("\n! Invalid UTF-8 sequence");
-      fatal("","");
-    }
-    else if (k==wbuffer)
-      return(0);
-  }
+  if (c==WEOF && !feof(fp)) { printf("\n! Invalid UTF-8 sequence"); fatal("",""); }
 
   if (buffer + wcsntomos(wbuffer, wlimit-wbuffer, NULL) > buffer_end) {
     printf("\n! multibyte buffer too small"); fatal("","");
