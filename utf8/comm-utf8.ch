@@ -143,8 +143,6 @@ FILE *fp; /* what file to read from */
   while (k<=wbuffer_end && (c=getwc(fp)) != WEOF && c!=L'\n')
     if ((*(k++) = c) != L' ') wlimit = k;
 
-  if (c==WEOF && !feof(fp)) { printf("\n! Invalid UTF-8 sequence"); fatal("",""); }
-
   if (buffer + wcsntomos(wbuffer, wlimit-wbuffer, NULL) > buffer_end) {
     printf("\n! multibyte buffer too small"); fatal("","");
   }
