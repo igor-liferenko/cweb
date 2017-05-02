@@ -143,6 +143,8 @@ FILE *fp; /* what file to read from */
   while (k<=wbuffer_end && (c=getwc(fp)) != WEOF && c!=L'\n')
     if ((*(k++) = c) != L' ') wlimit = k;
 
+  if (ferror(fp)) { printf("\n! getwc: %s", strerror(errno)); fatal("",""); }
+
   if (buffer + wcsntomos(wbuffer, wlimit-wbuffer, NULL) > buffer_end) {
     printf("\n! multibyte buffer too small"); fatal("","");
   }
