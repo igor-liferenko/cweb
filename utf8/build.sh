@@ -29,7 +29,7 @@ if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/com
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 if ! tie -m comm-utf8.h common.h $DIR/comm-utf8.hch > build-cweb.out; then cat build-cweb.out; exit; fi
-perl -i -pe 'print if /wchar_t/; s/wchar_t/wint_t/' cweave.w
+perl -i -pe 'print if /wchar_t/; s/wchar_t/wint_t/; print; s/wint_t/cchar_t/; print; s/cchar_t/ssize_t/' cweave.w
 if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch > build-cweb.out # ATTENTION: cweav-file.ch must be before cweav-mac.ch
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
@@ -63,7 +63,7 @@ perl -i -pe 's[\Q\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\31
 perl -i -pe 's[\Q\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337]'"'"'\322\323\324\325\326\327\330\331\332\333\334\335\336\337\340\341'"'" cweave.w
 perl -i -pe 's[\Q\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357]'"'"'\342\343\344\345\270\346\347\350\351\352\353\354\355\356\357\360'"'" cweave.w
 perl -i -pe 's[\Q\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377]'"'"'\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377\271'"'" cweave.w
-perl -i -pe 'print if /wchar_t/; s/wchar_t/wint_t/' cweave.w
+perl -i -pe 'print if /wchar_t/; s/wchar_t/wint_t/; print; s/wint_t/cchar_t/; print; s/cchar_t/ssize_t/' cweave.w
 if ! ./ctangle cweave.w $DIR/cweav-sort.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c cweave.c || exit
 gcc -g -o cweave cweave.o common.o
