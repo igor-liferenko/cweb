@@ -2,3 +2,13 @@ remove @+ from @+else in cweave.w and ctangle.w
 (only to check that parsing works OK - after that revert back)
 
 remove C++ keywords "new" and "delete"
+
+make this example work in cweave:
+@ @d eprintf(...) fprintf(stderr, __VA_ARGS__)
+
+make in the following examples that space will be added before `L' in ctangle:
+@ @c return L'\0';
+@ @c case L'\0':
+@ @c wprintf(PROG_NAME L"version 0.1\n");
+and understand how newline is preserved in ctangle if it is used before `L' in the examples
+(NOTE: in this case whitespace before L is not needed: L"two"L"strings")
