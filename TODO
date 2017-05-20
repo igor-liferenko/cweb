@@ -10,5 +10,5 @@ make in the following examples that space will be added before `L' in ctangle:
 @ @c return L'\0';
 @ @c case L'\0':
 @ @c wprintf(PROG_NAME L"version 0.1\n");
-and understand how newline is preserved in ctangle if it is used before `L' in the examples
+and understand how newline is preserved in ctangle if it is used before `L' in these examples
 (NOTE: in this case whitespace before L is not needed: L"two"L"strings")
