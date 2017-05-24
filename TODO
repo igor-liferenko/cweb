@@ -12,3 +12,6 @@ make in the following examples that space will be added before `L' in ctangle:
 @ @c wprintf(PROG_NAME L"version 0.1\n");
 and understand how newline is preserved in ctangle if it is used before `L' in these examples
 (NOTE: in this case whitespace before L is not needed: L"two"L"strings")
+
+make that new-style comments will work correctly with CWEAVE in the following example:
+@ @c //*searchtext = '\0';
