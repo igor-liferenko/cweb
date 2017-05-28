@@ -23,5 +23,4 @@ prnt:
 	@dvips -t a4 -u /dev/null -q common.dvi
 	@dvips -t a4 -u /dev/null -q cweave.dvi
 	@dvips -t a4 -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
-	@lpoptions -o media=a4 -o sides=two-sided-long-edge
-	@echo everything is ready - use \"lp\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
+	@echo everything is ready - run \"lpoptions -o media=a4 -o sides=two-sided-long-edge\" and use \"lp\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
