@@ -1,6 +1,6 @@
 To test for compatibility:
-git clone -b plain-cweb git://github.com/ascherer/cwebtest
-for i in *.w; do cw $i >/dev/null || echo FAIL; done
-for i in *.w; do ct $i >/dev/null || echo FAIL; done
+cd /usr/local/cweb-test/
+for i in *.w; do cw $i; done >cweave.log
+for i in *.w; do ct $i; done >ctangle.log
 git status
 If everything is OK, no changes must be shown.
