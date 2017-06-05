@@ -1,5 +1,5 @@
 To test for compatibility:
-cd /usr/local/cweb-test/
+cd /usr/local/cwebtest/
 ##### WARNING: this must be updated according to below info #######
 # for i in *.w; do cw $i; done >cweave.log
 # for i in *.w; do ct $i; done >ctangle.log
