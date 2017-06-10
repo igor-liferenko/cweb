@@ -8,7 +8,7 @@ all:
 	gcc -g -w -c cweave.c
 	gcc -g -o cweave cweave.o common.o
 
-prt:
+print:
 	@cw cweave.w cweave.dpl >/dev/null
 	@cw ctangle.w ctangle.dpl >/dev/null
 	@cw common.w common.dpl >/dev/null
@@ -19,8 +19,8 @@ prt:
 	@tex common.tex >/dev/null
 	@patch -s -o cwebman-duplex.tex cwebman.tex cwebman-duplex.patch
 	@tex cwebman-duplex.tex >/dev/null
-	@dvips -t a4 -u /dev/null -q ctangle.dvi
-	@dvips -t a4 -u /dev/null -q common.dvi
-	@dvips -t a4 -u /dev/null -q cweave.dvi
-	@dvips -t a4 -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
+	@dvips -Pduplex -t a4 -u /dev/null -q ctangle.dvi
+	@dvips -Pduplex -t a4 -u /dev/null -q common.dvi
+	@dvips -Pduplex -t a4 -u /dev/null -q cweave.dvi
+	@dvips -Pduplex -t a4 -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
 	@echo everything is ready - use \"lpr\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
