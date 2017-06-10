@@ -23,4 +23,4 @@ prt:
 	@dvips -t a4 -u /dev/null -q common.dvi
 	@dvips -t a4 -u /dev/null -q cweave.dvi
 	@dvips -t a4 -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
-	@echo everything is ready - use \"lpr -o raw\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
+	@echo everything is ready - use \"lpr\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
