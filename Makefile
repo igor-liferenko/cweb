@@ -12,15 +12,8 @@ print:
 	@cw cweave.w cweave.dpl >/dev/null
 	@cw ctangle.w ctangle.dpl >/dev/null
 	@cw common.w common.dpl >/dev/null
-	@wget --quiet -nc https://raw.github.com/igor-liferenko/lhplain/master/lhplain.ini
-	@tex -ini -jobname tex lhplain.ini >/dev/null
 	@tex cweave.tex >/dev/null
 	@tex ctangle.tex >/dev/null
 	@tex common.tex >/dev/null
-	@patch -s -o cwebman-duplex.tex cwebman.tex cwebman-duplex.patch
-	@tex cwebman-duplex.tex >/dev/null
-	@dvips -Pduplex -t a4 -u /dev/null -q ctangle.dvi
-	@dvips -Pduplex -t a4 -u /dev/null -q common.dvi
-	@dvips -Pduplex -t a4 -u /dev/null -q cweave.dvi
-	@dvips -Pduplex -t a4 -u /dev/null -q cwebman-duplex.dvi -o cwebman.ps
-	@echo everything is ready - use \"lpr\" for printing ctangle.ps, common.ps, cweave.ps and cwebman.ps
+	@tex cwebman.tex >/dev/null
+	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
