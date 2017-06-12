@@ -5,7 +5,7 @@
 #       "./ctangle cweave.w" in second part of this script.
 # You may also test cw and ct on cwebtest/, because there all files are ASCII-only.
 # If you want to test cw, remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
-# part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" after running cw.
+# part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" in runall-/usr/local/bin/-Vlocal branch.
 
 DIR=/usr/local/cweb-git/utf8
 

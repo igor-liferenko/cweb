@@ -6,8 +6,3 @@ ctangle=ct cweave=cw ./runall.sh -p /usr/local/bin/ -v local
 git diff runall-/usr/local/bin/-Voriginal runall-/usr/local/bin/-Vlocal
 
 If everything is OK, no changes must be shown.
-
-If you checkout the 'master' branch of the 'cwebtest' project, the
-required corrections are already in place.
-
-Note that the various 'cweb' branches are considered obsolete.
