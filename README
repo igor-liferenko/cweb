@@ -1,8 +1,8 @@
 To test for compatibility:
 
 cd /usr/local/cwebtest/
-./runall.sh -p /usr/local/bin/ -v original
-ctangle=ct cweave=cw ./runall.sh -p /usr/local/bin/ -v local
-git diff runall-/usr/local/bin/-Voriginal runall-/usr/local/bin/-Vlocal
+./runall.sh -p /bin/
+./runall.sh -p /usr/local/bin/
+git diff runall-/bin/-V runall-/usr/local/bin/-V
 
 If everything is OK, no changes must be shown.
