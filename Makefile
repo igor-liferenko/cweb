@@ -9,9 +9,9 @@ all:
 	gcc -g -o cweave cweave.o common.o
 
 print:
-	@cw cweave.w cweave.dpl >/dev/null
-	@cw ctangle.w ctangle.dpl >/dev/null
-	@cw common.w common.dpl >/dev/null
+	@cweave cweave.w cweave.dpl >/dev/null
+	@cweave ctangle.w ctangle.dpl >/dev/null
+	@cweave common.w common.dpl >/dev/null
 	@tex cweave.tex >/dev/null
 	@tex ctangle.tex >/dev/null
 	@tex common.tex >/dev/null
