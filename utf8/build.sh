@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# NOTE: you may test cweave and ctangle on cwebtest/
-#       If you want to test cweave on cwebtest/, remove cweav-sort.ch from
+# NOTE: you may test /bin/cweave and /bin/ctangle on cwebtest/
+#       If you want to test /bin/cweave on cwebtest/, remove cweav-sort.ch from
 #       "./ctangle cweave.w" in second part of this script.
-# You may also test cw and ct on cwebtest/, because there all files are ASCII-only.
-# If you want to test cw, remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
+# You may also test cweave and ctangle on cwebtest/, because there all files are ASCII-only.
+# If you want to test cweave, remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
 # part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" in runall-/usr/local/bin/-Vlocal branch.
 
 DIR=/usr/local/cweb-git/utf8
@@ -35,13 +35,13 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c cweave.c || exit
-gcc -g -o cw cweave.o common.o uniweb.o
+gcc -g -o cweave cweave.o common.o uniweb.o
 if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-file.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c ctangle.c || exit
-gcc -g -o ct ctangle.o common.o uniweb.o
-cp cw ct /usr/local/bin/
+gcc -g -o ctangle ctangle.o common.o uniweb.o
+cp cweave ctangle /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
 
@@ -72,6 +72,6 @@ gcc -g -o cweave cweave.o common.o
 if ! ./ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c ctangle.c || exit
 gcc -g -o ctangle ctangle.o common.o
-cp cweave ctangle /usr/local/bin/
+cp cweave ctangle /var/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
