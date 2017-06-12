@@ -1,24 +1,13 @@
 To test for compatibility:
+
 cd /usr/local/cwebtest/
-##### WARNING: this must be updated according to below info #######
-# for i in *.w; do cw $i; done >cweave.log
-# for i in *.w; do ct $i; done >ctangle.log
-# git status
-# If everything is OK, no changes must be shown.
-#####################
+./runall.sh -p /usr/local/bin/ -v original
+ctangle=ct cweave=cw ./runall.sh -p /usr/local/bin/ -v local
+git diff runall-/usr/local/bin/-Voriginal runall-/usr/local/bin/-Vlocal
+
+If everything is OK, no changes must be shown.
 
 If you checkout the 'master' branch of the 'cwebtest' project, the
 required corrections are already in place.
 
-Note that the various 'cweb' branches are considered obsolete. Instead,
-in order to create current CWEB output, run the 'runall.sh' script,
-switch to the resulting 'runall-whatever' branch, and compile the codes
-with a simple 'for i in *.c; do gcc -c -I/usr/include/sgb $i; done' and
-a similar loop 'for i in *.tex; do ...; done' (where you're free to add
-any required 'mpost' and 'mf' invocations).
-
-If you want to compare different versions of CWEB, use different
-arguments to 'runall.sh -p ... -v ...' and 'git diff runall-one
-runall-two'. This is much more impressive than my former approach with
-creating and uploading such branches on Github.
-
+Note that the various 'cweb' branches are considered obsolete.
