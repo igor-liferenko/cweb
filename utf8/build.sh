@@ -13,10 +13,10 @@
 # cd /usr/local/cwebtest/
 # git checkout .
 # git reset .
-# git clean -f
-# ./runall.sh -p /bin/ >runall.log
+# git clean -f >/dev/null
+# ./runall.sh -p /bin/ >runall.log 2>/dev/null
 # NOTE: we use runall2.log instead of putting the next line before second "git archive" and redirecting to runall.log, because otherwise you will get "your local changes would be overwritten by checkout" error on runall.log when you will run runall.sh for the second time
-# ./runall.sh -p /usr/local/bin/ >runall2.log # OR /var/local/bin/
+# ./runall.sh -p /usr/local/bin/ >runall2.log 2>/dev/null # OR /var/local/bin/
 # git archive runall-/bin/-V | command tar -xf -
 # git add .
 # git reset runall2.log
