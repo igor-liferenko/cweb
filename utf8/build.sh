@@ -13,12 +13,13 @@
 # cd /usr/local/cwebtest/
 # git checkout .
 # git reset .
-# git checkout .
+# git clean -f
 # ./runall.sh -p /bin/ >/dev/null
 # ./runall.sh -p /usr/local/bin/ >/dev/null # OR /var/local/bin/
 # git archive runall-/bin/-V | command tar -xf -
 # git add .
 # git archive runall-/usr/local/bin/-V | command tar -xf -
+# git branch -D runall-/bin/-V runall-/usr/local/bin/-V
 #
 # If everything is OK, "git st" must not show any changes.
 
