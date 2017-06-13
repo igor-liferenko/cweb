@@ -1,11 +1,27 @@
 #!/bin/bash
 
-# NOTE: you may test /bin/cweave and /bin/ctangle on cwebtest/
-#       If you want to test /bin/cweave on cwebtest/, remove cweav-sort.ch from
+# NOTE: you may test /var/local/bin/ on cwebtest/
+#       If you want to test /var/local/bin/, remove cweav-sort.ch from
 #       "./ctangle cweave.w" in second part of this script.
-# You may also test cweave and ctangle on cwebtest/, because there all files are ASCII-only.
-# If you want to test cweave, remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
-# part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" in runall-/usr/local/bin/-Vlocal branch.
+# You may also test /usr/local/bin/ on cwebtest/, because there all files are ASCII-only.
+# If you want to test /usr/local/bin/, remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
+# part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" after running below
+# commands.
+
+# To test for compatibility:
+#
+# cd /usr/local/cwebtest/
+# git checkout .
+# git reset .
+# git checkout .
+# ./runall.sh -p /bin/ >/dev/null
+# ./runall.sh -p /usr/local/bin/ >/dev/null # OR /var/local/bin/
+# git archive runall-/bin/-V | command tar -xf -
+# git add .
+# git archive runall-/usr/local/bin/-V | command tar -xf -
+#
+# If everything is OK, "git st" must not show any changes.
+
 
 DIR=/usr/local/cweb-git/utf8
 
