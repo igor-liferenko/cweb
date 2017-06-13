@@ -12,8 +12,8 @@ print:
 	@cweave cweave cweave >/dev/null
 	@cweave ctangle ctangle >/dev/null
 	@cweave common common >/dev/null
-	@tex cweave.tex >/dev/null
-	@tex ctangle.tex >/dev/null
-	@tex common.tex >/dev/null
-	@tex cwebman.tex >/dev/null
+	@tex cweave >/dev/null
+	@tex ctangle >/dev/null
+	@tex common >/dev/null
+	@tex cwebman >/dev/null
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
