@@ -21,8 +21,8 @@
 # git add .
 # git reset runall2.log
 # mv runall2.log runall.log
-# git archive runall-/usr/local/bin/-V | command tar -xf -
-# git branch -D runall-/bin/-V runall-/usr/local/bin/-V
+# git archive runall-/usr/local/bin/-V | command tar -xf - # OR /var/local/bin/
+# git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 #
 # If everything is OK, "git st" must not show any changes.
 
