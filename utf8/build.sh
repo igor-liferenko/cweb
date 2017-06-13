@@ -72,6 +72,7 @@ gcc -g -o cweave cweave.o common.o
 if ! ./ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c ctangle.c || exit
 gcc -g -o ctangle ctangle.o common.o
+mkdir -p /var/local/bin/
 cp cweave ctangle /var/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
