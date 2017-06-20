@@ -1,7 +1,7 @@
 @x
 \let\lheader\rheader
 @y
-\special{header=config.duplex}
+\special{header=config.duplong}
 \def\contentspagenumber{-1} % the value is calculated as "1-<quantity of pages in TOC,
                             % rounded up to the nearest even number>"
 % NOTE: if the number of pages in contents will be more than one, set \contentspagenumber
