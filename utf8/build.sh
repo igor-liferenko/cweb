@@ -40,7 +40,8 @@ DIR=/usr/local/cweb-git/utf8
 cd /usr/local/cweb/
 git rev-parse --abbrev-ref HEAD | grep -v master && exit
 git diff --exit-code HEAD || exit
-mkdir /tmp/cwebbuild/ || exit # do not remove automatically in order not to step over an already running build
+rm -fr /tmp/cwebbuild/
+mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
 cp -r /usr/local/cweb/* .
 gcc -g -w -c ctangle.c
@@ -71,7 +72,8 @@ cd /
 rm -fr /tmp/cwebbuild/
 
 # Build original CWEB for cct and ccw:
-mkdir /tmp/cwebbuild/ || exit # do not remove automatically because the above part may be deleted as said in second NOTE at the beginning of this file, and then this line will be the same as analogous line above - see comment after that line
+rm -fr /tmp/cwebbuild/
+mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
 cp -r /usr/local/cweb/* .
 gcc -g -w -c ctangle.c
