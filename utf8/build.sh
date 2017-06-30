@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# /bin/ = original (just in case)
+# /var/local/bin/ = original with minimal changes to work in ccw/cct (built in second part of this script)
+# /usr/bin/ = distribution's (TeX Live)
+# /usr/local/bin/ = my (built in first part of this script)
+
 # NOTE: you may test /var/local/bin/ on cwebtest/
 #       If you want to test /var/local/bin/, remove cweav-sort.ch from
 #       "./ctangle cweave.w" in second part of this script.
