@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# /bin/ = original (just in case)
+# /bin/ = original (for compatibility testing of /usr/local/bin/ in "cwebtest")
 # /var/local/bin/ = original with minimal changes to work in ccw/cct (built in second part of this script)
-# /usr/bin/ = distribution's (TeX Live)
+# /usr/bin/ = by default from distribution (TeX Live)
 # /usr/local/bin/ = my (built in first part of this script)
 
 # NOTE: you may test /var/local/bin/ on cwebtest/
