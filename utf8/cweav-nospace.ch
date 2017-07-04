@@ -12,6 +12,8 @@ else if (cat1==stmt || cat1==function) {
 }
 @z
 
+Do not insert extra space before declarations.
+
 @x
 if (cat1==stmt||cat1==decl||cat1==function) {
   big_app1(pp);
