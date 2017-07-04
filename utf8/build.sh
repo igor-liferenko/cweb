@@ -6,9 +6,8 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # NOTE: you may test /var/local/bin/ on cwebtest/
-#       If you want to test /var/local/bin/, replace
-#       "tie -c cweav-merged.ch" line and the line after it in second part of this script with
-#       "echo >cweav-merged.ch".
+#       If you want to test /var/local/bin/, replace cweav-sort.ch and cweav-nospace.ch from
+#       "tie -c cweav-merged.ch" to /dev/null in second part of this script.
 # You may also test /usr/local/bin/ on cwebtest/, because there all files are ASCII-only.
 # If you want to test /usr/local/bin/, remove cweav-sort.ch and cweav-nospace.ch from
 # "tie -c cweav-merged.ch" in first
