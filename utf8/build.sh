@@ -6,8 +6,8 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # NOTE: you may test /var/local/bin/ on cwebtest/
-#       If you want to test /var/local/bin/, replace cweav-sort.ch and cweav-nospace.ch from
-#       "tie -c cweav-merged.ch" to /dev/null in second part of this script.
+#       If you want to test /var/local/bin/, remove cweav-sort.ch and cweav-nospace.ch from
+#       "tie -c cweav-merged.ch" in second part of this script.
 # You may also test /usr/local/bin/ on cwebtest/, because there all files are ASCII-only.
 # If you want to test /usr/local/bin/, remove cweav-sort.ch and cweav-nospace.ch from
 # "tie -c cweav-merged.ch" in first
@@ -94,7 +94,7 @@ perl -i -pe 's[\Q\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\35
 perl -i -pe 's[\Q\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377]'"'"'\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377\271'"'" cweave.w
 perl -i -pe 'print if /wchar_t/; s/wchar_t/wint_t/' cweave.w
 perl -i -pe 'print if /size_t/; s/size_t/ssize_t/' cweave.w
-if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-nospace.ch > build-cweb.out
+if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-nospace.ch /dev/null > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c cweave.c || exit
