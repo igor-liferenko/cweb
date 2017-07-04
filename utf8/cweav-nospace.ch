@@ -1,5 +1,10 @@
 Do not insert extra space after declarations.
 
+Example:
+
+typedef uint32_t pixel_t;
+@<Global...@>;
+
 @x l.2562
 else if (cat1==stmt || cat1==function) {
   big_app1(pp); big_app(big_force);
@@ -13,6 +18,12 @@ else if (cat1==stmt || cat1==function) {
 @z
 
 Do not insert extra space before declarations.
+
+Example:
+
+@<Header files@>;
+typedef uint32_t pixel_t;
+
 
 @x
 if (cat1==stmt||cat1==decl||cat1==function) {
