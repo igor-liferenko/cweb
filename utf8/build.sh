@@ -78,7 +78,9 @@ EOF
 # perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
 # 5) for i in *.tex; do tex $i; done
 # for i in *.dvi; do dvihash $i; done >hash.all
-# then just diff hash.all from each branch - if they are the same - everything is compatible
+# Then just diff hash.all from each branch - if they are the same - everything is compatible.
+# TODO: for what is line "ensure that the contents file isn't empty" in cwebmal.tex? Try to
+# remove it and test for compatibility as said here.
 
 
 DIR=/usr/local/cweb-git/utf8
