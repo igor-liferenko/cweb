@@ -63,27 +63,29 @@ EOF
 # runall-/usr/local/bin/-V as follows:
 # remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first part of this script
 # run "build-cweb"
-# cd /usr/local/cwebtest/
-# git checkout .
-# git reset .
-# git clean -f >/dev/null
-# ./runall.sh -p /bin/ >runall.log 2>/dev/null
-# git checkout runall-/bin/-V
-# git add runall.log
-# git commit -m 'runall'
-# git checkout master
-# ./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
-# git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
-# git add runall.log
-# git commit -m 'runall'
-# git checkout master
-# cd ../
-# cp -a cwebtest/ cwebtest-local/
-# cd cwebtest/
-# git checkout runall-/bin/-V
-# cd ../cwebtest-local/
-# git checkout runall-/usr/local/bin/-V
-# cd ../
+: << EOF
+cd /usr/local/cwebtest/
+git checkout .
+git reset .
+git clean -f >/dev/null
+./runall.sh -p /bin/ >runall.log 2>/dev/null
+git checkout runall-/bin/-V
+git add runall.log
+git commit -m 'runall'
+git checkout master
+./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
+git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
+git add runall.log
+git commit -m 'runall'
+git checkout master
+cd ../
+cp -a cwebtest/ cwebtest-local/
+cd cwebtest/
+git checkout runall-/bin/-V
+cd ../cwebtest-local/
+git checkout runall-/usr/local/bin/-V
+cd ../
+EOF
 # 1) in cwebtest/ and cwebtest-local/: for i in *.mp; do mpost $i; done
 # 2) in cwebtest-local/ apply patch to tcb.tex:
 #
