@@ -37,6 +37,35 @@ git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 EOF
 # If everything is OK, "git st" must not show any changes in red.
 
+# if you want to run "TeX" on resulting files, do this:
+# apply patch to tcb.tex:
+#
+#-\input cwebmac
+#+\input cwebmal
+# \let\INPUT=\input
+# \def\input#1 {\def\next{#1}\ifx\next\cwebmac\else\INPUT #1\fi}
+#-\def\cwebmac{cwebmac}
+#+\def\cwebmac{cwebmal}
+# \def\inx{}
+# \def\fin{}
+# \def\con{\output{\setbox0=\box255
+#                 \global\output{\normaloutput\page\lheader\rheader}}\eject}
+# \outer\def\N#1#2#3.{% beginning of starred section
+#-  \ifacro{\toksF={}\makeoutlinetoks#3\outlinedone\outlinedone}\fi
+#   \gdepth=#1\gtitle={#3}\MN{#2}%
+#   \ifon\ifnum#1<\secpagedepth \vfil\eject % force page break if depth is small
+#     \else\vfil\penalty-100\vfilneg\vskip\intersecskip\fi\fi
+#@@ -99,11 +98,6 @@ programs.html} and used without restriction.
+#   \def\stripprefix##1>{}\def\gtitletoks{#3}%
+#   \edef\gtitletoks{\expandafter\stripprefix\meaning\gtitletoks}%
+#  % omit output to contents file
+#-  \ifpdftex\expandafter\xdef\csname curr#1\endcsname{\secno}
+#-    \ifnum#1>0\countB=#1 \advance\countB by-1
+#-      \advancenumber{chunk\the\countB.\expnumber{curr\the\countB}}\fi\fi
+#-  \ifpdf\special{pdf: outline #1 << /Title (\the\toksE) /Dest
+#-    [ @thispage /FitH @ypos ] >>}\fi
+#   \ifon\startsection{\bf#3.\quad}\ignorespaces}
+#
 # regenerate tex.fmt with this: perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 # for i in *.mp; do mpost $i; done
 # for i in *.tex; do tex $i; done
