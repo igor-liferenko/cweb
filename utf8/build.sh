@@ -12,67 +12,15 @@
 #   test-cweb
 # If everything is OK, no changes must be shown.
 
-# To test for compatibility of cwebmac.tex, run tex+dvihash in branches runall-/bin/-V and
-# runall-/usr/local/bin/-V as follows:
-# remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first part of this script
-# run "build-cweb"
-: << EOF
-cd /usr/local/cwebtest/
-git checkout .
-git reset .
-git clean -f >/dev/null
-./runall.sh -p /bin/ &>/dev/null
-./runall.sh -p /usr/local/bin/ &>/dev/null
-cd ../
-cp -a cwebtest/ cwebtest-local/
-cd cwebtest/
-git checkout runall-/bin/-V
-cd ../cwebtest-local/
-git checkout runall-/usr/local/bin/-V
-cd ../
-EOF
-# 1) in cwebtest/ and cwebtest-local/: for i in *.mp; do mpost $i; done
-# 2) in cwebtest-local/ apply patch to tcb.tex:
+# To test for compatibility of cwebmal.tex:
+# remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first
+# part of this script and run:
+#   build-cweb
+#   test-cwebmac
+# If everything is OK, no changes must be shown.
 #
-#-\input cwebmac
-#+\input cwebmal
-# \let\INPUT=\input
-# \def\input#1 {\def\next{#1}\ifx\next\cwebmac\else\INPUT #1\fi}
-#-\def\cwebmac{cwebmac}
-#+\def\cwebmac{cwebmal}
-# \def\inx{}
-# \def\fin{}
-# \def\con{\output{\setbox0=\box255
-#                 \global\output{\normaloutput\page\lheader\rheader}}\eject}
-# \outer\def\N#1#2#3.{% beginning of starred section
-#-  \ifacro{\toksF={}\makeoutlinetoks#3\outlinedone\outlinedone}\fi
-#   \gdepth=#1\gtitle={#3}\MN{#2}%
-#   \ifon\ifnum#1<\secpagedepth \vfil\eject % force page break if depth is small
-#     \else\vfil\penalty-100\vfilneg\vskip\intersecskip\fi\fi
-#@@ -99,11 +98,6 @@ programs.html} and used without restriction.
-#   \def\stripprefix##1>{}\def\gtitletoks{#3}%
-#   \edef\gtitletoks{\expandafter\stripprefix\meaning\gtitletoks}%
-#  % omit output to contents file
-#-  \ifpdftex\expandafter\xdef\csname curr#1\endcsname{\secno}
-#-    \ifnum#1>0\countB=#1 \advance\countB by-1
-#-      \advancenumber{chunk\the\countB.\expnumber{curr\the\countB}}\fi\fi
-#-  \ifpdf\special{pdf: outline #1 << /Title (\the\toksE) /Dest
-#-    [ @thispage /FitH @ypos ] >>}\fi
-#   \ifon\startsection{\bf#3.\quad}\ignorespaces}
-#
-# 3) in both cwebtest/ and cwebtest-local/ generate new tex.fmt with following commands:
-# cp /usr/local/SUPER_DEBIAN/lhplain.ini .
-# perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
-# tex -ini -jobname tex lhplain.ini >/dev/null
-# 4) in cwebtest/ fix bug in cwebmac.tex by running the following commands:
-# cp /usr/local/cweb/cwebmac.tex . # first check via "git st" that it is not modified
-# perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
-# 5) for i in *.tex; do tex $i; done
-# for i in *.dvi; do dvihash $i; done >hash.all
-# Then just diff cwebtest/hash.all cwebtest-local/hash.all: if they are the same,
-# everything is compatible.
-# TODO: for what is line "ensure that the contents file isn't empty" in cwebmal.tex? Try to
-# remove it and test for compatibility as said here.
+# TODO: for what is line "ensure that the contents file isn't empty" in cwebmal.tex?
+# Try to remove it and test for compatibility.
 
 
 DIR=/usr/local/cweb-git/utf8
