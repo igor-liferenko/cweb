@@ -5,16 +5,10 @@
 # /usr/bin/ = by default from distribution (TeX Live)
 # /usr/local/bin/ = my (built in first part of this script)
 
-# NOTE: you may test /var/local/bin/ on cwebtest/
-#       If you want to test /var/local/bin/, replace cweav-sort.ch and cweav-nospace.ch from
-#       "tie -c cweav-merged.ch" to /dev/null in second part of this script.
-# You may also test /usr/local/bin/ on cwebtest/, because there all files are ASCII-only.
-# If you want to test /usr/local/bin/, remove cweav-sort.ch and cweav-nospace.ch from
-# "tie -c cweav-merged.ch" in first
-# part of this script, and run "perl -i -pe 's/cwebmal/cwebmac/' *.tex" after running
-# "test for compatibility" commands below.
-
-# To test for compatibility:
+# To test for compatibility of cweave and ctangle in /usr/local/bin/:
+# remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first
+# part of this script
+# run "build-cweb"
 : << EOF
 cd /usr/local/cwebtest/
 git checkout .
@@ -25,23 +19,73 @@ git checkout runall-/bin/-V
 git add runall.log
 git commit -m 'runall'
 git checkout master
-./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
-git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
+./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null
+git checkout runall-/usr/local/bin/-V
 git add runall.log
 git commit -m 'runall'
 git checkout master
 git archive runall-/bin/-V | command tar -xf -
 git add .
-git archive runall-/usr/local/bin/-V | command tar -xf - # OR /var/local/bin/
-git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
+git archive runall-/usr/local/bin/-V | command tar -xf -
+perl -i -pe 's/cwebmal/cwebmac/' *.tex
+git branch -D runall-/bin/-V runall-/usr/local/bin/-V
 EOF
 # If everything is OK, "git st" must not show any changes in red.
 
-# To test changes to cwebmal.tex for compatibility with cwebmac.tex (at the moment of writing they were
-# tested to be 100% compatible), run tex+dvihash in branches runall-/bin/-V and
+
+# To test for compatibility of cweave and ctangle in /var/local/bin/:
+# replace cweav-sort.ch and cweav-nospace.ch from
+# "tie -c cweav-merged.ch" to /dev/null in second part of this script
+# run "build-cweb"
+: << EOF
+cd /usr/local/cwebtest/
+git checkout .
+git reset .
+git clean -f >/dev/null
+./runall.sh -p /bin/ >runall.log 2>/dev/null
+git checkout runall-/bin/-V
+git add runall.log
+git commit -m 'runall'
+git checkout master
+./runall.sh -p /var/local/bin/ >runall.log 2>/dev/null
+git checkout runall-/var/local/bin/-V
+git add runall.log
+git commit -m 'runall'
+git checkout master
+git archive runall-/bin/-V | command tar -xf -
+git add .
+git archive runall-/var/local/bin/-V | command tar -xf -
+git branch -D runall-/bin/-V runall-/var/local/bin/-V
+EOF
+# If everything is OK, "git st" must not show any changes in red.
+
+# To test for compatibility of cwebmac.tex, run tex+dvihash in branches runall-/bin/-V and
 # runall-/usr/local/bin/-V as follows:
-# 1) for i in *.mp; do mpost $i; done
-# 2) apply patch to tcb.tex in branch runall-/usr/local/bin/-V:
+# remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first part of this script
+# run "build-cweb"
+# cd /usr/local/cwebtest/
+# git checkout .
+# git reset .
+# git clean -f >/dev/null
+# ./runall.sh -p /bin/ >runall.log 2>/dev/null
+# git checkout runall-/bin/-V
+# git add runall.log
+# git commit -m 'runall'
+# git checkout master
+# ./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
+# git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
+# git add runall.log
+# git commit -m 'runall'
+# git checkout master
+# cd ../
+# cp -a cwebtest/ cwebtest-local/
+# cd cwebtest/
+# git checkout runall-/bin/-V
+# cd ../cwebtest-local/
+# git checkout runall-/usr/local/bin/-V
+# cd ../
+# 1) in cwebtest/ and cwebtest-local/: for i in *.mp; do mpost $i; done
+# 2) in cwebtest-local/ apply patch to tcb.tex:
 #
 #-\input cwebmac
 #+\input cwebmal
@@ -69,16 +113,17 @@ EOF
 #-    [ @thispage /FitH @ypos ] >>}\fi
 #   \ifon\startsection{\bf#3.\quad}\ignorespaces}
 #
-# 3) in both branches generate new tex.fmt with following commands:
+# 3) in both cwebtest/ and cwebtest-local/ generate new tex.fmt with following commands:
 # wget --quiet https://raw.github.com/igor-liferenko/lhplain/master/lhplain.ini
 # perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 # tex -ini -jobname tex lhplain.ini >/dev/null
-# 4) in branch runall-/bin/-V fix bug in cwebmac.tex by running the following commands:
+# 4) in cwebtest/ fix bug in cwebmac.tex by running the following commands:
 # cp /usr/local/cweb/cwebmac.tex . # first check via "git st" that it is not modified
 # perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
 # 5) for i in *.tex; do tex $i; done
 # for i in *.dvi; do dvihash $i; done >hash.all
-# Then just diff hash.all from each branch - if they are the same - everything is compatible.
+# Then just diff cwebtest/hash.all cwebtest-local/hash.all: if they are the same,
+# everything is compatible.
 # TODO: for what is line "ensure that the contents file isn't empty" in cwebmal.tex? Try to
 # remove it and test for compatibility as said here.
 
