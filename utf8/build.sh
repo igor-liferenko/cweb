@@ -44,6 +44,7 @@ EOF
 # NOTE: if you want to do dvihash using cwebmac.tex, do this before running 'tex' above:
 # mkdir -p /usr/local/share/texmf/tex/plain/
 # cp /usr/local/cweb/cwebmac.tex /usr/local/share/texmf/tex/plain/ # ensure that it is not modified
+# perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' /usr/local/share/texmf/tex/plain/cwebmac.tex # fix bug
 # texhash /usr/local/share/texmf
 
 
