@@ -33,32 +33,6 @@ EOF
 # If everything is OK, "git st" must not show any changes in red.
 
 
-# To test for compatibility of cweave and ctangle in /var/local/bin/:
-# replace cweav-sort.ch and cweav-nospace.ch from
-# "tie -c cweav-merged.ch" to /dev/null in second part of this script
-# run "build-cweb"
-: << EOF
-cd /usr/local/cwebtest/
-git checkout .
-git reset .
-git clean -f >/dev/null
-./runall.sh -p /bin/ >runall.log 2>/dev/null
-git checkout runall-/bin/-V
-git add runall.log
-git commit -m 'runall'
-git checkout master
-./runall.sh -p /var/local/bin/ >runall.log 2>/dev/null
-git checkout runall-/var/local/bin/-V
-git add runall.log
-git commit -m 'runall'
-git checkout master
-git archive runall-/bin/-V | command tar -xf -
-git add .
-git archive runall-/var/local/bin/-V | command tar -xf -
-git branch -D runall-/bin/-V runall-/var/local/bin/-V
-EOF
-# If everything is OK, "git st" must not show any changes in red.
-
 # To test for compatibility of cwebmac.tex, run tex+dvihash in branches runall-/bin/-V and
 # runall-/usr/local/bin/-V as follows:
 # remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first part of this script
@@ -68,16 +42,8 @@ cd /usr/local/cwebtest/
 git checkout .
 git reset .
 git clean -f >/dev/null
-./runall.sh -p /bin/ >runall.log 2>/dev/null
-git checkout runall-/bin/-V
-git add runall.log
-git commit -m 'runall'
-git checkout master
-./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
-git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
-git add runall.log
-git commit -m 'runall'
-git checkout master
+./runall.sh -p /bin/ &>/dev/null
+./runall.sh -p /usr/local/bin/ &>/dev/null
 cd ../
 cp -a cwebtest/ cwebtest-local/
 cd cwebtest/
