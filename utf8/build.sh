@@ -37,6 +37,7 @@ git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 EOF
 # If everything is OK, "git st" must not show any changes in red.
 
+# regenerate tex.fmt with this: perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 # for i in *.mp; do mpost $i; done
 # for i in *.tex; do tex $i; done
 # for i in *.dvi; do dvihash $i; done >hash.all
