@@ -38,8 +38,6 @@ EOF
 # If everything is OK, "git st" must not show any changes in red.
 
 # for i in *.mp; do mpost $i; done
-# mf-nowin celtica13
-# mf-nowin celticb13
 # for i in *.tex; do tex $i; done
 
 
