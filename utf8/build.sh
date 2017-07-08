@@ -21,12 +21,17 @@
 # git reset .
 # git clean -f >/dev/null
 # ./runall.sh -p /bin/ >runall.log 2>/dev/null
-# NOTE: we use runall2.log instead of putting the next line before second "git archive" and redirecting to runall.log, because otherwise you will get "your local changes would be overwritten by checkout" error on runall.log when you will run runall.sh for the second time
-# ./runall.sh -p /usr/local/bin/ >runall2.log 2>/dev/null # OR /var/local/bin/
+# git checkout runall-/bin/-V
+# git add runall.log
+# git commit -m 'runall'
+# git checkout master
+# ./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
+# git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
+# git add runall.log
+# git commit -m 'runall'
+# git checkout master
 # git archive runall-/bin/-V | command tar -xf -
 # git add .
-# git reset runall2.log
-# mv runall2.log runall.log
 # git archive runall-/usr/local/bin/-V | command tar -xf - # OR /var/local/bin/
 # git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 #
