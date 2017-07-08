@@ -116,7 +116,7 @@ EOF
 #   \ifon\startsection{\bf#3.\quad}\ignorespaces}
 #
 # 3) in both cwebtest/ and cwebtest-local/ generate new tex.fmt with following commands:
-# wget --quiet https://raw.github.com/igor-liferenko/lhplain/master/lhplain.ini
+# cp /usr/local/SUPER_DEBIAN/lhplain.ini .
 # perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 # tex -ini -jobname tex lhplain.ini >/dev/null
 # 4) in cwebtest/ fix bug in cwebmac.tex by running the following commands:
