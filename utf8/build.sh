@@ -37,8 +37,11 @@ git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 EOF
 # If everything is OK, "git st" must not show any changes in red.
 
-# if you want to run "TeX" on resulting files, do this:
-# apply patch to tcb.tex:
+# To test changes to cwebmal.tex for compatibility with cwebmac.tex (at the moment of writing they were
+# tested to be 100% compatible), run tex+dvihash in branches runall-/bin/-V and
+# runall-/usr/local/bin/-V as follows:
+# 1) for i in *.mp; do mpost $i; done
+# 2) apply patch to tcb.tex in branch runall-/usr/local/bin/-V:
 #
 #-\input cwebmac
 #+\input cwebmal
@@ -66,15 +69,16 @@ EOF
 #-    [ @thispage /FitH @ypos ] >>}\fi
 #   \ifon\startsection{\bf#3.\quad}\ignorespaces}
 #
-# regenerate tex.fmt with this: perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
-# for i in *.mp; do mpost $i; done
-# for i in *.tex; do tex $i; done
+# 3) in both branches generate new tex.fmt with following commands:
+# wget --quiet https://raw.github.com/igor-liferenko/lhplain/master/lhplain.ini
+# perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
+# tex -ini -jobname tex lhplain.ini >/dev/null
+# 4) in branch runall-/bin/-V fix bug in cwebmac.tex by running the following commands:
+# cp /usr/local/cweb/cwebmac.tex . # first check via "git st" that it is not modified
+# perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
+# 5) for i in *.tex; do tex $i; done
 # for i in *.dvi; do dvihash $i; done >hash.all
-# NOTE: if you want to do dvihash using cwebmac.tex, do this before running 'tex' above:
-# mkdir -p /usr/local/share/texmf/tex/plain/
-# cp /usr/local/cweb/cwebmac.tex /usr/local/share/texmf/tex/plain/ # ensure that it is not modified
-# perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' /usr/local/share/texmf/tex/plain/cwebmac.tex # fix bug
-# texhash /usr/local/share/texmf
+# then just diff hash.all from each branch - if they are the same - everything is compatible
 
 
 DIR=/usr/local/cweb-git/utf8
