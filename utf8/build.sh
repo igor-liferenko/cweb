@@ -15,26 +15,26 @@
 # "test for compatibility" commands below.
 
 # To test for compatibility:
-#
-# cd /usr/local/cwebtest/
-# git checkout .
-# git reset .
-# git clean -f >/dev/null
-# ./runall.sh -p /bin/ >runall.log 2>/dev/null
-# git checkout runall-/bin/-V
-# git add runall.log
-# git commit -m 'runall'
-# git checkout master
-# ./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
-# git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
-# git add runall.log
-# git commit -m 'runall'
-# git checkout master
-# git archive runall-/bin/-V | command tar -xf -
-# git add .
-# git archive runall-/usr/local/bin/-V | command tar -xf - # OR /var/local/bin/
-# git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
-#
+: << EOF
+cd /usr/local/cwebtest/
+git checkout .
+git reset .
+git clean -f >/dev/null
+./runall.sh -p /bin/ >runall.log 2>/dev/null
+git checkout runall-/bin/-V
+git add runall.log
+git commit -m 'runall'
+git checkout master
+./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null # OR /var/local/bin/
+git checkout runall-/usr/local/bin/-V # OR /var/local/bin/
+git add runall.log
+git commit -m 'runall'
+git checkout master
+git archive runall-/bin/-V | command tar -xf -
+git add .
+git archive runall-/usr/local/bin/-V | command tar -xf - # OR /var/local/bin/
+git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
+EOF
 # If everything is OK, "git st" must not show any changes.
 
 
