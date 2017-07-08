@@ -13,7 +13,10 @@
 cd /usr/local/cwebtest/
 git checkout .
 git reset .
+git checkout .
 git clean -f >/dev/null
+git checkout master
+git branch -D runall-/bin/-V runall-/usr/local/bin/-V 2>/dev/null
 ./runall.sh -p /bin/ >runall.log 2>/dev/null
 git checkout runall-/bin/-V
 git add runall.log
@@ -23,14 +26,12 @@ git checkout master
 git checkout runall-/usr/local/bin/-V
 git add runall.log
 git commit -m 'runall'
-git checkout master
-git archive runall-/bin/-V | command tar -xf -
-git add .
-git archive runall-/usr/local/bin/-V | command tar -xf -
 perl -i -pe 's/cwebmal/cwebmac/' *.tex
-git branch -D runall-/bin/-V runall-/usr/local/bin/-V
+git commit -m 'cwebmac' .
+git checkout master
+git diff runall-/bin/-V runall-/usr/local/bin/-V
 EOF
-# If everything is OK, "git st" must not show any changes in red.
+# If everything is OK, "git diff" must not show any changes.
 
 
 # To test for compatibility of cwebmac.tex, run tex+dvihash in branches runall-/bin/-V and
