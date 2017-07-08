@@ -39,7 +39,7 @@ EOF
 
 # for i in *.mp; do mpost $i; done
 # for i in *.tex; do tex $i; done
-
+# for i in *.dvi; do dvihash $i; done >hash.all
 
 DIR=/usr/local/cweb-git/utf8
 
