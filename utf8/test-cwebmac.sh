@@ -8,8 +8,8 @@ git checkout master &>/dev/null
 git branch -D runall-/bin/-V runall-/usr/local/bin/-V &>/dev/null
 ./runall.sh -p /bin/ &>/dev/null
 ./runall.sh -p /usr/local/bin/ &>/dev/null
-git checkout runall-/bin/-V
-for i in *.mp; do mpost $i; done
+git checkout runall-/bin/-V &>/dev/null
+for i in *.mp; do mpost $i; done >/dev/null
 cp /usr/local/SUPER_DEBIAN/lhplain.ini .
 perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 tex -ini -jobname tex lhplain.ini >/dev/null
@@ -19,17 +19,17 @@ git diff --exit-code HEAD || exit
 cd - >/dev/null
 cp /usr/local/cweb/cwebmac.tex .
 perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
-for i in *.tex; do [ $i = cwebmac.tex ] && continue; tex $i; done >/dev/null
+for i in *.tex; do [ $i = cwebmac.tex ] && continue; tex $i; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
 git add hash.all
-git commit -m 'hash'
+git commit -m 'hash' >/dev/null
 git checkout .
 git reset .
 git checkout .
 git clean -f >/dev/null
 git checkout runall-/usr/local/bin/-V &>/dev/null
-for i in *.mp; do mpost $i; done
-patch -F0 tcb.tex << EOF || exit
+for i in *.mp; do mpost $i; done >/dev/null
+patch -F0 tcb.tex << EOF >/dev/null || exit
 @@ -82,16 +82,15 @@
  
  % Now I bring in the program files created with cweave
@@ -65,13 +65,13 @@ EOF
 cp /usr/local/SUPER_DEBIAN/lhplain.ini .
 perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 tex -ini -jobname tex lhplain.ini >/dev/null
-for i in *.tex; do [ $i = cwebmac.tex ] && continue; tex $i; done >/dev/null
+for i in *.tex; do [ $i = cwebmac.tex ] && continue; tex $i; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
 git add hash.all
-git commit -m 'hash'
+git commit -m 'hash' >/dev/null
 git checkout .
 git reset .
 git checkout .
 git clean -f >/dev/null
 git checkout master &>/dev/null
-git diff runall-/bin/-V runall-/usr/local/bin/-V hash.all
+git diff runall-/bin/-V runall-/usr/local/bin/-V -- hash.all
