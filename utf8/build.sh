@@ -41,6 +41,10 @@ EOF
 # for i in *.mp; do mpost $i; done
 # for i in *.tex; do tex $i; done
 # for i in *.dvi; do dvihash $i; done >hash.all
+# NOTE: if you want to do dvihash using cwebmac.tex, do this before running 'tex' above:
+# mkdir -p /usr/local/share/texmf/tex/plain/
+# cp /usr/local/cweb/cwebmac.tex /usr/local/share/texmf/tex/plain/ # ensure that it is not modified
+# texhash /usr/local/share/texmf
 
 
 DIR=/usr/local/cweb-git/utf8
