@@ -10,6 +10,7 @@ git branch -D runall-/bin/-V runall-/usr/local/bin/-V &>/dev/null
 ./runall.sh -p /usr/local/bin/ &>/dev/null
 git checkout runall-/bin/-V &>/dev/null
 for i in *.mp; do mpost $i; done >/dev/null
+cp /usr/local/SUPER_DEBIAN/epsf.tex .
 cp /usr/local/SUPER_DEBIAN/lhplain.ini .
 perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 tex -ini -jobname tex lhplain.ini >/dev/null
@@ -59,6 +60,7 @@ patch -F0 tcb.tex << EOF >/dev/null || exit
  
  \def\datethis{\def\startsection{\centerline{\bf Program 1}\bigskip
 EOF
+cp /usr/local/SUPER_DEBIAN/epsf.tex .
 cp /usr/local/SUPER_DEBIAN/lhplain.ini .
 perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 tex -ini -jobname tex lhplain.ini >/dev/null
