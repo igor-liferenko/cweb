@@ -18,9 +18,6 @@
 #   build-cweb
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
 # If everything is OK, no changes must be shown.
-#
-# TODO: for what is line "ensure that the contents file isn't empty" in cwebmal.tex?
-# Try to remove it and test for compatibility.
 
 
 DIR=/usr/local/cweb-git/utf8
