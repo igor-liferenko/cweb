@@ -41,6 +41,7 @@ EOF
 # for i in *.tex; do tex $i; done
 # for i in *.dvi; do dvihash $i; done >hash.all
 
+
 DIR=/usr/local/cweb-git/utf8
 
 # NOTE: if you want to make temporary changes (for example, for adding printfs for tracing), remove the first part from this file and edit /usr/local/cweb/ directly
