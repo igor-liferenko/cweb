@@ -35,7 +35,7 @@ git add .
 git archive runall-/usr/local/bin/-V | command tar -xf - # OR /var/local/bin/
 git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 EOF
-# If everything is OK, "git st" must not show any changes.
+# If everything is OK, "git st" must not show any changes in red.
 
 
 DIR=/usr/local/cweb-git/utf8
