@@ -16,7 +16,7 @@
 # remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first
 # part of this script and run:
 #   build-cweb
-#   test-cwebmac
+#   test-cwebmac # before running this ensure that test-cweb produces empty output
 # If everything is OK, no changes must be shown.
 #
 # TODO: for what is line "ensure that the contents file isn't empty" in cwebmal.tex?

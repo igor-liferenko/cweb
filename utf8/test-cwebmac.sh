@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /usr/local/cwebtest/
 git checkout .
-git reset .
+git reset >/dev/null
 git checkout .
 git clean -f >/dev/null
 git checkout master &>/dev/null
@@ -21,12 +21,8 @@ cp /usr/local/cweb/cwebmac.tex .
 perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; tex $i; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
-git add hash.all
-git commit -m 'hash' >/dev/null
-git checkout .
-git reset .
-git checkout .
-git clean -f >/dev/null
+git add .
+git commit -m 'tex' >/dev/null
 git checkout runall-/usr/local/bin/-V &>/dev/null
 for i in *.mp; do mpost $i; done >/dev/null
 patch -F0 tcb.tex << EOF >/dev/null || exit
@@ -67,11 +63,7 @@ perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 tex -ini -jobname tex lhplain.ini >/dev/null
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; tex $i; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
-git add hash.all
-git commit -m 'hash' >/dev/null
-git checkout .
-git reset .
-git checkout .
-git clean -f >/dev/null
+git add .
+git commit -m 'tex' >/dev/null
 git checkout master &>/dev/null
-git diff runall-/bin/-V runall-/usr/local/bin/-V -- hash.all
+git diff runall-/bin/-V runall-/usr/local/bin/-V -- . ':!*.tex' ':!*.log' ':!*.dvi' ':!*.0' ':!*.1' ':!*.2' ':!*.3' ':!*.4' ':!*.5' ':!*.6' ':!*.7' ':!*.8' ':!*.9' ':!*.10' ':!*.11' ':!*.12' ':!*.13' ':!*.14' ':!*.20' ':!*.21' ':!*.22' ':!*.23' ':!*.24' ':!*.25' ':!*.30' ':!*.31' ':!*.32' ':!*.33' ':!*.34' ':!*.35' ':!*.36' ':!*.37' ':!*.38' ':!*.39' ':!*.40' ':!*.41' ':!*.42' ':!*.50' ':!*.51' ':!*.52' ':!*.81' ':!*.82' ':!*.84' ':!*.90' ':!*.91' ':!*.92' ':!*.93' ':!*.94' ':!*.95' ':!*.96' ':!*.97' ':!*.98' ':!*.99' ':!*.100' ':!*.101' ':!*.102' ':!*.103' ':!*.104' ':!*.105' ':!*.106' ':!*.107' ':!*.108' ':!*.109' ':!*.110' ':!*.200' ':!*.201' ':!*.202' ':!*.203' ':!*.204' ':!*.205' ':!*.206' ':!*.207'

@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /usr/local/cwebtest/
 git checkout .
-git reset .
+git reset >/dev/null
 git checkout .
 git clean -f >/dev/null
 git checkout master &>/dev/null
