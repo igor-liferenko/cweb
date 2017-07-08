@@ -37,6 +37,11 @@ git branch -D runall-/bin/-V runall-/usr/local/bin/-V # OR /var/local/bin/
 EOF
 # If everything is OK, "git st" must not show any changes in red.
 
+# for i in *.mp; do mpost $i; done
+# mf-nowin celtica13
+# mf-nowin celticb13
+# for i in *.tex; do tex $i; done
+
 
 DIR=/usr/local/cweb-git/utf8
 
