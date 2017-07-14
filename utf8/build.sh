@@ -7,17 +7,20 @@
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
 # remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first
-# part of this script and run:
+# part of build.sh and run:
 #   build-cweb
 #   test-cweb
 # If everything is OK, no changes must be shown.
 
 # To test for compatibility of cwebmal.tex:
 # remove cweav-sort.ch and cweav-nospace.ch from "tie -c cweav-merged.ch" in first
-# part of this script and run:
+# part of build.sh and run:
 #   build-cweb
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
 # If everything is OK, no changes must be shown.
+
+# NOTE: to build woven outputs for all example programs, run "test-cwebmac >/dev/null"
+# (without modifying build.sh) and checkout runall-/bin/-V branch in cwebtest repo
 
 
 DIR=/usr/local/cweb-git/utf8
