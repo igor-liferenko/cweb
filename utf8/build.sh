@@ -23,24 +23,24 @@
 # (without modifying build.sh) and checkout runall-/bin/-V branch in cwebtest repo
 
 
-DIR=/usr/local/cweb-git/utf8
+DIR=/home/user/cweb-git/utf8
 
-# NOTE: if you want to make temporary changes (for example, for adding printfs for tracing), remove the first part from this file and edit /usr/local/cweb/ directly
+# NOTE: if you want to make temporary changes (for example, for adding printfs for tracing), remove the first part from this file and edit /home/user/cweb/ directly
 
 # Build UTF-8 CWEB from source:
-cd /usr/local/cweb/
+cd /home/user/cweb/
 git rev-parse --abbrev-ref HEAD | grep -v master && exit
 git diff --exit-code HEAD || exit
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
-cp -r /usr/local/cweb/* .
+cp -r /home/user/cweb/* .
 gcc -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 gcc -g -w -c common.c
 gcc -g -o ctangle ctangle.o common.o
-if ! ./ctangle /usr/local/uniweb/uniweb.w > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -c uniweb.c
+if ! ./ctangle /home/user/uni/uni.w > build-cweb.out; then cat build-cweb.out; exit; fi
+gcc -c uni.c
 if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
@@ -52,12 +52,12 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c cweave.c || exit
-gcc -g -o cweave cweave.o common.o uniweb.o
+gcc -g -o cweave cweave.o common.o uni.o
 if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-file.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 gcc -g -w -c ctangle.c || exit
-gcc -g -o ctangle ctangle.o common.o uniweb.o
+gcc -g -o ctangle ctangle.o common.o uni.o
 cp cweave ctangle /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
@@ -66,7 +66,7 @@ rm -fr /tmp/cwebbuild/
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
-cp -r /usr/local/cweb/* .
+cp -r /home/user/cweb/* .
 gcc -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 gcc -g -w -c common.c
