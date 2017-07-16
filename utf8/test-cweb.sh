@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /usr/local/cwebtest/
+cd /home/user/cwebtest/
 git checkout .
 git reset >/dev/null
 git checkout .

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /usr/local/cwebtest/
+cd /home/user/cwebtest/
 git checkout .
 git reset >/dev/null
 git checkout .
@@ -14,11 +14,11 @@ cp /usr/local/SUPER_DEBIAN/epsf.tex .
 cp /usr/local/SUPER_DEBIAN/lhplain.ini .
 perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
 tex -ini -jobname tex lhplain.ini >/dev/null
-cd /usr/local/cweb/
+cd /home/user/cweb/
 git rev-parse --abbrev-ref HEAD | grep -v master && exit
 git diff --exit-code HEAD || exit
 cd - >/dev/null
-cp /usr/local/cweb/cwebmac.tex .
+cp /home/user/cweb/cwebmac.tex .
 perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
 perl -i -ne 'print unless /ensure that the contents file/' cwebmac.tex # fix nonsense
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; [ $i = epsf.tex ] && continue; tex $i; done &>/dev/null
