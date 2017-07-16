@@ -35,29 +35,29 @@ rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
 cp -r /home/user/cweb/* .
-gcc -g -w -c ctangle.c
+cc -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
-gcc -g -w -c common.c
-gcc -g -o ctangle ctangle.o common.o
+cc -g -w -c common.c
+cc -g -o ctangle ctangle.o common.o
 if ! ./ctangle /home/user/uni/uni.w > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -c uni.c
+cc -c uni.c
 if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
+cc -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 if ! tie -m comm-utf8.h common.h $DIR/comm-utf8.hch > build-cweb.out; then cat build-cweb.out; exit; fi
 perl -i -pe 'print if /wchar_t/; s/wchar_t/wint_t/' cweave.w
 perl -i -pe 'print if /size_t/; s/size_t/ssize_t/' cweave.w
 if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-nospace.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch > build-cweb.out # ATTENTION: cweav-file.ch must be before cweav-mac.ch
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -g -w -c cweave.c || exit
-gcc -g -o cweave cweave.o common.o uni.o
+cc -g -w -c cweave.c || exit
+cc -g -o cweave cweave.o common.o uni.o
 if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-file.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -g -w -c ctangle.c || exit
-gcc -g -o ctangle ctangle.o common.o uni.o
+cc -g -w -c ctangle.c || exit
+cc -g -o ctangle ctangle.o common.o uni.o
 cp cweave ctangle /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
@@ -67,12 +67,12 @@ rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
 cp -r /home/user/cweb/* .
-gcc -g -w -c ctangle.c
+cc -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
-gcc -g -w -c common.c
-gcc -g -o ctangle ctangle.o common.o
+cc -g -w -c common.c
+cc -g -o ctangle ctangle.o common.o
 if ! ./ctangle common.w > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
+cc -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
 perl -i -pe 's/  argc=ac; argv=av;/  setlocale(LC_CTYPE,"ru_RU.CP1251");\n$&/' cweave.w
 perl -i -pe 's/xislower\(/islower((unsigned char)/' cweave.w
@@ -87,11 +87,11 @@ perl -i -pe 'print if /size_t/; s/size_t/ssize_t/' cweave.w
 if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-nospace.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -g -w -c cweave.c || exit
-gcc -g -o cweave cweave.o common.o
+cc -g -w -c cweave.c || exit
+cc -g -o cweave cweave.o common.o
 if ! ./ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
-gcc -g -w -c ctangle.c || exit
-gcc -g -o ctangle ctangle.o common.o
+cc -g -w -c ctangle.c || exit
+cc -g -o ctangle ctangle.o common.o
 mkdir -p /var/local/bin/
 cp cweave ctangle /var/local/bin/
 cd /
