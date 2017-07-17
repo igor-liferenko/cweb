@@ -7,7 +7,7 @@
 #include <limits.h>
 #include <locale.h>
 @<Include files@>@/
-#include "uniweb.h"
+#include "uni.h"
 extern char *encTeX[];
 unsigned char enc(char *p)
 {
