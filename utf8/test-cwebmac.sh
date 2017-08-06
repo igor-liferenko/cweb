@@ -19,7 +19,6 @@ git rev-parse --abbrev-ref HEAD | grep -v master && exit
 git diff --exit-code HEAD || exit
 cd - >/dev/null
 cp /home/user/cweb/cwebmac.tex .
-perl -i -pe 's/\\pageshift=0in/\\pageshift=\\hoffset/' cwebmac.tex # fix bug
 perl -i -ne 'print unless /ensure that the contents file/' cwebmac.tex # fix nonsense
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; [ $i = epsf.tex ] && continue; tex $i; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
