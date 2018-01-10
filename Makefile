@@ -10,13 +10,11 @@ all:
 
 print:
 	@cweave cweave cweave >/dev/null
-	@touch -d '-1 seconds' cweave.tex
 	@cweave ctangle ctangle >/dev/null
-	@touch -d '-1 seconds' ctangle.tex
 	@cweave common common >/dev/null
-	@touch -d '-1 seconds' common.tex
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
 	@tex cwebman >/dev/null
+	@touch -d '-5 seconds' cweave.tex ctangle.tex common.tex # for 'test' in prt.fn
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
