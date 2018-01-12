@@ -59,7 +59,7 @@ if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.o
 clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o uni.o
 cp cweave ctangle /usr/local/bin/
-ctangle examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w wmerge.c -o /usr/local/bin/wmerge # extra
+ctangle examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" wmerge.c -o /usr/local/bin/wmerge # extra
 cd /
 rm -fr /tmp/cwebbuild/
 
