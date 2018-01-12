@@ -1,3 +1,8 @@
+@x
+char alt_web_file_name[max_file_name_length]; /* alternate name to try */
+@y
+@z
+
 Fix:
 @x
 @:caddr_t}{\bf caddr_t@>
@@ -6,10 +11,9 @@ Fix:
 @z
 
 @x
-  char *dot_pos; /* position of |'.'| in the argument */
+  strcpy(web_file_name,alt_web_file_name);
+  if ((web_file=fopen(web_file_name,"r"))==NULL)
 @y
-  char *dot_pos; /* position of |'.'| in the argument */
-  char *name_pos; /* file name beginning, sans directory */
 @z
 
 Fix:
@@ -20,19 +24,31 @@ Fix:
 @z
 
 @x
-      s=*argv;@+dot_pos=NULL;
+@ We use all of |*argv| for the |web_file_name| if there is a |'.'| in it,
+otherwise we add |".w"|. If this file can't be opened, we prepare an
+|alt_web_file_name| by adding |"web"| after the dot.
+The other file names come from adding other things
 @y
-      s=name_pos=*argv;@+dot_pos=NULL;
+@ We use all of |*argv| for the |web_file_name| if there is a |'.'| in it,
+otherwise we add |".w"|.
+The other file names come from adding corresponding things
 @z
 
 @x
-        else if (*s=='/') dot_pos=NULL,++s;
+  sprintf(alt_web_file_name,"%s.web",*argv);
 @y
-        else if (*s=='/') dot_pos=NULL,name_pos=++s;
 @z
 
 @x
-  *out_file_name='\0'; /* this will print to stdout */
+  if (dot_pos==NULL) sprintf(out_file_name,"%s.out",*argv);
 @y
-  sprintf(out_file_name,"%s.web",name_pos); /* strip off directory name */
+  if (dot_pos==NULL) sprintf(out_file_name,"%s.web",*argv);
 @z
+
+@x
+  fatal("! Usage: wmerge webfile[.w] [changefile[.ch] [outfile[.out]]]\n","")@;
+@y
+  fatal("! Usage: wmerge webfile[.w] [changefile[.ch] [outfile[.web]]]\n","")@;
+@z
+
+TODO: remove substituting .web
