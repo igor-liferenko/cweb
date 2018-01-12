@@ -1,3 +1,4 @@
+Remove alt file name:
 @x
 char alt_web_file_name[max_file_name_length]; /* alternate name to try */
 @y
@@ -10,6 +11,7 @@ Fix:
 @:caddr_t}{\bf caddr\_t@>
 @z
 
+Remove alt file name:
 @x
   strcpy(web_file_name,alt_web_file_name);
   if ((web_file=fopen(web_file_name,"r"))==NULL)
@@ -23,6 +25,7 @@ Fix:
     if ((**(++argv)=='-'||**argv=='+')&&*(*argv+1)) @<Handle flag argument@>@;
 @z
 
+Remove alt file name:
 @x
 @ We use all of |*argv| for the |web_file_name| if there is a |'.'| in it,
 otherwise we add |".w"|. If this file can't be opened, we prepare an
@@ -34,21 +37,22 @@ otherwise we add |".w"|.
 The other file names come from adding corresponding things
 @z
 
+Remove alt file name:
 @x
   sprintf(alt_web_file_name,"%s.web",*argv);
 @y
 @z
 
+Change default extension of output file:
 @x
   if (dot_pos==NULL) sprintf(out_file_name,"%s.out",*argv);
 @y
   if (dot_pos==NULL) sprintf(out_file_name,"%s.web",*argv);
 @z
 
+Change default extension of output file:
 @x
   fatal("! Usage: wmerge webfile[.w] [changefile[.ch] [outfile[.out]]]\n","")@;
 @y
   fatal("! Usage: wmerge webfile[.w] [changefile[.ch] [outfile[.web]]]\n","")@;
 @z
-
-TODO: remove substituting .web
