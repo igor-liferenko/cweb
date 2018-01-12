@@ -1297,7 +1297,7 @@ after the dot.  We must check that there is enough room in
     sprintf(web_file_name,"%s.w",*argv);
   else {
     strcpy(web_file_name,*argv);
-    *dot_pos=0; /* string now ends where the dot was */
+    *dot_pos='\0'; /* string now ends where the dot was */
   }
   sprintf(alt_web_file_name,"%s.web",*argv);
   sprintf(tex_file_name,"%s.tex",name_pos); /* strip off directory name */
