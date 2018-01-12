@@ -1,14 +1,14 @@
-Remove alt file name:
-@x
-char alt_web_file_name[max_file_name_length]; /* alternate name to try */
-@y
-@z
-
 Fix:
 @x
 @:caddr_t}{\bf caddr_t@>
 @y
 @:caddr_t}{\bf caddr\_t@>
+@z
+
+Remove alt file name:
+@x
+char alt_web_file_name[max_file_name_length]; /* alternate name to try */
+@y
 @z
 
 Remove alt file name:
