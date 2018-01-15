@@ -31,10 +31,14 @@ Remove alt file name:
 otherwise we add |".w"|. If this file can't be opened, we prepare an
 |alt_web_file_name| by adding |"web"| after the dot.
 The other file names come from adding other things
+after the dot.  We must check that there is enough room in
+|web_file_name| and the other arrays for the argument.
 @y
 @ We use all of |*argv| for the |web_file_name| if there is a |'.'| in it,
 otherwise we add |".w"|.
-The other file names come from adding corresponding things
+We must check that there is enough room in
+|web_file_name| for the argument.
+
 @z
 
 Remove alt file name:
