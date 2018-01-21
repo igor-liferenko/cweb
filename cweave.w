@@ -102,7 +102,7 @@ char **av; /* argument values */
 {
   argc=ac; argv=av;
   program=cweave;
-  make_xrefs=force_lines=make_pb=1; /* controlled by command-line options */
+  make_xrefs=force_lines=1; /* controlled by command-line options */
   common_init();
   @<Set initial values@>;
   if (show_banner) printf(banner); /* print a ``banner line'' */
