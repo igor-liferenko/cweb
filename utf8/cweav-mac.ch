@@ -4,6 +4,7 @@
 *out_ptr='l';
 @z
 
+If we use shebang, we must always explicitly \input macros file that we need.
 @x
 @.Writing the output file...@>
 @y
