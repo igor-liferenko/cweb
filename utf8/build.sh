@@ -41,7 +41,7 @@ clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
 if ! ./ctangle /home/user/uni/uni.w > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -c uni.c
-if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch $DIR/comm-exten.ch >build-cweb.out
+if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-exten.ch >build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
