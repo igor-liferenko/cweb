@@ -97,5 +97,3 @@ mkdir -p /var/local/bin/
 cp cweave ctangle /var/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
-
-# appendix (build wmerge):
