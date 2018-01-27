@@ -20,6 +20,7 @@ git diff --exit-code HEAD || exit
 cd - >/dev/null
 cp /home/user/cweb/cwebmac.tex .
 perl -i -ne 'print unless /ensure that the contents file/' cwebmac.tex # fix nonsense
+#TODO: check if this is also nonsense: \setbox\sbox\vbox{\unvbox\sbox} % take it out of its box
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; [ $i = epsf.tex ] && continue; tex $i; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
 git add .
