@@ -1,5 +1,3 @@
-TODO: only print status if error
-
 Fix:
 @x
 @:caddr_t}{\bf caddr_t@>
