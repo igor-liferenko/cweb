@@ -12,7 +12,7 @@
 #   test-cweb
 # If everything is OK, no changes must be shown.
 
-# To test for compatibility of cwebmal.tex:
+# To test for compatibility of cwebmac.tex:
 # remove cweav-sort.ch, cweav-nospace.ch and cweav-nopb.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb

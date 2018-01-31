@@ -15,7 +15,6 @@ git checkout master &>/dev/null
 git checkout runall-/usr/local/bin/-V &>/dev/null
 git add runall.log
 git commit -m 'runall' >/dev/null
-perl -i -pe 's/cwebmal/cwebmac/' *.tex
 git commit -m 'cwebmac' . >/dev/null
 git checkout master &>/dev/null
 git diff runall-/bin/-V runall-/usr/local/bin/-V
