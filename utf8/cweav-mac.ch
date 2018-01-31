@@ -1,23 +1,21 @@
 @x
+@<Global variables@>@/
+@y
+@<Global variables@>@/
+extern int ascii_only;
+@z
+
+@x
 *out_ptr='c'; tex_printf("\\input cwebma");
 @y
 *out_ptr='l';
 @z
 
-If we use shebang, we must always explicitly \input macros file that we need.
 @x
 @.Writing the output file...@>
 @y
-{
-  wchar_t line[buf_size];
-  FILE *fp = fopen(web_file_name, "r");
-  if (fgetws(line, buf_size, fp) != NULL)
-    if (wcsstr(line, L"%&") == line)
-      fprintf(active_file, "%ls", line);
-  fclose(fp);
-  if (wcsstr(line, L"%&lhplain") == line)
-    *out_ptr='r';
-}
+if (ascii_only==0) tex_printf("%%&lhplain\n");
 tex_printf("\\input cwebma");
+if (ascii_only==0) *out_ptr='r';
 @.Writing the output file...@>
 @z
