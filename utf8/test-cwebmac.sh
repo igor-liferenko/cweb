@@ -26,7 +26,7 @@ git add .
 git commit -m 'tex' >/dev/null
 git checkout runall-/usr/local/bin/-V &>/dev/null
 for i in *.mp; do mpost $i; done >/dev/null
-patch tcb.tex <<EOF || exit # pdf mode is not used in my cwebmac
+patch tcb.tex <<EOF >/dev/null || exit # pdf mode is not used in my cwebmac
 @@ -94 +93,0 @@
 -  \ifacro{\toksF={}\makeoutlinetoks#3\outlinedone\outlinedone}\fi
 @@ -102,5 +100,0 @@
