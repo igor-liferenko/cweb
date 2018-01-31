@@ -22,6 +22,8 @@
 # NOTE: to build woven outputs for all example programs, run "test-cwebmac >/dev/null"
 # (without modifying build.sh) and checkout runall-/bin/-V branch in cwebtest repo
 
+# TODO: restore cweav-nopb.ch and do not change cweave.w and cwebman.tex in cweb-git/
+
 
 DIR=/home/user/cweb-git/utf8
 
