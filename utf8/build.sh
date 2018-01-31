@@ -70,7 +70,7 @@ clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-sed -i 's/@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))/@d xisupper(c) isupper((eight_bits)c)/' common.w
+sed -i 's/@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))/@d xisupper(c) isupper((unsigned char)c)/' common.w
 if ! ./ctangle common.w > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
