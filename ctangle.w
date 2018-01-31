@@ -162,8 +162,6 @@ char *id_loc; /* just after the current identifier in the buffer */
 @d xisalpha(c) (isalpha(c)&&((eight_bits)c<0200))
 @d xisdigit(c) (isdigit(c)&&((eight_bits)c<0200))
 @d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
-@d xislower(c) (islower(c)&&((eight_bits)c<0200))
-@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
 @d xisxdigit(c) (isxdigit(c)&&((eight_bits)c<0200))
 
 @<Common code...@>=
