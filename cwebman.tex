@@ -7,7 +7,7 @@
 \def\myship{\setbox255=\vbox{\special{header=config.duplong}\unvbox255}\shipout\box255}
 
 \def\tangref{3} % where the main explanation of CTANGLing is given
-\input cwebmal
+\input cwebmac
 \hoffset=12.29mm % purely empirical - change if needed
 \pageshift=210mm \advance\pageshift by-6.5in \advance\pageshift by-\hoffset
 \advance\hoffset by-1in
@@ -1509,7 +1509,7 @@ features needed by the output of \.{CWEAVE}.
   \def\do##1{\catcode`##1=12 } \dospecials
   \parskip 0pt \parindent 0pt
   \catcode`\ =13 \catcode`\^^M=13
-  \tt \verbatimdefs \input cwebmal \endgroup}
+  \tt \verbatimdefs \input cwebmac \endgroup}
 \printmacs
 \endgroup
 \vfill\eject
