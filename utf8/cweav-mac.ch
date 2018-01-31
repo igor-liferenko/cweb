@@ -8,7 +8,7 @@ extern int ascii_only;
 @x
 *out_ptr='c'; tex_printf("\\input cwebma");
 @y
-*out_ptr='l';
+*out_ptr='c';
 @z
 
 @x
