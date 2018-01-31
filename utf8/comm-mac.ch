@@ -8,6 +8,6 @@ int ascii_only=1;
 @x
   return(1);
 @y
-  if (wlimit-wbuffer != limit-buffer) ascii_only=0;
+  if (wlimit-wbuffer == 9 && wcscmp(wbuffer, L"%&lhplain") == 0) ascii_only=0;
   return(1);
 @z
