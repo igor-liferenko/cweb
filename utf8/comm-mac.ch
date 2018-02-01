@@ -15,7 +15,8 @@ it and '\input cwebma...' manually.
   if (first_line) {
     if (wlimit-wbuffer == 9 && wcscmp(wbuffer, L"%&lhplain") == 0) ascii_only=0;
     first_line=0;
-    limit=buffer; /* empty the first input line */
+    limit=buffer; /* empty the first input line; it makes no difference on phase one,
+      because limbo is skipped in it anyway */
   }
   return(1);
 @z
