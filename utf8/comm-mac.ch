@@ -3,12 +3,13 @@
 @y
 @<Include files@>@/
 int ascii_only=1;
-int first_line=1; /* set to 1 at the beginning of phase two also */
+int first_line=1;
 @z
 
-We must know if %& is used before copy_limbo() is started. This is done with
-ascii_only flag on phase one. On phase two we omit the %& line after outputting
-it and '\input cwebma...' manually.
+We must know before copy_limbo() is started if %&-line is used. This is done with
+setting ascii_only flag on phase one and checking it right before phase two.
+On phase two depending on ascii_only flag we omit the first %&-line after outputting
+%&lhplain\n" and "\input cwebmar".
 @x
   return(1);
 @y
