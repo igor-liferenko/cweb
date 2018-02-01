@@ -1,2 +1,0 @@
-Comment in commit c6ec8a6855c316e4a98557d35aadd317d6d89a0e is incorrect:
-I used cwebmal.tex not because of \hoffset, but because I wanted to do another default for \def\contentspagenumber, but then I figured out how to do without changing the default.
