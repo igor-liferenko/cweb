@@ -2,6 +2,7 @@
 @<Global variables@>@/
 @y
 @<Global variables@>@/
+extern int first_line;
 extern int ascii_only;
 @z
 
@@ -14,9 +15,15 @@ extern int ascii_only;
 @x
 @.Writing the output file...@>
 @y
-if (ascii_only==0) tex_printf("%%&lhplain\n");
-tex_printf("\\input cwebma");
-if (ascii_only==0) *out_ptr='r';
+if (ascii_only==0) {
+  tex_printf("%%&lhplain\n");
+  tex_printf("\\input cwebmar");
+  out_ptr=out_buf;
+  limit=buffer;
+  *buffer='x'; /* make finish_line() skip first line */
+  first_line=1;
+}
+else tex_printf("\\input cwebma");
 @.Writing the output file...@>
 @z
 
