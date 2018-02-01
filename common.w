@@ -434,7 +434,8 @@ int get_line() /* inputs the next line */
     if (changing && include_depth==change_depth) goto restart;
   }
   if (input_has_ended) return 0;
-  loc=buffer; *limit=' ';
+  loc=buffer; *limit=' '; /* here we use the fact that limit
+    points right after the last character in the buffer */
   if (buffer[0]=='@@' && (buffer[1]=='i' || buffer[1]=='I')) {
     loc=buffer+2; *limit='"';
     while (*loc==' '||*loc=='\t') loc++;
