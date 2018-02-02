@@ -7,7 +7,7 @@ int first_line=1;
 @z
 
 We must know before |copy_limbo| is started if %&-line is used. This is done with
-setting |tex_format| on phase one and checking it right before phase two.
+setting |tex_format| on phase one and checking it in cweav-mac.ch right before phase two.
 On phase two depending on |tex_format| we omit the first %&-line after outputting
 %&lhplain\n" and "\input cwebmac-lh".
 @x
