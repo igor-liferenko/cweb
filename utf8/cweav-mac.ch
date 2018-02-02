@@ -17,10 +17,10 @@ extern int tex_format;
 @y
 if (tex_format==1) {
   tex_printf("%%&lhplain\n"); out_line++;
-  tex_printf("\\input cwebmac-lhplain");
+  tex_printf("\\input cwebmac-lh");
   out_ptr=out_buf; limit=buffer; *buffer='x'; /* make finish_line() not to print
-    newline after '\input cwebmac-lhplain' for
-    it to take the place of the emptied first input line */
+    newline after '\input cwebmac-lh' for it to take the place of the emptied
+    first input line */
   first_line=1; /* make the code which empties first line in input_ln() work */
 }
 else tex_printf("\\input cwebma");
