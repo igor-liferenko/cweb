@@ -14,7 +14,7 @@ On phase two depending on |tex_format| we omit the first %&-line after outputtin
   return(1);
 @y
   if (first_line) {
-    if (limit-buffer == 9 && strcmp(buffer, "%&lhplain") == 0) {
+    if (limit-buffer == 9 && strncmp(buffer, "%&lhplain", 9) == 0) {
       tex_format=1;
       limit=buffer; /* empty the first input line */
     }
