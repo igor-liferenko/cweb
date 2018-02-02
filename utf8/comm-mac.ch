@@ -14,7 +14,7 @@ On phase two depending on ascii_only flag we omit the first %&-line after output
   return(1);
 @y
   if (first_line) {
-    if (wlimit-wbuffer == 9 && wcscmp(wbuffer, L"%&lhplain") == 0) ascii_only=0;
+    if (limit-buffer == 9 && strcmp(buffer, "%&lhplain") == 0) ascii_only=0;
     first_line=0;
     limit=buffer; /* empty the first input line; it makes no difference on phase one,
       because limbo is skipped in it anyway */
