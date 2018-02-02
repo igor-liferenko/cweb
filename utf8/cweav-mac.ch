@@ -3,7 +3,7 @@
 @y
 @<Global variables@>@/
 extern int first_line;
-extern int ascii_only;
+extern int tex_format;
 @z
 
 @x
@@ -15,7 +15,7 @@ extern int ascii_only;
 @x
 @.Writing the output file...@>
 @y
-if (ascii_only==0) {
+if (tex_format==1) {
   tex_printf("%%&lhplain\n"); out_line++;
   tex_printf("\\input cwebmac-lhplain");
   out_ptr=out_buf; limit=buffer; *buffer='x'; /* make finish_line() not to print
