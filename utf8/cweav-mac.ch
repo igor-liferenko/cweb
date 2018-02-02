@@ -17,7 +17,7 @@ extern int ascii_only;
 @y
 if (ascii_only==0) {
   tex_printf("%%&lhplain\n");
-  tex_printf("\\input cwebmar");
+  tex_printf("\\input cwebmac-lhplain");
   out_ptr=out_buf;
   limit=buffer;
   *buffer='x'; /* make finish_line() not to print newline after '\input cwebmar' for
