@@ -16,11 +16,10 @@ extern int ascii_only;
 @.Writing the output file...@>
 @y
 if (ascii_only==0) {
-  tex_printf("%%&lhplain\n");
+  tex_printf("%%&lhplain\n"); out_line++;
   tex_printf("\\input cwebmac-lhplain");
-  out_ptr=out_buf;
-  limit=buffer;
-  *buffer='x'; /* make finish_line() not to print newline after '\input cwebmac-lhplain' for
+  out_ptr=out_buf; limit=buffer; *buffer='x'; /* make finish_line() not to print
+    newline after '\input cwebmac-lhplain' for
     it to take the place of the emptied first input line */
   first_line=1; /* make the code which empties first line in input_ln() work */
 }
