@@ -159,7 +159,7 @@ some of \.{CWEB}'s routines use the fact that it is safe to refer to
 @<Definitions...@>=
 char buffer[long_buf_size]; /* where each line of input goes */
 char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
-char *limit=buffer; /* points to the last character in the buffer */
+char *limit=buffer; /* points right after the last character in the buffer */
 char *loc=buffer; /* points to the next character to be read from the buffer */
 
 @ @<Include files@>=
@@ -239,7 +239,7 @@ Here's a shorthand expression for inequality between the two lines:
 
 @<Other...@>=
 char change_buffer[buf_size]; /* next line of |change_file| */
-char *change_limit; /* points to the last character in |change_buffer| */
+char *change_limit; /* points right after the last character in |change_buffer| */
 
 @ Procedure |prime_the_change_buffer|
 sets |change_buffer| in preparation for the next matching operation.
