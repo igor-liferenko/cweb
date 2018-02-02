@@ -16,8 +16,7 @@ On phase two depending on ascii_only flag we omit the first %&-line after output
   if (first_line) {
     if (limit-buffer == 9 && strcmp(buffer, "%&lhplain") == 0) ascii_only=0;
     first_line=0;
-    limit=buffer; /* empty the first input line; it makes no difference on phase one,
-      because limbo is skipped in it anyway */
+    limit=buffer; /* empty the first input line */
   }
   return(1);
 @z
