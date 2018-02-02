@@ -20,8 +20,8 @@ git diff --exit-code HEAD || exit
 cd - >/dev/null
 cp /home/user/cweb/cwebmac.tex .
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; [ $i = epsf.tex ] && continue; tex $i; done &>/dev/null
-for i in *.toc; do perl -i -0777 -pe 's/\n(?=\\catcode `\\@=12\\relax)//' $i; done # this is removed in my cwebmac
 for i in *.dvi; do dvihash $i; done >hash.all
+for i in *.toc; do perl -i -0777 -pe 's/\n(?=\\catcode `\\@=12\\relax)//' $i; done # after .dvi file is generated we can do whatever we want with .toc file
 git add .
 git commit -m 'tex' >/dev/null
 git checkout runall-/usr/local/bin/-V &>/dev/null
