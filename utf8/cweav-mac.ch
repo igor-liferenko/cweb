@@ -18,7 +18,7 @@ extern int tex_format;
 if (tex_format==1) {
   tex_printf("%%&lhplain\n"); out_line++;
   tex_printf("\\input cwebmac-lh");
-  out_ptr=out_buf; limit=buffer; *buffer='x'; /* make |finish_line| not to print
+  out_ptr=out_buf; limit=buffer; *buffer='@@'; /* make |finish_line| not to print
     newline after '\input cwebmac-lh' for it to take the place of the emptied
     first input line */
   first_line=1; /* make the code which empties first line in comm-mac.ch work */
