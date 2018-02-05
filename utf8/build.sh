@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # /bin/ = original (for compatibility testing of /usr/local/bin/ in "cwebtest")
-# /var/local/bin/ = original with minimal changes to work in ccw/cct (built in second part of this script)
+# /var/local/bin/ = 
 # /usr/bin/ = by default from distribution (TeX Live)
 # /usr/local/bin/ = my (built in first part of this script)
 
@@ -61,7 +61,7 @@ ctangle examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w -DCWEBINPUTS=
 cd /
 rm -fr /tmp/cwebbuild/
 
-# Build original CWEB for cct and ccw:
+# Build original CWEB with minimal changes for cct and ccw:
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
@@ -86,11 +86,10 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-nospace.ch $D
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
-clang -g -o cweave cweave.o common.o
+clang -g -o cw cweave.o common.o
 if ! ./ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
-clang -g -o ctangle ctangle.o common.o
-mkdir -p /var/local/bin/
-cp cweave ctangle /var/local/bin/
+clang -g -o ct ctangle.o common.o
+cp cw ct /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
