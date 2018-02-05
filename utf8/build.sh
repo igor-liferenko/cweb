@@ -1,9 +1,14 @@
 #!/bin/bash
 
 # /bin/ = original (for compatibility testing of /usr/local/bin/ in "cwebtest")
-# /var/local/bin/ = 
+# /var/local/bin/ = from cweb-git/* (built in third part of this script)
 # /usr/bin/ = by default from distribution (TeX Live)
 # /usr/local/bin/ = my (built in first part of this script)
+
+# To test for compatibility of cweave and ctangle in /var/local/bin/:
+#  build-cweb
+#  ./test.sh
+# If everything is OK, no changes must be shown.
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
 # remove cweav-sort.ch, cweav-nospace.ch and cweav-nopb.ch from "tie -c cweav-merged.ch" in first
@@ -91,5 +96,23 @@ if ! ./ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
 clang -g -o ct ctangle.o common.o
 cp cw ct /usr/local/bin/
+cd /
+rm -fr /tmp/cwebbuild/
+
+# Build CWEB with modifications:
+rm -fr /tmp/cwebbuild/
+mkdir /tmp/cwebbuild/
+cd /tmp/cwebbuild/
+cp -r /home/user/cweb-git/* .
+if ! /bin/ctangle common.w > build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
+if ! /bin/ctangle cweave.w > build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c cweave.c || exit
+clang -g -o cweave cweave.o common.o
+if ! /bin/ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c ctangle.c || exit
+clang -g -o ctangle ctangle.o common.o
+mkdir -p /var/local/bin/
+cp cweave ctangle /var/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
