@@ -1,3 +1,7 @@
+TODO: what will be if we use fopen again without fclose after reading a line?
+will it have effect of resetting file? If we use a different filehandle, will
+the previous hold ins position?
+
 @x
 @<Include files@>@/
 @y
