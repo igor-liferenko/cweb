@@ -1,14 +1,9 @@
 #!/bin/bash
 
 # /bin/ = original (for compatibility testing of /usr/local/bin/ in "cwebtest")
-# /var/local/bin/ = 
+# /var/local/bin/ = original with minimal changes to work in ccw/cct (built in second part of this script)
 # /usr/bin/ = by default from distribution (TeX Live)
 # /usr/local/bin/ = my (built in first part of this script)
-
-# To test for compatibility of cweave and ctangle in /var/local/bin/:
-#  build-cweb
-#  ./test.sh
-# If everything is OK, no changes must be shown.
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
 # remove cweav-sort.ch, cweav-nospace.ch and cweav-nopb.ch from "tie -c cweav-merged.ch" in first
