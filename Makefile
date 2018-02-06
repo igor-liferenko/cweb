@@ -1,12 +1,15 @@
 all:
-	ctangle common
-	gcc -g -w -c common.c
-	ctangle ctangle
-	gcc -g -w -c ctangle.c
-	gcc -g -o ctangle ctangle.o common.o
-	ctangle cweave
-	gcc -g -w -c cweave.c
-	gcc -g -o cweave cweave.o common.o
+	@/bin/ctangle -b -h -p common|sed /^$$/d
+	@clang -g -w -c common.c
+	@/bin/ctangle -b -h -p ctangle|sed /^$$/d
+	@clang -g -w -c ctangle.c
+	@clang -g -o ctangle ctangle.o common.o
+	@/bin/ctangle -b -h -p cweave|sed /^$$/d
+	@clang -g -w -c cweave.c
+	@clang -g -o cweave cweave.o common.o
+
+test: all
+	@./test
 
 print:
 	@cweave cweave cweave >/dev/null
