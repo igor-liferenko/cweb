@@ -1,3 +1,6 @@
+# type 'make' and then 'gdb cweave'
+# to test compatibility with original cweb, type 'make test' - if everything OK, then no output
+# is produced
 all:
 	@/bin/ctangle -b -h -p common|sed /^$$/d
 	@clang -g -w -c common.c
