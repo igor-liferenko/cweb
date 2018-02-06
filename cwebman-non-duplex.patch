@@ -1,31 +1,13 @@
-diff --git a/cwebman.tex b/cwebman.tex
-index 88c1f2b..a64a392 100644
---- a/cwebman.tex
-+++ b/cwebman.tex
-@@ -1,17 +1,7 @@
- % This file generates the user manual; TeX it, don't read it!
- % update 14 Nov 2016 by DEK: corrected obsolete remarks re debugging info
--
+@@ -3,4 +2,0 @@
 -\let\oldshipout\shipout
 -\def\shipout{\global\let\shipout\oldshipout\afterassignment\myboat\setbox255=}
 -\def\myboat{\aftergroup\myship}
 -\def\myship{\setbox255=\vbox{\special{header=config.duplong}\unvbox255}\shipout\box255}
--
- \def\tangref{3} % where the main explanation of CTANGLing is given
- \input cwebmac
+@@ -9,4 +4,0 @@
 -\hoffset=12.29mm % purely empirical - change if needed
 -\pageshift=210mm \advance\pageshift by-6.5in \advance\pageshift by-\hoffset
 -\advance\hoffset by-1in
 -\advance\pageshift by-1in
- \def\page{\box255 } \normalbottom
- \parskip 0pt plus 1pt
- \def\RA{\char'31 } % right arrow
-@@ -95,7 +85,7 @@ for their own personal use.
- Internet page \.{http://www-cs-faculty.stanford.edu/\char`\~knuth/cweb.html}
- contains current info about \.{CWEB} and related topics.
- 
+@@ -96 +88 @@
 -\pageno=-1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
 +\pageno=0 \titletrue\eject
- 
- \titletrue
- \centerline{\titlefont The {\ttitlefont CWEB} System of
