@@ -17,7 +17,9 @@ Compare it with the following where there is no spurious \Y:
 If we put @s x int to limbo, no spurious \Y is produced.
 
 @x
+  if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked){emit_space_if_needed;save_position;}
 @y
+  if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked&&format_visible){emit_space_if_needed;save_position;}
 @z
