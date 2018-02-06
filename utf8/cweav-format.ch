@@ -15,13 +15,6 @@ Compare it with the following where there is no spurious \Y:
 
 @ Next section.
 If we put @s x int to limbo, no spurious \Y is produced.
-(this spurious \Y is added after TeX part, not after middle part,
-because if we use the following file (i.e., with empty TeX part),
-no spurious \Y is produced:
-@ @s x int
-
-@ Next section.
-)
 
 @x
   if(!space_checked){emit_space_if_needed;save_position;}
