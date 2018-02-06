@@ -4297,7 +4297,7 @@ it starts after we scan the matching `\.)'.
 @ @<Start a format...@>= {
   doing_format=1;
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
-  if(!space_checked){emit_space_if_needed;save_position;}
+  if(!space_checked&&format_visible){emit_space_if_needed;save_position;}
   app_str("\\F"); /* this will produce `\&{format }' */
 @.\\F@>
   next_control=get_next();
