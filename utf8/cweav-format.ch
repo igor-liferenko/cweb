@@ -3,12 +3,14 @@ Suppose we need to explain some type names in TeX-text part of a section
 For these type names to be formatted correctly, we need to use @s
 (assuming that these type names did not occur earlier in C code).
 Problem appears if @s is put to middle part of the section (in contrast with limbo).
-In the following CWEB program spurious \Y is added without using this change-file:
+In the following CWEB program spurious \Y is added after TeX-text
+without using this change-file:
 
   @ Let's explain |struct x|.
   @s x int
 
-If there is C-part after @s, this change-file does not differ from default.
+NOTE: If C-text is non-empty (and TeX-text is empty), no spurious \Y is produced,
+so it seems such case is handled in cweave. TODO: find where
 
 @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
