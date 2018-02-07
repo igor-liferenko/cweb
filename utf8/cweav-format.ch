@@ -8,6 +8,8 @@ In the following CWEB program spurious \Y is added without using this change-fil
   @ Let's explain |struct x|.
   @s x int
 
+If there is C-part after @s, this change-file does not differ from default.
+
 @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked){emit_space_if_needed;save_position;}
