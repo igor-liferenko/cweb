@@ -22,3 +22,6 @@ and here:
 /bin/ctangle -b -h -p cweave
 
 and then remove "|sed /^$$/d" in Makefile
+--------------------------
+at value 127 of hash_size cweave works OK, at value 113 it breaks in
+@<Look for matches for new name among...@>=, because of Segmentation fault
