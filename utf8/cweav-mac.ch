@@ -21,7 +21,7 @@ if (tex_format==1) {
   out_ptr=out_buf; limit=buffer; *buffer='@@'; /* make |finish_line| not to print
     newline after '\input cwebmac-lh' for it to take the place of the emptied
     first input line */
-  first_line=1; /* make the code which empties first line in comm-mac.ch work */
+  first_line=1; /* make the code which empties first input line in comm-mac.ch work */
 }
 else tex_printf("\\input cwebma");
 @.Writing the output file...@>
