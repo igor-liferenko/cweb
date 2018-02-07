@@ -70,13 +70,13 @@ clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-sed -i 's/@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))/@d xisupper(c) isupper(c)/' common.w
+sed -i 's/@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))/@d xisupper(c) isupper(c)/' common.w # isupper('ю') returns 0 and isupper('я') returns 0
 if ! ./ctangle common.w > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
 perl -i -pe 's/  argc=ac; argv=av;/  setlocale(LC_CTYPE,"ru_RU.CP1251");\n$&/' cweave.w
 sed -i 's/@d xislower(c) (islower(c)&&((eight_bits)c<0200))/@d xislower(c) islower((eight_bits)c)/' common.h
-sed -i 's/@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))/@d xisupper(c) isupper(c)/' common.h
+sed -i 's/@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))/@d xisupper(c) isupper(c)/' common.h # isupper('ю') returns 0 and isupper('я') returns 0
 perl -i -pe 's[\Q\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277]'"'"'\260\261\262\263\264\265\266\267\272\273\274\275\276\277\300\301'"'" cweave.w
 perl -i -pe 's[\Q\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317]'"'"'\302\303\304\305\306\307\310\311\312\313\314\315\316\317\320\321'"'" cweave.w
 perl -i -pe 's[\Q\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337]'"'"'\322\323\324\325\326\327\330\331\332\333\334\335\336\337\340\341'"'" cweave.w
