@@ -94,3 +94,24 @@ mkdir -p /var/local/bin/
 cp cweave ctangle /var/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
+
+# For /dev/null-sections:
+rm -fr /tmp/cwebbuild/
+mkdir /tmp/cwebbuild/
+cd /tmp/cwebbuild/
+cp -r /home/user/cweb/* .
+clang -g -w -c ctangle.c
+perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
+clang -g -w -c common.c
+clang -g -o ctangle ctangle.o common.o
+if ! tie -c comm-merged.ch common.w $DIR/../comm-blank.ch $DIR/../comm-out.ch > build-cweb.out
+  then cat build-cweb.out; exit; fi
+if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
+if ! tie -c cweav-merged.ch cweave.w $DIR/../cweav-opts.ch > build-cweb.out
+  then cat build-cweb.out; exit; fi
+if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c cweave.c || exit
+clang -g -o /usr/local/bin/cw cweave.o common.o
+cd /
+rm -fr /tmp/cwebbuild/
