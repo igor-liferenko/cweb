@@ -1,3 +1,6 @@
+Do not create empty output file if input file does not exist
+(works in conjunction with comm-file.ch and ctang-file.ch).
+
 @x
 `\.{\\input cwebmac}'.
 

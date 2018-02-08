@@ -2,8 +2,7 @@
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-void my1(char *msg) {(void) msg;}
-void my2(sixteen_bits n) {(void) n;}
+int gobble;
 @z
 
 @x
@@ -15,7 +14,7 @@ void my2(sixteen_bits n) {(void) n;}
 @x
 @.Writing the output file...@>
 @y
-out_ptr=out_buf; limit=buffer; *buffer='@@';
+out_ptr=out_buf; limit=buffer; *buffer='@@'; /* the same trick as in cweav-mac.ch */
 @.Writing the output file...@>
 @z
 
@@ -26,8 +25,6 @@ finish_line();
 @z
 
 @x
-@ @<Translate the current section@>= {
-  section_count++;
   @<Output the code for the beginning of a new section@>;
   save_position;
   @<Translate the \TEX/ part of the current section@>;
@@ -35,21 +32,13 @@ finish_line();
   @<Translate the \CEE/ part of the current section@>;
   @<Show cross-references to this section@>;
   @<Output the code for the end of a section@>;
-}
 @y
-@ @<Translate the current section@>= {
-  section_count++;
-#define out_str my1
-#define out_section my2
-  @<Output the code for the beginning of a new section@>;
-#undef out_str
-#undef out_section
+  gobble=1; @<Output the code for the beginning of a new section@>; gobble=0;
   save_position;
-  @<Translate the \TEX/ part of the current section@>; /* outputs nothing, but must be present */
-  @<Translate the definition part of the current section@>; /* same */
+  @<Translate the \TEX/ part of the current section@>;
+  @<Translate the definition part of the current section@>;
   @<Translate the \CEE/ part of the current section@>;
   finish_line();
-}
 @z
 
 @x

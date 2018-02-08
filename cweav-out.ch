@@ -1,3 +1,6 @@
+Allow to use trick in cweav-tran.ch and output to stdout
+(works in conjunction with utf8/comm-file.ch).
+
 @x
 `\.{\\input cwebmac}'.
 
