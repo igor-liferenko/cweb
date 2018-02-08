@@ -12,6 +12,28 @@ int gobble;
 @z
 
 @x
+out_str(s) /* output characters from |s| to end of string */
+char *s;
+{
+@y
+out_str(s) /* output characters from |s| to end of string */
+char *s;
+{
+  if (gobble) return;
+@z
+
+@x
+out_section(n)
+sixteen_bits n;
+{
+@y
+out_section(n)
+sixteen_bits n;
+{
+  if (gobble) return;
+@z
+
+@x
 @.Writing the output file...@>
 @y
 out_ptr=out_buf; limit=buffer; *buffer='@@'; /* the same trick as in cweav-mac.ch */
