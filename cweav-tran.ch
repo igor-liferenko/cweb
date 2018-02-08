@@ -7,6 +7,7 @@
 @x
 @.Writing the output file...@>
 @y
+out_ptr=out_buf; limit=buffer; *buffer='@@';
 @.Writing the output file...@>
 @z
 
