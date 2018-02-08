@@ -1,6 +1,19 @@
 @x
+*out_ptr='c'; tex_printf("\\input cwebma");
+@y
+*out_ptr='c';
+@z
+
+@x
+@.Writing the output file...@>
+@y
+@.Writing the output file...@>
+@z
+
+@x
 finish_line(); flush_buffer(out_buf,0,0); /* insert a blank line, it looks nice */
 @y
+finish_line();
 @z
 
 @x
