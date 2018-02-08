@@ -1,4 +1,12 @@
 @x
+@<Global variables@>@/
+@y
+@<Global variables@>@/
+void my1(char *msg) {(void) msg;}
+void my2(sixteen_bits n) {(void) n;}
+@z
+
+@x
 *out_ptr='c'; tex_printf("\\input cwebma");
 @y
 *out_ptr='c';
@@ -30,9 +38,13 @@ finish_line();
 }
 @y
 @ @<Translate the current section@>= {
-//  section_count++;
+  section_count++;
+#define out_str my1
+#define out_section my2
   @<Output the code for the beginning of a new section@>;
-//  save_position;
+#undef out_str
+#undef out_section
+  save_position;
   @<Translate the \TEX/ part of the current section@>; /* outputs nothing, but must be present */
   @<Translate the definition part of the current section@>; /* same */
   @<Translate the \CEE/ part of the current section@>;
