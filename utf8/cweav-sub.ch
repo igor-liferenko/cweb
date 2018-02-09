@@ -4,9 +4,21 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-int not_null=1;
+int not_null;
 @z
 
+-------------- PHASE ONE --------------
+
+Beginning of new section:
+@x
+  cur_section_char=*(loc-1);
+@y
+  cur_section_char=*(loc-1);
+  if (cur_section_char == '(') not_null = 0; else not_null = 1;
+  /* TODO: check section name and set not_null to zero only if it is /dev/null */
+@z
+
+Do not make cross-references for /dev/null sections:
 @x
     if (next_control==section_name && cur_section!=name_dir)
       new_section_xref(cur_section);
@@ -19,6 +31,8 @@ int not_null=1;
     if (not_null) outer_xref();
 @z
 
+----------- PHASE TWO --------------
+
 @x
   @<Translate the \CEE/ part of the current section@>;
 @y
@@ -30,6 +44,8 @@ int not_null=1;
   finish_C(1);
 @y
   finish_C(not_null);
+  /* TODO: here we call \.{cw} on tex_file_name.section_number
+     and print its output to |tex_file| and remove tex_file_name.section_number */
 @z
 
 @x
@@ -42,3 +58,5 @@ if(cur_xref->num==file_flag) {
   cur_xref=cur_xref->xlink;
 }
 @z
+
+TODO: output |buffer| to tex_file_name.section_number
