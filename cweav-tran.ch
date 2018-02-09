@@ -54,7 +54,7 @@ finish_line();
   gobble=0;
 @z
 
-FIXME: remove "finish_line();" ?
+FIXME: remove "finish_line();" ? (see what finish_line does)
 @x
 out_str("\\fi"); finish_line();
 @.\\fi@>
