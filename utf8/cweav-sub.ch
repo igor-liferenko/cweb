@@ -5,7 +5,6 @@ Substitute C text in /dev/null section.
 @y
 @<Global variables@>@/
 int not_null;
-int printing=0;
 int null_sections[100];
 void add_null(int n)
 {
@@ -34,11 +33,9 @@ Beginning of new section:
     if (cur_section_char=='(' && strncmp("/dev/null",k0+1,k-k0)==0) {
       add_null(section_count);
       not_null=0;
-      printing=1;
     }
     else {
       not_null=1;
-      printing=0;
     }
   }
   if (phase==2) {
@@ -68,5 +65,5 @@ Do not make index entries for C-part of /dev/null sections:
      and print its output to |tex_file| and remove tex_file_name.section_number */
 @z
 
-TODO: output |buffer| to tex_file_name.section_number based on |printing|
-(decide where it is better to do it - in phase one or two)
+TODO: output |buffer| to tex_file_name.section_number based on |has_null(section_count)|
+in phase two
