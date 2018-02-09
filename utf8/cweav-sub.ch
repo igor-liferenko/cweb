@@ -78,13 +78,19 @@ Do not make index entries for C-part of /dev/null sections:
 @<Output a section name@>= {
   sprint_section_name(scratch,cur_name);
   if (phase==3&&strcmp(scratch,"/dev/null")==0) out_ptr=out_buf;
-  if (phase==3&&strcmp(scratch,"/dev/null")!=0) out_str("\\X");
+  if (phase==3) {
+    if (strcmp(scratch,"/dev/null")!=0) {out_str("\\X");}
+  }
+  else {out_str("\\X");}
 @.\\X@>
   cur_xref=(xref_pointer)cur_name->xref;
   if (cur_xref->num==file_flag) {an_output=1; cur_xref=cur_xref->xlink;}
   else an_output=0;
   if (cur_xref->num>=def_flag) {
-    if (phase==3&&strcmp(scratch,"/dev/null")!=0) out_section(cur_xref->num-def_flag);
+    if (phase==3) {
+      if (strcmp(scratch,"/dev/null")!=0) {out_section(cur_xref->num-def_flag);}
+    }
+    else {out_section(cur_xref->num-def_flag);}
 @z
 
 @x
@@ -95,18 +101,30 @@ Do not make index entries for C-part of /dev/null sections:
   if (an_output) out_str(@q{@>" }");
   out_str("\\X");
 @y
-  if (phase==3&&strcmp(scratch,"/dev/null")!=0) out(':');
-  if (phase==3&&strcmp(scratch,"/dev/null")!=0) if (an_output) out_str("\\.{"@q}@>);
+  if (phase==3) {
+    if (strcmp(scratch,"/dev/null")!=0) {out(':');}
+  }
+  else {out(':');}
+  if (phase==3) {
+    if (strcmp(scratch,"/dev/null")!=0) {if (an_output) out_str("\\.{"@q}@>);}
+  }
+  else {if (an_output) out_str("\\.{"@q}@>);}
 @.\\.@>
   @<Output the text of the section name@>;
-  if (phase==3&&strcmp(scratch,"/dev/null")!=0) if (an_output) out_str(@q{@>" }");
-  if (phase==3&&strcmp(scratch,"/dev/null")!=0) out_str("\\X");
+  if (phase==3) {
+    if (strcmp(scratch,"/dev/null")!=0) {if (an_output) out_str(@q{@>" }");}
+  }
+  else {if (an_output) out_str(@q{@>" }");}
+  if (phase==3) {
+    if (strcmp(scratch,"/dev/null")!=0) {out_str("\\X");}
+  }
+  else {out_str("\\X");}
 @z
 
 @x
  default: out(b);
 @y
- default: if (phase==3&&strcmp(scratch,"/dev/null")!=0) out(b);
+ default: if (phase==3) { if (strcmp(scratch,"/dev/null")!=0) {out(b);}}else{out(b);}
 @z
 
 ----------- PHASE TWO --------------
