@@ -74,6 +74,11 @@ Do not make index entries for C-part of /dev/null sections:
   else an_output=0;
   if (cur_xref->num>=def_flag) {
     out_section(cur_xref->num-def_flag);
+    if (phase==3) {
+      cur_xref=cur_xref->xlink;
+      while (cur_xref->num>=def_flag) {
+        out_str(", ");
+        out_section(cur_xref->num-def_flag);
 @y
 @<Output a section name@>= {
   sprint_section_name(scratch,cur_name);
@@ -91,6 +96,11 @@ Do not make index entries for C-part of /dev/null sections:
       if (strcmp(scratch,"/dev/null")!=0) {out_section(cur_xref->num-def_flag);}
     }
     else {out_section(cur_xref->num-def_flag);}
+    if (phase==3) {
+      cur_xref=cur_xref->xlink;
+      while (cur_xref->num>=def_flag) {
+        if (strcmp(scratch,"/dev/null")!=0) {out_str(", ");}
+        if (strcmp(scratch,"/dev/null")!=0) {out_section(cur_xref->num-def_flag);}
 @z
 
 @x
