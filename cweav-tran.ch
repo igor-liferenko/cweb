@@ -54,6 +54,7 @@ finish_line();
   gobble=0;
 @z
 
+FIXME: remove "finish_line();" ?
 @x
 out_str("\\fi"); finish_line();
 @.\\fi@>
