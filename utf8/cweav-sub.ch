@@ -6,6 +6,9 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 int not_null;
 int null_sections[100];
+extern int line_cur;
+int line_prev=0;
+#define line_changed line_prev!=line_cur
 void add_null(int n)
 {
   for (int i = 0; i<100; i++)
@@ -17,6 +20,18 @@ int has_null(int n)
     if (null_sections[i]==n) return 1;
   return 0;
 }
+@z
+
+@x
+get_next() /* produces the next input token */
+{@+eight_bits c; /* the current character */
+@y
+get_next() /* produces the next input token */
+{@+eight_bits c; /* the current character */
+  if (phase==2 && has_null(section_count) && line_changed) {
+    printf("%.*s\n",limit-buffer,buffer);
+    line_prev=line_cur;
+  }
 @z
 
 -------------- PHASE ONE --------------
