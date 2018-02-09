@@ -52,13 +52,8 @@ Beginning of new section:
 
 Do not make index entries for C-part of /dev/null sections:
 @x
-    if (next_control==section_name && cur_section!=name_dir)
-      new_section_xref(cur_section);
     next_control=get_next(); outer_xref();
 @y
-    if (not_null)
-      if (next_control==section_name && cur_section!=name_dir)
-        new_section_xref(cur_section);
     next_control=get_next();
     if (not_null) outer_xref();
 @z
