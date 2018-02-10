@@ -4,6 +4,7 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 @y
 @<Global variables@>@/
+int print;
 int not_null;
 int null_sections[100];
 void add_null(int n)
@@ -20,11 +21,132 @@ int has_null(int n)
 @z
 
 @x
-get_next() /* produces the next input token */
-{@+eight_bits c; /* the current character */
+    @<Check if we're at the end of a preprocessor command@>;
+    if (loc>limit && get_line()==0) return(new_section);
+    c=*(loc++);
 @y
-get_next() /* produces the next input token */
-{@+eight_bits c; /* the current character */
+    @<Check if we're at the end of a preprocessor command@>;
+    if (loc>limit && get_line()==0) return(new_section);
+    c=*(loc++);
+    if (print) printf("%c", c);
+@z
+
+@x
+while (loc<=buffer_end-7 && xisspace(*loc)) loc++;
+@y
+while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
+@z
+
+@x
+  while (loc==limit-1 && preprocessing && *loc=='\\')
+    if (get_line()==0) return(new_section); /* still in preprocessor mode */
+@y
+  while (loc==limit-1 && preprocessing && *loc=='\\') {
+    if (print) printf("%c", *loc);
+    if (get_line()==0) return(new_section); /* still in preprocessor mode */
+  }
+@z
+
+@x
+@d compress(c) if (loc++<=limit) return(c)
+@y
+@d compress(c) do{if(loc++<=limit)return(c);else if(print)printf("%c",*(loc-1));}while(0)
+@z
+
+@x
+    else if (*loc=='>') if (*(loc+1)=='*') {loc++; compress(minus_gt_ast);}
+                        else compress(minus_gt); break;
+  case '.': if (*loc=='*') {compress(period_ast);}
+            else if (*loc=='.' && *(loc+1)=='.') {
+              loc++; compress(dot_dot_dot);
+@y
+    else if (*loc=='>') if (*(loc+1)=='*') {if(print)printf("%c",*loc);
+      loc++; compress(minus_gt_ast);}
+                        else compress(minus_gt); break;
+  case '.': if (*loc=='*') {compress(period_ast);}
+            else if (*loc=='.' && *(loc+1)=='.') {
+              if(print)printf("%c",*loc);loc++; compress(dot_dot_dot);
+@z
+
+@x
+  while (isalpha(*++loc) || isdigit(*loc) || isxalpha(*loc) || ishigh(*loc));
+@y
+  while (isalpha(*++loc) || isdigit(*loc) || isxalpha(*loc) || ishigh(*loc))
+    if(print)printf("%c",*loc);
+@z
+
+@x
+  if (*(loc-1)=='0') {
+    if (*loc=='x' || *loc=='X') {*id_loc++='^'; loc++;
+      while (xisxdigit(*loc)) *id_loc++=*loc++;} /* hex constant */
+    else if (xisdigit(*loc)) {*id_loc++='~';
+      while (xisdigit(*loc)) *id_loc++=*loc++;} /* octal constant */
+@y
+  if (*(loc-1)=='0') {
+    if (*loc=='x' || *loc=='X') {*id_loc++='^'; if (print) printf("%c", *loc); loc++;
+      while (xisxdigit(*loc)) {if (print) printf("%c", *loc);
+      *id_loc++=*loc++;}} /* hex constant */
+    else if (xisdigit(*loc)) {*id_loc++='~';
+      while (xisdigit(*loc)) {if (print) printf("%c", *loc);
+      *id_loc++=*loc++;}} /* octal constant */
+@z
+
+@x
+    while (xisdigit(*loc) || *loc=='.') *id_loc++=*loc++;
+    if (*loc=='e' || *loc=='E') { /* float constant */
+      *id_loc++='_'; loc++;
+      if (*loc=='+' || *loc=='-') *id_loc++=*loc++;
+      while (xisdigit(*loc)) *id_loc++=*loc++;
+    }
+  }
+  while (*loc=='u' || *loc=='U' || *loc=='l' || *loc=='L'
+         || *loc=='f' || *loc=='F') {
+    *id_loc++='$'; *id_loc++=toupper(*loc); loc++;
+@y
+    while (xisdigit(*loc) || *loc=='.') {if(print)printf("%c",*loc);*id_loc++=*loc++;}
+    if (*loc=='e' || *loc=='E') { /* float constant */
+      *id_loc++='_'; if(print)printf("%c",*loc);loc++;
+      if (*loc=='+' || *loc=='-') {if(print)printf("%c",*loc);*id_loc++=*loc++;}
+      while (xisdigit(*loc)) {if(print)printf("%c",*loc);*id_loc++=*loc++;}
+    }
+  }
+  while (*loc=='u' || *loc=='U' || *loc=='l' || *loc=='L'
+         || *loc=='f' || *loc=='F') {
+    *id_loc++='$'; *id_loc++=toupper(*loc); if(print)printf("%c",*loc);loc++;
+@z
+
+@x
+    delim=*loc++; *++id_loc=delim;
+@y
+    if(print)printf("%c",*loc);delim=*loc++; *++id_loc=delim;
+@z
+
+Gives nothing:
+@x
+    if (loc>=limit) {
+@y
+    if (loc>=limit) {
+      if(print)printf("\n");
+@z
+
+@x
+    if ((c=*loc++)==delim) {
+@y
+    if(print)printf("%c",*loc);
+    if ((c=*loc++)==delim) {
+@z
+
+@x
+        *id_loc = '\\'; c=*loc++;
+@y
+        *id_loc = '\\'; if(print)printf("%c",*loc);c=*loc++;
+@z
+
+@x
+@<Get control code and possible section name@>= {
+@y
+@<Get control code and possible section name@>= {
+  if(print)printf("%c",*loc);
 @z
 
 -------------- PHASE ONE --------------
@@ -44,6 +166,51 @@ Beginning of new section:
     }
     else not_null=1;
   }
+@z
+
+@<-string may be not needed
+@x
+  @<If end of name or erroneous control code, |break|@>;
+  loc++; if (k<section_text_end) k++;
+@y
+  @<If end of name or erroneous control code, |break|@>;
+  if(print)printf("%c", *loc);loc++; if (k<section_text_end) k++;
+@z
+
+@x
+@ @<If end of name...@>=
+if (c=='@@') {
+  c=*(loc+1);
+  if (c=='>') {
+@y
+@ @<If end of name...@>=
+if (c=='@@') {
+  if(print)printf("%c",*loc);
+  c=*(loc+1);
+  if (c=='>') {
+    if(print)printf("%c",*(loc+1));
+@z
+
+@x
+  *(++k)='@@'; loc++; /* now |c==*loc| again */
+@y
+  *(++k)='@@'; if(print)printf("%c",*loc);loc++; /* now |c==*loc| again */
+@z
+
+@x
+@<Scan a verbatim string@>= {
+  id_first=loc++; *(limit+1)='@@'; *(limit+2)='>';
+  while (*loc!='@@' || *(loc+1)!='>') loc++;
+  if (loc>=limit) err_print("! Verbatim string didn't end");
+@.Verbatim string didn't end@>
+  id_loc=loc; loc+=2;
+@y
+@<Scan a verbatim string@>= {
+  if(print)printf("%c",*loc);id_first=loc++; *(limit+1)='@@'; *(limit+2)='>';
+  while (*loc!='@@' || *(loc+1)!='>') {if(print)printf("%c",*loc);loc++;}
+  if (loc>=limit) err_print("! Verbatim string didn't end");
+@.Verbatim string didn't end@>
+  id_loc=loc; if(print)printf("%c%c",*loc,*(loc+1));loc+=2;
 @z
 
 Do not make index entries for C-part of /dev/null sections:
@@ -129,6 +296,13 @@ Do not make index entries for C-part of /dev/null sections:
 @z
 
 ----------- PHASE TWO --------------
+
+@x
+  @<Translate the definition part of the current section@>;
+@y
+  if (has_null(section_count)) print=1; else print=0;
+  @<Translate the definition part of the current section@>;
+@z
 
 @x
   finish_C(1);
