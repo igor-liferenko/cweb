@@ -147,5 +147,16 @@ Do not make index entries for C-part of /dev/null sections:
      and print its output to |tex_file| and remove tex_file_name.section_number */
 @z
 
+@x
+footnote(flag) /* outputs section cross-references */
+sixteen_bits flag;
+{
+@y
+footnote(flag) /* outputs section cross-references */
+sixteen_bits flag;
+{
+  if (has_null(section_count)) return;
+@z
+
 TODO: output |buffer| to tex_file_name.section_number based on |has_null(section_count)|
 in phase two
