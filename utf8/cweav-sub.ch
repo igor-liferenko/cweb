@@ -6,9 +6,6 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 int not_null;
 int null_sections[100];
-extern int line_cur;
-int line_prev=0;
-#define line_changed line_prev!=line_cur
 void add_null(int n)
 {
   for (int i = 0; i<100; i++)
@@ -28,10 +25,6 @@ get_next() /* produces the next input token */
 @y
 get_next() /* produces the next input token */
 {@+eight_bits c; /* the current character */
-  if (phase==2 && has_null(section_count) && line_changed) {
-    printf("%.*s\n",limit-buffer,buffer);
-    line_prev=line_cur;
-  }
 @z
 
 -------------- PHASE ONE --------------
@@ -49,9 +42,7 @@ Beginning of new section:
       add_null(section_count);
       not_null=0;
     }
-    else {
-      not_null=1;
-    }
+    else not_null=1;
   }
 @z
 
@@ -157,6 +148,3 @@ sixteen_bits flag;
 {
   if (has_null(section_count)) return;
 @z
-
-TODO: output |buffer| to tex_file_name.section_number based on |has_null(section_count)|
-in phase two

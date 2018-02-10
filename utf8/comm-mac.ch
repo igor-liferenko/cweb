@@ -4,7 +4,6 @@
 @<Include files@>@/
 int tex_format=0;
 int first_line=1;
-int line_cur=1;
 @z
 
 We must know if %&-line is used, before |copy_limbo| is started in phase two. This is done with
@@ -19,6 +18,5 @@ setting |tex_format| on phase one and checking it in cweav-mac.ch right before p
     }
     first_line=0;
   }
-  line_cur++;
   return(1);
 @z
