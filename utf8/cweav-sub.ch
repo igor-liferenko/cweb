@@ -321,5 +321,5 @@ sixteen_bits flag;
 footnote(flag) /* outputs section cross-references */
 sixteen_bits flag;
 {
-  if (has_null(section_count)) return;
+  if (phase==2&&has_null(section_count)) return;
 @z
