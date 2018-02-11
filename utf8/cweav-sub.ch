@@ -267,7 +267,7 @@ else if (c=='\\' && *loc!='@@')
     app_tok(*(loc++))@;
   }
   else loc++;
-else if(print)printf("%c",*(loc-1));
+else if(print&&(loc-1)!=limit)printf("%c",*(loc-1));
 @z
 
 ----------- PHASE THREE -----------
