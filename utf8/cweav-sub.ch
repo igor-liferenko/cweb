@@ -26,7 +26,7 @@ int has_null(int n)
 @y
     @<Check if we're at the end of a preprocessor command@>;
     if (loc>limit && get_line()==0) return(new_section);
-    if(print){if(loc==limit)printf("\n");else printf("%c",*loc);}
+    if(print){if(loc==limit)printf("\n");else if (*loc!='@@')printf("%c",*loc);}
 @z
 
 @x
@@ -144,7 +144,7 @@ Gives nothing:
 @<Get control code and possible section name@>= {
 @y
 @<Get control code and possible section name@>= {
-  if(print)printf("%c",*loc);
+  if(print&&ccode[(eight_bits)*loc]!=new_section) printf("%c%c",*(loc-1),*loc);
 @z
 
 -------------- PHASE ONE --------------
