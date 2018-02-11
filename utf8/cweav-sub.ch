@@ -4,7 +4,7 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-int print;
+int print=0;
 int not_null;
 int null_sections[100];
 void add_null(int n)
@@ -48,7 +48,7 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
 @x
 @d compress(c) if (loc++<=limit) return(c)
 @y
-@d compress(c) do{if(loc++<=limit)return(c);else if(print)printf("%c",*(loc-1));}while(0)
+@d compress(c) do{if(loc++<=limit){if(print)printf("%c",*(loc-1));return(c);}}while(0)
 @z
 
 @x
@@ -219,6 +219,57 @@ Do not make index entries for C-part of /dev/null sections:
     if (not_null) outer_xref();
 @z
 
+@x
+    if (loc<=limit) return(ccode[(eight_bits)*(loc++)]);
+@y
+    if (loc<=limit) {
+      if (ccode[(eight_bits)*loc]>=format_code) {
+        if(has_null(section_count)){print=1;printf("%c%c",*(loc-1),*loc);}
+      }
+      return(ccode[(eight_bits)*(loc++)]);
+    }
+@z
+
+@x
+    if (loc>limit) {
+@y
+    if (loc>limit) {
+      if(print)printf("\n");
+@z
+
+@x
+    if (c=='|') return(bal);
+@y
+    if (c=='|') {if(print)printf("%c",*(loc-1));return(bal);}
+@z
+
+@x
+if (c=='*' && *loc=='/') {
+@y
+if (c=='*' && *loc=='/') {
+  if(print)printf("%c%c",*(loc-1),*loc);
+@z
+
+@x
+    loc-=2; if (phase==2) *(tok_ptr-1)=' '; goto done;
+  }
+}
+else if (c=='\\' && *loc!='@@')
+  if (phase==2) app_tok(*(loc++))@; else loc++;
+@y
+    loc-=2; if (phase==2) *(tok_ptr-1)=' '; goto done;
+  }
+  else if(print)printf("%c%c",*(loc-2),*(loc-1));
+}
+else if (c=='\\' && *loc!='@@')
+  if (phase==2) {
+    if(print)printf("%c%c",*(loc-1),*loc);
+    app_tok(*(loc++))@;
+  }
+  else loc++;
+else if(print)printf("%c",*(loc-1));
+@z
+
 ----------- PHASE THREE -----------
 
 @x
@@ -297,12 +348,9 @@ Do not make index entries for C-part of /dev/null sections:
 
 @x
   @<Translate the \TEX/ part of the current section@>;
-  @<Translate the definition part of the current section@>;
 @y
   print=0;
   @<Translate the \TEX/ part of the current section@>;
-  if (has_null(section_count)) {printf("%c%c",*(loc-2),*(loc-1));print=1;}
-  @<Translate the definition part of the current section@>;
 @z
 
 @x
