@@ -23,12 +23,10 @@ int has_null(int n)
 @x
     @<Check if we're at the end of a preprocessor command@>;
     if (loc>limit && get_line()==0) return(new_section);
-    c=*(loc++);
 @y
     @<Check if we're at the end of a preprocessor command@>;
     if (loc>limit && get_line()==0) return(new_section);
-    c=*(loc++);
-    if (print) printf("%c", c);
+    if(print){if(loc==limit)printf("\n");else printf("%c",*loc);}
 @z
 
 @x
@@ -298,9 +296,12 @@ Do not make index entries for C-part of /dev/null sections:
 ----------- PHASE TWO --------------
 
 @x
+  @<Translate the \TEX/ part of the current section@>;
   @<Translate the definition part of the current section@>;
 @y
-  if (has_null(section_count)) print=1; else print=0;
+  print=0;
+  @<Translate the \TEX/ part of the current section@>;
+  if (has_null(section_count)) {printf("%c%c",*(loc-2),*(loc-1));print=1;}
   @<Translate the definition part of the current section@>;
 @z
 
