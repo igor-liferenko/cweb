@@ -118,14 +118,6 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
     if(print)printf("%c",*loc);delim=*loc++; *++id_loc=delim;
 @z
 
-Gives nothing:
-@x
-    if (loc>=limit) {
-@y
-    if (loc>=limit) {
-      if(print)printf("\n");
-@z
-
 @x
     if ((c=*loc++)==delim) {
 @y
