@@ -395,6 +395,7 @@ else if(print&&(loc-1)!=limit){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c"
   finish_C(1);
 @y
   finish_C(!has_null(section_count));
+if (has_null(section_count)) {
   fclose(cw_in1);
   fclose(cw_in2);
   wchar_t line[buf_size];
@@ -408,6 +409,7 @@ else if(print&&(loc-1)!=limit){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c"
     printf("child exited with error\n");
     exit(EXIT_FAILURE);
   }
+}
   print=0;
 @z
 
