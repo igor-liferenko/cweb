@@ -34,6 +34,12 @@ sixteen_bits n;
 @z
 
 @x
+    out_section(cur_xref->num-def_flag);
+@y
+    out_str(tex_file_name);
+@z
+
+@x
 @.Writing the output file...@>
 @y
 out_ptr=out_buf; limit=buffer; *buffer='@@'; /* the same trick as in cweav-mac.ch */

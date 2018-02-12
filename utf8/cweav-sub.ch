@@ -252,12 +252,14 @@ Do not make index entries for C-part of /dev/null sections:
             close(pipe_write2[1]);
             char writefd1[10];
             char writefd2[10];
+            char secstr[10];
             snprintf(writefd1, 10, "%d", pipe_write1[0]);
             snprintf(writefd2, 10, "%d", pipe_write2[0]);
+            snprintf(secstr, 10, "%d", section_count);
             if (prctl(PR_SET_PDEATHSIG, SIGINT) != -1 && /* automatically close window when
                                                     parent exits */
                 getppid() != 1) /* make sure that parent did not exit just before |prctl| call */
-              execl("/usr/local/bin/cw", "cw", writefd1, writefd2, (char *) NULL);
+              execl("/usr/local/bin/cw", "cw", writefd1, writefd2, secstr, (char *) NULL);
             exit(EXIT_FAILURE);
           }
           close(pipe_read[1]);

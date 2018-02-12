@@ -55,3 +55,22 @@ if ((change_file=fopen("/dev/null","r"))==NULL)
     @<Complain about argument length@>;
   strcpy(change_file_name,*argv);
 @z
+
+@x
+  if (dot_pos==NULL) {
+    sprintf(tex_file_name,"%s.tex",*argv);
+    sprintf(idx_file_name,"%s.idx",*argv);
+    sprintf(scn_file_name,"%s.scn",*argv);
+    sprintf(C_file_name,"%s.c",*argv);
+  } else {
+    strcpy(tex_file_name,*argv);
+    strcpy(C_file_name,*argv);
+    if (flags['x']) { /* indexes will be generated */
+      *dot_pos=0;
+      sprintf(idx_file_name,"%s.idx",*argv);
+      sprintf(scn_file_name,"%s.scn",*argv);
+    }
+  }
+@y
+    strcpy(tex_file_name,*argv);
+@z
