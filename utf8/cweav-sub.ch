@@ -4,6 +4,9 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 @y
 @<Global variables@>@/
+int pipe_read[2];
+int pipe_write1[2];
+int pipe_write2[2];
 int print=0;
 int null_sections[100];
 void add_null(int n)
@@ -25,13 +28,15 @@ int has_null(int n)
 @y
     @<Check if we're at the end of a preprocessor command@>;
     if (loc>limit && get_line()==0) return(new_section);
-    if(print){if(loc==limit)printf("\n");else if (*loc!='@@')printf("%c",*loc);}
+    if(print){if(loc==limit){fprintf(cw_in1,"\n");fprintf(cw_in2,"\n");}
+    else if (*loc!='@@'){fprintf(cw_in1,"%c",*loc);fprintf(cw_in2,"%c",*loc);}}
 @z
 
 @x
 while (loc<=buffer_end-7 && xisspace(*loc)) loc++;
 @y
-while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
+while (loc<=buffer_end-7 && xisspace(*loc)) {if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}loc++;}
 @z
 
 @x
@@ -39,7 +44,7 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
     if (get_line()==0) return(new_section); /* still in preprocessor mode */
 @y
   while (loc==limit-1 && preprocessing && *loc=='\\') {
-    if (print) printf("%c", *loc);
+    if (print) {fprintf(cw_in1,"%c", *loc);fprintf(cw_in2,"%c", *loc);}
     if (get_line()==0) return(new_section); /* still in preprocessor mode */
   }
 @z
@@ -47,7 +52,8 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
 @x
 @d compress(c) if (loc++<=limit) return(c)
 @y
-@d compress(c) do{if(loc++<=limit){if(print)printf("%c",*(loc-1));return(c);}}while(0)
+@d compress(c) do{if(loc++<=limit){if(print){fprintf(cw_in1,"%c",*(loc-1));
+fprintf(cw_in2,"%c",*(loc-1));}return(c);}}while(0)
 @z
 
 @x
@@ -57,19 +63,21 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
             else if (*loc=='.' && *(loc+1)=='.') {
               loc++; compress(dot_dot_dot);
 @y
-    else if (*loc=='>') if (*(loc+1)=='*') {if(print)printf("%c",*loc);
+    else if (*loc=='>') if (*(loc+1)=='*') {if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}
       loc++; compress(minus_gt_ast);}
                         else compress(minus_gt); break;
   case '.': if (*loc=='*') {compress(period_ast);}
             else if (*loc=='.' && *(loc+1)=='.') {
-              if(print)printf("%c",*loc);loc++; compress(dot_dot_dot);
+              if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}loc++; compress(dot_dot_dot);
 @z
 
 @x
   while (isalpha(*++loc) || isdigit(*loc) || isxalpha(*loc) || ishigh(*loc));
 @y
   while (isalpha(*++loc) || isdigit(*loc) || isxalpha(*loc) || ishigh(*loc))
-    if(print)printf("%c",*loc);
+    if(print){fprintf(cw_in1,"%c",*loc);fprintf(cw_in2,"%c",*loc);}
 @z
 
 @x
@@ -80,11 +88,14 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
       while (xisdigit(*loc)) *id_loc++=*loc++;} /* octal constant */
 @y
   if (*(loc-1)=='0') {
-    if (*loc=='x' || *loc=='X') {*id_loc++='^'; if (print) printf("%c", *loc); loc++;
-      while (xisxdigit(*loc)) {if (print) printf("%c", *loc);
+    if (*loc=='x' || *loc=='X') {*id_loc++='^'; if (print) {fprintf(cw_in1,"%c", *loc);
+fprintf(cw_in2,"%c", *loc);} loc++;
+      while (xisxdigit(*loc)) {if (print) {fprintf(cw_in1,"%c", *loc);
+fprintf(cw_in2,"%c", *loc);}
       *id_loc++=*loc++;}} /* hex constant */
     else if (xisdigit(*loc)) {*id_loc++='~';
-      while (xisdigit(*loc)) {if (print) printf("%c", *loc);
+      while (xisdigit(*loc)) {if (print) {fprintf(cw_in1,"%c", *loc);
+fprintf(cw_in2,"%c", *loc);}
       *id_loc++=*loc++;}} /* octal constant */
 @z
 
@@ -100,42 +111,49 @@ while (loc<=buffer_end-7 && xisspace(*loc)) {if(print)printf("%c",*loc);loc++;}
          || *loc=='f' || *loc=='F') {
     *id_loc++='$'; *id_loc++=toupper(*loc); loc++;
 @y
-    while (xisdigit(*loc) || *loc=='.') {if(print)printf("%c",*loc);*id_loc++=*loc++;}
+    while (xisdigit(*loc) || *loc=='.') {if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}*id_loc++=*loc++;}
     if (*loc=='e' || *loc=='E') { /* float constant */
-      *id_loc++='_'; if(print)printf("%c",*loc);loc++;
-      if (*loc=='+' || *loc=='-') {if(print)printf("%c",*loc);*id_loc++=*loc++;}
-      while (xisdigit(*loc)) {if(print)printf("%c",*loc);*id_loc++=*loc++;}
+      *id_loc++='_'; if(print){fprintf(cw_in1,"%c",*loc);fprintf(cw_in2,"%c",*loc);}loc++;
+      if (*loc=='+' || *loc=='-') {if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}*id_loc++=*loc++;}
+      while (xisdigit(*loc)) {if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}*id_loc++=*loc++;}
     }
   }
   while (*loc=='u' || *loc=='U' || *loc=='l' || *loc=='L'
          || *loc=='f' || *loc=='F') {
-    *id_loc++='$'; *id_loc++=toupper(*loc); if(print)printf("%c",*loc);loc++;
+    *id_loc++='$'; *id_loc++=toupper(*loc); if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}loc++;
 @z
 
 @x
     delim=*loc++; *++id_loc=delim;
 @y
-    if(print)printf("%c",*loc);delim=*loc++; *++id_loc=delim;
+    if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}delim=*loc++; *++id_loc=delim;
 @z
 
 @x
     if ((c=*loc++)==delim) {
 @y
-    if(print)printf("%c",*loc);
+    if(print){fprintf(cw_in1,"%c",*loc);fprintf(cw_in2,"%c",*loc);}
     if ((c=*loc++)==delim) {
 @z
 
 @x
         *id_loc = '\\'; c=*loc++;
 @y
-        *id_loc = '\\'; if(print)printf("%c",*loc);c=*loc++;
+        *id_loc = '\\'; if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}c=*loc++;
 @z
 
 @x
 @<Get control code and possible section name@>= {
 @y
 @<Get control code and possible section name@>= {
-  if(print&&ccode[(eight_bits)*loc]!=new_section) printf("%c%c",*(loc-1),*loc);
+  if(print&&ccode[(eight_bits)*loc]!=new_section){fprintf(cw_in1,"%c%c",*(loc-1),*loc);
+fprintf(cw_in2,"%c%c",*(loc-1),*loc);}
 @z
 
 -------------- PHASE ONE --------------
@@ -157,7 +175,8 @@ Beginning of new section:
 @x
   loc++; if (k<section_text_end) k++;
 @y
-  if(print)printf("%c", *loc);loc++; if (k<section_text_end) k++;
+  if(print){fprintf(cw_in1,"%c", *loc);
+fprintf(cw_in2,"%c", *loc);}loc++; if (k<section_text_end) k++;
 @z
 
 @x
@@ -168,16 +187,17 @@ if (c=='@@') {
 @y
 @ @<If end of name...@>=
 if (c=='@@') {
-  if(print)printf("%c",*loc);
+  if(print){fprintf(cw_in1,"%c",*loc);fprintf(cw_in2,"%c",*loc);}
   c=*(loc+1);
   if (c=='>') {
-    if(print)printf("%c",*(loc+1));
+    if(print){fprintf(cw_in1,"%c",*(loc+1));fprintf(cw_in2,"%c",*(loc+1));}
 @z
 
 @x
   *(++k)='@@'; loc++; /* now |c==*loc| again */
 @y
-  *(++k)='@@'; if(print)printf("%c",*loc);loc++; /* now |c==*loc| again */
+  *(++k)='@@'; if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}loc++; /* now |c==*loc| again */
 @z
 
 @x
@@ -189,11 +209,14 @@ if (c=='@@') {
   id_loc=loc; loc+=2;
 @y
 @<Scan a verbatim string@>= {
-  if(print)printf("%c",*loc);id_first=loc++; *(limit+1)='@@'; *(limit+2)='>';
-  while (*loc!='@@' || *(loc+1)!='>') {if(print)printf("%c",*loc);loc++;}
+  if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}id_first=loc++; *(limit+1)='@@'; *(limit+2)='>';
+  while (*loc!='@@' || *(loc+1)!='>') {if(print){fprintf(cw_in1,"%c",*loc);
+fprintf(cw_in2,"%c",*loc);}loc++;}
   if (loc>=limit) err_print("! Verbatim string didn't end");
 @.Verbatim string didn't end@>
-  id_loc=loc; if(print)printf("%c%c",*loc,*(loc+1));loc+=2;
+  id_loc=loc; if(print){fprintf(cw_in1,"%c%c",*loc,*(loc+1));
+fprintf(cw_in2,"%c%c",*loc,*(loc+1));}loc+=2;
 @z
 
 Do not make index entries for C-part of /dev/null sections:
@@ -211,9 +234,35 @@ Do not make index entries for C-part of /dev/null sections:
       if (ccode[(eight_bits)*loc]>=format_code) {
         if (has_null(section_count)) {
           print = 1;
-          fork
-          printf("@ ");
-          printf("%c%c", *(loc-1), *loc);
+          pid_t cpid;
+          if (pipe(pipe_read) == -1) exit(EXIT_FAILURE);
+          if (pipe(pipe_write1) == -1) exit(EXIT_FAILURE);
+          if (pipe(pipe_write2) == -1) exit(EXIT_FAILURE);
+          if ((cpid = fork()) == -1) {
+            printf("fork failed\n");
+            exit(EXIT_FAILURE);
+          }
+          if (cpid == 0) {
+            dup2(pipe_read[1], STDOUT_FILENO);
+            close(pipe_write1[1]);
+            close(pipe_write2[1]);
+            char writefd1[10];
+            char writefd2[10];
+            snprintf(writefd1, 10, "%d", pipe_write1[0]);
+            snprintf(writefd2, 10, "%d", pipe_write2[0]);
+            if (prctl(PR_SET_PDEATHSIG, SIGINT) != -1 && /* automatically close window when
+                                                    parent exits */
+                getppid() != 1) /* make sure that parent did not exit just before |prctl| call */
+              execl("/usr/local/bin/cw", "cw", writefd1, writefd2, (char *) NULL);
+            exit(EXIT_FAILURE);
+          }
+          close(pipe_read[1]);
+          FILE *cw_in1 = fdopen(pipe_write1[1],"w");
+          FILE *cw_in2 = fdopen(pipe_write2[1],"w");
+          close(pipe_write1[0]);
+          close(pipe_write2[0]);
+          fprintf(cw_in1,"@ ");fprintf(cw_in2,"@ ");
+          fprintf(cw_in1,"%c%c", *(loc-1), *loc);fprintf(cw_in2,"%c%c", *(loc-1), *loc);
         }
       }
       return(ccode[(eight_bits)*(loc++)]);
@@ -224,20 +273,21 @@ Do not make index entries for C-part of /dev/null sections:
     if (loc>limit) {
 @y
     if (loc>limit) {
-      if(print)printf("\n");
+      if(print){fprintf(cw_in1,"\n");fprintf(cw_in2,"\n");}
 @z
 
 @x
     if (c=='|') return(bal);
 @y
-    if (c=='|') {if(print)printf("%c",*(loc-1));return(bal);}
+    if (c=='|') {if(print){fprintf(cw_in1,"%c",*(loc-1));
+fprintf(cw_in2,"%c",*(loc-1));}return(bal);}
 @z
 
 @x
 if (c=='*' && *loc=='/') {
 @y
 if (c=='*' && *loc=='/') {
-  if(print)printf("%c%c",*(loc-1),*loc);
+  if(print){fprintf(cw_in1,"%c%c",*(loc-1),*loc);fprintf(cw_in2,"%c%c",*(loc-1),*loc);}
 @z
 
 @x
@@ -249,15 +299,16 @@ else if (c=='\\' && *loc!='@@')
 @y
     loc-=2; if (phase==2) *(tok_ptr-1)=' '; goto done;
   }
-  else if(print)printf("%c%c",*(loc-2),*(loc-1));
+  else if(print){fprintf(cw_in1,"%c%c",*(loc-2),*(loc-1));
+fprintf(cw_in2,"%c%c",*(loc-2),*(loc-1));}
 }
 else if (c=='\\' && *loc!='@@')
   if (phase==2) {
-    if(print)printf("%c%c",*(loc-1),*loc);
+    if(print){fprintf(cw_in1,"%c%c",*(loc-1),*loc);fprintf(cw_in2,"%c%c",*(loc-1),*loc);}
     app_tok(*(loc++))@;
   }
   else loc++;
-else if(print&&(loc-1)!=limit)printf("%c",*(loc-1));
+else if(print&&(loc-1)!=limit){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c",*(loc-1));}
 @z
 
 ----------- PHASE THREE -----------
@@ -337,18 +388,23 @@ else if(print&&(loc-1)!=limit)printf("%c",*(loc-1));
 ----------- PHASE TWO --------------
 
 @x
-  @<Translate the \TEX/ part of the current section@>;
-@y
-  print=0;
-  @<Translate the \TEX/ part of the current section@>;
-@z
-
-@x
   finish_C(1);
 @y
   finish_C(!has_null(section_count));
-  /* TODO: here we call \.{cw} on tex_file_name.section_number
-     and print its output to |tex_file| and remove tex_file_name.section_number */
+  fclose(cw_in1);
+  fclose(cw_in2);
+  wchar_t line[buf_size];
+  FILE *cw_out = fdopen(pipe_read[0], "r");
+  while (fgetws(line, buf_size, cw_out) != NULL)
+    fprintf(active_file,"%ls",line);
+  fclose(cw_out);
+  int wstatus;
+  wait(&wstatus);
+  if (!(WIFEXITED(wstatus)&&WEXITSTATUS(wstatus)==0)) {
+    printf("child exited with error\n");
+    exit(EXIT_FAILURE);
+  }
+  print=0;
 @z
 
 @x
