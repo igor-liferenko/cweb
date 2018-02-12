@@ -60,6 +60,14 @@ finish_line();
   gobble=0;
 @z
 
+@x
+  finish_C(1);
+@y
+  finish_C(1);
+  fclose(tex_file);
+  tex_file=fopen("/dev/null","w");
+@z
+
 FIXME: remove "finish_line();" ? (see what finish_line does)
 @x
 out_str("\\fi"); finish_line();
