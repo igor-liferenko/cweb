@@ -166,12 +166,9 @@ Beginning of new section:
   }
 @z
 
-@<-string may be not needed
 @x
-  @<If end of name or erroneous control code, |break|@>;
   loc++; if (k<section_text_end) k++;
 @y
-  @<If end of name or erroneous control code, |break|@>;
   if(print)printf("%c", *loc);loc++; if (k<section_text_end) k++;
 @z
 
@@ -224,7 +221,12 @@ Do not make index entries for C-part of /dev/null sections:
 @y
     if (loc<=limit) {
       if (ccode[(eight_bits)*loc]>=format_code) {
-        if(has_null(section_count)){print=1;printf("%c%c",*(loc-1),*loc);}
+        if (has_null(section_count)) {
+          print = 1;
+          fork
+          printf("@ ");
+          printf("%c%c", *(loc-1), *loc);
+        }
       }
       return(ccode[(eight_bits)*(loc++)]);
     }
