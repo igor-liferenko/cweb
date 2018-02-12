@@ -4,6 +4,10 @@ Substitute C text in /dev/null section.
 @<Global variables@>@/
 @y
 @<Global variables@>@/
+#include <signal.h>
+#include <sys/prctl.h>
+FILE *cw_in1;
+FILE *cw_in2;
 int pipe_read[2];
 int pipe_write1[2];
 int pipe_write2[2];
@@ -243,7 +247,7 @@ Do not make index entries for C-part of /dev/null sections:
             exit(EXIT_FAILURE);
           }
           if (cpid == 0) {
-            dup2(pipe_read[1], STDOUT_FILENO);
+            dup2(pipe_read[1], 1);
             close(pipe_write1[1]);
             close(pipe_write2[1]);
             char writefd1[10];
@@ -257,11 +261,11 @@ Do not make index entries for C-part of /dev/null sections:
             exit(EXIT_FAILURE);
           }
           close(pipe_read[1]);
-          FILE *cw_in1 = fdopen(pipe_write1[1],"w");
-          FILE *cw_in2 = fdopen(pipe_write2[1],"w");
+          cw_in1 = fdopen(pipe_write1[1],"w");
+          cw_in2 = fdopen(pipe_write2[1],"w");
           close(pipe_write1[0]);
           close(pipe_write2[0]);
-          fprintf(cw_in1,"@ ");fprintf(cw_in2,"@ ");
+          fprintf(cw_in1,"@@ ");fprintf(cw_in2,"@@ ");
           fprintf(cw_in1,"%c%c", *(loc-1), *loc);fprintf(cw_in2,"%c%c", *(loc-1), *loc);
         }
       }

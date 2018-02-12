@@ -104,7 +104,7 @@ clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-if ! tie -c comm-merged.ch common.w $DIR/../comm-blank.ch $DIR/../comm-opts.ch $DIR/comm-file.ch > build-cweb.out
+if ! tie -c comm-merged.ch common.w $DIR/../comm-blank.ch $DIR/../comm-opts.ch $DIR/comm-file.ch $DIR/../comm-pipe.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
