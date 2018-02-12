@@ -5,7 +5,6 @@ Substitute C text in /dev/null section.
 @y
 @<Global variables@>@/
 int print=0;
-int not_null;
 int null_sections[100];
 void add_null(int n)
 {
@@ -158,11 +157,8 @@ Beginning of new section:
   char *k0 = section_text;
   @<Put section name into |section_text|@>;
   if (phase == 1) {
-    if (cur_section_char=='(' && strncmp("/dev/null",k0+1,k-k0)==0) {
+    if (cur_section_char=='(' && strncmp("/dev/null",k0+1,k-k0)==0)
       add_null(section_count);
-      not_null=0;
-    }
-    else not_null=1;
   }
 @z
 
@@ -213,7 +209,7 @@ Do not make index entries for C-part of /dev/null sections:
     next_control=get_next(); outer_xref();
 @y
     next_control=get_next();
-    if (not_null) outer_xref();
+    if (!has_null(section_count)) outer_xref();
 @z
 
 @x
