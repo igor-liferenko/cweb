@@ -14,23 +14,19 @@ int gobble=1;
 @c
 @y
 @d tex_printf(c) fprintf(active_file,c)
+@d tex_new_line if(gobble)out_line--;else putc('\n',active_file)
 
 @c
-void c_line_write(char c)
+void c_line_write(int n)
 {
   fflush(active_file);
   if (gobble) return;
-  fwrite(out_buf+1,sizeof(char),c,active_file);
+  fwrite(out_buf+1,sizeof(char),n,active_file);
 }
 void tex_putc(char c)
 {
   if (gobble) return;
   putc(c,active_file);
-}
-void tex_new_line(char c)
-{
-  if (gobble) {out_line--;return;}
-  putc('\n',active_file);
 }
 @z
 
@@ -50,6 +46,7 @@ void tex_new_line(char c)
 @.Writing the output file...@>
 @y
 out_ptr=out_buf; limit=buffer; *buffer='@@'; /* the same trick as in cweav-mac.ch */
+setbuf(stdout, NULL);
 @.Writing the output file...@>
 @z
 
