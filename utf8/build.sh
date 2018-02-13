@@ -112,6 +112,7 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/../cweav-opts.ch $DIR/../cweav-out.ch 
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
-clang -g -o /usr/local/bin/cw cweave.o common.o
+clang -g -o cw cweave.o common.o
+cp cw /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/

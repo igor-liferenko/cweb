@@ -434,7 +434,7 @@ if (has_null(section_count)) {
   wchar_t line[buf_size];
   FILE *cw_out = fdopen(pipe_read[0], "r");
   while (fgetws(line, buf_size, cw_out) != NULL)
-    fprintf(active_file,"%ls",line);
+    fprintf(active_file,"%ls",line); out_line++;
   fclose(cw_out);
   int wstatus;
   wait(&wstatus);
