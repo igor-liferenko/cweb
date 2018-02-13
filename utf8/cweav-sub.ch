@@ -253,7 +253,7 @@ copy_TeX()
   while (1) {
     if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
     *(limit+1)='@@';
-        if (has_null(section_count)) {
+        if (has_null(section_count)&&print!=1) {
           print = 1;
           pid_t cpid;
           if (pipe(pipe_read) == -1) exit(EXIT_FAILURE);
@@ -289,7 +289,13 @@ copy_TeX()
     while ((c=*(loc++))!='|' && c!='@@') {
       out(c);
       if (out_ptr==out_buf+1 && (xisspace(c))) out_ptr--;
-      else if(print&&loc!=(limit+1)){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c",*(loc-1));}
+      else if (print) {
+        if (loc!=(limit+1)) {
+          fprintf(cw_in1,"%c",*(loc-1));
+          fprintf(cw_in2,"%c",*(loc-1));
+        }
+        else {fprintf(cw_in1,"\n");fprintf(cw_in2,"\n");}
+      }
     }
     if (c=='|') {if(print){fprintf(cw_in1,"%c",*(loc-1));
 fprintf(cw_in2,"%c",*(loc-1));}return('|');}
