@@ -232,10 +232,27 @@ Do not make index entries for C-part of /dev/null sections:
 @z
 
 @x
+copy_TeX()
+{
+  char c; /* current character being copied */
+  while (1) {
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    *(limit+1)='@@';
+    while ((c=*(loc++))!='|' && c!='@@') {
+      out(c);
+      if (out_ptr==out_buf+1 && (xisspace(c))) out_ptr--;
+    }
+    if (c=='|') return('|');
     if (loc<=limit) return(ccode[(eight_bits)*(loc++)]);
+  }
+}
 @y
-    if (loc<=limit) {
-      if (ccode[(eight_bits)*loc]>=format_code) {
+copy_TeX()
+{
+  char c; /* current character being copied */
+  while (1) {
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    *(limit+1)='@@';
         if (has_null(section_count)) {
           print = 1;
           pid_t cpid;
@@ -268,11 +285,19 @@ Do not make index entries for C-part of /dev/null sections:
           close(pipe_write1[0]);
           close(pipe_write2[0]);
           fprintf(cw_in1,"@@ ");fprintf(cw_in2,"@@ ");
-          fprintf(cw_in1,"%c%c", *(loc-1), *loc);fprintf(cw_in2,"%c%c", *(loc-1), *loc);
         }
-      }
-      return(ccode[(eight_bits)*(loc++)]);
+    while ((c=*(loc++))!='|' && c!='@@') {
+      out(c);
+      if (out_ptr==out_buf+1 && (xisspace(c))) out_ptr--;
+      else if(print&&loc!=(limit+1)){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c",*(loc-1));}
     }
+    if (c=='|') {if(print){fprintf(cw_in1,"%c",*(loc-1));
+fprintf(cw_in2,"%c",*(loc-1));}return('|');}
+    if (loc<=limit) {if(print){fprintf(cw_in1,"%c%c",*(loc-1),*loc);
+fprintf(cw_in2,"%c%c",*(loc-1),*loc);}
+return(ccode[(eight_bits)*(loc++)]);}
+  }
+}
 @z
 
 @x
