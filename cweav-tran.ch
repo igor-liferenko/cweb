@@ -64,8 +64,8 @@ finish_line();
   finish_C(1);
 @y
   finish_C(1);
-  fclose(tex_file);
   tex_file=fopen("/dev/null","w");
+  active_file=tex_file;
 @z
 
 FIXME: remove "finish_line();" ? (see what finish_line does)
