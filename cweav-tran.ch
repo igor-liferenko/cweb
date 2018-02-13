@@ -56,15 +56,6 @@ finish_line();
 @z
 
 @x
-@d emit_space_if_needed if (save_line!=out_line || save_place!=out_ptr)
-  out_str("\\Y");
-  space_checked=1
-@y
-@d emit_space_if_needed if (save_line!=out_line || save_place!=out_ptr)
-  space_checked=1
-@z
-
-@x
   finish_C(1);
 @y
   gobble=0;
