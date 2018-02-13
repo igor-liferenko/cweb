@@ -2,35 +2,42 @@
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-int gobble;
+int gobble=1;
+@z
+
+@x
+@d c_line_write(c) fflush(active_file),fwrite(out_buf+1,sizeof(char),c,active_file)
+@d tex_putc(c) putc(c,active_file)
+@d tex_new_line putc('\n',active_file)
+@d tex_printf(c) fprintf(active_file,c)
+
+@c
+@y
+@d tex_printf(c) fprintf(active_file,c)
+
+@c
+void c_line_write(char c)
+{
+  fflush(active_file);
+  if (gobble) return;
+  fwrite(out_buf+1,sizeof(char),c,active_file);
+}
+void tex_putc(char c)
+{
+  if (gobble) return;
+  putc(c,active_file);
+}
+void tex_new_line(char c)
+{
+  if (gobble) {out_line--;return;}
+  putc('\n',active_file);
+}
 @z
 
 @x
 *out_ptr='c'; tex_printf("\\input cwebma");
 @y
 *out_ptr='c';
-@z
-
-@x
-out_str(s) /* output characters from |s| to end of string */
-char *s;
-{
-@y
-out_str(s) /* output characters from |s| to end of string */
-char *s;
-{
-  if (gobble) return;
-@z
-
-@x
-out_section(n)
-sixteen_bits n;
-{
-@y
-out_section(n)
-sixteen_bits n;
-{
-  if (gobble) return;
 @z
 
 @x
@@ -53,18 +60,11 @@ finish_line();
 @z
 
 @x
-  @<Output the code for the beginning of a new section@>;
+  finish_C(1);
 @y
-  gobble=1;
-  @<Output the code for the beginning of a new section@>;
   gobble=0;
-@z
-
-@x
   finish_C(1);
-@y
-  finish_C(1);
-  fflush(tex_file);
+  fclose(tex_file);
   tex_file=fopen("/dev/null","w");
   active_file=tex_file;
 @z
