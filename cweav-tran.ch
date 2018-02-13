@@ -46,7 +46,6 @@ void tex_putc(char c)
 @.Writing the output file...@>
 @y
 out_ptr=out_buf; limit=buffer; *buffer='@@'; /* the same trick as in cweav-mac.ch */
-setbuf(stdout, NULL);
 @.Writing the output file...@>
 @z
 
@@ -54,6 +53,15 @@ setbuf(stdout, NULL);
 finish_line(); flush_buffer(out_buf,0,0); /* insert a blank line, it looks nice */
 @y
 finish_line();
+@z
+
+@x
+@d emit_space_if_needed if (save_line!=out_line || save_place!=out_ptr)
+  out_str("\\Y");
+  space_checked=1
+@y
+@d emit_space_if_needed if (save_line!=out_line || save_place!=out_ptr)
+  space_checked=1
 @z
 
 @x
