@@ -1479,7 +1479,7 @@ of commented-out text).
 @d c_line_write(n) fflush(active_file),fwrite(out_buf+1,sizeof(char),n,active_file)
 @d tex_putc(c) putc(c,active_file)
 @d tex_new_line putc('\n',active_file)
-@d tex_printf(c) fprintf(active_file,c)
+@d tex_printf(s) fprintf(active_file,s)
 
 @c
 void
