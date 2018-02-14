@@ -62,19 +62,3 @@ finish_line();
   finish_C(1);
   gobble=1;
 @z
-
-FIXME: remove "finish_line();" ? (see what finish_line does)
-@x
-out_str("\\fi"); finish_line();
-@.\\fi@>
-flush_buffer(out_buf,0,0); /* insert a blank line, it looks nice */
-@y
-finish_line();
-@z
-
-@x
-  out_str("\\end");
-@.\\end@>
-  finish_line();
-@y
-@z

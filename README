@@ -1,5 +1,6 @@
 To see what "cw" does, remove comm-pipe.ch from build.sh,
 run build-cweb and run "cw file.w - N", where file.w
-consists of one section, and N is a number.
+consists of one section, and N is a number (just ignore ".tex"
+after N in the output).
 
 To see what is passed to "cw" in "cweav-sub.ch", see "tst.c"
