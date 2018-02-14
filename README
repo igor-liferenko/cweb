@@ -1,6 +1,15 @@
+The following change-files are for "cw", for which is utf8/cweav-sub.ch:
+comm-blank.ch
+comm-opts.ch
+comm-out.ch
+comm-pipe.ch
+cweav-opts.ch
+cweav-tran.ch
+
 To see what "cw" does, remove comm-pipe.ch from build.sh,
 run build-cweb and run "cw file.w - N", where file.w
 consists of one section, and N is a number (just ignore ".tex"
 after N in the output).
 
-To see what is passed to "cw" in "cweav-sub.ch", see "tst.c"
+To see what is passed to "cw" in "cweav-sub.ch", use "tst.c" in utf8/cweav-sub.ch
+instead of "cw".
