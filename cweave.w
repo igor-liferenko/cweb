@@ -1476,7 +1476,7 @@ if the |carryover| parameter is true, a |"%"| in that line will be
 carried over to the next line (so that \TEX/ will ignore the completion
 of commented-out text).
 
-@d c_line_write(c) fflush(active_file),fwrite(out_buf+1,sizeof(char),c,active_file)
+@d c_line_write(n) fflush(active_file),fwrite(out_buf+1,sizeof(char),n,active_file)
 @d tex_putc(c) putc(c,active_file)
 @d tex_new_line putc('\n',active_file)
 @d tex_printf(c) fprintf(active_file,c)
