@@ -60,9 +60,7 @@ finish_line();
 @y
   gobble=0;
   finish_C(1);
-  fclose(tex_file);
-  tex_file=fopen("/dev/null","w");
-  active_file=tex_file;
+  gobble=1;
 @z
 
 FIXME: remove "finish_line();" ? (see what finish_line does)
