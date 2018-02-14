@@ -429,7 +429,7 @@ else if(print&&(loc-1)!=limit){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c"
 @y
   finish_C(!has_null(section_count));
 if (has_null(section_count)) {
-  out_ptr-=2; /* suppress \Y which is in |out_buf| */
+  out_ptr=out_buf;
   fclose(cw_in1);
   fclose(cw_in2);
   wchar_t line[buf_size];
