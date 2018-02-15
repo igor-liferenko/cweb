@@ -13,3 +13,5 @@ after N in the output).
 
 To see what is passed to "cw" in "cweav-sub.ch", use "tst.c" in utf8/cweav-sub.ch
 instead of "cw".
+
+NOTE: adding *utf8* change-files to part 3 of build.sh should work without problems
