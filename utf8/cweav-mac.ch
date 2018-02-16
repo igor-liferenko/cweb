@@ -26,3 +26,5 @@ if (tex_format==1) {
 else tex_printf("\\input cwebma");
 @.Writing the output file...@>
 @z
+
+FIXME: check why it stopped working
