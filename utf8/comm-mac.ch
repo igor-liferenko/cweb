@@ -11,7 +11,7 @@ setting |tex_format| on phase one and checking it in cweav-mac.ch right before p
 @x
   return(1);
 @y
-  if (first_line) {
+  if (!changing && first_line) {
     if (limit-buffer == 9 && strncmp(buffer, "%&lhplain", 9) == 0) {
       if (phase==1) tex_format=1;
       if (phase==2) limit=buffer; /* empty the input line */
