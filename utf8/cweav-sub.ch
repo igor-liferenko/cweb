@@ -1,5 +1,8 @@
 Substitute C text in /dev/null section.
 
+TODO: create a function myprintf which takes varargs and use it instead of two consecutive
+calls to fprintf(cw_in1,... and fprintf(cw_in2,...
+
 @x
 @<Global variables@>@/
 @y
