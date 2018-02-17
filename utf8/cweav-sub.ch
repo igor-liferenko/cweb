@@ -223,6 +223,8 @@ fprintf(cw_in2,"%c",*loc);}loc++;}
 fprintf(cw_in2,"%c%c",*loc,*(loc+1));}loc+=2;
 @z
 
+------------- PHASE ONE ------------------------
+
 Do not make index entries for C-part of /dev/null sections:
 @x
     next_control=get_next(); outer_xref();
@@ -230,6 +232,8 @@ Do not make index entries for C-part of /dev/null sections:
     next_control=get_next();
     if (!has_null(section_count)) outer_xref();
 @z
+
+------------------------------------------------
 
 @x
 copy_TeX()
