@@ -1,7 +1,8 @@
 Substitute C text in /dev/null section.
 
-TODO: create a function myprintf which takes varargs and use it instead of two consecutive
-calls to fprintf(cw_in1,... and fprintf(cw_in2,...
+TODO: use myprintf(...) instead of two consecutive
+calls to fprintf(cw_in1, ...) and fprintf(cw_in2, ...)
+and remove extra braces
 
 @x
 @<Global variables@>@/
@@ -27,6 +28,7 @@ int has_null(int n)
     if (null_sections[i]==n) return 1;
   return 0;
 }
+#define myprintf(__VA_ARGS__) fprintf(cw_in1, __VA_ARGS__),fprintf(cw_in2, __VA_ARGS__)
 @z
 
 @x
@@ -35,7 +37,7 @@ int has_null(int n)
 @y
     @<Check if we're at the end of a preprocessor command@>;
     if (loc>limit && get_line()==0) return(new_section);
-    if(print){if(loc==limit){fprintf(cw_in1,"\n");fprintf(cw_in2,"\n");}
+    if (print) { if (loc==limit) myprintf("\n");
     else if (*loc!='@@'){fprintf(cw_in1,"%c",*loc);fprintf(cw_in2,"%c",*loc);}}
 @z
 
