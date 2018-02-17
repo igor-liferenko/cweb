@@ -163,20 +163,15 @@ fprintf(cw_in2,"%c",*loc);}c=*loc++;
 fprintf(cw_in2,"%c%c",*(loc-1),*loc);}
 @z
 
--------------- PHASE ONE --------------
-
-Beginning of new section:
+In phase one mark beginning of new /dev/null section by putting its number into array:
 @x
-  cur_section_char=*(loc-1);
   @<Put section name into |section_text|@>;
 @y
-  cur_section_char=*(loc-1);
   char *k0 = section_text;
   @<Put section name into |section_text|@>;
-  if (phase == 1) {
+  if (phase == 1)
     if (cur_section_char=='(' && strncmp("/dev/null",k0+1,k-k0)==0)
       add_null(section_count);
-  }
 @z
 
 @x
@@ -351,7 +346,7 @@ else if (c=='\\' && *loc!='@@')
 else if(print&&(loc-1)!=limit){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c",*(loc-1));}
 @z
 
------------ PHASE THREE -----------
+----------- PHASE THREE (suppress output of /dev/null section to .scn file) -----------
 
 TODO: check that there are no macros here and remove extra braces
 
@@ -427,7 +422,7 @@ TODO: check that there are no macros here and remove extra braces
  default: if (phase==3) { if (strcmp(scratch,"/dev/null")!=0) {out(b);}}else{out(b);}
 @z
 
------------ PHASE TWO --------------
+-----------------------------------------
 
 @x
   finish_C(1);
