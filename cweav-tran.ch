@@ -13,7 +13,7 @@ int gobble=1;
 
 @c
 @y
-@d tex_new_line if (gobble) out_line--; else putc('\n',active_file)
+@d tex_new_line if (!gobble) putc('\n',active_file)
 @d tex_printf(s)
 
 @c
