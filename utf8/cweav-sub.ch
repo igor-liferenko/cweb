@@ -350,6 +350,8 @@ else if(print&&(loc-1)!=limit){fprintf(cw_in1,"%c",*(loc-1));fprintf(cw_in2,"%c"
 
 ----------- PHASE THREE -----------
 
+TODO: check that there are no macros here and remove extra braces
+
 @x
 @<Output a section name@>= {
   out_str("\\X");
