@@ -251,13 +251,13 @@ copy_TeX()
   }
 }
 @y
-copy_TeX()
+copy_TeX() /* TeX-part influences how C-part is formed, so start output to "cw" with it */
 {
   char c; /* current character being copied */
   while (1) {
     if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
     *(limit+1)='@@';
-        if (has_null(section_count)&&print!=1) {
+        if (!print && has_null(section_count)) {
           print = 1;
           pid_t cpid;
           if (pipe(pipe_read) == -1) exit(EXIT_FAILURE);
@@ -434,10 +434,13 @@ TODO: check that there are no macros here and remove extra braces
   finish_C(1);
 @y
   finish_C(!has_null(section_count));
-if (has_null(section_count)) {
-  out_ptr=out_buf;
+if (has_null(section_count)) { /* stop output to "cw" and put its output instead of ours (FIXME:
+    maybe think if it can be done without "cw" - just substituting proper section number in
+    section names and changing += to = - use "ccw" to test) */
+  print = 0;
   fclose(cw_in1);
   fclose(cw_in2);
+  out_ptr = out_buf;
   wchar_t line[buf_size];
   FILE *cw_out = fdopen(pipe_read[0], "r");
   while (fgetws(line, buf_size, cw_out) != NULL)
@@ -450,7 +453,6 @@ if (has_null(section_count)) {
     exit(EXIT_FAILURE);
   }
 }
-  print=0;
 @z
 
 @x
