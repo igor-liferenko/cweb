@@ -455,6 +455,14 @@ if (has_null(section_count)) { /* stop output to "cw" and put its output instead
 }
 @z
 
+In |phase_two| skip "See also section(s)" at the end of first /dev/null-section.
+In |phase_three| it outputs to .scn file "Used in section(s)"
+and "Cited in section(s)" after section name, and |section_count|
+stops being updated after |phase_two|, so it has the number of
+the last section when |phase_three| is entered into, so if
+last section happened to be /dev/null-section, we will break the
+.scn file, so we add |phase!=3| check to execute this function in
+|phase_three| for all sections.
 @x
 footnote(flag) /* outputs section cross-references */
 sixteen_bits flag;
@@ -463,5 +471,5 @@ sixteen_bits flag;
 footnote(flag) /* outputs section cross-references */
 sixteen_bits flag;
 {
-  if (phase==2&&has_null(section_count)) return;
+  if (phase!=3 && null_sections[0] == section_count) return;
 @z
