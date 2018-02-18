@@ -1,4 +1,4 @@
-This is to produce desired section name in cweav-sub.ch:
+Pass section number as third argument to "cw" in order to produce proper section name:
 @x
     out_section(cur_xref->num-def_flag);
 @y
