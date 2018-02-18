@@ -12,6 +12,6 @@ run build-cweb and run "cw file.w", where file.w
 consists of one section.
 
 To see what is passed to "cw" in utf8/cweav-sub.ch, redefine myprintf macro to
-print to stdout.
+print to stdout. (and maybe use -h -b -p options to cweave and use comm-blank.ch)
 
 NOTE: adding *utf8* change-files to part 3 of build.sh should work without problems
