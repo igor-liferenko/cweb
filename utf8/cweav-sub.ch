@@ -251,7 +251,8 @@ copy_TeX()
   }
 }
 @y
-copy_TeX() /* TeX-part influences how C-part is formed, so start output to "cw" with it */
+copy_TeX() /* TeX-part influences how section name in C-part is formed, so start output
+              to "cw" with it */
 {
   char c; /* current character being copied */
   while (1) {
