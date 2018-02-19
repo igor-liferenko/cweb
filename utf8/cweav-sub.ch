@@ -430,13 +430,16 @@ TODO: check that there are no macros here and remove extra braces
 
 -----------------------------------------
 
+FIXME: maybe think if it can be done without "cw" - just substituting proper section number in
+section names and changing += to =
+Check if it is possible by using finish_C(1) and not using fprintf(active_file...
+and then use "ccw" - if its output will be the same as output of "ccw" as it is now, then
+it makes no difference and thus can be done without "cw".
 @x
   finish_C(1);
 @y
   finish_C(!has_null(section_count));
-if (has_null(section_count)) { /* stop output to "cw" and put its output instead of ours (FIXME:
-    maybe think if it can be done without "cw" - just substituting proper section number in
-    section names and changing += to = - use "ccw" to test) */
+if (has_null(section_count)) { /* stop output to "cw" and put its output to .tex file */
   print = 0;
   fclose(cw_in1);
   fclose(cw_in2);
