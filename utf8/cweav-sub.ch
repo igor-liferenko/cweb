@@ -439,23 +439,23 @@ it makes no difference and thus can be done without "cw".
   finish_C(1);
 @y
   finish_C(!has_null(section_count));
-if (has_null(section_count)) { /* stop output to "cw" and put its output to .tex file */
-  print = 0;
-  fclose(cw_in1);
-  fclose(cw_in2);
-  out_ptr = out_buf;
-  wchar_t line[buf_size];
-  FILE *cw_out = fdopen(pipe_read[0], "r");
-  while (fgetws(line, buf_size, cw_out) != NULL)
-    fprintf(active_file,"%ls",line); out_line++;
-  fclose(cw_out);
-  int wstatus;
-  wait(&wstatus);
-  if (!(WIFEXITED(wstatus)&&WEXITSTATUS(wstatus)==0)) {
-    printf("child exited with error\n");
-    exit(EXIT_FAILURE);
+  if (has_null(section_count)) { /* stop output to "cw" and put its output to .tex file */
+    print = 0;
+    fclose(cw_in1);
+    fclose(cw_in2);
+    out_ptr = out_buf;
+    wchar_t line[buf_size];
+    FILE *cw_out = fdopen(pipe_read[0], "r");
+    while (fgetws(line, buf_size, cw_out) != NULL)
+      fprintf(active_file,"%ls",line); out_line++;
+    fclose(cw_out);
+    int wstatus;
+    wait(&wstatus);
+    if (!(WIFEXITED(wstatus)&&WEXITSTATUS(wstatus)==0)) {
+      printf("child exited with error\n");
+      exit(EXIT_FAILURE);
+    }
   }
-}
 @z
 
 In |phase_two| skip "See also section(s)" at the end of first /dev/null-section.
