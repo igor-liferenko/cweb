@@ -28,7 +28,7 @@ int has_null(int n)
     if (null_sections[i]==n) return 1;
   return 0;
 }
-#define myprintf(__VA_ARGS__) fprintf(cw_in1, __VA_ARGS__),fprintf(cw_in2, __VA_ARGS__)
+#define myprintf(...) fprintf(cw_in1, __VA_ARGS__),fprintf(cw_in2, __VA_ARGS__)
 @z
 
 @x
