@@ -12,6 +12,18 @@ without using this change-file:
 NOTE: If C-text is non-empty (and TeX-text is empty), no spurious \Y is produced,
 so it seems such case is handled in cweave. TODO: find where
 
+TODO: Is it right that if we do
+@
+@c
+we get
+\M{1}
+\Y\B\par
+and if we do
+@ @c
+we get
+\M{1}\B\par
+?
+
 @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked){emit_space_if_needed;save_position;}

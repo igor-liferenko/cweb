@@ -16,16 +16,4 @@ and understand how newline is preserved in ctangle if it is used before `L' in t
 at value 127 of hash_size cweave works OK, at value 113 it breaks in
 @<Look for matches for new name among...@>=, because of Segmentation fault
 
-Is it right that if we do
-@
-@c
-we get
-\M{1}
-\Y\B\par
-and if we do
-@ @c
-we get
-\M{1}\B\par
-?
-----------------------------------
 sizeof formatting is inconsistent, because sizeof var produces space after sizeof, and sizeof (type) doesn't (here "type" is a recognized type name, via @s, @f or syntax methods), so space must be added in second case
