@@ -27,3 +27,5 @@ and if we do
 we get
 \M{1}\B\par
 ?
+----------------------------------
+sizeof formatting is inconsistent, because sizeof var produces space after sizeof, and sizeof (type) doesn't, so space must be added in second case
