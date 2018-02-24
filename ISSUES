@@ -1,0 +1,4 @@
+it gobbles space before @s - check on send.w
+and it removes blank line between paragragraphs in TeX-part
+and if we do not have @s in /dev/null-section, @(/dev/null@>= becomes @(@(/dev/null@>=
+
