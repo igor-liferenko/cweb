@@ -1,9 +1,5 @@
 Substitute C text in /dev/null section.
 
-TODO: use myprintf(...) instead of two consecutive
-calls to fprintf(cw_in1, ...) and fprintf(cw_in2, ...)
-and remove extra braces
-
 @x
 @<Global variables@>@/
 @y
