@@ -15,3 +15,19 @@ To see what is passed to "cw" in utf8/cweav-sub.ch, redefine myprintf macro to
 print to stdout. (and maybe use -h -b -p options to cweave and use comm-blank.ch)
 
 NOTE: adding *utf8* change-files to part 3 of build.sh should work without problems
+
+modify cweave in such a way that if it sees section with @(/dev/null@>, it does not
+make index entries for C-part of it in phase one, and in phase two output TeX-part,
+middle part
+and C-part from
+this section to a separate file and process it with
+"cw" call and write the output of C-part to .tex file, for each such section.
+And they must not be +=, and they must not appear in Section Names.
+It is necessary to process separately in order that index in main program will
+not be affected by the excerpts from @(/dev/null@> sections.
+NOTE: to compare what we get, use ccw - it must show that in .tex file nothing changed
+except section numbers in <...> and <...>+= into <...>= and "see also" is removed;
+in .scn file only /dev/null section must be removed, and in .idx file references must change
+NOTE: @<...@> cannot be used in /dev/null-section - instead replace the part of material
+which you want to move to another section
+with "/* continued in next section */" and put it to subsequent /dev/null-section
