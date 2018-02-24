@@ -1,4 +1,7 @@
 it gobbles space before @s - check on send.w
 and it removes blank line between paragragraphs in TeX-part
 and if we do not have @s in /dev/null-section, @(/dev/null@>= becomes @(@(/dev/null@>=
-
+and if we add /* Size of the control (address 0) endpoint's bank in bytes. */ after point0size in usbttl.w, it writes
+! String didn't end. (l. 361)
+  uint8_t  Endpoint0Size; /* Size of the control (address 0) endpoint's bank in
+and if I remove ' it does not write the error
