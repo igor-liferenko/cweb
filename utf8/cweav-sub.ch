@@ -13,6 +13,7 @@ int pipe_write1[2];
 int pipe_write2[2];
 int print=0;
 int null_sections[100];
+int gobble=0;
 void add_null(int n)
 {
   for (int i = 0; i<100; i++)
@@ -25,6 +26,17 @@ int has_null(int n)
   return 0;
 }
 #define myprintf(...) fprintf(cw_in1, __VA_ARGS__),fprintf(cw_in2, __VA_ARGS__)
+@z
+
+@x
+new_xref(p)
+name_pointer p;
+{
+@y
+new_xref(p)
+name_pointer p;
+{
+   if (gobble) return;
 @z
 
 @x
@@ -229,7 +241,9 @@ Do not make index entries for C-part of /dev/null sections:
     next_control=get_next(); outer_xref();
 @y
     next_control=get_next();
-    if (!has_null(section_count)) outer_xref();
+    if (!has_null(section_count)) gobble=1;
+    outer_xref();
+    gobble=0;
 @z
 
 ------------------------------------------------

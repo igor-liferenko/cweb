@@ -1,4 +1,0 @@
-if we add /* Size of the control (address 0) endpoint's bank in bytes. */ after point0size in usbttl.w, it writes
-! String didn't end. (l. 361)
-  uint8_t  Endpoint0Size; /* Size of the control (address 0) endpoint's bank in
-and if I remove ' it does not write the error
