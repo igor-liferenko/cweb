@@ -306,7 +306,7 @@ copy_TeX() /* TeX-part influences how section name in C-part is formed, so start
       return('|');
     }
     if (loc<=limit) {
-      if (print) myprintf("%c%c", *(loc-1), *loc);
+      if (print && ccode[(eight_bits)*loc]!=section_name) myprintf("%c%c", *(loc-1), *loc);
       return(ccode[(eight_bits)*(loc++)]);
     }
   }
