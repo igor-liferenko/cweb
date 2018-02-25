@@ -292,7 +292,10 @@ copy_TeX() /* TeX-part influences how section name in C-part is formed, so start
         }
     while ((c=*(loc++))!='|' && c!='@@') {
       out(c);
-      if (out_ptr==out_buf+1 && (xisspace(c))) out_ptr--;
+      if (out_ptr==out_buf+1 && (xisspace(c))) {
+        out_ptr--;
+        if (print && loc==limit+1) myprintf("\n"); /* empty line */
+      }
       else if (print) {
         if (loc!=(limit+1)) myprintf("%c", *(loc-1));
         else myprintf("\n");
