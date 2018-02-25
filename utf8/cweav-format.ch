@@ -9,10 +9,7 @@ without using this change-file:
   @ Let's explain |struct x|.
   @s x int
 
-NOTE: If C-text is non-empty (and TeX-text is empty), no spurious \Y is produced,
-so it seems such case is handled in cweave. TODO: find where
-
-TODO: Is it right that if we do
+NOTE: in the following example
 @
 @c
 we get
@@ -22,7 +19,10 @@ and if we do
 @ @c
 we get
 \M{1}\B\par
-?
+The following code in |copy_TeX| causes this behavior:
+  if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+It makes out_line and out_ptr change, which causes |emit_space_if_needed|
+in @<Translate the \CEE/...@> produce the \Y
 
 @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
