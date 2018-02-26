@@ -52,7 +52,6 @@ under the terms of a permission notice identical to this one.
 }
 \let\lheader\rheader
 \let\maybe=\iftrue
-@s not_eq normal
 
 @** Introduction.
 This is the \.{CWEAVE} program by Silvio Levy and Donald E. Knuth,
@@ -618,7 +617,6 @@ id_lookup("mutable",NULL,int_like);
 id_lookup("namespace",NULL,struct_like);
 id_lookup("new",NULL,new_like);
 id_lookup("not",NULL,alfop);
-id_lookup("not_eq",NULL,alfop);
 id_lookup("NULL",NULL,custom);
 id_lookup("offsetof",NULL,raw_int);
 id_lookup("operator",NULL,operator_like);

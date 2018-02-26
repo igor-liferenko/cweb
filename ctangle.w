@@ -46,7 +46,6 @@ under the terms of a permission notice identical to this one.
 }
 \let\lheader\rheader
 \let\maybe=\iftrue
-@s not_eq normal
 
 @** Introduction.
 This is the \.{CTANGLE} program by Silvio Levy and Donald E. Knuth,

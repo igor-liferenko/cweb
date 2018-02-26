@@ -41,7 +41,6 @@ under the terms of a permission notice identical to this one.
 
 \let\lheader\rheader
 \let\maybe=\iftrue
-@s not_eq normal
 
 @** Introduction.  This file contains code common
 to both \.{CTANGLE} and \.{CWEAVE}, which roughly concerns the following
