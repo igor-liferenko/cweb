@@ -5,3 +5,4 @@ any occurrence of "not_eq" in a CWEB program is printed as "!=" in TeX output
 This is necessary in order to correctly process C++ source code that might use
 the "not_eq" operator.
 This id_lookup call puts the definition of "not_eq" as "alfop" to cweave's tables.
+And the @s... line does not make any difference if the id_lookup is not used.
