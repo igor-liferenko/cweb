@@ -24,3 +24,8 @@ typedef struct {
   int z;
 } my;
 my y;
+----------------------
+Make it possible to use SHIFT+BKSP like in this program:
+@ @c
+a ≠ b;
+For this change cweav-utf8.ch to convert E2 89 A0 into 1A.
