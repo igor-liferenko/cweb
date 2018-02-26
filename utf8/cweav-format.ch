@@ -30,14 +30,14 @@ BUT, according to this code from cweave.w, the first variant is valid syntax:
 TODO: understand why on the following file
 @ @s not_eq normal
 @d not_eq 032
-we get the following difference without and with this change-file, and fix it:
+we get the following difference without and with this change-file, and fix it, and then enable this change:
 -\M{1}\B\4\D$\\{not\_eq}$ \5
 +\M{1}\B\D$\\{not\_eq}$ \5
 
-@x
+ @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked){emit_space_if_needed;save_position;}
-@y
+ @y
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked&&format_visible){emit_space_if_needed;save_position;}
-@z
+ @z
