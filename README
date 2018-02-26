@@ -13,7 +13,7 @@ consists of one section.
 
 To see what is passed to "cw" in utf8/cweav-sub.ch, redefine myprintf macro to
 print to stdout. (and maybe use -h -b -p options to cweave and use comm-blank.ch), or
-better print to stderr and add ">/dev/null" at the end of cweave call
+better print to stderr and use ">/dev/null"
 
 NOTE: adding *utf8* change-files to "cw" should work without problems (if the need will arise)
 
