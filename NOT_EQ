@@ -1,0 +1,7 @@
+CWEAVE (if "id_lookup...not_eq" is present in cweave.w) uses "not_eq" in a CWEB
+program as representative of the "!=" operator:
+any occurrence of "not_eq" in a CWEB program is printed as "!=" in TeX output
+("@s not_eq normal" in cweave.w is needed to cancel the effect of this id_lookup).
+This is necessary in order to correctly process C++ source code that might use
+the "not_eq" operator.
+This id_lookup call puts the definition of "not_eq" as "alfop" to cweave's tables.
