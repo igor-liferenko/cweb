@@ -36,6 +36,8 @@ cweb-git/common.w, cweb-git/cweave.w, cweb-git/ctangle.w to the very first commi
 the difference is the same:
 -\M{1}\B\4\D$\\{not\_eq}$ \5
 +\M{1}\B\D$\\{not\_eq}$ \5
+HINT: the following line plays the role in this case:
+  if (save_line!=out_line || save_place!=out_ptr || space_checked) app(backup);
 
  @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
