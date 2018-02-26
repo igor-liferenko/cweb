@@ -30,8 +30,9 @@ BUT, according to this code from cweave.w, the first variant is valid syntax:
 TODO: understand why on the following file
 @ @s not_eq normal
 @d not_eq 032
-we get the following difference without and with this change-file, and fix it, and then enable
-this change, and understand why the same difference is when we roll back all changes to
+we get the following difference without and with this change-file, and fix it, and then fix and
+enable this change, and then fix the same in cweb-git/cweave.w, and understand why the
+same difference is when we roll back all changes to
 cweb-git/common.w, cweb-git/cweave.w, cweb-git/ctangle.w to the very first commit in this repo,
 the difference is the same:
 -\M{1}\B\4\D$\\{not\_eq}$ \5
