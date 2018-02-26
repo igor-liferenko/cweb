@@ -14,6 +14,8 @@ all:
 test: all
 	@./test
 
+# NOTE: be careful with cweav-nospace.ch and cweav-op.ch below (compatibility):
+
 print:
 	@cweave cweave cweave >/dev/null
 	@cweave ctangle ctangle >/dev/null
