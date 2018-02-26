@@ -47,3 +47,12 @@ HINT: the following line plays the role in this case:
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked&&format_visible){emit_space_if_needed;save_position;}
  @z
+
+NOTE: we use @s if type is defined after it is first used, like in the following example:
+@ @c
+my x;
+typedef struct {
+  int z;
+} my;
+my y;
+This seems to be due to the fact that typedef is not supposed to be treated in phase one - only in phase two, where it is too late.

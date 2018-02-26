@@ -16,15 +16,6 @@ and understand how newline is preserved in ctangle if it is used before `L' in t
 at value 127 of hash_size cweave works OK, at value 113 it breaks in
 @<Look for matches for new name among...@>=, because of Segmentation fault
 
-Is it correct that in the following code in "my x" "my" is not recognized an a type, and
-in "my y" it is? Explanation in cweav-format.ch assumes that it is true. Currently we use @s if type is defined after it is first used.
-@ @c
-my x;
-typedef struct {
-  int z;
-} my;
-my y;
-----------------------
 Make it possible to use SHIFT+BKSP like in this program:
 @ @c
 a ≠ b;
