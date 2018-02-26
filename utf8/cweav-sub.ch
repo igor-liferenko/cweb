@@ -241,7 +241,7 @@ Do not make index entries for C-part of /dev/null sections:
     next_control=get_next(); outer_xref();
 @y
     next_control=get_next();
-    if (!has_null(section_count)) gobble=1;
+    if (has_null(section_count)) gobble=1;
     outer_xref();
     gobble=0;
 @z
