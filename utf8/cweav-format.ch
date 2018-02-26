@@ -27,6 +27,13 @@ BUT, according to this code from cweave.w, the first variant is valid syntax:
   ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
      =ccode['*']=new_section;
 
+TODO: understand why on the following file
+@ @s not_eq normal
+@d not_eq 032
+we get the following difference without and with this change-file, and fix it:
+-\M{1}\B\4\D$\\{not\_eq}$ \5
++\M{1}\B\D$\\{not\_eq}$ \5
+
 @x
   if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
   if(!space_checked){emit_space_if_needed;save_position;}
