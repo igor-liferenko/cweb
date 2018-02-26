@@ -52,8 +52,6 @@ under the terms of a permission notice identical to this one.
 }
 \let\lheader\rheader
 \let\maybe=\iftrue
-@s not_eq normal @q Don't want to remove "id_lookup not_eq" from main cweave only to @>
-                 @q process this file, as I don't use not_eq in any programs @>
 
 @** Introduction.
 This is the \.{CWEAVE} program by Silvio Levy and Donald E. Knuth,

@@ -1,3 +1,12 @@
+Treat "not_eq" as an identifier (not as an operator), even if "@s not_eq normal" is
+not used, because I do not use C++:
+@x
+id_lookup("not_eq",NULL,alfop);
+@y
+@z
+
+TODO: see if other "alfop" are necessary in cweave.w
+
 CWEAVE (if "id_lookup...not_eq" is present in cweave.w) uses "not_eq" in a CWEB
 program as representative of the "!=" operator:
 any occurrence of "not_eq" in a CWEB program is printed as "!=" in TeX output
