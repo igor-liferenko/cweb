@@ -328,8 +328,8 @@ will be typeset in special ways.
 \.{@@.} in the \.{CWEB} file.
 
 \yskip\hang |alfop|, \dots, |template_like|
-identifiers are \CEE/ or \CPLUSPLUS/ reserved words whose |ilk|
-explains how they are to be treated when \CEE/ code is being
+identifiers are \CPLUSPLUS/ reserved words \&{and} and \&{template} whose |ilk|
+explains how they are to be treated when \CPLUSPLUS/ code is being
 formatted.
 
 @d ilk dummy.Ilk
@@ -340,7 +340,7 @@ formatted.
 @d abnormal(a) (a->ilk>typewriter) /* tells if a name is special */
 @d func_template 4 /* identifiers that can be followed by optional template */
 @d custom 5 /* identifiers with user-given control sequence */
-@d alfop 22 /* alphabetic operators like \&{and} or \&{not\_eq} */
+@d alfop 22 /* alphabetic operator \&{and} */
 @d else_like 26 /* \&{else} */
 @d public_like 40 /* \&{public}, \&{private}, \&{protected} */
 @d operator_like 41 /* \&{operator} */
@@ -565,11 +565,8 @@ are defined in header files of the ISO Standard \CEE/ Library.)
 
 @<Store all the reserved words@>=
 id_lookup("and",NULL,alfop);
-id_lookup("and_eq",NULL,alfop);
 id_lookup("asm",NULL,sizeof_like);
 id_lookup("auto",NULL,int_like);
-id_lookup("bitand",NULL,alfop);
-id_lookup("bitor",NULL,alfop);
 id_lookup("bool",NULL,raw_int);
 id_lookup("break",NULL,case_like);
 id_lookup("case",NULL,case_like);
@@ -577,7 +574,6 @@ id_lookup("catch",NULL,catch_like);
 id_lookup("char",NULL,raw_int);
 id_lookup("class",NULL,struct_like);
 id_lookup("clock_t",NULL,raw_int);
-id_lookup("compl",NULL,alfop);
 id_lookup("const",NULL,const_like);
 id_lookup("const_cast",NULL,raw_int);
 id_lookup("continue",NULL,case_like);
@@ -616,12 +612,9 @@ id_lookup("long",NULL,raw_int);
 id_lookup("mutable",NULL,int_like);
 id_lookup("namespace",NULL,struct_like);
 id_lookup("new",NULL,new_like);
-id_lookup("not",NULL,alfop);
 id_lookup("NULL",NULL,custom);
 id_lookup("offsetof",NULL,raw_int);
 id_lookup("operator",NULL,operator_like);
-id_lookup("or",NULL,alfop);
-id_lookup("or_eq",NULL,alfop);
 id_lookup("pragma",NULL,if_like);
 id_lookup("private",NULL,public_like);
 id_lookup("protected",NULL,public_like);
@@ -658,8 +651,6 @@ id_lookup("void",NULL,raw_int);
 id_lookup("volatile",NULL,const_like);
 id_lookup("wchar_t",NULL,raw_int);
 id_lookup("while",NULL,for_like);
-id_lookup("xor",NULL,alfop);
-id_lookup("xor_eq",NULL,alfop);
 res_wd_end=name_ptr;
 id_lookup("TeX",NULL,custom);
 id_lookup("make_pair",NULL,func_template);
@@ -2087,11 +2078,8 @@ end of \.\# line&|rproc|:  |force|&no\cr
 identifier&|exp|: \.{\\\\\{}identifier with underlines and
              dollar signs quoted\.\}&maybe\cr
 \.{and}&|alfop|: \stars&yes\cr
-\.{and\_eq}&|alfop|: \stars&yes\cr
 \.{asm}&|sizeof_like|: \stars&maybe\cr
 \.{auto}&|int_like|: \stars&maybe\cr
-\.{bitand}&|alfop|: \stars&yes\cr
-\.{bitor}&|alfop|: \stars&yes\cr
 \.{bool}&|raw_int|: \stars&maybe\cr
 \.{break}&|case_like|: \stars&maybe\cr
 \.{case}&|case_like|: \stars&maybe\cr
@@ -2099,7 +2087,6 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{char}&|raw_int|: \stars&maybe\cr
 \.{class}&|struct_like|: \stars&maybe\cr
 \.{clock\_t}&|raw_int|: \stars&maybe\cr
-\.{compl}&|alfop|: \stars&yes\cr
 \.{const}&|const_like|: \stars&maybe\cr
 \.{const\_cast}&|raw_int|: \stars&maybe\cr
 \.{continue}&|case_like|: \stars&maybe\cr
@@ -2139,13 +2126,9 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{mutable}&|int_like|: \stars&maybe\cr
 \.{namespace}&|struct_like|: \stars&maybe\cr
 \.{new}&|new_like|: \stars&maybe\cr
-\.{not}&|alfop|: \stars&yes\cr
-\.{not\_eq}&|alfop|: \stars&yes\cr
 \.{NULL}&|exp|: \.{\\NULL}&yes\cr
 \.{offsetof}&|raw_int|: \stars&maybe\cr
 \.{operator}&|operator_like|: \stars&maybe\cr
-\.{or}&|alfop|: \stars&yes\cr
-\.{or\_eq}&|alfop|: \stars&yes\cr
 \.{pragma}&|if_like|: \stars&maybe\cr
 \.{private}&|public_like|: \stars&maybe\cr
 \.{protected}&|public_like|: \stars&maybe\cr
@@ -2183,8 +2166,6 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{volatile}&|const_like|: \stars&maybe\cr
 \.{wchar\_t}&|raw_int|: \stars&maybe\cr
 \.{while}&|for_like|: \stars&maybe\cr
-\.{xor}&|alfop|: \stars&yes\cr
-\.{xor\_eq}&|alfop|: \stars&yes\cr
 \.{@@,}&|insert|: \.{\\,}&maybe\cr
 \.{@@\v}&|insert|:  |opt| \.0&maybe\cr
 \.{@@/}&|insert|:  |force|&no\cr
