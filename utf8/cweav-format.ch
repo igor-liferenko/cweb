@@ -55,4 +55,4 @@ typedef struct {
   int z;
 } my;
 my y;
-This seems to be due to the fact that typedef is not supposed to be treated in phase one - only in phase two, where it is too late.
+This is due to the fact that typedef is not treated in phase one - syntax analysis is made and scraps are formed only in phase two, where it is too late.
