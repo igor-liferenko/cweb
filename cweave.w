@@ -330,7 +330,8 @@ will be typeset in special ways.
 \yskip\hang |alfop|, \dots, |template_like|
 identifiers are \CPLUSPLUS/ reserved words \&{and} and \&{template} whose |ilk|
 explains how they are to be treated when \CPLUSPLUS/ code is being
-formatted.
+formatted. TODO: purgte them out.
+@^TODO@>
 
 @d ilk dummy.Ilk
 @d normal 0 /* ordinary identifiers have |normal| ilk */
