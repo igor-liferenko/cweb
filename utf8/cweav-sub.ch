@@ -1,4 +1,10 @@
-Substitute C text in /dev/null section.
+If we need to describe some C code, which is not direct part of the program,
+it is useful to cite this C code in the program.
+
+This change-file does not index C code in /dev/null sections (/dev/null is used because
+CTANGLE effectively ignores it by default) and replaces formatted C code
+with C code, formatted in a separate run of CWEAVE on each /dev/null section (to make sure that
+the formatted code is not influenced by main program).
 
 @x
 @<Global variables@>@/
