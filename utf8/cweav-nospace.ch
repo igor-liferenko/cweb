@@ -5,7 +5,7 @@ Example:
 typedef uint32_t pixel_t;
 @<Global...@>;
 
-@x l.2562
+@x
 else if (cat1==stmt || cat1==function) {
   big_app1(pp); big_app(big_force);
   big_app1(pp+1); reduce(pp,2,cat1,-1,41);
