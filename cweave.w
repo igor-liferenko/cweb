@@ -327,10 +327,12 @@ will be typeset in special ways.
 \yskip\hang |typewriter| identifiers are index entries that appear after
 \.{@@.} in the \.{CWEB} file.
 
-\yskip\hang |alfop|, \dots, |template_like|
-identifiers are \CPLUSPLUS/ reserved words \&{and} and \&{template} whose |ilk|
+\yskip\hang |alfop| alphabetic operator \&{sizeof}.
+
+\yskip\hang |template_like|
+identifiers are \CPLUSPLUS/ reserved words \&{template} whose |ilk|
 explains how they are to be treated when \CPLUSPLUS/ code is being
-formatted. TODO: purgte them out.
+formatted. TODO: purge this out
 @^TODO@>
 
 @d ilk dummy.Ilk
@@ -341,7 +343,7 @@ formatted. TODO: purgte them out.
 @d abnormal(a) (a->ilk>typewriter) /* tells if a name is special */
 @d func_template 4 /* identifiers that can be followed by optional template */
 @d custom 5 /* identifiers with user-given control sequence */
-@d alfop 22 /* alphabetic operator \&{and} */
+@d alfop 22 /* alphabetic operator \&{sizeof} */
 @d else_like 26 /* \&{else} */
 @d public_like 40 /* \&{public}, \&{private}, \&{protected} */
 @d operator_like 41 /* \&{operator} */
@@ -356,7 +358,6 @@ formatted. TODO: purgte them out.
 @d raw_int 51 /* \&{int}, \&{char}, \dots; also structure and class names  */
 @d int_like 52 /* same, when not followed by left parenthesis or \DC\ */
 @d case_like 53 /* \&{case}, \&{return}, \&{goto}, \&{break}, \&{continue} */
-@d sizeof_like 54 /* \&{sizeof} */
 @d struct_like 55 /* \&{struct}, \&{union}, \&{enum}, \&{class} */
 @d typedef_like 56 /* \&{typedef} */
 @d define_like 57 /* \&{define} */
@@ -2142,7 +2143,7 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{sig\_atomic\_t}&|raw_int|: \stars&maybe\cr
 \.{signed}&|raw_int|: \stars&maybe\cr
 \.{size\_t}&|raw_int|: \stars&maybe\cr
-\.{sizeof}&|sizeof_like|: \stars&maybe\cr
+\.{sizeof}&|alfop|: \stars&maybe\cr
 \.{static}&|int_like|: \stars&maybe\cr
 \.{static\_cast}&|raw_int|: \stars&maybe\cr
 \.{struct}&|struct_like|: \stars&maybe\cr
