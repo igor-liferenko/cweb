@@ -566,8 +566,7 @@ are defined in header files of the ISO Standard \CEE/ Library.)
 @^reserved words@>
 
 @<Store all the reserved words@>=
-id_lookup("and",NULL,alfop);
-id_lookup("asm",NULL,sizeof_like);
+id_lookup("asm",NULL,asm_like);
 id_lookup("auto",NULL,int_like);
 id_lookup("bool",NULL,raw_int);
 id_lookup("break",NULL,case_like);
@@ -581,7 +580,7 @@ id_lookup("const_cast",NULL,raw_int);
 id_lookup("continue",NULL,case_like);
 id_lookup("default",NULL,case_like);
 id_lookup("define",NULL,define_like);
-id_lookup("defined",NULL,sizeof_like);
+id_lookup("defined",NULL,asm_like);
 id_lookup("delete",NULL,delete_like);
 id_lookup("div_t",NULL,raw_int);
 id_lookup("do",NULL,do_like);
@@ -629,7 +628,7 @@ id_lookup("short",NULL,raw_int);
 id_lookup("sig_atomic_t",NULL,raw_int);
 id_lookup("signed",NULL,raw_int);
 id_lookup("size_t",NULL,raw_int);
-id_lookup("sizeof",NULL,sizeof_like);
+id_lookup("sizeof",NULL,alfop);
 id_lookup("static",NULL,int_like);
 id_lookup("static_cast",NULL,raw_int);
 id_lookup("struct",NULL,struct_like);
@@ -1920,7 +1919,7 @@ eight_bits cat_index;
     strcpy(cat_name[raw_int],"raw");
     strcpy(cat_name[int_like],"int");
     strcpy(cat_name[case_like],"case");
-    strcpy(cat_name[sizeof_like],"sizeof");
+    strcpy(cat_name[asm_like],"asm");
     strcpy(cat_name[struct_like],"struct");
     strcpy(cat_name[typedef_like],"typedef");
     strcpy(cat_name[define_like],"define");
@@ -2080,7 +2079,7 @@ end of \.\# line&|rproc|:  |force|&no\cr
 identifier&|exp|: \.{\\\\\{}identifier with underlines and
              dollar signs quoted\.\}&maybe\cr
 \.{and}&|alfop|: \stars&yes\cr
-\.{asm}&|sizeof_like|: \stars&maybe\cr
+\.{asm}&|asm_like|: \stars&maybe\cr
 \.{auto}&|int_like|: \stars&maybe\cr
 \.{bool}&|raw_int|: \stars&maybe\cr
 \.{break}&|case_like|: \stars&maybe\cr
@@ -2094,7 +2093,7 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{continue}&|case_like|: \stars&maybe\cr
 \.{default}&|case_like|: \stars&maybe\cr
 \.{define}&|define_like|: \stars&maybe\cr
-\.{defined}&|sizeof_like|: \stars&maybe\cr
+\.{defined}&|asm_like|: \stars&maybe\cr
 \.{delete}&|delete_like|: \stars&maybe\cr
 \.{div\_t}&|raw_int|: \stars&maybe\cr
 \.{do}&|do_like|: \stars&maybe\cr
@@ -2485,7 +2484,7 @@ code needs to be provided with a proper environment.
     case ubinop: @<Cases for |ubinop|@>; @+break;
     case binop: @<Cases for |binop|@>; @+break;
     case cast: @<Cases for |cast|@>; @+break;
-    case sizeof_like: @<Cases for |sizeof_like|@>; @+break;
+    case asm_like: @<Cases for |asm_like|@>; @+break;
     case int_like: @<Cases for |int_like|@>; @+break;
     case public_like: @<Cases for |public_like|@>; @+break;
     case colcol: @<Cases for |colcol|@>; @+break;
@@ -2754,7 +2753,7 @@ else if (cat1==exp) {
 }
 else if (cat1==semi) squash(pp,1,exp,-2,22);
 
-@ @<Cases for |sizeof_like|@>=
+@ @<Cases for |asm_like|@>=
 if (cat1==cast) squash(pp,2,exp,-2,23);
 else if (cat1==exp) {
   big_app1(pp); big_app(' '); big_app1(pp+1); reduce(pp,2,exp,-2,24);
