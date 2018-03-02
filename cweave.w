@@ -358,7 +358,7 @@ formatted. TODO: purge this out
 @d raw_int 51 /* \&{int}, \&{char}, \dots; also structure and class names  */
 @d int_like 52 /* same, when not followed by left parenthesis or \DC\ */
 @d case_like 53 /* \&{case}, \&{return}, \&{goto}, \&{break}, \&{continue} */
-@d asm_like 54 /* \&{asm}, \&{define} */
+@d asm_like 54 /* \&{asm}, \&{defined} */
 @d struct_like 55 /* \&{struct}, \&{union}, \&{enum}, \&{class} */
 @d typedef_like 56 /* \&{typedef} */
 @d define_like 57 /* \&{define} */
