@@ -327,11 +327,9 @@ will be typeset in special ways.
 \yskip\hang |typewriter| identifiers are index entries that appear after
 \.{@@.} in the \.{CWEB} file.
 
-\yskip\hang |alfop| alphabetic operator \&{sizeof}.
-
-\yskip\hang |template_like|
-identifiers are \CPLUSPLUS/ reserved words \&{template} whose |ilk|
-explains how they are to be treated when \CPLUSPLUS/ code is being
+\yskip\hang |alfop|, \dots, |template_like|
+identifiers are \CEE/ or \CPLUSPLUS/ reserved words whose |ilk|
+explains how they are to be treated when \CEE/ code is being
 formatted. TODO: purge this out
 @^TODO@>
 
