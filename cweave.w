@@ -358,6 +358,7 @@ formatted. TODO: purge this out
 @d raw_int 51 /* \&{int}, \&{char}, \dots; also structure and class names  */
 @d int_like 52 /* same, when not followed by left parenthesis or \DC\ */
 @d case_like 53 /* \&{case}, \&{return}, \&{goto}, \&{break}, \&{continue} */
+@d asm_like 54 /* \&{asm}, \&{define} */
 @d struct_like 55 /* \&{struct}, \&{union}, \&{enum}, \&{class} */
 @d typedef_like 56 /* \&{typedef} */
 @d define_like 57 /* \&{define} */
@@ -2078,7 +2079,6 @@ with discretionary breaks in between.
 end of \.\# line&|rproc|:  |force|&no\cr
 identifier&|exp|: \.{\\\\\{}identifier with underlines and
              dollar signs quoted\.\}&maybe\cr
-\.{and}&|alfop|: \stars&yes\cr
 \.{asm}&|asm_like|: \stars&maybe\cr
 \.{auto}&|int_like|: \stars&maybe\cr
 \.{bool}&|raw_int|: \stars&maybe\cr
@@ -2142,7 +2142,7 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{sig\_atomic\_t}&|raw_int|: \stars&maybe\cr
 \.{signed}&|raw_int|: \stars&maybe\cr
 \.{size\_t}&|raw_int|: \stars&maybe\cr
-\.{sizeof}&|alfop|: \stars&maybe\cr
+\.{sizeof}&|alfop|: \stars&yes\cr
 \.{static}&|int_like|: \stars&maybe\cr
 \.{static\_cast}&|raw_int|: \stars&maybe\cr
 \.{struct}&|struct_like|: \stars&maybe\cr
