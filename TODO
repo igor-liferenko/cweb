@@ -16,4 +16,4 @@ and understand how newline is preserved in ctangle if it is used before `L' in t
 at value 127 of hash_size cweave works OK, at value 113 it breaks in
 @<Look for matches for new name among...@>=, because of Segmentation fault
 
-Do git diff d53c147daeb10f7cf3f8b48625d7acc60c9c5475..71948a02243e4e707c9692c9531d07e922c79977 and create change-file from it to use in /usr/local/bin/cweave
+Do git diff d53c147daeb10f7cf3f8b48625d7acc60c9c5475..71948a02243e4e707c9692c9531d07e922c79977 and use this change of "sizeof" formatting in cweav-op.ch
