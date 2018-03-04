@@ -15,3 +15,4 @@ and for cast:
 with
   @ @c
   (int) (var1+var2);
+Also, see @[ in cwebman if it explains how to change (type) cast operator.
