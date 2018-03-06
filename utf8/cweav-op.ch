@@ -21,3 +21,5 @@ with
 Also, see @[ in cwebman if it explains how to change (type) cast operator.
 
 FIXME: maybe merge cweav-alfop.ch here?
+
+HINT: maybe use clang-format to determine the tokens?
