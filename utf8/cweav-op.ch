@@ -22,4 +22,5 @@ Also, see @[ in cwebman if it explains how to change (type) cast operator.
 
 FIXME: maybe merge cweav-alfop.ch here?
 
-HINT: maybe use clang-format to determine the tokens?
+HINT: maybe use clang-format library to tokenize the C code? Separate C code from CWEB input the
+same way as I separate C code in cweav-sub.ch
