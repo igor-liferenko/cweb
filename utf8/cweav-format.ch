@@ -52,4 +52,4 @@ typedef struct {
   int z;
 } my;
 my y;
-This is due to the fact that typedef is not treated in phase one - syntax analysis is made and scraps are formed only in phase two, where it is too late.
+This is due to the fact that typedef is not treated in phase one - syntax analysis is made and scraps are formed only in phase two, where it is too late. TODO: find which function exactly is used to mark an identifier when typedef is encountered - |id_lookup|?
