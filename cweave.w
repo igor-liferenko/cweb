@@ -331,14 +331,13 @@ will be typeset in special ways.
 identifiers are \CEE/ or \CPLUSPLUS/ reserved words whose |ilk|
 explains how they are to be treated when \CEE/ code is being
 formatted.
+TODO: purge \CPLUSPLUS/
+@^TODO@>
 NOTE: |alfop| is used only for \&{and} alphabetic operator, which is not
 needed in \CEE/, but is used by DEK like this: \par
 \.{@@s mod and}\par
 \.{\\let\\Xmod=\\bmod \% this is CWEB magic for using "mod" instead of "\%"}\par
 so it may not be purged
-
-TODO: purge \CPLUSPLUS/
-@^TODO@>
 
 @d ilk dummy.Ilk
 @d normal 0 /* ordinary identifiers have |normal| ilk */
