@@ -12,8 +12,8 @@ without using this change-file:
 This change-file also fixes the case when @s is not preceded by TeX-part and followed by @d;
 without this change-file the #define is backspaced, but it must not be:
 
-  @ @s not_eq normal
-  @d not_eq 032
+  @ @s line normal
+  @d line something
 
 The following line plays the role in this case:
 
