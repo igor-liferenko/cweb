@@ -30,6 +30,7 @@ as it is done for "typedef short boolean;"
 
 Find out via prductions tracing why pixel_t is not bold:
 
+  @ @c
   typedef uint32_t pixel_t;
   void main(void)
   {
