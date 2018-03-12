@@ -9,6 +9,36 @@ without using this change-file:
   @ Let's explain |struct x|.
   @s x int
 
+This change-file also fixes the case when @s is not preceded by TeX-part and followed by @d;
+without this change-file the #define is backspaced, but it must not be:
+
+  @ @s not_eq normal
+  @d not_eq 032
+
+The following line plays the role in this case:
+
+  if (save_line!=out_line || save_place!=out_ptr || space_checked) app(backup);
+
+So, without this change-file emit_space_if_needed is called (between @x-@y below),
+which sets space_checked=1 and triggers above "app(backup)".
+
+@x
+  if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
+  if(!space_checked){emit_space_if_needed;save_position;}
+@y
+  if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
+  if(!space_checked&&format_visible){emit_space_if_needed;save_position;}
+@z
+
+NOTE (concerning the need for @s in "@s x int" example above): we use @s if type is defined after it is first used, like in the following example:
+@ @c
+my x;
+typedef struct {
+  int z;
+} my;
+my y;
+This is due to the fact that typedef is not treated in phase one - syntax analysis is made and scraps are formed only in phase two, where it is too late. TODO: find which function exactly is used to mark an identifier when typedef is encountered - |id_lookup|?
+
 TODO: in the following example
 @
 @c
@@ -26,30 +56,3 @@ in @<Translate the \CEE/...@> produce the \Y
 BUT, according to this code from cweave.w, the first variant is valid syntax:
   ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
      =ccode['*']=new_section;
-
-TODO: understand why on the following file
-@ @s not_eq normal
-@d not_eq 032
-we get the following difference without and with this change-file, then fix it, and then apply
-the same changes to cweb-git/cweave.w:
--\M{1}\B\4\D$\\{not\_eq}$ \5
-+\M{1}\B\D$\\{not\_eq}$ \5
-HINT: the following line plays the role in this case:
-  if (save_line!=out_line || save_place!=out_ptr || space_checked) app(backup);
-
- @x
-  if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
-  if(!space_checked){emit_space_if_needed;save_position;}
- @y
-  if(*(loc-1)=='s' || *(loc-1)=='S') format_visible=0;
-  if(!space_checked&&format_visible){emit_space_if_needed;save_position;}
- @z
-
-NOTE: we use @s if type is defined after it is first used, like in the following example:
-@ @c
-my x;
-typedef struct {
-  int z;
-} my;
-my y;
-This is due to the fact that typedef is not treated in phase one - syntax analysis is made and scraps are formed only in phase two, where it is too late. TODO: find which function exactly is used to mark an identifier when typedef is encountered - |id_lookup|?
