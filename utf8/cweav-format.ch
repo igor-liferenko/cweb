@@ -1,7 +1,8 @@
 Suppose we need to explain some type names in TeX-text part of a section
 (suppose also that this section does not have C-code part).
 For these type names to be formatted correctly, we need to use @s
-(assuming that these type names did not occur earlier in C code).
+(assuming that these type names did not occur earlier in C code);
+for explanation of why it is necessary, see #8 in "Additional features and caveats" in cwebman.
 Problem appears if @s is put to middle part of the section (in contrast with limbo).
 In the following CWEB program spurious \Y is added after TeX-text
 without using this change-file:
