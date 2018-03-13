@@ -45,9 +45,10 @@ typedef struct {
 } my;
 my y;
 This is due to the fact that typedef is not treated in phase one - syntax analysis is made and scraps are formed only in phase two, where it is too late. TODO: find which function exactly is used to mark an identifier when typedef is encountered - |id_lookup|? HINT: see this in cwebman.tex:
-+    \.{CWEAVE} knows that identifiers being
-+    defined with a \&{typedef} should become reserved words; thus you
-+    don't need format definitions very often.
+   \.{CWEAVE} knows that identifiers being
+   defined with a \&{typedef} should become reserved words; thus you
+   don't need format definitions very often.
+Also, see #8 in "Additional features and caveats" in cwebman.
 
 TODO (related to cweav-format.ch): in the following example
 @
