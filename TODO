@@ -67,3 +67,5 @@ in @<Translate the \CEE/...@> produce the \Y
 BUT, according to this code from cweave.w, the first variant is valid syntax:
   ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
      =ccode['*']=new_section;
+###############################
+use comm-blank.ch in /usr/local/bin/cweave and add alias wv=cweave -bhp
