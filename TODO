@@ -50,22 +50,5 @@ This is due to the fact that typedef is not treated in phase one - syntax analys
    don't need format definitions very often.
 Also, see #8 in "Additional features and caveats" in cwebman.
 
-TODO (related to cweav-format.ch): in the following example
-@
-@c
-we get
-\M{1}
-\Y\B\par
-and if we do
-@ @c
-we get
-\M{1}\B\par
-The following code in |copy_TeX| causes this behavior:
-  if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
-It makes out_line and out_ptr change, which causes |emit_space_if_needed|
-in @<Translate the \CEE/...@> produce the \Y
-BUT, according to this code from cweave.w, the first variant is valid syntax:
-  ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
-     =ccode['*']=new_section;
 ###############################
 use comm-blank.ch in /usr/local/bin/cweave and add alias wv=cweave -bhp

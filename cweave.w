@@ -719,7 +719,7 @@ eight_bits ccode[256]; /* meaning of a char following \.{@@} */
 
 @ @<Set ini...@>=
 {int c; for (c=0; c<256; c++) ccode[c]=0;}
-ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
+ccode[' ']=ccode['\t']=ccode['\v']=ccode['\r']=ccode['\f']
    =ccode['*']=new_section;
 ccode['@@']='@@'; /* `quoted' at sign */
 ccode['=']=verbatim;
@@ -1679,8 +1679,11 @@ eight_bits
 copy_TeX()
 {
   char c; /* current character being copied */
+  int do_not_finish_line = 0;
+  if (loc>limit && next_control==new_section) do_not_finish_line = 1;
   while (1) {
-    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    if (loc>limit && !do_not_finish_line) finish_line();
+    if (loc>limit && (get_line()==0)) return(new_section);
     *(limit+1)='@@';
     while ((c=*(loc++))!='|' && c!='@@') {
       out(c);
