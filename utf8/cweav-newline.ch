@@ -46,8 +46,17 @@ copy_TeX()
 {
   char c; /* current character being copied */
   int do_not_finish_line = 0;
-  if (loc>limit && next_control==new_section) do_not_finish_line = 1;
+  if (loc>limit && new_section_was_just_started) do_not_finish_line = 1;
+  new_section_was_just_started=0;
   while (1) {
     if (loc>limit && !do_not_finish_line) finish_line();
     if (loc>limit && (get_line()==0)) return(new_section);
+@z
+
+@x
+@ @<Translate the current section@>= {
+@y
+boolean new_section_was_just_started=0;
+@ @<Translate the current section@>= {
+  new_section_was_just_started=1;
 @z
