@@ -18,8 +18,6 @@ at value 127 of hash_size cweave works OK, at value 113 it breaks in
 
 -------------------
 
-read goweave.pdf how grammar parsing is implemented there (maybe also see gowebman.pdf)
-
 TODO: find out which productions are applied in this example
 
   @ @c
