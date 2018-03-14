@@ -20,15 +20,15 @@ at value 127 of hash_size cweave works OK, at value 113 it breaks in
 
 TODO: find out which productions are applied in this example
 
-  @ @c
+  @ @c @2
   typedef uint32_t pixel_t;
 
 and why it does not print "\&{typedef} \&{uint32\_t} \&{pixel\_t}",
 as it is done for "typedef short boolean;"
 
-Find out via prductions tracing why pixel_t is not bold:
+Then check the following example and fix it too if second pixel_t will not be bold:
 
-  @ @c
+  @ @c @2
   typedef uint32_t pixel_t;
   void main(void)
   {
