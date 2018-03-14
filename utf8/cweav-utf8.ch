@@ -1,4 +1,4 @@
-@x l.70
+@x
 @c @<Include files@>@/
 @y
 @c
@@ -39,44 +39,44 @@ int mosntowcs(char *mbs, int len, wchar_t *s)
 }
 @z
 
-@x l.102
+@x
   argc=ac; argv=av;
 @y
   setlocale(LC_CTYPE, "C.UTF-8");
   argc=ac; argv=av;
 @z
 
-@x l.128
+@x
 @d long_buf_size (buf_size+longest_name)
 @y
 @d long_buf_size (buf_size*MB_LEN_MAX+longest_name*MB_LEN_MAX)
 @z
 
-@x l.143
+@x
 @i common.h
 @y
 @i comm-utf8.h
 @z
 
-@x l.270
+@x
 @d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+1)
 @y
 @d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+mblen((p)->byte_start,MB_CUR_MAX))
 @z
 
-@x l.1300
+@x
 char out_buf[line_length+1]; /* assembled characters */
 @y
 char out_buf[line_length*MB_LEN_MAX+1]; /* assembled characters */
 @z
 
-@x l.1302
+@x
 char *out_buf_end = out_buf+line_length; /* end of |out_buf| */
 @y
 char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
 @z
 
-@x l.1380
+@x
 @d out(c) {if (out_ptr>=out_buf_end) break_out(); *(++out_ptr)=c;}
 @y
 @d out(c) {
@@ -85,7 +85,7 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
 }
 @z
 
-@x l.1430
+@x
   term_write(out_buf+1, out_ptr-out_buf-1);
   new_line; mark_harmless;
   flush_buffer(out_ptr-1,1,1); return;
@@ -97,7 +97,7 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
   flush_buffer(out_ptr-mblen(k,MB_CUR_MAX),1,1); return;
 @z
 
-@x l.3359
+@x
   if((eight_bits)(*id_first)>0177) {
     app_tok(quoted_char);
     app_tok((eight_bits)(*id_first++));
@@ -111,13 +111,13 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
   }
 @z
 
-@x l.3696
+@x
   char scratch[longest_name]; /* scratch area for section names */
 @y
   char scratch[longest_name*MB_LEN_MAX]; /* scratch area for section names */
 @z
 
-@x l.3753
+@x
       if (xislower(*p)) { /* not entirely uppercase */
          delim='\\'; break;
       }
@@ -131,23 +131,21 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
     }
 @z
 
-@x l.3768
+@x
   out((cur_name->byte_start)[0]);
 @y
   for (int w = 0; w < mblen(cur_name->byte_start,MB_CUR_MAX); w++)
     out(*(cur_name->byte_start + w));
 @z
 
-@x l.4388
+@x
       if (xisupper(c)) c=tolower(c);
 @y
       if (xisupper(c)) c=tolower(c);
       else if (ishigh(c)) c=enc(cur_name->byte_start);
 @z
 
-Move 'ё' down next to 'е' and shift the rest of the sequence:
-
-@x l.4453
+@x
 strcpy(collate+133,"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257");
 /* 16 characters + 133 = 149 */
 strcpy(collate+149,"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277");
@@ -173,7 +171,7 @@ strcpy(collate+197,"\337\340\341\342\343\344\345\346\347\350\351\352\353\354\355
 strcpy(collate+213,"\357\360\362\363\364\365\366\367\370\371\372\373\374\375\376\377");
 @z
 
-@x l.4509
+@x
     cur_byte=cur_name->byte_start+cur_depth;
     if (cur_byte==(cur_name+1)->byte_start) c=0; /* hit end of the name */
     else {
@@ -190,7 +188,7 @@ strcpy(collate+213,"\357\360\362\363\364\365\366\367\370\371\372\373\374\375\376
       else if (ishigh(c)) c=enc(cur_byte);
 @z
 
-@x l.4536
+@x
       for (j=cur_name->byte_start;j<(cur_name+1)->byte_start;j++)
         if (xislower(*j)) goto lowcase;
 @y
