@@ -1,3 +1,0 @@
-Note about mbsnrtowcs():
-*src only can be used when ret==(size_t)-1 and dst is not NULL
-see man for mbsnrtowcs on opengroup site
