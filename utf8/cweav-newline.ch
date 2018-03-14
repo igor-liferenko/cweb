@@ -1,3 +1,34 @@
+In the following example
+
+  @
+  @c
+
+we get
+
+  \M{1}
+  \Y\B\par
+
+and if we do
+
+  @ @c
+
+we get
+
+  \M{1}\B\par
+
+The following code in |copy_TeX| causes this behavior:
+
+  if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+
+This |finish_line| call makes |out_line| and |out_ptr| change, which causes |emit_space_if_needed|
+in @<Translate the \CEE/...@> produce the spurious \Y.
+
+BUT, according to this code from cweave.w, the first variant is valid syntax:
+
+  ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
+     =ccode['*']=new_section;
+
+This is not used directly:
 @x
 ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
 @y
