@@ -28,7 +28,7 @@ BUT, according to this code from cweave.w, the first variant is valid syntax:
   ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
      =ccode['*']=new_section;
 
-This is not used directly:
+This influences nothing because '\n' is not used directly:
 @x
 ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
 @y
