@@ -40,3 +40,7 @@ Find out via prductions tracing why pixel_t is not bold:
 ###############################
 
 use comm-blank.ch in /usr/local/bin/cweave and add alias wv=cweave -bhp
+
+------------------------------------------
+
+remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b313e3c07bae54151e933d9b3b44 in goweb repo
