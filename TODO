@@ -43,4 +43,4 @@ use comm-blank.ch in /usr/local/bin/cweave and add alias wv=cweave -bhp
 
 ------------------------------------------
 
-remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b313e3c07bae54151e933d9b3b44 in goweb repo
+remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b313e3c07bae54151e933d9b3b44 and 49cd5dec3241e80835bbb15479acb6fb9b5dd4b9 in goweb repo
