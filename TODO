@@ -21,6 +21,7 @@ remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b3
 -------------------
 
 TODO: find out which productions are applied in this example
+(see @1 instead of @2)
 
   @ @c @2
   typedef uint32_t pixel_t;
