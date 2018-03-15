@@ -19,6 +19,9 @@ without using this change-file:
   @ Let's explain |struct x|.
   @s x int
 
+NOTE: now this problem is not so common because I use /dev/null-sections instead of writing
+pre-formatted C code in TeX-part
+
 This change-file also fixes the case when @s is not preceded by TeX-part and followed by @d;
 without this change-file the #define is backspaced, but it must not be:
 
