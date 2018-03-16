@@ -1,3 +1,7 @@
+TODO: remove @[@] everywhere in grep ~/
+Change 'sizeof(' to 'sizeof (' and '(type)(' to '(type) (' in woven output
+(because sizeof and (type) are operators, so there _should_ be a space after them, and because
+if an ordinary variable follows sizeof and cast there is a space).
 @x
 @ @<Cases for |sizeof_like|@>=
 if (cat1==cast) squash(pp,2,exp,-2,23);
