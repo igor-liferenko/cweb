@@ -3,6 +3,23 @@ Change 'sizeof(' to 'sizeof (' and '(type)(' to '(type) (' in woven output
 (because sizeof and (type) are operators, so there _should_ be a space after them, and because
 if an ordinary variable follows sizeof and cast there is a space).
 
+Compare .tex output with and without (...), e.g.:
+  @ @c
+  sizeof var;
+with
+  @ @s type int
+  @c
+  sizeof (type);
+and for cast:
+  @ @c
+  (int) var;
+and
+  @ @c
+  x = (char)~(1<<7);
+with
+  @ @c
+  (int) (var1+var2);
+
 @x
 @ @<Cases for |cast|@>=
 if (cat1==lpar) squash(pp,2,lpar,-1,21);
