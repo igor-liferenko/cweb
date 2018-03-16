@@ -6,14 +6,14 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch and cweav-prod.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cweb
 # If everything is OK, no changes must be shown.
 
 # To test for compatibility of cwebmac.tex:
-# remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch and cweav-prod.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
@@ -46,7 +46,7 @@ if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/com
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 if ! tie -m comm-utf8.h common.h $DIR/comm-utf8.hch > build-cweb.out; then cat build-cweb.out; exit; fi
-if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-newline.ch $DIR/cweav-sub.ch $DIR/cweav-utf8.ch $DIR/cweav-alfop.ch $DIR/cweav-sort.ch $DIR/cweav-format.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch > build-cweb.out # ATTENTION: cweav-file.ch must be before cweav-mac.ch
+if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-newline.ch $DIR/cweav-sub.ch $DIR/cweav-utf8.ch $DIR/cweav-alfop.ch $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-format.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch > build-cweb.out # ATTENTION: cweav-file.ch must be before cweav-mac.ch
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
