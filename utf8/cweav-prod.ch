@@ -7,6 +7,7 @@ if an ordinary variable follows sizeof and cast there is a space).
 @ @<Cases for |cast|@>=
 if (cat1==lpar) squash(pp,2,lpar,-1,21);
 @y
+@ @<Cases for |cast|@>=
 if (cat1==lpar) {
   big_app1(pp);
   big_app(' ');
