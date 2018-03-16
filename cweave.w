@@ -2772,7 +2772,7 @@ code needs to be provided with a proper environment.
 @d cat2 (pp+2)->cat
 @d cat3 (pp+3)->cat
 @d lhs_not_simple (pp->cat!=public_like
-        && pp->cat!=semi
+        && pp->cat!=semi 
         && pp->cat!=prelangle
         && pp->cat!=prerangle
         && pp->cat!=template_like
