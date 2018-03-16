@@ -37,28 +37,3 @@ Then check the following example and fix it too if second pixel_t will not be bo
   {
     int x = sizeof(pixel_t);
   }
-
-------------------------------------------
-
-change 'sizeof (' to 'sizeof @[@](' - find via grep -r --exclude-dir=.git 'sizeof (' 0000-git
-and the same concerns cast if it precedes parentheses - see ~/pcm/generate-tone.w for an example
-(because sizeof and (type) are operators, so there _should_ be a space after them, and because
-if an ordinary variable follows sizeof and cast there is a space)
-And add @[@] for "sizeof" and "(cast)" in ~/uni/.
-
-Compare .tex output with and without (...), e.g.:
-  @ @c
-  sizeof var;
-with
-  @ @s type int
-  @c
-  sizeof (type);
-and for cast:
-  @ @c
-  (int) var;
-and
-  @ @c
-  x = (char)~(1<<7);
-with
-  @ @c
-  (int) (var1+var2);
