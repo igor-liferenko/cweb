@@ -17,23 +17,3 @@ at value 127 of hash_size cweave works OK, at value 113 it breaks in
 @<Look for matches for new name among...@>=, because of Segmentation fault
 
 remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b313e3c07bae54151e933d9b3b44 and 49cd5dec3241e80835bbb15479acb6fb9b5dd4b9 in goweb repo
-
--------------------
-
-TODO: find out which productions are applied in this example
-(see @1 instead of @2)
-
-  @ @c @2
-  typedef uint32_t pixel_t;
-
-and why it does not print "\&{typedef} \&{uint32\_t} \&{pixel\_t}",
-as it is done for "typedef short boolean;"
-
-Then check the following example and fix it too if second pixel_t will not be bold:
-
-  @ @c @2
-  typedef uint32_t pixel_t;
-  void main(void)
-  {
-    int x = sizeof(pixel_t);
-  }
