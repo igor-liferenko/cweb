@@ -145,6 +145,8 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
       else if (ishigh(c)) c=enc(cur_name->byte_start);
 @z
 
+Move 'ё' down next to 'е' and shift the rest of the sequence:
+
 @x
 strcpy(collate+133,"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257");
 /* 16 characters + 133 = 149 */
