@@ -19,6 +19,10 @@ and
 with
   @ @c
   (int) (var1+var2);
+TODO: see diff of woven output from 2nd and 5th examples above before and after
+applying this change-file, and then edit woven output with change-file according
+to the diff - adjust mathness manually, and then compare with dvidiff before and
+after adjusting - must be the same
 
 @x
 @ @<Cases for |cast|@>=
