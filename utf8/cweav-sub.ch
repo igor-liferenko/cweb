@@ -253,7 +253,7 @@ Do not make index entries for C-part of /dev/null sections:
 
 ------------------------------------------------
 
-TeX-part influences how section name in C-part is formed, so start output to "cw" with it
+TeX-part influences how section name in C-part is formed, so start output to "cw" with TeX-part
 @x
     while ((c=*(loc++))!='|' && c!='@@') {
       out(c);
