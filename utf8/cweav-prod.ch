@@ -50,7 +50,9 @@ if (cat1==cast) {
 
 -----------------------
 
-Here is the output from @2 of "1*(1+1);" when "d" in rule #11 is -2, -1 and 0 respectively:
+Explanation of |d| argument of |reduce|:
+
+Here is the output from @2 of "1*(1+1);" when |d| in rule #11 is -2, -1 and 0 respectively:
 
 11:*exp +ubinop+ +exp+ ;...
 11: exp*+ubinop+ +exp+ ;...
