@@ -21,3 +21,7 @@ remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b3
 --------------------------
 
 use @2 to understand how @/ differs from @; (see "Further details about formatting" in cwebman)
+
+-------------------------
+
+see how in ~/goweb/ is solved the problem of sorting the index for unicode (256-bit bucket=?, index into array of 256=?)
