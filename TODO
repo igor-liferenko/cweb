@@ -17,3 +17,7 @@ at value 127 of hash_size cweave works OK, at value 113 it breaks in
 @<Look for matches for new name among...@>=, because of Segmentation fault
 
 remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b313e3c07bae54151e933d9b3b44 and 49cd5dec3241e80835bbb15479acb6fb9b5dd4b9 in goweb repo
+
+--------------------------
+
+use @2 to understand how @/ differs from @; (see "Further details about formatting" in cwebman)
