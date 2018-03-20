@@ -20,7 +20,7 @@ remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b3
 
 --------------------------
 
-use @2 to understand how @/ differs from @; (see "Further details about formatting" in cwebman)
+use @2 to understand how @/ differs from @; and from @| (see "Further details about formatting" in cwebman)
 
 -------------------------
 
