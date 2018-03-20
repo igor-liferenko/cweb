@@ -5,7 +5,6 @@
 #include <limits.h>
 @<Include files@>@/
 #include <errno.h>
-#include "uni.h"
 char *encTeX[256];
 @z
 
@@ -124,7 +123,7 @@ size_t wcsntomos(wchar_t *s, size_t len, char *mbs)
   size_t n = 0;
   size_t l = 0;
   while (l<len) {
-    n+=wctomo(*(s+l), mbs==NULL?mbs:mbs+n);
+    n+=wctomb(mbs==NULL?mbs:mbs+n, *(s+l));
     l++;
   }
   return n;
