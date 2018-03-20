@@ -39,8 +39,6 @@ clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-if ! ./ctangle /home/user/uni/uni.w > build-cweb.out; then cat build-cweb.out; exit; fi
-clang -c uni.c
 if ! tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch $DIR/comm-exten.ch $DIR/../comm-blank.ch >build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
@@ -50,12 +48,12 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sub.ch $DIR/cweav-utf8.ch $DIR/c
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
-clang -g -o cweave cweave.o common.o uni.o
+clang -g -o cweave cweave.o common.o
 if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-file.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
-clang -g -o ctangle ctangle.o common.o uni.o
+clang -g -o ctangle ctangle.o common.o
 cp cweave ctangle /usr/local/bin/
 ctangle examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" wmerge.c -o /usr/local/bin/wmerge # extra
 cd /
