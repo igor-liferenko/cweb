@@ -7,7 +7,6 @@
 #include <limits.h>
 #include <locale.h>
 @<Include files@>@/
-#include "uni.h"
 extern char *encTeX[];
 unsigned char enc(char *p)
 {
@@ -30,7 +29,8 @@ int mosntowcs(char *mbs, int len, wchar_t *s)
   int n = 0;
   int l = 0;
   while (l<len) {
-    l+=motowc(mbs+l, s);
+    l+=mbtowc(s, mbs+l, MB_CUR_MAX); /* valid UTF-8 is assumed (in this program |fgetwc|
+                                        is used to read data, so it is guaranteed) */
     n++;
     if (s!=NULL) s++;
   }
