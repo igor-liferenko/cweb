@@ -24,7 +24,7 @@ unsigned char enc(char *p)
 
   return z;
 }
-int mosntowcslen(char *mbs, int len)
+int mbsntowcslen(char *mbs, int len)
 {
   int n = 0;
   int l = 0;
@@ -79,7 +79,7 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
 @d out(c) {if (out_ptr>=out_buf_end) break_out(); *(++out_ptr)=c;}
 @y
 @d out(c) {
-  if (mosntowcslen(out_buf+1, out_ptr-(out_buf+1)+1) >= line_length) break_out();
+  if (mbsntowcslen(out_buf+1, out_ptr-(out_buf+1)+1) >= line_length) break_out();
   *++out_ptr=c;
 }
 @z

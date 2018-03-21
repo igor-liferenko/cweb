@@ -118,7 +118,7 @@ FILE *fp; /* what file to read from */
   if (c==EOF && limit==buffer) return(0);  /* there was nothing after
     the last newline */
 @y
-size_t wcsntomos(wchar_t *s, size_t len, char *mbs)
+size_t wcsntombs(wchar_t *s, size_t len, char *mbs)
 {
   size_t n = 0;
   size_t l = 0;
@@ -146,7 +146,7 @@ FILE *fp; /* what file to read from */
 
   if (ferror(fp)) { printf("\n! getwc: %s", strerror(errno)); fatal("",""); }
 
-  if (buffer + wcsntomos(wbuffer, wlimit-wbuffer, NULL) > buffer_end) {
+  if (buffer + wcsntombs(wbuffer, wlimit-wbuffer, NULL) > buffer_end) {
     printf("\n! multibyte buffer too small"); fatal("","");
   }
 
