@@ -24,37 +24,16 @@ unsigned char enc(char *p)
 
   return z;
 }
-int motowc(char *mbs, wchar_t *c, int len)
-{ /* \\{mbtowc} and \\{mbrtowc} are buggy like hell, so use own conversion function */
-  int i, n;
-  char *s = mbs;
-  if (!(*mbs & (char)(1<<7))) { /* first byte begins with `0' */
-    if (c!=NULL) *c = (wchar_t) *mbs;
-    return 1;
-  }
-  for (i=7, n=0; i > 1; i--)
-    if (*mbs & (char)(1 << i)) n++; @+ else break;
-  if (c==NULL) return n;
-  *c = 0;
-  for (i=6-n; i>=0; i--)
-    if (*mbs & (char)(1 << i)) *c |= (wchar_t)(1 << ((n-1)*6+i));
-  for (i=n-2; i>=0; i--) {
-    mbs++;
-    if ((mbs-s)==len) return n-i-1;
-    *c |= (wchar_t)((*mbs & (char)~(1<<7)) << i*6);
-  }
-  return n;
-}
-int mosntowcs(char *mbs, int len, wchar_t *s)
+int mosntowcslen(char *mbs, int len)
 {
   int n = 0;
   int l = 0;
+  int r;
   while (l<len) {
-    l+=motowc(mbs+l, s, len-l);
+    if ((r=mblen(mbs+l, len-l))==-1) break;
+    l+=r;
     n++;
-    if (s!=NULL) s++;
   }
-  if (s!=NULL) *s=L'\0';
   return n;
 }
 @z
@@ -100,7 +79,7 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
 @d out(c) {if (out_ptr>=out_buf_end) break_out(); *(++out_ptr)=c;}
 @y
 @d out(c) {
-  if (mosntowcs(out_buf+1, out_ptr-(out_buf+1)+1, NULL) >= line_length) break_out();
+  if (mosntowcslen(out_buf+1, out_ptr-(out_buf+1)+1) >= line_length) break_out();
   *++out_ptr=c;
 }
 @z
