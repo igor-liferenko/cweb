@@ -1,5 +1,4 @@
 TODO: remove @[@] everywhere in grep ~/
-TODO: apply this change-file to cweb-git/cweave.w
 Change 'sizeof(' to 'sizeof (' and '(type)(' to '(type) (' in woven output
 (because sizeof and (type) are operators, so there _should_ be a space after them, and because
 if an ordinary variable follows sizeof and cast there is a space).
