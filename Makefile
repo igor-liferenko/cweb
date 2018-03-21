@@ -2,22 +2,22 @@
 # to test compatibility with original cweb, type 'make test' - if everything OK, then no output
 # is produced
 all:
-	@/bin/ctangle -bhp common
+	@./ctangle -bhp common
 	@clang -g -w -c common.c
-	@/bin/ctangle -bhp ctangle
+	@./ctangle -bhp ctangle
 	@clang -g -w -c ctangle.c
 	@clang -g -o ctangle ctangle.o common.o
-	@/bin/ctangle -bhp cweave
+	@./ctangle -bhp cweave
 	@clang -g -w -c cweave.c
 	@clang -g -o cweave cweave.o common.o
 
 test: all
 	@./test
 
-print:
-	@cweave cweave cweave >/dev/null
-	@cweave ctangle ctangle >/dev/null
-	@cweave common common >/dev/null
+print: test
+	@./cweave cweave cweave >/dev/null
+	@./cweave ctangle ctangle >/dev/null
+	@./cweave common common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
@@ -25,10 +25,10 @@ print:
 	@touch -d '-5 seconds' cweave.tex ctangle.tex common.tex # for 'test' in prt.fn
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
-view:
-	@cweave cweave >/dev/null
-	@cweave ctangle >/dev/null
-	@cweave common >/dev/null
+view: test
+	@./cweave cweave >/dev/null
+	@./cweave ctangle >/dev/null
+	@./cweave common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
