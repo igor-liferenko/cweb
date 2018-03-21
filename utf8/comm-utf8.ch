@@ -134,9 +134,11 @@ wchar_t wbuffer[buf_size + longest_name];
 wchar_t *wbuffer_end = wbuffer + buf_size - 2;
 wchar_t *wlimit = wbuffer;
 
+/* use |getwc| to ensure that input is valid UTF-8 */
+
 int input_ln(fp) /* copies a line into |buffer| or returns 0 */
 FILE *fp; /* what file to read from */
-{ /* use |getwc| to read data to guarantee that we work with valid UTF-8 further */
+{
   register wint_t c; /* character read */
   register wchar_t *k;  /* where next character goes */
   if (feof(fp)) return(0);  /* we have hit end-of-file */
