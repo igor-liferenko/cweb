@@ -122,8 +122,9 @@ size_t wcsntomos(wchar_t *s, size_t len, char *mbs)
 {
   size_t n = 0;
   size_t l = 0;
+  char mb[MB_CUR_MAX];
   while (l<len) {
-    n+=wctomb(mbs==NULL?mbs:mbs+n, *(s+l));
+    n+=wctomb(mbs==NULL?mb:mbs+n, *(s+l));
     l++;
   }
   return n;
