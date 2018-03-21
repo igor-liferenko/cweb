@@ -136,7 +136,7 @@ wchar_t *wlimit = wbuffer;
 
 int input_ln(fp) /* copies a line into |buffer| or returns 0 */
 FILE *fp; /* what file to read from */
-{
+{ /* use |getwc| to read data to guarantee that we work with valid UTF-8 further */
   register wint_t c; /* character read */
   register wchar_t *k;  /* where next character goes */
   if (feof(fp)) return(0);  /* we have hit end-of-file */

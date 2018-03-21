@@ -24,13 +24,33 @@ unsigned char enc(char *p)
 
   return z;
 }
+int motowc(char *mbs, wchar_t *c, int len)
+{ /* \\{mbtowc} and \\{mbrtowc} are buggy like hell, so use own conversion function */
+  int i, n;
+  char *s = mbs;
+  if (!(*mbs & (char)(1<<7))) { /* first byte begins with `0' */
+    if (c!=NULL) *c = (wchar_t) *mbs;
+    return 1;
+  }
+  for (i=7, n=0; i > 1; i--)
+    if (*mbs & (char)(1 << i)) n++; @+ else break;
+  if (c==NULL) return n;
+  *c = 0;
+  for (i=6-n; i>=0; i--)
+    if (*mbs & (char)(1 << i)) *c |= (wchar_t)(1 << ((n-1)*6+i));
+  for (i=n-2; i>=0; i--) {
+    mbs++;
+    if ((mbs-s)==len) return n-i-1;
+    *c |= (wchar_t)((*mbs & (char)~(1<<7)) << i*6);
+  }
+  return n;
+}
 int mosntowcs(char *mbs, int len, wchar_t *s)
 {
   int n = 0;
   int l = 0;
   while (l<len) {
-    l+=mbtowc(s, mbs+l, MB_CUR_MAX); /* valid UTF-8 is assumed (in this program |fgetwc|
-                                        is used to read data, so it is guaranteed) */
+    l+=motowc(mbs+l, s, len-l);
     n++;
     if (s!=NULL) s++;
   }
