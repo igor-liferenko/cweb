@@ -2,12 +2,12 @@
 # to test compatibility with original cweb, type 'make test' - if everything OK, then no output
 # is produced
 all:
-	@./ctangle -bhp common
+	@/bin/ctangle -bhp common
 	@clang -g -w -c common.c
-	@./ctangle -bhp ctangle
+	@/bin/ctangle -bhp ctangle
 	@clang -g -w -c ctangle.c
 	@clang -g -o ctangle ctangle.o common.o
-	@./ctangle -bhp cweave
+	@/bin/ctangle -bhp cweave
 	@clang -g -w -c cweave.c
 	@clang -g -o cweave cweave.o common.o
 
