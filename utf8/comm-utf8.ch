@@ -152,7 +152,7 @@ FILE *fp; /* what file to read from */
     printf("\n! multibyte buffer too small"); fatal("","");
   }
 
-  limit = buffer + wcsntomos(wbuffer, wlimit-wbuffer, buffer);
+  limit = buffer + wcsntombs(wbuffer, wlimit-wbuffer, buffer);
   if (k>wbuffer_end)
     if ((c=getwc(fp))!=WEOF && c!=L'\n') {
       ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
