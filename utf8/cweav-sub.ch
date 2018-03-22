@@ -253,7 +253,8 @@ Do not make index entries for C-part of /dev/null sections:
 
 ------------------------------------------------
 
-TeX-part influences how section name in C-part is formed, so start output to "cw" with TeX-part
+TeX-part influences how section name in C-part is formed, so start output to "cweave-null"
+with TeX-part
 @x
     while ((c=*(loc++))!='|' && c!='@@') {
       out(c);
@@ -287,7 +288,8 @@ TeX-part influences how section name in C-part is formed, so start output to "cw
             if (prctl(PR_SET_PDEATHSIG, SIGINT) != -1 && /* automatically close window when
                                                     parent exits */
                 getppid() != 1) /* make sure that parent did not exit just before |prctl| call */
-              execl("/usr/local/bin/cw", "cw", writefd1, writefd2, secstr, (char *) NULL);
+              execl("/var/local/bin/cweave-null", "cweave-null",
+                writefd1, writefd2, secstr, (char *) NULL);
             exit(EXIT_FAILURE);
           }
           close(pipe_read[1]);
@@ -441,17 +443,19 @@ TODO: check that there are no macros here and remove extra braces
 
 -----------------------------------------
 
-FIXME: maybe think if it can be done without "cw" - just substituting proper section number in
+FIXME: maybe think if it can be done without "cweave-null" - just substituting proper section
+number in
 section names and changing += to =
 Check if it is possible by using finish_C(1) and not using fprintf(active_file...
 and then use "ccw" - if its output will be the same as output of "ccw" as it is now, then
-it makes no difference and thus can be done without "cw" (or better instead of using "ccw",
-check via dvidiff before and after doing without "cw").
+it makes no difference and thus can be done without "cweave-null" (or better instead of using
+"ccw",
+check via dvidiff before and after doing without "cweave-null").
 @x
   finish_C(1);
 @y
   finish_C(!has_null(section_count));
-  if (has_null(section_count)) { /* stop output to "cw" and put its output to .tex file */
+  if (has_null(section_count)) { /* stop output to "cweave-null" and put its output to .tex file */
     print = 0;
     fclose(cw_in1);
     fclose(cw_in2);
