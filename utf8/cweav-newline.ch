@@ -60,3 +60,37 @@ boolean new_section_was_just_started=0;
 @ @<Translate the current section@>= {
   new_section_was_just_started=1;
 @z
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+make so that
+
+  @
+  X
+
+will produce
+
+  \M{1}X
+
+and not
+
+  \M{1}X 
+
+as now (i.e., without trailing space)
+
+----------------
+
+and after you fix this, check that the following example
+
+  @
+  X%
+  Y
+
+instead of
+
+  \M{1}X% Y 
+
+will produce
+
+  \M{1}X%
+  Y
