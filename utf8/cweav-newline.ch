@@ -94,3 +94,5 @@ will produce
 
   \M{1}X%
   Y
+
+Also, use ccw with these examples.
