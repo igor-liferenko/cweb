@@ -80,7 +80,7 @@ perl -i -pe 's[\Q\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\31
 perl -i -pe 's[\Q\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337]'"'"'\322\323\324\325\326\327\330\331\332\333\334\335\336\337\340\341'"'" cweave.w
 perl -i -pe 's[\Q\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357]'"'"'\342\343\344\345\270\346\347\350\351\352\353\354\355\356\357\360'"'" cweave.w
 perl -i -pe 's[\Q\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377]'"'"'\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377\271'"'" cweave.w
-if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-newline.ch $DIR/cweav-format.ch > build-cweb.out
+if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-prod.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
