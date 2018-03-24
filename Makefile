@@ -14,10 +14,10 @@ all:
 test: all
 	@./test
 
-print: test
-	@./cweave cweave cweave >/dev/null
-	@./cweave ctangle ctangle >/dev/null
-	@./cweave common common >/dev/null
+print:
+	@cweave cweave cweave >/dev/null
+	@cweave ctangle ctangle >/dev/null
+	@cweave common common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
@@ -25,10 +25,10 @@ print: test
 	@touch -d '-5 seconds' cweave.tex ctangle.tex common.tex # for 'test' in prt.fn
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
-view: test
-	@./cweave cweave >/dev/null
-	@./cweave ctangle >/dev/null
-	@./cweave common >/dev/null
+view:
+	@cweave cweave >/dev/null
+	@cweave ctangle >/dev/null
+	@cweave common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
