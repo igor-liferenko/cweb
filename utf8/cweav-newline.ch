@@ -95,4 +95,4 @@ will produce
   \M{1}X%
   Y
 
-Also, use ccw with these examples.
+Also, use ccw with these examples to check if "+"-part is correct.
