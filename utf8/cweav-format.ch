@@ -1,11 +1,11 @@
 In the following example
 
-  @
+  @ %
   @c
 
 we get
 
-  \M{1}
+  \M{1}%
   \Y\B\par
 
 and if we do
@@ -22,18 +22,6 @@ The following code in |copy_TeX| causes this behavior:
 
 This |finish_line| call makes |out_line| and |out_ptr| change, which causes |emit_space_if_needed|
 in @<Translate the \CEE/...@> produce the spurious \Y.
-
-BUT, according to this code from cweave.w, the first variant is valid syntax:
-
-  ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
-     =ccode['*']=new_section;
-
-This influences nothing because '\n' is not used directly:
-@x
-ccode[' ']=ccode['\t']=ccode['\n']=ccode['\v']=ccode['\r']=ccode['\f']
-@y
-ccode[' ']=ccode['\t']=ccode['\v']=ccode['\r']=ccode['\f']
-@z
 
 @x
 copy_TeX()
