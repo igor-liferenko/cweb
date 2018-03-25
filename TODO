@@ -16,14 +16,6 @@ and understand how newline is preserved in ctangle if it is used before `L' in t
 at value 127 of hash_size cweave works OK, at value 113 it breaks in
 @<Look for matches for new name among...@>=, because of Segmentation fault
 
-remove special processing of '->', '::', '.*', '->*' as in commit 8d510b989190b313e3c07bae54151e933d9b3b44 and 49cd5dec3241e80835bbb15479acb6fb9b5dd4b9 in goweb repo
-
---------------------------
-
-use @2 to understand how @/ differs from @; and from @| (see "Further details about formatting" in cwebman); also see mmix docs how big structures are formatted
-
--------------------------
-
 see how in ~/goweb/ is solved the problem of sorting the index for unicode (256-slot bucket;
 also, 'translit[][]' certainly should _not_ be extended in the first
 index to 'uint32_t' for this - instead, a thin matrix with just the '@l'
