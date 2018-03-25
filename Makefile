@@ -14,6 +14,8 @@ all:
 test: all
 	@./test
 
+# TODO: compile custom cweave here with cweav-prod.ch and compile the following with it
+
 print:
 	@cweave cweave cweave >/dev/null
 	@cweave ctangle ctangle >/dev/null
