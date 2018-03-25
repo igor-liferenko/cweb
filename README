@@ -1,5 +1,4 @@
 The following change-files are for "cweave-null", which is used in utf8/cweav-sub.ch:
-utf8/comm-show.ch (it is not necessary to use utf8/cweav-show.ch and utf8/ctang-show.ch when we use "-bhp" options to "cweave-null" - in this case via comm-opts.ch)
 comm-opts.ch
 comm-out.ch
 comm-pipe.ch
