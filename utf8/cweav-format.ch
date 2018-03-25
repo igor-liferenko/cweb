@@ -40,19 +40,19 @@ copy_TeX()
 @y
 copy_TeX()
 {
-  int do_not_emit_space=0;
+  int TeX_part_is_empty=0;
   int reset_position=0;
   if (new_section_was_just_started && limit-buffer == 3 && *loc == '%') /* determine
                                                           if the line is `\.{@@ \%}' */
-    do_not_emit_space=1;
+    TeX_part_is_empty=1;
   new_section_was_just_started=0;
   char c; /* current character being copied */
   while (1) {
-    if (loc>limit && do_not_emit_space) reset_position=1;
+    if (loc>limit && TeX_part_is_empty) reset_position=1;
     if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
     if (reset_position) {
       save_position;
-      do_not_emit_space=0;
+      TeX_part_is_empty=0;
       reset_position=0;
     }
 @z
