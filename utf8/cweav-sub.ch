@@ -256,6 +256,12 @@ Do not make index entries for C-part of /dev/null sections:
 TeX-part influences how section name in C-part is formed, so start output to "cweave-null"
 with TeX-part
 @x
+copy_TeX()
+{
+  char c; /* current character being copied */
+  while (1) {
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    *(limit+1)='@@';
     while ((c=*(loc++))!='|' && c!='@@') {
       out(c);
       if (out_ptr==out_buf+1 && (xisspace(c))) out_ptr--;
@@ -265,6 +271,12 @@ with TeX-part
   }
 }
 @y
+copy_TeX()
+{
+  char c; /* current character being copied */
+  while (1) {
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    *(limit+1)='@@';
         if (!print && has_null(section_count)) {
           print = 1;
           pid_t cpid;

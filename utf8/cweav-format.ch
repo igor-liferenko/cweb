@@ -29,7 +29,8 @@ copy_TeX()
 @y
 copy_TeX()
 {
-  if (!(loc>limit) && new_section_was_just_started) skip_space=1;
+  if (!(loc>limit) && new_section_was_just_started) /* determine if the line is `\.{@@ \%}' */
+    skip_space=1;
   new_section_was_just_started=0;
 @z
 
