@@ -36,7 +36,7 @@ and
   
   @c
 
-must not give \Y
+must not give \Y and must not give empty line
 
 
 @x
@@ -61,7 +61,10 @@ copy_TeX()
       reset_position=1;
       TeX_part_is_empty=0;
     }
-    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    if (loc>limit) {
+      if (!(reset_position && out_ptr==out_buf)) finish_line();
+      if (get_line()==0) return(new_section);
+    }
     if (reset_position) save_position;
 @z
 
