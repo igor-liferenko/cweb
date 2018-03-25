@@ -23,6 +23,14 @@ The following code in |copy_TeX| causes this behavior:
 This |finish_line| call makes |out_line| and |out_ptr| change, which causes |emit_space_if_needed|
 in @<Translate the \CEE/...@> produce the spurious \Y.
 
+Notice, that
+
+  @ %
+  hello
+  @c
+
+must give the \Y
+
 @x
 copy_TeX()
 {
@@ -32,17 +40,21 @@ copy_TeX()
 @y
 copy_TeX()
 {
-  int TeX_part_is_empty=0;
+  int first_line_is_empty=0;
   int reset_position=0;
   if (new_section_was_just_started && limit-buffer == 3 && *loc == '%') /* determine
                                                           if the line is `\.{@@ \%}' */
-    TeX_part_is_empty=1;
+    first_line_is_empty=1;
   new_section_was_just_started=0;
   char c; /* current character being copied */
   while (1) {
-    if (loc>limit && TeX_part_is_empty) reset_position=1;
+    if (loc>limit && first_line_is_empty) reset_position=1;
     if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
-    if (reset_position) save_position; reset_position=0;
+    if (reset_position) {
+      save_position;
+      first_line_is_empty=0;
+      reset_position=0;
+    }
 @z
 
 @x
