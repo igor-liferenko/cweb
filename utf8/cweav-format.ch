@@ -30,6 +30,14 @@ Notice, that
   @c
 
 must give the \Y
+and
+
+  @ %
+  
+  @c
+
+must not give \Y
+
 
 @x
 copy_TeX()
@@ -48,13 +56,13 @@ copy_TeX()
   new_section_was_just_started=0;
   char c; /* current character being copied */
   while (1) {
-    if (loc>limit && TeX_part_is_empty) reset_position=1;
-    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
-    if (reset_position) {
-      save_position;
+    if (loc>limit && out_ptr>out_buf && reset_position) reset_position=0;
+    if (loc>limit && TeX_part_is_empty) {
+      reset_position=1;
       TeX_part_is_empty=0;
-      reset_position=0;
     }
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    if (reset_position) save_position;
 @z
 
 @x
