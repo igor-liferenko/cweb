@@ -26,31 +26,29 @@ in @<Translate the \CEE/...@> produce the spurious \Y.
 @x
 copy_TeX()
 {
+  char c; /* current character being copied */
+  while (1) {
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
 @y
 copy_TeX()
 {
-  if (!(loc>limit) && new_section_was_just_started) /* determine if the line is `\.{@@ \%}' */
-    skip_space=1;
+  int TeX_part_is_empty=0;
+  int reset_position=0;
+  if (new_section_was_just_started && limit-buffer == 3 && *loc == '%') /* determine
+                                                          if the line is `\.{@@ \%}' */
+    TeX_part_is_empty=1;
   new_section_was_just_started=0;
-@z
-
-@x
-@d emit_space_if_needed if (save_line!=out_line || save_place!=out_ptr)
-  out_str("\\Y");
-  space_checked=1
-@y
-@d emit_space_if_needed if ((save_line!=out_line ||
-  save_place!=out_ptr) && !skip_space)
-  out_str("\\Y");
-  space_checked=1;
-  skip_space=0
+  char c; /* current character being copied */
+  while (1) {
+    if (loc>limit && TeX_part_is_empty) reset_position=1;
+    if (loc>limit && (finish_line(), get_line()==0)) return(new_section);
+    if (reset_position) save_position; reset_position=0;
 @z
 
 @x
 @ @<Translate the current section@>= {
 @y
 boolean new_section_was_just_started=0;
-boolean skip_space=0;
 @ @<Translate the current section@>= {
   new_section_was_just_started=1;
 @z
@@ -91,7 +89,7 @@ The following line plays the role in this case:
 
   if (save_line!=out_line || save_place!=out_ptr || space_checked) app(backup);
 
-So, without this change-file emit_space_if_needed is called (between @x-@y below),
+So, without this change, emit_space_if_needed is called (between @x-@y below),
 which sets space_checked=1 and triggers above "app(backup)".
 
 @x
