@@ -14,9 +14,8 @@ all:
 test: all
 	@./test
 
-# TODO: compile custom cweave here with cweav-prod.ch and compile the following with it
-
 print:
+	@echo compile custom cweave here with cweav-prod.ch and compile with it; false
 	@cweave cweave cweave >/dev/null
 	@cweave ctangle ctangle >/dev/null
 	@cweave common common >/dev/null
@@ -28,6 +27,7 @@ print:
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
 view:
+	@echo compile custom cweave here with cweav-prod.ch and compile with it; false
 	@cweave cweave >/dev/null
 	@cweave ctangle >/dev/null
 	@cweave common >/dev/null
