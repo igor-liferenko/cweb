@@ -1,5 +1,5 @@
 The following change-files are for "cweave-null", which is used in utf8/cweav-sub.ch:
-comm-blank.ch
+utf8/comm-show.ch (it is not necessary to use utf8/cweav-show.ch and utf8/ctang-show.ch when we use "-bhp" options to "cweave-null" - in this case via comm-opts.ch)
 comm-opts.ch
 comm-out.ch
 comm-pipe.ch
@@ -12,8 +12,7 @@ run build-cweb and run "/var/local/bin/cweave-null file.w", where file.w
 consists of one section.
 
 To see what is passed to "cweave-null" in utf8/cweav-sub.ch, redefine myprintf macro to
-print to stderr and use ">/dev/null", or print to stdout and use -h -b -p options to cweave,
-also using comm-blank.ch (this option is good with gdb).
+print to stdout and use "cweave -bhp".
 
 NOTE: adding *utf8* change-files to "cweave-null" should work without problems (if the
       need will arise)
