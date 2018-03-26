@@ -20,3 +20,5 @@ see how in ~/goweb/ is solved the problem of sorting the index for unicode (256-
 also, 'translit[][]' certainly should _not_ be extended in the first
 index to 'uint32_t' for this - instead, a thin matrix with just the '@l'
 replacements for multi-byte entries should be used)
+
+create @r which will do the same as @s but do not put every section where this type is used to index? (see commit e5704a3c47fb266b512498e268515fa7a6703f67)
