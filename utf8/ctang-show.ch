@@ -18,6 +18,7 @@ boolean starred_shown=0;
 @x
         printf("\nWriting the output files:");
 @y
+        if (starred_shown) printf("\n");
         printf("Writing the output files:");
 @z
 
