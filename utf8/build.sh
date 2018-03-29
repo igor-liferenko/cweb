@@ -6,14 +6,14 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch, cweav-nospace.ch and cweav-prod.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch, cweav-nospace.ch, cweav-prod.ch, ctang-show.ch and cweav-show.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cweb
 # If everything is OK, no changes must be shown.
 
 # To test for compatibility of cwebmac.tex:
-# remove cweav-sort.ch, cweav-nospace.ch and cweav-prod.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch, cweav-nospace.ch, cweav-prod.ch, ctang-show.ch and cweav-show.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
