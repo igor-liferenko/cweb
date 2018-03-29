@@ -24,7 +24,6 @@ Example:
 @<Header files@>;
 typedef uint32_t pixel_t;
 
-
 @x
 if (cat1==stmt||cat1==decl||cat1==function) {
   big_app1(pp);
