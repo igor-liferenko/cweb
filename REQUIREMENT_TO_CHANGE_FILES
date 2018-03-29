@@ -1,1 +1,1 @@
-Original cweave must compile my programs fine (only minor formatting variations are allowed).
+Original CWEB (+gcc, +TeX) must *not fail* on my ascii-only programs (no matter what will be the formatting).
