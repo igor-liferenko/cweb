@@ -865,6 +865,24 @@ $$\.{\#define foo @[(int)(bar)@]}$$
 \subsec
 The remaining control codes govern the input that \.{CWEB} sees.
 
+\@i [\\{web\_file}]
+Furthermore the \\{web\_file} itself can be a combination of
+several files.  When either \.{CWEAVE} or \.{CTANGLE} is reading a file and
+encounters the control code \.{@i} at the beginning of a line, it
+interrupts normal reading and starts looking at the file named after the
+\.{@i}, much as the \CEE/ preprocessor does when it encounters an \.{\#include}
+line.  After the included file has been entirely read, the program
+goes back to the next line
+of the original file.  The file name following \.{@i} can be
+surrounded by \." characters, but such delimiters are
+optional. Include files can nest.
+
+\more On \UNIX/ systems (and others that support environment variables),
+if the environment variable \.{CWEBINPUTS} is set, or if the compiler flag
+of the same name was defined at compile time,
+\.{CWEB} will look for include files in the directory thus named, if
+it cannot find them in the current directory.
+
 \@{x @y @z}[\\{change\_file}]
 \.{CWEAVE} and \.{CTANGLE} are designed to work with two input files,
 called \\{web\_file} and \\{change\_file}, where \\{change\_file} contains
@@ -897,18 +915,6 @@ your changes are working, you will be able to incorporate them readily
 into new releases of the master web file that you might receive from time
 to time.
 
-\@i [\\{web\_file}]
-Furthermore the \\{web\_file} itself can be a combination of
-several files.  When either \.{CWEAVE} or \.{CTANGLE} is reading a file and
-encounters the control code \.{@i} at the beginning of a line, it
-interrupts normal reading and starts looking at the file named after the
-\.{@i}, much as the \CEE/ preprocessor does when it encounters an \.{\#include}
-line.  After the included file has been entirely read, the program
-goes back to the next line
-of the original file.  The file name following \.{@i} can be
-surrounded by \." characters, but such delimiters are
-optional. Include files can nest.
-
 \more
 Change files can have lines starting with \.{@i}. In this way
 you can replace one included file with another.
@@ -917,16 +923,10 @@ is not \.{@i} \.{foo}, further master file input is taken from \.{foo};
 if the next match is \.{@i} \.{foo}, the substitution is done without giving
 any treatment to \.{@i}.
 After applying change-file, the output is checked for \.{@i} lines.
-So, if \.{@i} \.{foo}
+So, changes
+can be made to lines from files that were included in master file; but if \.{@i} \.{foo}
 occurs between \.{@y} and \.{@z} in a change file, individual lines
-of file \.{foo} and files it includes are not changeable; but changes
-can be made to lines from files that were included in master file.
-
-\more On \UNIX/ systems (and others that support environment variables),
-if the environment variable \.{CWEBINPUTS} is set, or if the compiler flag
-of the same name was defined at compile time,
-\.{CWEB} will look for include files in the directory thus named, if
-it cannot find them in the current directory.
+of file \.{foo} and files it includes are not changeable.
 
 \section Additional features and caveats.
 
