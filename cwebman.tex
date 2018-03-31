@@ -911,12 +911,16 @@ optional. Include files can nest.
 
 \more
 Change files can have lines starting with \.{@i}. In this way
-you can replace one included file with another. Conceptually, the
-replacement mechanism described above does its work first, and
-its output is then checked for \.{@i} lines. If \.{@i} \.{foo}
+you can replace one included file with another.
+If \.{@i} \.{foo} is encountered in master file and the next match in change file
+is not \.{@i} \.{foo}, further master file input is taken from \.{foo};
+if the next match is \.{@i} \.{foo}, the substitution is done without giving
+any treatment to \.{@i}.
+After applying change-file, the output is checked for \.{@i} lines.
+So, if \.{@i} \.{foo}
 occurs between \.{@y} and \.{@z} in a change file, individual lines
 of file \.{foo} and files it includes are not changeable; but changes
-can be made to lines from files that were included by unchanged input.
+can be made to lines from files that were included in master file.
 
 \more On \UNIX/ systems (and others that support environment variables),
 if the environment variable \.{CWEBINPUTS} is set, or if the compiler flag
