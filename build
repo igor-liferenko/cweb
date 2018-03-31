@@ -1,0 +1,19 @@
+#!/bin/sh
+cd /home/user/cweb/
+git rev-parse --abbrev-ref HEAD | grep -v master && exit
+git diff --exit-code HEAD || exit
+rm -fr /tmp/cwebbuild/
+mkdir /tmp/cwebbuild/
+cd /tmp/cwebbuild/
+cp -r /home/user/cweb/* .
+clang -g -w -c ctangle.c
+perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
+clang -g -w -c common.c
+clang -g -o ctangle ctangle.o common.o
+if ! ./ctangle common.w /home/user/cweb-git/comm-opts.ch > build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c common.c || exit
+if ! ./ctangle ctangle.w >build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c ctangle.c || exit
+clang -g -o /var/local/bin/ctangle-git ctangle.o common.o
+cd /
+rm -fr /tmp/cwebbuild/
