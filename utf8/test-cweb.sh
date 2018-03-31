@@ -6,7 +6,7 @@ git checkout .
 git clean -f >/dev/null
 git checkout master &>/dev/null
 git branch -D runall-/bin/-V runall-/usr/local/bin/-V &>/dev/null
-sed -i '0,/^@ /s//@* Intro. /' reflect.w # see tex/question3.tex
+sed -i '0,/^@ /s//@* Intro. /' reflect.w # see tex/question2.tex
 ./runall.sh -p /bin/ >runall.log 2>/dev/null
 git checkout reflect.w
 git checkout runall-/bin/-V &>/dev/null
