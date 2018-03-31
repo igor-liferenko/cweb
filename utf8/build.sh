@@ -69,7 +69,7 @@ clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-if ! ./ctangle common.w > build-cweb.out; then cat build-cweb.out; exit; fi
+if ! ./ctangle common.w $DIR/comm-show.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
 perl -i -pe 's/  argc=ac; argv=av;/  setlocale(LC_CTYPE,"ru_RU.CP1251");\n$&/' cweave.w
@@ -81,12 +81,12 @@ perl -i -pe 's[\Q\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\33
 perl -i -pe 's[\Q\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357]'"'"'\342\343\344\345\270\346\347\350\351\352\353\354\355\356\357\360'"'" cweave.w
 perl -i -pe 's[\Q\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377]'"'"'\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377\271'"'" cweave.w
 perl -i -pe 'if(/wchar_t/){print; s/wchar_t/wint_t/; print; s/wint_t/ssize_t/; print; s/ssize_t/uint8_t/; print; s/uint8_t/uint16_t/; print; s/uint16_t/uint32_t/; print; s/uint32_t/int32_t/; print; s/int32_t/cchar_t/; print; s/cchar_t/pid_t/}' cweave.w
-if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-prod.ch > build-cweb.out
+if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-show.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
-if ! ./ctangle ctangle.w > build-cweb.out; then cat build-cweb.out; exit; fi
+if ! ./ctangle ctangle.w $DIR/ctang-show.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o
 mkdir -p /var/local/bin/
