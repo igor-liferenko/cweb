@@ -16,10 +16,11 @@ test: all
 	@./test
 
 print:
-	@echo 'compile custom cweave here with cweav-prod.ch and compile with it and undo C++ removal in cweave.w, common.w, ctangle.w (after commit c9cb85d3a44d8353f3cf654883790e5a895eb317 ?)'; false
-	@cweave cweave cweave >/dev/null
-	@cweave ctangle ctangle >/dev/null
-	@cweave common common >/dev/null
+	@./build
+	@echo 'undo C++ removal in cweave.w, common.w, ctangle.w (after commit c9cb85d3a44d8353f3cf654883790e5a895eb317 ?)'; false
+	@/var/local/bin/cweave-git cweave cweave >/dev/null
+	@/var/local/bin/cweave-git cweave ctangle ctangle >/dev/null
+	@/var/local/bin/cweave-git common common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
@@ -28,10 +29,11 @@ print:
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
 view:
-	@echo 'compile custom cweave here with cweav-prod.ch and compile with it and undo C++ removal in cweave.w, common.w, ctangle.w (after commit c9cb85d3a44d8353f3cf654883790e5a895eb317 ?)'; false
-	@cweave cweave >/dev/null
-	@cweave ctangle >/dev/null
-	@cweave common >/dev/null
+	@./build
+	@echo 'undo C++ removal in cweave.w, common.w, ctangle.w (after commit c9cb85d3a44d8353f3cf654883790e5a895eb317 ?)'; false
+	@/var/local/bin/cweave-git cweave >/dev/null
+	@/var/local/bin/cweave-git ctangle >/dev/null
+	@/var/local/bin/cweave-git common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null

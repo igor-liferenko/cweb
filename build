@@ -10,10 +10,55 @@ clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-if ! ./ctangle common.w /home/user/cweb-git/comm-opts.ch > build-cweb.out; then cat build-cweb.out; exit; fi
+cat <<'EOF' >comm-foo.ch
+This is necessary to suppress all the output (disabling three options below is not enough):
+
+@x
+int wrap_up() {
+  putchar('\n');
+@y
+int wrap_up() {
+@z
+
+@x
+show_banner=show_happiness=show_progress=1;
+@y
+@z
+EOF
+if ! ./ctangle common.w comm-foo.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c common.c || exit
 if ! ./ctangle ctangle.w >build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
 clang -g -o /var/local/bin/ctangle-git ctangle.o common.o
+cat <<'EOF' >cweav-foo.ch
+@x
+@ @<Cases for |cast|@>=
+if (cat1==lpar) squash(pp,2,lpar,-1,21);
+@y
+@ @<Cases for |cast|@>=
+if (cat1==lpar) {
+  big_app1(pp);
+  big_app(' ');
+  big_app1(pp+1);
+  reduce(pp,2,lpar,-1,21);
+}
+@z
+
+@x
+@ @<Cases for |sizeof_like|@>=
+if (cat1==cast) squash(pp,2,exp,-2,23);
+@y
+@ @<Cases for |sizeof_like|@>=
+if (cat1==cast) {
+  big_app1(pp);
+  big_app(' ');
+  big_app1(pp+1);
+  reduce(pp,2,exp,-2,23);
+}
+@z
+EOF
+if ! ./ctangle cweave.w cweav-foo.ch >build-cweb.out; then cat build-cweb.out; exit; fi
+clang -g -w -c cweave.c || exit
+clang -g -o /var/local/bin/cweave-git cweave.o common.o
 cd /
 rm -fr /tmp/cwebbuild/

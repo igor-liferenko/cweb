@@ -21,6 +21,7 @@ with
   (int) (var1+var2);
 TODO: see diff of woven output from 2nd and 5th examples above before and after
 applying this change-file---разобраться с mathness и что значит + - в @2
+(then sync with cweb-git/build if necessary)
 
 @x
 @ @<Cases for |cast|@>=
