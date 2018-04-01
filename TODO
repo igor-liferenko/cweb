@@ -35,3 +35,4 @@ create @- (it is free and using it does not fail in original cweb, so it can be 
 HINT: see this in cweave.w:
 @ In the \TEX/ part of a section, we simply copy the source text, except that
 index entries are not copied and \CEE/ text within \pb\ is translated.
+HINT: why "f" in "int @[@] (*f)();" is not indexed if "@[@]" is not used?
