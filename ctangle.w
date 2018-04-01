@@ -1696,6 +1696,7 @@ but not an |int|, we use \.{\%ld} to print these quantities.
 void
 print_stats() {
   printf("\nMemory usage statistics:\n");
+@.Memory usage statistics:@>
   printf("%ld names (out of %ld)\n",
           (long)(name_ptr-name_dir),(long)max_names);
   printf("%ld replacement texts (out of %ld)\n",

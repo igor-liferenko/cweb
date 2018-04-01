@@ -35,3 +35,9 @@ boolean starred_shown=0;
   if (*(loc-1)=='*' && show_progress) { /* starred section */
     starred_shown=1;
 @z
+
+@x
+  printf("\nMemory usage statistics:\n");
+@y
+  printf("Memory usage statistics:\n");
+@z

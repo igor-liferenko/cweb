@@ -36,3 +36,9 @@ if (show_happiness) printf("\nDone.");
 if (show_progress) printf("\n");
 if (show_happiness) printf("Done.");
 @z
+
+@x
+  printf("\nMemory usage statistics:\n");
+@y
+  printf("Memory usage statistics:\n");
+@z
