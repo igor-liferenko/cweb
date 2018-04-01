@@ -32,3 +32,6 @@ create @- which will act like @=, but do not put border; useful to exclude thing
   {CDC_RX_EPADDR, CDC_TXRX_EPSIZE, @[.Banks@]=1},@|
   {CDC_NOTIFICATION_EPADDR, CDC_NOTIFICATION_EPSIZE, @[.Banks@]=1}@/
 }
+HINT: see this in cweave.w:
+@ In the \TEX/ part of a section, we simply copy the source text, except that
+index entries are not copied and \CEE/ text within \pb\ is translated.
