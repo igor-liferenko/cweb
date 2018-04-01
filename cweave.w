@@ -2283,50 +2283,6 @@ translated without line-break controls.
 @d tok_flag 4*id_flag /* signifies a token list */
 @d inner_tok_flag 5*id_flag /* signifies a token list in `\pb' */
 
-@c
-void
-print_text(p) /* prints a token list for debugging; not used in |main| */
-text_pointer p;
-{
-  token_pointer j; /* index into |tok_mem| */
-  sixteen_bits r; /* remainder of token after the flag has been stripped off */
-  if (p>=text_ptr) printf("BAD");
-  else for (j=*p; j<*(p+1); j++) {
-    r=*j%id_flag;
-    switch (*j/id_flag) {
-      case 1: printf("\\\\{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
-        break; /* |id_flag| */
-      case 2: printf("\\&{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
-        break; /* |res_flag| */
-      case 3: printf("<"); print_section_name((name_dir+r)); printf(">");
-        break; /* |section_flag| */
-      case 4: printf("[[%d]]",r); break; /* |tok_flag| */
-      case 5: printf("|[[%d]]|",r); break; /* |inner_tok_flag| */
-      default: @<Print token |r| in symbolic form@>;
-    }
-  }
-  fflush(stdout);
-}
-
-@ @<Print token |r|...@>=
-switch (r) {
-  case math_rel: printf("\\mathrel{"@q}@>); break;
-  case big_cancel: printf("[ccancel]"); break;
-  case cancel: printf("[cancel]"); break;
-  case indent: printf("[indent]"); break;
-  case outdent: printf("[outdent]"); break;
-  case backup: printf("[backup]"); break;
-  case opt: printf("[opt]"); break;
-  case break_space: printf("[break]"); break;
-  case force: printf("[force]"); break;
-  case big_force: printf("[fforce]"); break;
-  case preproc_line: printf("[preproc]"); break;
-  case quoted_char: j++; printf("[%o]",(unsigned)*j); break;
-  case end_translation: printf("[quit]"); break;
-  case inserted: printf("[inserted]"); break;
-  default: putxchar(r);
-}
-
 @ The production rules listed above are embedded directly into \.{CWEAVE},
 since it is easier to do this than to write an interpretive system
 that would handle production systems in general. Several macros are defined
