@@ -73,7 +73,7 @@ if ! ./ctangle common.w $DIR/comm-show.ch > build-cweb.out; then cat build-cweb.
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
 perl -i -pe 's/  argc=ac; argv=av;/  setlocale(LC_CTYPE,"ru_RU.CP1251");\n$&/' cweave.w
-perl -i -pe 's/xislower\(/islower((eight_bits)/' cweave.w # if we do not use "(eight_bits)", islower('я') returns 0
+perl -i -pe 's/xislower\(/islower((unsigned char)/' cweave.w # if we do not use cast, islower('я') returns 0
 perl -i -pe 's/xisupper/isupper/' cweave.w
 perl -i -pe 's[\Q\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277]'"'"'\260\261\262\263\264\265\266\267\272\273\274\275\276\277\300\301'"'" cweave.w
 perl -i -pe 's[\Q\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317]'"'"'\302\303\304\305\306\307\310\311\312\313\314\315\316\317\320\321'"'" cweave.w
