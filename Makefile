@@ -17,7 +17,6 @@ test: all
 
 print:
 	@./build
-	@echo 'undo C++ removal in cweave.w, common.w, ctangle.w (after commit c9cb85d3a44d8353f3cf654883790e5a895eb317 ?)'; false
 	@/var/local/bin/cweave-git cweave cweave >/dev/null
 	@/var/local/bin/cweave-git cweave ctangle ctangle >/dev/null
 	@/var/local/bin/cweave-git common common >/dev/null
@@ -30,7 +29,6 @@ print:
 
 view:
 	@./build
-	@echo 'undo C++ removal in cweave.w, common.w, ctangle.w (after commit c9cb85d3a44d8353f3cf654883790e5a895eb317 ?)'; false
 	@/var/local/bin/cweave-git cweave >/dev/null
 	@/var/local/bin/cweave-git ctangle >/dev/null
 	@/var/local/bin/cweave-git common >/dev/null
