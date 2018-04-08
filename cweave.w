@@ -52,6 +52,7 @@ under the terms of a permission notice identical to this one.
 }
 \let\lheader\rheader
 \let\maybe=\iftrue
+@s not_eq normal @q unreserve a C++ keyword @>
 
 @** Introduction.
 This is the \.{CWEAVE} program by Silvio Levy and Donald E. Knuth,
@@ -340,7 +341,7 @@ formatted.
 @d abnormal(a) (a->ilk>typewriter) /* tells if a name is special */
 @d func_template 4 /* identifiers that can be followed by optional template */
 @d custom 5 /* identifiers with user-given control sequence */
-@d alfop 22 /* alphabetic operator \&{and} */
+@d alfop 22 /* alphabetic operators like \&{and} or \&{not\_eq} */
 @d else_like 26 /* \&{else} */
 @d public_like 40 /* \&{public}, \&{private}, \&{protected} */
 @d operator_like 41 /* \&{operator} */
@@ -565,8 +566,11 @@ are defined in header files of the ISO Standard \CEE/ Library.)
 
 @<Store all the reserved words@>=
 id_lookup("and",NULL,alfop);
+id_lookup("and_eq",NULL,alfop);
 id_lookup("asm",NULL,sizeof_like);
 id_lookup("auto",NULL,int_like);
+id_lookup("bitand",NULL,alfop);
+id_lookup("bitor",NULL,alfop);
 id_lookup("bool",NULL,raw_int);
 id_lookup("break",NULL,case_like);
 id_lookup("case",NULL,case_like);
@@ -574,6 +578,7 @@ id_lookup("catch",NULL,catch_like);
 id_lookup("char",NULL,raw_int);
 id_lookup("class",NULL,struct_like);
 id_lookup("clock_t",NULL,raw_int);
+id_lookup("compl",NULL,alfop);
 id_lookup("const",NULL,const_like);
 id_lookup("const_cast",NULL,raw_int);
 id_lookup("continue",NULL,case_like);
@@ -612,9 +617,13 @@ id_lookup("long",NULL,raw_int);
 id_lookup("mutable",NULL,int_like);
 id_lookup("namespace",NULL,struct_like);
 id_lookup("new",NULL,new_like);
+id_lookup("not",NULL,alfop);
+id_lookup("not_eq",NULL,alfop);
 id_lookup("NULL",NULL,custom);
 id_lookup("offsetof",NULL,raw_int);
 id_lookup("operator",NULL,operator_like);
+id_lookup("or",NULL,alfop);
+id_lookup("or_eq",NULL,alfop);
 id_lookup("pragma",NULL,if_like);
 id_lookup("private",NULL,public_like);
 id_lookup("protected",NULL,public_like);
@@ -651,6 +660,8 @@ id_lookup("void",NULL,raw_int);
 id_lookup("volatile",NULL,const_like);
 id_lookup("wchar_t",NULL,raw_int);
 id_lookup("while",NULL,for_like);
+id_lookup("xor",NULL,alfop);
+id_lookup("xor_eq",NULL,alfop);
 res_wd_end=name_ptr;
 id_lookup("TeX",NULL,custom);
 id_lookup("make_pair",NULL,func_template);
@@ -2078,8 +2089,11 @@ end of \.\# line&|rproc|:  |force|&no\cr
 identifier&|exp|: \.{\\\\\{}identifier with underlines and
              dollar signs quoted\.\}&maybe\cr
 \.{and}&|alfop|: \stars&yes\cr
+\.{and\_eq}&|alfop|: \stars&yes\cr
 \.{asm}&|sizeof_like|: \stars&maybe\cr
 \.{auto}&|int_like|: \stars&maybe\cr
+\.{bitand}&|alfop|: \stars&yes\cr
+\.{bitor}&|alfop|: \stars&yes\cr
 \.{bool}&|raw_int|: \stars&maybe\cr
 \.{break}&|case_like|: \stars&maybe\cr
 \.{case}&|case_like|: \stars&maybe\cr
@@ -2087,6 +2101,7 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{char}&|raw_int|: \stars&maybe\cr
 \.{class}&|struct_like|: \stars&maybe\cr
 \.{clock\_t}&|raw_int|: \stars&maybe\cr
+\.{compl}&|alfop|: \stars&yes\cr
 \.{const}&|const_like|: \stars&maybe\cr
 \.{const\_cast}&|raw_int|: \stars&maybe\cr
 \.{continue}&|case_like|: \stars&maybe\cr
@@ -2126,9 +2141,13 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{mutable}&|int_like|: \stars&maybe\cr
 \.{namespace}&|struct_like|: \stars&maybe\cr
 \.{new}&|new_like|: \stars&maybe\cr
+\.{not}&|alfop|: \stars&yes\cr
+\.{not\_eq}&|alfop|: \stars&yes\cr
 \.{NULL}&|exp|: \.{\\NULL}&yes\cr
 \.{offsetof}&|raw_int|: \stars&maybe\cr
 \.{operator}&|operator_like|: \stars&maybe\cr
+\.{or}&|alfop|: \stars&yes\cr
+\.{or\_eq}&|alfop|: \stars&yes\cr
 \.{pragma}&|if_like|: \stars&maybe\cr
 \.{private}&|public_like|: \stars&maybe\cr
 \.{protected}&|public_like|: \stars&maybe\cr
@@ -2166,6 +2185,8 @@ identifier&|exp|: \.{\\\\\{}identifier with underlines and
 \.{volatile}&|const_like|: \stars&maybe\cr
 \.{wchar\_t}&|raw_int|: \stars&maybe\cr
 \.{while}&|for_like|: \stars&maybe\cr
+\.{xor}&|alfop|: \stars&yes\cr
+\.{xor\_eq}&|alfop|: \stars&yes\cr
 \.{@@,}&|insert|: \.{\\,}&maybe\cr
 \.{@@\v}&|insert|:  |opt| \.0&maybe\cr
 \.{@@/}&|insert|:  |force|&no\cr
@@ -4062,11 +4083,7 @@ while (!input_has_ended) @<Translate the current section@>;
 sections of a section, e.g., between the \TEX/ and definition parts if both
 are nonempty. This puts a little white space between the parts when they are
 printed. However, we don't want \.{\\Y} to occur between two definitions
-within a single section.
-In other words, if \TEX/ section is non-empty, we need \.{\\Y} to appear
-only before first \.{@@d} or \.{@@f}
-(no \.{@@s}).
-The variables |out_line| or |out_ptr| will
+within a single section. The variables |out_line| or |out_ptr| will
 change if a section is non-null, so the following macros `|save_position|'
 and `|emit_space_if_needed|' are able to handle the situation:
 
