@@ -341,7 +341,7 @@ formatted.
 @d abnormal(a) (a->ilk>typewriter) /* tells if a name is special */
 @d func_template 4 /* identifiers that can be followed by optional template */
 @d custom 5 /* identifiers with user-given control sequence */
-@d alfop 22 /* alphabetic operators like \&{and} or \&{not\_eq} */
+@d alfop 22 /* alphabetic operators like `\.{and}' or `\.{not\_eq}' */
 @d else_like 26 /* \&{else} */
 @d public_like 40 /* \&{public}, \&{private}, \&{protected} */
 @d operator_like 41 /* \&{operator} */
