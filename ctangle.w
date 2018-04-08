@@ -46,6 +46,7 @@ under the terms of a permission notice identical to this one.
 }
 \let\lheader\rheader
 \let\maybe=\iftrue
+@s not_eq normal @q unreserve a C++ keyword @>
 
 @** Introduction.
 This is the \.{CTANGLE} program by Silvio Levy and Donald E. Knuth,
@@ -161,6 +162,8 @@ char *id_loc; /* just after the current identifier in the buffer */
 @d xisalpha(c) (isalpha(c)&&((eight_bits)c<0200))
 @d xisdigit(c) (isdigit(c)&&((eight_bits)c<0200))
 @d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
+@d xislower(c) (islower(c)&&((eight_bits)c<0200))
+@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
 @d xisxdigit(c) (isxdigit(c)&&((eight_bits)c<0200))
 
 @<Common code...@>=
