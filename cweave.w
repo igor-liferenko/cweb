@@ -4083,7 +4083,11 @@ while (!input_has_ended) @<Translate the current section@>;
 sections of a section, e.g., between the \TEX/ and definition parts if both
 are nonempty. This puts a little white space between the parts when they are
 printed. However, we don't want \.{\\Y} to occur between two definitions
-within a single section. The variables |out_line| or |out_ptr| will
+within a single section.
+In other words, if \TEX/ section is non-empty, we need \.{\\Y} to appear
+only before first \.{@@d} or \.{@@f}
+(no \.{@@s}).
+The variables |out_line| or |out_ptr| will
 change if a section is non-null, so the following macros `|save_position|'
 and `|emit_space_if_needed|' are able to handle the situation:
 
