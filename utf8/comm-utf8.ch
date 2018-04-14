@@ -122,7 +122,8 @@ size_t wcsntombs(char *mbs, wchar_t *s, size_t len)
 {
   size_t n = 0;
   size_t l = 0;
-  char mb[MB_CUR_MAX];
+  char mb[MB_CUR_MAX]; /* |wctomb| does not count number of bytes
+    when first argument is |NULL| ---~this dummy array is used to work around this */
   while (l<len) {
     n+=wctomb(mbs==NULL?mb:mbs+n, *(s+l));
     l++;
