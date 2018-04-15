@@ -4,7 +4,6 @@
 #include <wchar.h>
 #include <limits.h>
 @<Include files@>@/
-#include <errno.h>
 char *encTeX[256];
 @z
 
@@ -147,7 +146,10 @@ FILE *fp; /* what file to read from */
   while (k<=wbuffer_end && (c=getwc(fp)) != WEOF && c!=L'\n')
     if ((*(k++) = c) != L' ') wlimit = k;
 
-  if (ferror(fp)) { printf("\n! getwc: %s", strerror(errno)); fatal("",""); }
+  if (ferror(fp)) {
+    printf("\n! getwc: %m");
+    fatal("","");
+  }
 
   if (buffer + wcsntombs(NULL, wbuffer, wlimit-wbuffer) > buffer_end) {
     printf("\n! multibyte buffer too small"); fatal("","");
