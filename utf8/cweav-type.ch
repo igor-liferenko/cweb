@@ -1,5 +1,5 @@
 Do not use @s to define common type names (@s puts type name to index).
-
+FIXME: does it make any difference if @s is used in limbo or in middle part?
 @x
 id_lookup("wchar_t",NULL,raw_int);
 @y
@@ -12,4 +12,7 @@ id_lookup("uint32_t",NULL,raw_int);
 id_lookup("int32_t",NULL,raw_int);
 id_lookup("cchar_t",NULL,raw_int);
 id_lookup("pid_t",NULL,raw_int);
+id_lookup("pcre2_match_data",NULL,raw_int);
+id_lookup("pcre2_code",NULL,raw_int);
+id_lookup("sigset_t",NULL,raw_int);
 @z
