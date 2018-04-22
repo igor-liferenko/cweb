@@ -20,3 +20,5 @@ see how in ~/goweb/ is solved the problem of sorting the index for unicode (256-
 also, 'translit[][]' certainly should _not_ be extended in the first
 index to 'uint32_t' for this - instead, a thin matrix with just the '@l'
 replacements for multi-byte entries should be used)
+
+why wmerge does not have limitation on input line length? (unlike cweave)
