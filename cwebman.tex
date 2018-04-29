@@ -534,8 +534,10 @@ email address in a \.{CWEB} file (e.g., \.{levy@@math.berkeley.edu}).
 Here are the codes that introduce the \TEX/ part of a section.
 
 \@\ [LTMC\to T] This denotes the beginning of a new (unstarred)
-section. Do not use end-of-line character (A tab mark or form feed = ?)
-after an \.@ sign in this case, because it will add \.{\\Y} (see cweb-git/NOTE)
+section. A tab mark or form feed character is equivalent to a space when it follows an \.@
+sign (and in most other cases).
+End-of-line character is not equivalent to a space in this case, because it
+causes an unneeded \.{\\Y} to be added in woven output.
 
 \@* [LTMC\to T] This denotes the beginning of a new starred
 section, i.e., a section that begins a new major group. The title of the new
