@@ -1479,7 +1479,7 @@ of commented-out text).
 @d c_line_write(n) fflush(active_file),fwrite(out_buf+1,sizeof(char),n,active_file)
 @d tex_putc(c) putc(c,active_file)
 @d tex_new_line putc('\n',active_file)
-@d tex_printf(s) fprintf(active_file,s)
+@d tex_printf(f,s) fprintf(active_file,f,s)
 
 @c
 void
@@ -1530,7 +1530,7 @@ tricky way so that the first line of the output file will be
 
 @<Set init...@>=
 out_ptr=out_buf+1; out_line=1; active_file=tex_file;
-*out_ptr='c'; tex_printf("\\input cwebma");
+*out_ptr='c'; tex_printf("%s", "\\input cwebma");
 
 @ When we wish to append one character |c| to the output buffer, we write
 `|out(c)|'; this will cause the buffer to be emptied if it was already
