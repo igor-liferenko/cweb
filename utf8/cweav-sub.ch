@@ -10,7 +10,6 @@ with C code, formatted in a separate run of CWEAVE on each /dev/null section.
 @y
 @<Global variables@>@/
 #include <signal.h>
-#include <sys/prctl.h>
 FILE *cw_in1;
 FILE *cw_in2;
 int pipe_read[2];
@@ -297,11 +296,8 @@ copy_TeX()
             snprintf(writefd1, 10, "%d", pipe_write1[0]);
             snprintf(writefd2, 10, "%d", pipe_write2[0]);
             snprintf(secstr, 10, "%d", section_count);
-            if (prctl(PR_SET_PDEATHSIG, SIGTERM) != -1 && /* child exits automatically if
-                                                    parent exits */
-                getppid() != 1) /* make sure that parent did not exit just before |prctl| call */
-              execl("/var/local/bin/cweave-null", "cweave-null",
-                writefd1, writefd2, secstr, (char *) NULL);
+            execl("/var/local/bin/cweave-null", "cweave-null",
+              writefd1, writefd2, secstr, (char *) NULL);
             exit(EXIT_FAILURE);
           }
           close(pipe_read[1]);
