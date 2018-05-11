@@ -23,5 +23,5 @@ replacements for multi-byte entries should be used)
 
 why wmerge does not have limitation on input line length? (unlike cweave/ctangle)
 ----------
-understand why "@s USB_StdDescriptor_Config_Header_t int" in /dev/null section in usb.w
-influences |USB_StdDescriptor_Config_Header_t| if it is used in another section
+understand why "@s ... int" in /dev/null section
+influences |...| if it is used in another section - see receive.w
