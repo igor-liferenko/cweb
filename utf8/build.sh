@@ -105,7 +105,7 @@ if ! tie -c comm-merged.ch common.w $DIR/../comm-opts.ch $DIR/../comm-out.ch $DI
   then cat build-cweb.out; exit; fi
 if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
-if ! tie -c cweav-merged.ch cweave.w $DIR/../cweav-opts.ch $DIR/../cweav-tran.ch $DIR/../cweav-pipe.ch $DIR/cweav-type.ch > build-cweb.out
+if ! tie -c cweav-merged.ch cweave.w $DIR/../cweav-opts.ch $DIR/../cweav-tran.ch $DIR/../cweav-pipe.ch $DIR/cweav-prod.ch $DIR/cweav-type.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
