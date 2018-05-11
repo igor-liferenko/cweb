@@ -22,6 +22,3 @@ index to 'uint32_t' for this - instead, a thin matrix with just the '@l'
 replacements for multi-byte entries should be used)
 
 why wmerge does not have limitation on input line length? (unlike cweave/ctangle)
-----------
-understand why "@s ... int" in /dev/null section
-influences |...| if it is used in another section - see receive.w
