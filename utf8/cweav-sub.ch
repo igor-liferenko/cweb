@@ -252,7 +252,9 @@ Do not make index entries for C-part of /dev/null sections:
 
 ------------------------------------------------
 
-TeX-part influences how section name in C-part is formed, so start output to "cweave-null"
+TeX-part influences how section name in C-part is formed
+("\B\4\X3" when TeX-part is non-empty vs "\B\X3" when TeX-part is empty),
+so start output to "cweave-null"
 with TeX-part
 @x
 copy_TeX()
