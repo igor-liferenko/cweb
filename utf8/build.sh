@@ -49,13 +49,12 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
-if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-show.ch $DIR/ctang-file.ch > build-cweb.out
+if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-show.ch $DIR/ctang-file.ch $DIR/ctang-pp.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o
 cp cweave ctangle /usr/local/bin/
-ctangle examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" wmerge.c -o /usr/local/bin/wmerge # extra
 cd /
 rm -fr /tmp/cwebbuild/
 
@@ -110,5 +109,14 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/../cweav-opts.ch $DIR/../cweav-tran.ch
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
 clang -g -o /var/local/bin/cweave-null cweave.o common.o
+cd /
+rm -fr /tmp/cwebbuild/
+
+# Build wmerge:
+rm -fr /tmp/cwebbuild/
+mkdir /tmp/cwebbuild/
+cd /tmp/cwebbuild/
+cp -r /home/user/cweb/* .
+/bin/ctangle examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" wmerge.c -o /usr/local/bin/wmerge # extra
 cd /
 rm -fr /tmp/cwebbuild/
