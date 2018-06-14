@@ -20,3 +20,5 @@ HINT: find in cweave.w code which corresponds to this extract from cwebman.tex:
     or \.{CWEAVE} won't print it correctly.
 
 See mcpp.pdf
+
+Solution: make one more program based on ctangle.w which just substitutes @d to #define, and run this program, mcpp and ctangle in a pipeline
