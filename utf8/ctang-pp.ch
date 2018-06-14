@@ -19,6 +19,4 @@ HINT: find in cweave.w code which corresponds to this extract from cwebman.tex:
     the \.\# that introduces it must be at the beginning of a line,
     or \.{CWEAVE} won't print it correctly.
 
-See mcpp.pdf
-
-Solution: make one more program based on ctangle.w which just substitutes @d to #define, and run this program, mcpp and ctangle in a pipeline
+Solution: integrate code from cppp, unifdef or sunifdef (whichever is written cleaner) directly into ctangle.w via this change-file
