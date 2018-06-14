@@ -18,3 +18,5 @@ HINT: find in cweave.w code which corresponds to this extract from cwebman.tex:
     If a \CEE/ preprocessor command is enclosed in \pb,
     the \.\# that introduces it must be at the beginning of a line,
     or \.{CWEAVE} won't print it correctly.
+
+See mcpp.pdf
