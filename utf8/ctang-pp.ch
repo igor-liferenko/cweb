@@ -5,7 +5,7 @@ For testing take example from email thread to Andreas about clang patch.
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - first process the output and only then print
 it to file (all output to file goes through below code - to see this,
-uncomment the changes to see that resulting .c file is empty)
+uncomment the changes below - the resulting .c file will be empty)
 
  @x
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
