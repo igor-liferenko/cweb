@@ -58,6 +58,10 @@ cp cweave ctangle /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
 
+# Build wmerge:
+ctangle /home/user/cweb/examples/wmerge.w $DIR/wmerge.ch /tmp/wmerge.c >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" /tmp/wmerge.c -o /usr/local/bin/wmerge
+rm /tmp/wmerge.c
+
 # Build original CWEB with minimal changes for cct and ccw:
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
@@ -111,7 +115,3 @@ clang -g -w -c cweave.c || exit
 clang -g -o /var/local/bin/cweave-null cweave.o common.o
 cd /
 rm -fr /tmp/cwebbuild/
-
-# Build wmerge:
-ctangle /home/user/cweb/examples/wmerge.w $DIR/wmerge.ch /tmp/wmerge.c >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" /tmp/wmerge.c -o /usr/local/bin/wmerge
-rm /tmp/wmerge.c
