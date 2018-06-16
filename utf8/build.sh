@@ -113,8 +113,5 @@ cd /
 rm -fr /tmp/cwebbuild/
 
 # Build wmerge:
-mkdir /tmp/cwebbuild/
-cd /tmp/cwebbuild/
-ctangle /home/user/cweb/examples/wmerge.w $DIR/wmerge.ch >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" wmerge.c -o /usr/local/bin/wmerge
-cd /
-rm -fr /tmp/cwebbuild/
+ctangle /home/user/cweb/examples/wmerge.w $DIR/wmerge.ch /tmp/wmerge.c >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" /tmp/wmerge.c -o /usr/local/bin/wmerge
+rm /tmp/wmerge.c
