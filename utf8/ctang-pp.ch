@@ -44,6 +44,13 @@ new section, decide if it must be output to file
 uncomment the changes below - the resulting .c file will be empty)
 TODO: determine the place below where a section is expanded
 
+Do this: fork + exec program which analyzes ifdefs but does not print anything to stdout;
+it reads input from pipe, when it sees character '\0', it outputs to pipe 1 or 0
+depending on whether this character would be output if output had been printed to stdout
+and this '\0' was a normal character; ctangle.w writes '\0' to pipe in the place where
+a section is about to be expanded and if it reads 0 back from pipe, it skips this section
+altogether
+
  @x
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
     C_putc(a); /* a high-bit character can occur in a string */
