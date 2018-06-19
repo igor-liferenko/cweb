@@ -1,41 +1,5 @@
-# For testing use the following C program (see real CWEB example in my emails to Scherer
-# about this issue):
-
-# int main(void)
-# {
-#   int a;
-# #if 1==0
-# #line 50 "test.c"
-# #endif
-#   a = 1;
-#   return 0;
-# }
-
-# the output of gcc -E is:
-
-# int main(void)
-# {
-#   int a;
-#
-#
-#
-#   a = 1;
-#   return 0;
-# }
-
-# and output of clang -E after applying this patch is:
-
-# int main(void)
-# {
-#   int a;
-# # 50 "test.c"
-#
-#   a = 1;
-#   return 0;
-# }
-
-
-For testing take example from email thread to Andreas about clang patch.
+For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
+block).
 
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - process everything as you go, and if you encounter
