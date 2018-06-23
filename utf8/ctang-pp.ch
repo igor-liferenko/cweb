@@ -1,6 +1,10 @@
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
 block).
 
+To understand what is going on, process test-pp.w with ctangle and then process test-pp.c
+with clang -E - you will see that false clause is omitted, and "# N ..." is omitted too
+from the false clause.
+
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - process everything as you go, and if you encounter
 new section, decide if it must be output to file
