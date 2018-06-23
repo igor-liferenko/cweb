@@ -35,11 +35,14 @@ case'\x18':
 break;
 case'\x12':
 -----------------------
-What it does is that it completely omits #if-endif block inclusively and replaces its line
-count with "# ...", which is equivalent to outputting empty line for each line between the
+What it does is that it outputs empty line for each line between the
 #if-endif inclusively. It does not look at '#line 15" directive which restores line
-numbering after expanding the section. Therefore we must output the text as-is, without
-expanding it.
+numbering after expanding the section. Therefore we must output the just the section
+name, without expanding it.
+(NOTE: if empty lines exceed a certain amount, they are replaced by a "# number ..."
+where number is line number which would be here if empty lines were not
+omittid, as in above example; but do not be confused by it - it is just an
+optimization of the preprocessor)
 
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - process everything as you go, and if you encounter
