@@ -6,6 +6,13 @@ with clang -E - you will see that false clause is omitted, and "# N ..." is omit
 from the false clause.
 This part from test-pp.c:
 --------------------
+#line 7 "test-pp.w"
+
+int done= 0;
+int main(void)
+{
+char c= '\x1a';
+switch(c){
 case'\x18':
 #if 1==0
 /*2:*/
@@ -21,10 +28,18 @@ done= 1;
 break;
 case'\x12':
 --------------------
-after "clang -E" is turned into this (TODO: check after reinstall with original clang):
+after "clang -E" is turned into this:
 -----------------------
-...
+case'\x18':
+# 25 "test-pp.w"
+break;
+case'\x12':
 -----------------------
+What it does is that it completely omits #if-endif block inclusively and replaces its line
+count with "# ...", which is equivalent to outputting empty line for each line between the
+#if-endif inclusively. It does not look at '#line 15" directive which restores line
+numbering after expanding the section. Therefore we must output the text as-is, without
+expanding it.
 
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - process everything as you go, and if you encounter
