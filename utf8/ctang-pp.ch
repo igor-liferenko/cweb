@@ -4,6 +4,27 @@ block).
 To understand what is going on, process test-pp.w with ctangle and then process test-pp.c
 with clang -E - you will see that false clause is omitted, and "# N ..." is omitted too
 from the false clause.
+This part from test-pp.c:
+--------------------
+case'\x18':
+#if 1==0
+/*2:*/
+#line 3 "test-pp.w"
+
+(void)c;
+
+/*:2*/
+#line 15 "test-pp.w"
+
+done= 1;
+#endif
+break;
+case'\x12':
+--------------------
+after "clang -E" is turned into this (TODO: check after reinstall with original clang):
+-----------------------
+...
+-----------------------
 
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - process everything as you go, and if you encounter
