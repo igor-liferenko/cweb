@@ -1,10 +1,7 @@
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
 block).
 
-To understand what is going on, process test-pp.w with ctangle and then process test-pp.c
-with clang -E - you will see that false clause is omitted, and "# N ..." is omitted too
-from the false clause.
-This part from test-pp.c:
+As the result of this change-file, this part from test-pp.c:
 --------------------
 #line 7 "test-pp.w"
 
@@ -28,21 +25,23 @@ done= 1;
 break;
 case'\x12':
 --------------------
-after "clang -E" is turned into this:
+must be this:
 -----------------------
+#line 7 "test-pp.w"
+
+int done= 0;
+int main(void)
+{
+char c= '\x1a';
+switch(c){
 case'\x18':
-# 25 "test-pp.w"
+#if 1==0
+
+done= 1;
+#endif
 break;
 case'\x12':
 -----------------------
-What it does is that it outputs empty line for each line between the
-#if-endif inclusively. It does not look at '#line 15" directive which restores line
-numbering after expanding the section. Therefore we must output the just the section
-name, without expanding it.
-(NOTE: if empty lines exceed a certain amount, they are replaced by a "# number ..."
-where number is line number which would be here if empty lines were not
-omittid, as in above example; but do not be confused by it - it is just an
-optimization of the preprocessor)
 
 Solution: take code from cppp, unifdef or sunifdef (whichever is written
 cleaner) and put it below - process everything as you go, and if you encounter
