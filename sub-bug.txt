@@ -7,3 +7,7 @@ Also, this happens:
 
 @t\hskip2.5pt@> @=PROGMEM@> = { @t\1@> @/
 @t @=PROGMEM@> = { @t @/
+
+CONCLUSION: in cweav-sub.ch there is some code that when it sees @t it starts skipping
+
+see NOTE at the end of README how to debug cweav-sub.ch
