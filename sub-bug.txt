@@ -3,6 +3,6 @@ When myprintf macro is redefined as in README, "cweave -bhp sub-bug" gives this:
 @ @(/dev/null@>=
 int @t x;
 
-CONCLUSION: in cweav-sub.ch there is some code that when it sees @t it starts skipping
+CONCLUSION: in cweav-sub.ch there is absent code that calls myprint between @t and @>
 
 see NOTE at the end of README how to debug cweav-sub.ch
