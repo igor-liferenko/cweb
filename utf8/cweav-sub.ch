@@ -220,6 +220,20 @@ if (c=='@@') {
 @z
 
 @x
+  while (*loc!='@@') loc++;
+@y
+  while (*loc!='@@') { if (print) myprintf("%c",*loc); loc++; }
+@z
+
+@x
+    if (*loc=='@@'&&loc<=limit) {loc++; goto false_alarm;}
+@y
+    if (print) myprintf("%c",*(loc-1));
+    if (*loc=='@@'&&loc<=limit) { if (print) myprintf("%c",*loc); loc++; goto false_alarm; }
+    if (print) myprintf("%c",*loc);
+@z
+
+@x
 @<Scan a verbatim string@>= {
   id_first=loc++; *(limit+1)='@@'; *(limit+2)='>';
   while (*loc!='@@' || *(loc+1)!='>') loc++;
