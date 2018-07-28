@@ -5,6 +5,8 @@ This change-file does not index C code in /dev/null sections (/dev/null is used 
 CTANGLE effectively ignores it by default) and replaces formatted C code
 with C code, formatted in a separate run of CWEAVE on each /dev/null section.
 
+We use two identical files, because CWEAVE (i.e., cweave-null) reads each file twice.
+
 @x
 @<Global variables@>@/
 @y
