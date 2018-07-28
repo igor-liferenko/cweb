@@ -60,6 +60,9 @@ https://www.uninformativ.de/blog/postings/2017-02-11/0/POSTING-en.html
 then call mcpp on /dev/fd/xx (as said in the article) and save its output to
 another in-memory file and use it in pase three.
 
+DO THIS: add phase_three to ctangle which just calls phase_two and see
+what will happen
+
 @x
 @<Global variables@>@/
 @y
