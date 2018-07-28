@@ -54,7 +54,7 @@ to them - system header files are just skipped, as required):
 mcpp -P -W 0 -I- file.c
 
 call mcpp on partial file? - check
-In the following changes instead of stdout use in-memory file like here
+In the following changes instead of stderr use in-memory file like here
 https://www.uninformativ.de/blog/postings/2017-02-11/0/POSTING-en.html
 
 @x
@@ -63,7 +63,7 @@ https://www.uninformativ.de/blog/postings/2017-02-11/0/POSTING-en.html
 @y
   if (out_state==verbatim && a!=string && a!=constant && a!='\n') {
     C_putc(a); /* a high-bit character can occur in a string */
-    putc(a,stdout);
+    putc(a,stderr);
   }
 @z
 
@@ -75,7 +75,7 @@ flush_buffer() /* writes one line to output file */
 flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
-  putc('\n',stdout);
+  putc('\n',stderr);
 @z
 
 @x
@@ -89,7 +89,7 @@ flush_buffer() /* writes one line to output file */
           C_putc(a); /* a high-bit character can occur in a string */
 @y
       C_printf("%s","#define ");
-      fprintf(stdout,"%s","#define ");
+      fprintf(stderr,"%s","#define ");
       out_state=normal;
       protect=1; /* newlines should be preceded by |'\\'| */
       while (cur_byte<cur_end) {
@@ -97,7 +97,7 @@ flush_buffer() /* writes one line to output file */
         if (cur_byte==cur_end && a=='\n') break; /* disregard a final newline */
         if (out_state==verbatim && a!=string && a!=constant && a!='\n') {
           C_putc(a); /* a high-bit character can occur in a string */
-          putc(a,stdout);
+          putc(a,stderr);
         }
 @z
 
@@ -138,31 +138,31 @@ restart:
     switch (cur_char) {
       case '\n': if (protect && out_state!=verbatim) {
                    C_putc(' ');
-                   putc(' ',stdout);
+                   putc(' ',stderr);
                  }
         if (protect || out_state==verbatim) {
           C_putc('\\');
-          putc('\\',stdout);
+          putc('\\',stderr);
         }
         flush_buffer(); if (out_state!=verbatim) out_state=normal; break;
       @/@t\4@>@<Case of an identifier@>;
       @/@t\4@>@<Case of a section number@>;
       @/@t\4@>@<Cases like \.{!=}@>;
       case '=': case '>': C_putc(cur_char); C_putc(' ');
-                          putc(cur_char,stdout); putc(' ',stdout);
+                          putc(cur_char,stderr); putc(' ',stderr);
         out_state=normal; break;
       case join: out_state=unbreakable; break;
       case constant: if (out_state==verbatim) {
           out_state=num_or_id; break;
         }
-        if(out_state==num_or_id) C_putc(' '); putc(' ',stdout);
+        if(out_state==num_or_id) C_putc(' '); putc(' ',stderr);
                                  out_state=verbatim; break;
       case string: if (out_state==verbatim) out_state=normal;
         else out_state=verbatim; break;
-      case '/': C_putc('/'); putc('/',stdout); out_state=post_slash; break;
-      case '*': if (out_state==post_slash) C_putc(' '); putc(' ',stdout);
+      case '/': C_putc('/'); putc('/',stderr); out_state=post_slash; break;
+      case '*': if (out_state==post_slash) C_putc(' '); putc(' ',stderr);
         /* fall through */
-      default: C_putc(cur_char); putc(cur_char,stdout); out_state=normal; break;
+      default: C_putc(cur_char); putc(cur_char,stderr); out_state=normal; break;
     }
 }
 @z
@@ -188,37 +188,37 @@ case minus_gt_ast: C_putc('-'); C_putc('>'); C_putc('*'); out_state=normal;
     break;
 @y
 @ @<Cases like \.{!=}@>=
-case plus_plus: C_putc('+'); C_putc('+'); putc('+',stdout);putc('+',stdout);
+case plus_plus: C_putc('+'); C_putc('+'); putc('+',stderr);putc('+',stderr);
                 out_state=normal; break;
-case minus_minus: C_putc('-'); C_putc('-'); putc('-',stdout); putc('-',stdout);
+case minus_minus: C_putc('-'); C_putc('-'); putc('-',stderr); putc('-',stderr);
                   out_state=normal; break;
-case minus_gt: C_putc('-'); C_putc('>'); putc('-',stdout);putc('>',stdout);
+case minus_gt: C_putc('-'); C_putc('>'); putc('-',stderr);putc('>',stderr);
                out_state=normal; break;
-case gt_gt: C_putc('>'); C_putc('>'); putc('>',stdout);putc('>',stdout);
+case gt_gt: C_putc('>'); C_putc('>'); putc('>',stderr);putc('>',stderr);
             out_state=normal; break;
-case eq_eq: C_putc('='); C_putc('='); putc('=',stdout);putc('=',stdout);
+case eq_eq: C_putc('='); C_putc('='); putc('=',stderr);putc('=',stderr);
             out_state=normal; break;
-case lt_lt: C_putc('<'); C_putc('<');putc('<',stdout);putc('<',stdout);
+case lt_lt: C_putc('<'); C_putc('<');putc('<',stderr);putc('<',stderr);
             out_state=normal; break;
-case gt_eq: C_putc('>'); C_putc('=');putc('>',stdout);putc('=',stdout);
+case gt_eq: C_putc('>'); C_putc('=');putc('>',stderr);putc('=',stderr);
             out_state=normal; break;
-case lt_eq: C_putc('<'); C_putc('=');putc('<',stdout);putc('=',stdout);
+case lt_eq: C_putc('<'); C_putc('=');putc('<',stderr);putc('=',stderr);
             out_state=normal; break;
-case not_eq: C_putc('!'); C_putc('=');putc('!',stdout);putc('=',stdout);
+case not_eq: C_putc('!'); C_putc('=');putc('!',stderr);putc('=',stderr);
              out_state=normal; break;
-case and_and: C_putc('&'); C_putc('&');putc('&',stdout);putc('&',stdout);
+case and_and: C_putc('&'); C_putc('&');putc('&',stderr);putc('&',stderr);
               out_state=normal; break;
-case or_or: C_putc('|'); C_putc('|');putc('|',stdout);putc('|',stdout);
+case or_or: C_putc('|'); C_putc('|');putc('|',stderr);putc('|',stderr);
             out_state=normal; break;
-case dot_dot_dot: C_putc('.'); C_putc('.'); C_putc('.');putc('.',stdout);
-                  putc('.',stdout);putc('.',stdout); out_state=normal;
+case dot_dot_dot: C_putc('.'); C_putc('.'); C_putc('.');putc('.',stderr);
+                  putc('.',stderr);putc('.',stderr); out_state=normal;
     break;
-case colon_colon: C_putc(':'); C_putc(':');putc(':',stdout);
-                  putc(':',stdout); out_state=normal; break;
-case period_ast: C_putc('.'); C_putc('*');putc('.',stdout);
-                 putc('*',stdout); out_state=normal; break;
-case minus_gt_ast: C_putc('-'); C_putc('>'); C_putc('*');putc('-',stdout);
-                   putc('>',stdout);putc('*',stdout); out_state=normal;
+case colon_colon: C_putc(':'); C_putc(':');putc(':',stderr);
+                  putc(':',stderr); out_state=normal; break;
+case period_ast: C_putc('.'); C_putc('*');putc('.',stderr);
+                 putc('*',stderr); out_state=normal; break;
+case minus_gt_ast: C_putc('-'); C_putc('>'); C_putc('*');putc('-',stderr);
+                   putc('>',stderr);putc('*',stderr); out_state=normal;
     break;
 @z
 
@@ -233,14 +233,14 @@ case identifier:
 case identifier:
   if (out_state==num_or_id) {
     C_putc(' ');
-    putc(' ',stdout);
+    putc(' ',stderr);
   }
   j=(cur_val+name_dir)->byte_start;
   k=(cur_val+name_dir+1)->byte_start;
   while (j<k) {
     if ((unsigned char)(*j)<0200) {
       C_putc(*j);
-      putc(*j,stdout);
+      putc(*j,stderr);
     }
 @z
 
@@ -248,7 +248,7 @@ case identifier:
       C_printf("%s",translit[z-0200]);
 @y
       C_printf("%s",translit[z-0200]);
-      fprintf(stdout,"%s",translit[z-0200]);
+      fprintf(stderr,"%s",translit[z-0200]);
 @z
 
 @x
@@ -279,11 +279,11 @@ case section_number:
 case section_number:
   if (cur_val>0) {
     C_printf("/*%d:*/",cur_val);
-    fprintf(stdout,"/*%d:*/",cur_val);
+    fprintf(stderr,"/*%d:*/",cur_val);
   }
   else if(cur_val<0) {
     C_printf("/*:%d*/",-cur_val);
-    fprintf(stdout,"/*:%d*/",-cur_val);
+    fprintf(stderr,"/*:%d*/",-cur_val);
   }
   else if (protect) {
     cur_byte +=4; /* skip line number and file name */
@@ -294,7 +294,7 @@ case section_number:
     a=0400* *cur_byte++;
     a+=*cur_byte++; /* gets the line number */
     C_printf("\n#line %d \"",a);
-    fprintf(stdout,"\n#line %d \"",a);
+    fprintf(stderr,"\n#line %d \"",a);
 @:line}{\.{\#line}@>
     cur_val=*cur_byte++;
     cur_val=0400*(cur_val-0200)+ *cur_byte++; /* points to the file name */
@@ -302,13 +302,13 @@ case section_number:
          j<k; j++) {
       if (*j=='\\' || *j=='"') {
         C_putc('\\');
-        putc('\\',stdout);
+        putc('\\',stderr);
       }
       C_putc(*j);
-      putc(*j,stdout);
+      putc(*j,stderr);
     }
     C_printf("%s","\"\n");
-    fprintf(stdout,"%s","\"\n");
+    fprintf(stderr,"%s","\"\n");
   }
   break;
 @z
