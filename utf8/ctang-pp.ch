@@ -49,13 +49,16 @@ file content up till current?) together with the section name, and in phase thre
 now in phase two, but before each section expansion grep the identifier in the
 file processed with mcpp and decide if the section must be expanded.
 
+NOTE: calling mcpp on a partial file (to avoid phase three) does not work
+
 Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
 to them - system header files are just skipped, as required):
 mcpp -P -W 0 -I- file.c
 
-call mcpp on partial file? - check
 In the following changes instead of stderr use in-memory file like here
 https://www.uninformativ.de/blog/postings/2017-02-11/0/POSTING-en.html
+then call mcpp on /dev/fd/xx (as said in the article) and save its output to
+another in-memory file and use it in pase three.
 
 @x
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
