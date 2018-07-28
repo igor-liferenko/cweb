@@ -49,6 +49,10 @@ file content up till current?) together with the section name, and in phase thre
 now in phase two, but before each section expansion grep the identifier in the
 file processed with mcpp and decide if the section must be expanded.
 
+Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
+to them - system header files are just skipped, as required):
+mcpp -P -W 0 -I- file.c
+
 HINT: all output to file goes through below code - to see this,
 uncomment the changes below - the resulting .c file will be empty
 TODO: determine the place below where a section is expanded
