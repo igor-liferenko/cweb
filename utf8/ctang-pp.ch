@@ -43,19 +43,15 @@ break;
 case'\x12':
 -----------------------
 
-Solution: take code from cppp, unifdef or sunifdef (whichever is written
-cleaner) and put it below - process everything as you go, and if you encounter
-new section, decide if it must be output to file
-(all output to file goes through below code - to see this,
-uncomment the changes below - the resulting .c file will be empty)
-TODO: determine the place below where a section is expanded
+Solution: use three phases, instead of two. In phase two do like is now, but output to
+an in-memory file and process it with mcpp, and somehow store identifier (a hash of
+file content up till current?) together with the section name, and in phase three do the same what is
+now in phase two, but before each section expansion grep the identifier in the
+file processed with mcpp and decide if the section must be expanded.
 
-Do this: fork + exec program which analyzes ifdefs but does not print anything to stdout;
-it reads input from pipe, when it sees character '\0', it outputs to pipe 1 or 0
-depending on whether this character would be output if output had been printed to stdout
-and this '\0' was a normal character; ctangle.w writes '\0' to pipe in the place where
-a section is about to be expanded and if it reads 0 back from pipe, it skips this section
-altogether
+HINT: all output to file goes through below code - to see this,
+uncomment the changes below - the resulting .c file will be empty
+TODO: determine the place below where a section is expanded
 
  @x
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
