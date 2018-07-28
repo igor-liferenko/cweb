@@ -155,7 +155,10 @@ restart:
       case constant: if (out_state==verbatim) {
           out_state=num_or_id; break;
         }
-        if(out_state==num_or_id) C_putc(' '); putc(' ',stderr);
+        if (out_state==num_or_id) {
+          C_putc(' ');
+           putc(' ',stderr);
+         }
                                  out_state=verbatim; break;
       case string: if (out_state==verbatim) out_state=normal;
         else out_state=verbatim; break;
