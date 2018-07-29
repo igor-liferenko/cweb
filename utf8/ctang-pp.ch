@@ -43,13 +43,11 @@ break;
 case'\x12':
 -----------------------
 
-Solution: use three phases, instead of two. In phase two do like is now, but output to
-an in-memory file and process it with mcpp, and somehow store identifier (a hash of
-file content up till current?) together with the section name, and in phase three do the same what is
-now in phase two, but before each section expansion grep the identifier in the
-file processed with mcpp and decide if the section must be expanded.
-
-NOTE: calling mcpp on a partial file (to avoid phase three) does not work
+Solution: use three phases, instead of two. phase_three() is almost the same
+as phase_two(). At the beginning of phase three
+process mcpp-XXXXXX file with mcpp, and save its output to analogous in-memory file.
+In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/, and in phase three
+grep some-bizarre-stringN in the output of mcpp before deciding if section N must be expanded.
 
 Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
 to them - system header files are just skipped, as required):
@@ -69,13 +67,28 @@ what will happen
 @<Global variables@>@/
 #include <fcntl.h> /* |O_WRONLY| */
 FILE *cpp;
+int cppfd;
 @z
 
 @x
   @<Set initial values@>;
 @y
   @<Set initial values@>;
-  cpp = fdopen(open("/dev/null", O_WRONLY), "w"); /* here is output to preprocessor */
+  const char tmpl[] = "/mcpp-XXXXXX";
+  const char *path;
+  char *name;
+  path = getenv("XDG_RUNTIME_DIR"); /* stored in volatile memory instead of a persistent storage
+                                       device */
+//  if (path == NULL) return 0;
+  name = malloc(strlen(path) + sizeof tmpl);
+//  if (name == NULL) return 0;
+  strcat(strcpy(name, path), tmpl);
+  cppfd = mkstemp(name);
+  if (fd != -1)
+    unlink(name); /* will be deleted automatically when ctangle exits */
+  free(name);
+//  if (fd == -1) return 0;
+  cpp = fdopen(cppfd, "w");
 @z
 
 @x
