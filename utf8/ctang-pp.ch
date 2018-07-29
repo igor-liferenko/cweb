@@ -46,7 +46,8 @@ case'\x12':
 Solution: use three phases, instead of two. phase_three() is almost the same
 as phase_two(). At the beginning of phase three
 process mcpp-XXXXXX file with mcpp, and save its output to analogous in-memory file.
-In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/, and in phase three
+In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/
+(see "case section_number" below), and in phase three
 grep some-bizarre-stringN in the output of mcpp before deciding if section N must be expanded.
 
 Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
@@ -58,7 +59,10 @@ https://www.uninformativ.de/blog/postings/2017-02-11/0/POSTING-en.html
 then call mcpp on /dev/fd/xx (as said in the article) and save its output to
 another in-memory file and use it in pase three.
 
-DO THIS: add phase_three to ctangle which just calls phase_two and see
+DO THIS: change C_putc to myputc and remove putc, change C_printf
+to myprintf and remove fprintf, and add two functions: myputc() and
+myprintf() in which call C_putc+putc and C_printf+fprintf (if phase==2);
+add phase_three to ctangle which just calls phase_two and see
 what will happen
 
 @x
