@@ -54,11 +54,6 @@ Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors
 to them - system header files are just skipped, as required):
 mcpp -P -W 0 -I- file.c
 
-In the following changes instead of stderr use in-memory file like here
-https://www.uninformativ.de/blog/postings/2017-02-11/0/POSTING-en.html
-then call mcpp on /dev/fd/xx (as said in the article) and save its output to
-another in-memory file and use it in pase three.
-
 DO THIS: change C_putc to myputc and remove putc, change C_printf
 to myprintf and remove fprintf, and add two functions: myputc() and
 myprintf() in which call C_putc+putc and C_printf+fprintf (if phase==2);
@@ -88,10 +83,10 @@ int cppfd;
 //  if (name == NULL) return 0;
   strcat(strcpy(name, path), tmpl);
   cppfd = mkstemp(name);
-  if (fd != -1)
+  if (cppfd != -1)
     unlink(name); /* will be deleted automatically when ctangle exits */
   free(name);
-//  if (fd == -1) return 0;
+//  if (cppfd == -1) return 0;
   cpp = fdopen(cppfd, "w");
 @z
 
