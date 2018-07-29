@@ -52,7 +52,7 @@ grep some-bizarre-stringN in the output of mcpp before deciding if section N mus
 
 Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
 to them - system header files are just skipped, as required):
-mcpp -P -W 0 -I- file.c
+mcpp -C -P -W 0 -I- file.c
 
 DO THIS: change C_putc to myputc and remove putc, change C_printf
 to myprintf and remove fprintf, and add two functions: myputc() and
