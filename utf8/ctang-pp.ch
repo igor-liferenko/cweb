@@ -45,10 +45,14 @@ case'\x12':
 
 Solution: use three phases, instead of two. phase_three() is almost the same
 as phase_two(). At the beginning of phase three
-process cpp-XXXXXX file with sunifdef or coan, and save its output to analogous in-memory file.
+process mcpp-XXXXXX file with mcpp, and save its output to analogous in-memory file.
 In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/
 (see "case section_number" below), and in phase three
-grep some-bizarre-stringN in the output of cpp before deciding if section N must be expanded.
+grep some-bizarre-stringN in the output of mcpp before deciding if section N must be expanded.
+
+Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
+to them - system header files are just skipped, as required):
+mcpp -P -W 0 -I- file.c
 
 DO THIS: change C_putc to myputc and remove putc, change C_printf
 to myprintf and remove fprintf, and add two functions: myputc() and
@@ -69,7 +73,7 @@ int cppfd;
   @<Set initial values@>;
 @y
   @<Set initial values@>;
-  const char tmpl[] = "/cpp-XXXXXX";
+  const char tmpl[] = "/mcpp-XXXXXX";
   const char *path;
   char *name;
   path = getenv("XDG_RUNTIME_DIR"); /* stored in volatile memory instead of a persistent storage
