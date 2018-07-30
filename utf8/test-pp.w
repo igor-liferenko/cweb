@@ -11,7 +11,7 @@ int main(void)
   char c = '\x1a';
   switch (c) {
 	case '\x18': /* C-x */
-#if 1==0
+#if 0
 		@<Remove lock and save cursor@>@;
 		done = 1; /* quit without saving */
 #endif
