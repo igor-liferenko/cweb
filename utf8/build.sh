@@ -59,7 +59,7 @@ cd /
 rm -fr /tmp/cwebbuild/
 
 # Build wmerge:
-ctangle /home/user/cweb/examples/wmerge.w $DIR/wmerge.ch /tmp/wmerge.c >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" /tmp/wmerge.c -o /usr/local/bin/wmerge
+/bin/ctangle /home/user/cweb/examples/wmerge.w $DIR/wmerge.ch /tmp/wmerge.c >/dev/null && clang -g -w -DCWEBINPUTS=\"/home/user/0000-git/cweb\" /tmp/wmerge.c -o /usr/local/bin/wmerge
 rm /tmp/wmerge.c
 
 # Build original CWEB with minimal changes for cct and ccw:
