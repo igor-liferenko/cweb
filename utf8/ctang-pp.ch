@@ -54,10 +54,7 @@ Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors
 to them - system header files are just skipped, as required):
 mcpp -C -P -W 0 -I- file.c
 
-DO THIS: change C_putc to myputc and remove putc, change C_printf
-to myprintf and remove fprintf, and add two functions: myputc() and
-myprintf() in which call C_putc+putc and C_printf+fprintf (if phase==2);
-add phase_three to ctangle which just calls phase_two and see
+DO THIS: add phase_three to ctangle which just calls phase_two and see
 what will happen
 
 @x
@@ -67,6 +64,19 @@ what will happen
 #include <fcntl.h> /* |O_WRONLY| */
 FILE *cpp;
 int cppfd;
+void myprintf(char *msg, ...)
+{
+  va_list args;
+  va_start(args, msg);
+  vfprintf(C_file, msg, args);
+  if (phase==2) vfprintf(cpp, msg, args);
+  va_end(args);
+}
+void myputc(int c)
+{
+  putc(c,C_file);
+  if (phase==2) putc(c,cpp);
+}
 @z
 
 @x
