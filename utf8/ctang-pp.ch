@@ -61,21 +61,16 @@ what will happen
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-#include <fcntl.h> /* |O_WRONLY| */
 FILE *cpp;
-int cppfd;
-void myprintf(char *msg, ...)
+void myprintf(char *msg, char *s)
 {
-  va_list args;
-  va_start(args, msg);
-  vfprintf(C_file, msg, args);
-  if (phase==2) vfprintf(cpp, msg, args);
-  va_end(args);
+  fprintf(C_file, msg, s);
+  fprintf(cpp, msg, s);
 }
 void myputc(int c)
 {
   putc(c,C_file);
-  if (phase==2) putc(c,cpp);
+  putc(c,cpp);
 }
 @z
 
@@ -92,7 +87,7 @@ void myputc(int c)
   name = malloc(strlen(path) + sizeof tmpl);
 //  if (name == NULL) return 0;
   strcat(strcpy(name, path), tmpl);
-  cppfd = mkstemp(name);
+  int cppfd = mkstemp(name);
   if (cppfd != -1)
     unlink(name); /* will be deleted automatically when ctangle exits */
   free(name);
