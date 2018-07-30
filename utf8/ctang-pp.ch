@@ -65,12 +65,12 @@ FILE *cpp;
 void myprintf(char *msg, char *s)
 {
   fprintf(C_file, msg, s);
-  fprintf(cpp, msg, s);
+  if (phase==2) fprintf(cpp, msg, s);
 }
 void myputc(int c)
 {
   putc(c,C_file);
-  putc(c,cpp);
+  if (phase==2) putc(c,cpp);
 }
 @z
 
