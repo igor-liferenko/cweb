@@ -5,7 +5,9 @@ This change-file does not index C code in /dev/null sections (/dev/null is used 
 CTANGLE effectively ignores it by default) and replaces formatted C code
 with C code, formatted in a separate run of CWEAVE on each /dev/null section.
 
-We use two identical files, because CWEAVE (i.e., cweave-null) reads each file twice. Note, that all file is stored in a pipe. This works because /dev/null-sections are small. Maybe do it via an in-memory file instead, like in ctang-pp.ch.
+We use two identical files, because CWEAVE (i.e., cweave-null) reads each file twice. Note, that all file is stored in a pipe. This works because /dev/null-sections are small. Maybe do it via an in-memory file instead, like in ctang-pp.ch (here the situation is different from
+ctang-pp.ch that in ctang-pp.ch output of ctangle is used, whereas here input of cweave
+is used).
 
 @x
 @<Global variables@>@/
