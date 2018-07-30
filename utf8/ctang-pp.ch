@@ -43,18 +43,15 @@ break;
 case'\x12':
 -----------------------
 
-Solution: use three phases, instead of two. phase_three() is almost the same
-as phase_two(). At the beginning of phase three do "fflush(cpp); phase=3;" and
+Solution: use three phases, instead of two. phase three is the same
+as phase two. At the beginning of phase three do "fflush(C_file); phase=3;" and
 process mcpp-XXXXXX file with mcpp, and save its output to analogous in-memory file.
 In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/, and in phase three
-grep some-bizarre-stringN in the output of mcpp before deciding if section N must be expanded.
+grep some-bizarre-stringN in the output of mcpp before deciding if section N must be gobbled.
 
 Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
 to them - system header files are just skipped, as required):
 mcpp -C -P -W 0 -I- file.c
-
-DO THIS: add phase_three to ctangle which just calls phase_two and see
-what will happen
 
 @x
 @<Global variables@>@/
