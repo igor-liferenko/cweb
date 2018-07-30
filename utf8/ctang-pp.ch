@@ -44,7 +44,7 @@ case'\x12':
 -----------------------
 
 Solution: use three phases, instead of two. phase_three() is almost the same
-as phase_two(). At the beginning of phase three do fflush(cpp) and
+as phase_two(). At the beginning of phase three do "fflush(cpp); phase=3;" and
 process mcpp-XXXXXX file with mcpp, and save its output to analogous in-memory file.
 In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/
 (see "case section_number" below), and in phase three
