@@ -46,8 +46,7 @@ case'\x12':
 Solution: use three phases, instead of two. phase_three() is almost the same
 as phase_two(). At the beginning of phase three do "fflush(cpp); phase=3;" and
 process mcpp-XXXXXX file with mcpp, and save its output to analogous in-memory file.
-In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/
-(see "case section_number" below), and in phase three
+In phase two output /*some-bizarre-stringN*:/ instead of /*N:*/, and in phase three
 grep some-bizarre-stringN in the output of mcpp before deciding if section N must be expanded.
 
 Use this command ("2>/dev/null" is to ignore "Can't open include file..." errors - do not pay attention
@@ -293,8 +292,10 @@ case section_number:
   break;
 @y
 case section_number:
-  if (cur_val>0)
-    myprintf("/*%d:*/",cur_val);
+  if (cur_val>0) {
+    if (phase == 2) myprintf("/*some-bizarre-string%d:*/",cur_val);
+    else myprintf("/*%d:*/",cur_val);
+  }
   else if(cur_val<0)
     myprintf("/*:%d*/",-cur_val);
   else if (protect) {
