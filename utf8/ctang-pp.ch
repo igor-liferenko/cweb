@@ -11,7 +11,7 @@ int main(void)
 char c= '\x1a';
 switch(c){
 case'\x18':
-#if 1==0
+#if 0
 /*2:*/
 #line 3 "test-pp.w"
 
@@ -35,7 +35,7 @@ int main(void)
 char c= '\x1a';
 switch(c){
 case'\x18':
-#if 1==0
+#if 0
 
 done= 1;
 #endif
@@ -61,61 +61,36 @@ what will happen
 @y
 @<Global variables@>@/
   char cppname[10000], cppoutname[10000];
-@z
-
-FILE *cpp;
+  int gobble_section=0;
 void myprintf(char *msg, char *s)
 {
-  fprintf(C_file, msg, s);
-  if (phase==2) fprintf(cpp, msg, s);
+  if (!gobble_section) fprintf(C_file, msg, s);
 }
 void myputc(int c)
 {
-  putc(c,C_file);
-  if (phase==2) putc(c,cpp);
+  if (!gobble_section) putc(c,C_file);
 }
- @z
+@z
 
- @x
-  @<Set initial values@>;
- @y
-  @<Set initial values@>;
-  const char tmpl[] = "/mcpp-XXXXXX";
-  const char *path;
-  char *name;
-  path = getenv("XDG_RUNTIME_DIR"); /* stored in volatile memory instead of a persistent storage
-                                       device */
-//  if (path == NULL) return 0;
-  name = malloc(strlen(path) + sizeof tmpl);
-//  if (name == NULL) return 0;
-  strcat(strcpy(name, path), tmpl);
-  int cppfd = mkstemp(name);
-  if (cppfd != -1)
-    unlink(name); /* will be deleted automatically when ctangle exits */
-  free(name);
-//  if (cppfd == -1) return 0;
-  cpp = fdopen(cppfd, "w");
- @z
-
- @x
+@x
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
     C_putc(a); /* a high-bit character can occur in a string */
- @y
+@y
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
     myputc(a); /* a high-bit character can occur in a string */
- @z
+@z
 
- @x
+@x
 flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
- @y
+@y
 flush_buffer() /* writes one line to output file */
 {
   myputc('\n');
- @z
+@z
 
- @x
+@x
       C_printf("%s","#define ");
       out_state=normal;
       protect=1; /* newlines should be preceded by |'\\'| */
@@ -124,7 +99,7 @@ flush_buffer() /* writes one line to output file */
         if (cur_byte==cur_end && a=='\n') break; /* disregard a final newline */
         if (out_state==verbatim && a!=string && a!=constant && a!='\n')
           C_putc(a); /* a high-bit character can occur in a string */
- @y
+@y
       myprintf("%s","#define ");
       out_state=normal;
       protect=1; /* newlines should be preceded by |'\\'| */
@@ -133,9 +108,9 @@ flush_buffer() /* writes one line to output file */
         if (cur_byte==cur_end && a=='\n') break; /* disregard a final newline */
         if (out_state==verbatim && a!=string && a!=constant && a!='\n')
           myputc(a); /* a high-bit character can occur in a string */
- @z
+@z
 
- @x
+@x
 out_char(cur_char)
 eight_bits cur_char;
 {
@@ -163,7 +138,7 @@ restart:
       default: C_putc(cur_char); out_state=normal; break;
     }
 }
- @y
+@y
 out_char(cur_char)
 eight_bits cur_char;
 {
@@ -191,9 +166,9 @@ restart:
       default: myputc(cur_char); out_state=normal; break;
     }
 }
- @z
+@z
 
- @x
+@x
 @ @<Cases like \.{!=}@>=
 case plus_plus: C_putc('+'); C_putc('+'); out_state=normal; break;
 case minus_minus: C_putc('-'); C_putc('-'); out_state=normal; break;
@@ -212,7 +187,7 @@ case colon_colon: C_putc(':'); C_putc(':'); out_state=normal; break;
 case period_ast: C_putc('.'); C_putc('*'); out_state=normal; break;
 case minus_gt_ast: C_putc('-'); C_putc('>'); C_putc('*'); out_state=normal;
     break;
- @y
+@y
 @ @<Cases like \.{!=}@>=
 case plus_plus: myputc('+'); myputc('+'); out_state=normal; break;
 case minus_minus: myputc('-'); myputc('-'); out_state=normal; break;
@@ -231,29 +206,29 @@ case colon_colon: myputc(':'); myputc(':'); out_state=normal; break;
 case period_ast: myputc('.'); myputc('*'); out_state=normal; break;
 case minus_gt_ast: myputc('-'); myputc('>'); myputc('*'); out_state=normal;
     break;
- @z
+@z
 
- @x
+@x
 case identifier:
   if (out_state==num_or_id) C_putc(' ');
   j=(cur_val+name_dir)->byte_start;
   k=(cur_val+name_dir+1)->byte_start;
   while (j<k) {
     if ((unsigned char)(*j)<0200) C_putc(*j);
- @y
+@y
 case identifier:
   if (out_state==num_or_id) myputc(' ');
   j=(cur_val+name_dir)->byte_start;
   k=(cur_val+name_dir+1)->byte_start;
   while (j<k) {
     if ((unsigned char)(*j)<0200) myputc(*j);
- @z
+@z
 
- @x
+@x
       C_printf("%s",translit[z-0200]);
- @y
+@y
       myprintf("%s",translit[z-0200]);
- @z
+@z
 
 @x
 case section_number:
@@ -287,10 +262,13 @@ case section_number:
       char cmd[1000];
       sprintf(cmd,"grep some-bizarre-string%d %s >/dev/null 2>/dev/null",cur_val,cppoutname);
       if (system(cmd)==0) C_printf("/*%d:*/",cur_val);
+      else gobble_section=1;
     }
   }
-  else if(cur_val<0)
-    C_printf("/*:%d*/",-cur_val);
+  else if(cur_val<0) {
+    myprintf("/*:%d*/",-cur_val);
+    if (phase==3) gobble_section=2;
+  }
   else if (protect) {
     cur_byte +=4; /* skip line number and file name */
     cur_char = '\n';
@@ -299,17 +277,18 @@ case section_number:
     sixteen_bits a;
     a=0400* *cur_byte++;
     a+=*cur_byte++; /* gets the line number */
-    C_printf("\n#line %d \"",a);
+    myprintf("\n#line %d \"",a);
 @:line}{\.{\#line}@>
     cur_val=*cur_byte++;
     cur_val=0400*(cur_val-0200)+ *cur_byte++; /* points to the file name */
     for (j=(cur_val+name_dir)->byte_start, k=(cur_val+name_dir+1)->byte_start;
          j<k; j++) {
       if (*j=='\\' || *j=='"')
-        C_putc('\\');
-      C_putc(*j);
+        myputc('\\');
+      myputc(*j);
     }
-    C_printf("%s","\"\n");
+    myprintf("%s","\"\n");
+    if (gobble_section==2) gobble_section=0;
   }
   break;
 @z
