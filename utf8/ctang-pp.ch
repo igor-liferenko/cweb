@@ -259,15 +259,21 @@ case section_number:
   if (cur_val>0) {
     if (phase == 2) C_printf("/*some-bizarre-string%d:*/",cur_val);
     else {
-      char cmd[1000];
-      sprintf(cmd,"grep some-bizarre-string%d %s >/dev/null 2>/dev/null",cur_val,cppoutname);
-      if (system(cmd)==0) C_printf("/*%d:*/",cur_val);
-      else gobble_section=1;
+      if (!gobble_section) {
+        char cmd[1000];
+        sprintf(cmd,"grep some-bizarre-string%d %s >/dev/null 2>/dev/null",cur_val,cppoutname);
+        if (system(cmd)!=0) gobble_section=cur_val;
+      }
+      myprintf("/*%d:*/",cur_val);
     }
   }
   else if(cur_val<0) {
     myprintf("/*:%d*/",-cur_val);
-    if (phase==3) gobble_section=2;
+    if (phase==3) {
+      if (gobble_section) {
+        if (gobble_section==-cur_val) gobble_section=-1;
+      }
+    }
   }
   else if (protect) {
     cur_byte +=4; /* skip line number and file name */
@@ -288,7 +294,7 @@ case section_number:
       myputc(*j);
     }
     myprintf("%s","\"\n");
-    if (gobble_section==2) gobble_section=0;
+    if (gobble_section==-1) gobble_section=0;
   }
   break;
 @z
