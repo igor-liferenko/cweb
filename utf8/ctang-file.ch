@@ -34,9 +34,8 @@
   show_progress = prev_show_progress;
   show_happiness = prev_show_happiness;
   phase_two();
-/*  if (cppfd != -1)
+  if (cppfd != -1)
     unlink(cppname);
   if (cppoutfd != -1)
     unlink(cppoutname);
-*/
 @z
