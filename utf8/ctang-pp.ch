@@ -266,11 +266,7 @@ case section_number:
   }
   else if(cur_val<0) {
     myprintf("/*:%d*/",-cur_val);
-    if (phase==3) {
-      if (gobble_section) {
-        if (gobble_section==-cur_val) gobble_section=-1;
-      }
-    }
+    if (gobble_section==-cur_val) gobble_section=-1;
   }
   else if (protect) {
     cur_byte +=4; /* skip line number and file name */
