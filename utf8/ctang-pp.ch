@@ -98,6 +98,12 @@ flush_buffer() /* writes one line to output file */
 @z
 
 @x
+    printf("\n(%s)",output_file_name); update_terminal;
+@y
+    if (phase == 3) { printf("\n(%s)",output_file_name); update_terminal; }
+@z
+
+@x
       C_printf("%s","#define ");
       out_state=normal;
       protect=1; /* newlines should be preceded by |'\\'| */
