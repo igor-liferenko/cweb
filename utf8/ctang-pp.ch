@@ -78,6 +78,16 @@ void myputc(int c)
 @z
 
 @x
+    printf("\n! Not present: <");
+    print_section_name(a+name_dir); err_print(">");
+@y
+    if (phase==3) {
+      printf("\n! Not present: <");
+      print_section_name(a+name_dir); err_print(">");
+    }
+@z
+
+@x
 flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
