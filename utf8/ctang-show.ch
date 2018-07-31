@@ -30,6 +30,14 @@ boolean starred_shown=0;
 @z
 
 @x
+    printf("\n(%s)",output_file_name); update_terminal;
+@y
+    if (show_progress) {
+      printf("\n(%s)",output_file_name); update_terminal;
+    }
+@z
+
+@x
   if (*(loc-1)=='*' && show_progress) { /* starred section */
 @y
   if (*(loc-1)=='*' && show_progress) { /* starred section */

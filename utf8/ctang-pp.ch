@@ -142,9 +142,13 @@ flush_buffer() /* writes one line to output file */
 @z
 
 @x
-    printf("\n(%s)",output_file_name); update_terminal;
+    if (show_progress) {
+      printf("\n(%s)",output_file_name); update_terminal;
+    }
 @y
-    if (phase == 3) { printf("\n(%s)",output_file_name); update_terminal; }
+    if (phase == 3 && show_progress) {
+      printf("\n(%s)",output_file_name); update_terminal;
+    }
 @z
 
 @x
