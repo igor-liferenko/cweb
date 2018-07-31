@@ -1,6 +1,9 @@
 Check that orig.w does not contain changes via "git diff orig.w"
 
-First apply existing change-file to original via
+Check that existing change-file applies to original without errors:
+  wmerge orig change >/dev/null
+
+Apply existing change-file to original via
   wmerge orig change|sponge orig.w
 
 Then edit orig.w and put "xxx" in the place where you edited.
