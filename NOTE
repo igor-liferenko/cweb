@@ -28,3 +28,19 @@ that occur in the input, except that an empty line is not
 output when the \TEX/ source line was nonempty. For example, a line
 of the \TEX/ file that contains only an index cross-reference entry
 will not be copied.
+------------------------------------------
+@ @c
+@<Something@>
+@ @<Something@>=
+int x;
+----------
+@ @c
+@<Something@>
+@ Test.
+@<Something@>=
+int x;
+^^^^^^^^^^^^^^^
+see .tex file of above .w files and do diff of
+these .tex files and put as comment to
+cweav-sub.ch as comment to change which
+changes copy_TeX()
