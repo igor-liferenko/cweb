@@ -75,14 +75,10 @@ void myputc(int c)
 @.Cannot open output file@>
   phase_two(); /* output the contents of the compressed tables */
 @y
-  const char tmpl[] = "/mcpp-XXXXXX";
-  const char *path;
-  path = getenv("XDG_RUNTIME_DIR"); /* stored in volatile memory instead of a persistent storage
-                                       device */
-//  if (path == NULL) return 0;
-  strcat(strcpy(cppname, path), tmpl);
+  const char *path = "/tmp/mcpp-XXXXXX";
+  strcpy(cppname, path);
   int cppfd = mkstemp(cppname);
-//  if (cppfd == -1) return 0;
+  if (cppfd == -1) fatal("! Cannot create temporary file ", cppname);
   if ((C_file=fdopen(cppfd,"w"))==NULL)
     fatal("! Cannot open output file ", C_file_name);
 @.Cannot open output file@>
@@ -92,9 +88,9 @@ void myputc(int c)
   show_happiness=0;
   phase_two(); /* output the contents of the compressed tables */
   fflush(C_file);
-  strcat(strcpy(cppoutname, path), tmpl);
+  strcpy(cppoutname, path);
   int cppoutfd = mkstemp(cppoutname);
-//  if (cppoutfd == -1) return 0;
+  if (cppoutfd == -1) fatal("! Cannot create temporary file ", cppoutname);
   char *cmd[500];
   sprintf(cmd, "mcpp -C -P -W 0 -I- %s 2>/dev/null >%s", cppname, cppoutname);
   system(cmd);
