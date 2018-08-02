@@ -273,8 +273,21 @@ Do not make index entries for C-part of /dev/null sections:
 ------------------------------------------------
 
 TeX-part influences how section name in C-part is formed
-("\Y\B\4" when TeX-part is non-empty vs. "\B" when TeX-part is empty),
+("\Y\B\4" when TeX-part is non-empty vs. "\B" when TeX-part is empty - see
+diff of .tex files created from the following two .w files),
 so start output to "cweave-null" with TeX-part
+
+@ @c
+@<Something@>
+@ Test.
+@<Something@>=
+int x;
+
+@ @c
+@<Something@>
+@ @<Something@>=
+int x;
+
 @x
 copy_TeX()
 {
