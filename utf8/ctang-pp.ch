@@ -99,7 +99,6 @@ void myputc(int c)
 
   if ((C_file=fopen(C_file_name,"w"))==NULL)
     fatal("! Cannot open output file ", C_file_name);
-@.Cannot open output file@>
   phase = 3;
   show_banner = prev_show_banner;
   show_progress = prev_show_progress;
