@@ -1,3 +1,5 @@
+TODO: debug on mf/window/wl.w and change /bin/ctangle to ctangle in mf/window/Makefile
+
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
 block).
 
