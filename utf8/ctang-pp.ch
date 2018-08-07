@@ -1,5 +1,7 @@
 TODO: make mcpp read from pipe instead of file, to make this extra processing leave as little trace as possible
 
+TODO: check how C_file is changed if @(filename@> is used and whether it can influence changes made here
+
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
 block).
 
