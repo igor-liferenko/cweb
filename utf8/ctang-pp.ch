@@ -1,9 +1,11 @@
+TODO: in test3.w make blank line after "#line 7" be output to C_file (test1.w and test2.w work properly)
+
 TODO: make mcpp read from pipe instead of file, to make this extra processing leave as little trace as possible
 
 TODO: check how C_file is changed if @(filename@> is used and whether it can influence changes made here
 
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
-block).
+block). After you finish this change-file, remove test-pp.w
 
 As the result of this change-file, this part from test-pp.c:
 --------------------
