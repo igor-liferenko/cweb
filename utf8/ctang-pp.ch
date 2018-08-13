@@ -1,4 +1,4 @@
-TODO: in test3.w make blank line after "#line 7" be output to C_file (test1.w and test2.w work properly)
+TODO: in test3.w make blank line after "#line 7" be output to C_file (for test1.w and test2.w proper output is produced)
 
 TODO: make mcpp read from pipe instead of file, to make this extra processing leave as little trace as possible
 
