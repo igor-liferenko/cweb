@@ -1,4 +1,12 @@
-TODO: in test3.w make blank line after "#line 7" be output to C_file (for test1.w and test2.w proper output is produced)
+TODO:
+test1.w: we return to the same line number where we left off
+test2.w: we return to the same line number where we left off
+test3.w: we return to line number greater by one where we left off,
+         so one more empty line must be printed
+conclusion: difference between the line where we left off and line
+number in final #line, is the number of empty lines which must be added
+
+TODO: why in test1.w blank line is removed after final #line and in test2.w and test-pp.w - not?
 
 TODO: make mcpp read from pipe instead of file, to make this extra processing leave as little trace as possible
 
