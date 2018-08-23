@@ -15,6 +15,8 @@ TODO: check how C_file is changed if @(filename@> is used and whether it can inf
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
 block). After you finish this change-file, remove test-pp.w
 
+TODO: do that test-pp2.w will work (see commit comment when it was added)
+
 As the result of this change-file, this part from test-pp.c:
 --------------------
 #line 7 "test-pp.w"
