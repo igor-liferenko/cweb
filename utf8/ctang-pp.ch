@@ -17,6 +17,9 @@ block). After you finish this change-file, remove test-pp.w
 
 TODO: do that test-pp2.w will work (after running "ctangle test-pp2", "cat test" is empty)
 
+TODO: do not expand section only if the #if-#endif pair is in one section (when you do it, remove
+WLWIN flom mf/window/wl.w)
+
 As the result of this change-file, this part from test-pp.c:
 --------------------
 #line 7 "test-pp.w"
