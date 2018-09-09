@@ -20,6 +20,8 @@ TODO: do that test-pp2.w will work (after running "ctangle test-pp2", "cat test"
 TODO: do not expand section only if the #if-#endif pair is in one section (when you do it, remove
 WLWIN flom mf/window/wl.w)
 
+TODO: instead of mcpp use strcmp when new line is read and use the required statements directly in source of ctangle and store all @d in an array and check there and based on this manipulate gobble_section
+
 As the result of this change-file, this part from test-pp.c:
 --------------------
 #line 7 "test-pp.w"
