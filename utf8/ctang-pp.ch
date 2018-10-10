@@ -1,3 +1,6 @@
+ERROR: with this change-file after "ctangle locale-test" in openwrt/prog/, *.c files are empty,
+so disable this change-file for now in build.sh
+
 TODO:
 test1.w: we return to the same line number where we left off
 test2.w: we return to the same line number where we left off
