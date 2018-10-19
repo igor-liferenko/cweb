@@ -1,3 +1,5 @@
+HINT: see ~/tex/web2c/splitup.c
+
 ERROR: with this change-file after "ctangle locale-test" in openwrt/prog/, *.c files are empty,
 so disable this change-file for now in build.sh
 
