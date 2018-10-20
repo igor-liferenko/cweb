@@ -2,4 +2,4 @@ CWEAVE reads each file twice.
 In reset_input() in phase_two() file is opened second time without being closed.
 But I guess this is OK because it is used only for reading. So, effectively
 previous handle is just hanging in memory without any references left for it,
-and closed automatically when program exits.
+and closed by OS when program exits.
