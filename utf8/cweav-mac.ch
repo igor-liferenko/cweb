@@ -16,7 +16,7 @@ extern int tex_format;
 @.Writing the output file...@>
 @y
 if (tex_format==1) {
-  tex_printf("%%&lhplain\n"); out_line++;
+  tex_printf("%%&lhplain\n"); out_line++; /* FIXME: no need to propagate %&lhplain to .tex file */
   tex_printf("\\input cwebmac-lh");
   out_ptr=out_buf; limit=buffer; *buffer='@@'; /* make |finish_line| not to print
     newline after '\input cwebmac-lh' for it to take the place of the emptied
