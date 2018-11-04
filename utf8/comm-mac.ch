@@ -2,7 +2,7 @@
 @<Include files@>@/
 @y
 @<Include files@>@/
-int custom_cweb_macros=0;
+int custom_cwebmac=0;
 int first_line=1;
 @z
 
@@ -14,7 +14,7 @@ before phase two.
 @y
   if (!changing && first_line) {
     if (limit-buffer > 14 && strncmp(buffer, "\\input cwebmac", 14) == 0)
-      custom_cweb_macros=1;
+      custom_cwebmac=1;
     first_line=0;
   }
   return(1);
