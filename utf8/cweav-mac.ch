@@ -2,7 +2,6 @@
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-extern int first_line;
 extern int custom_cwebmac;
 @z
 
