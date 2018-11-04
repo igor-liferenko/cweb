@@ -2,20 +2,18 @@
 @<Include files@>@/
 @y
 @<Include files@>@/
-int tex_format=0;
+int custom_cweb_macros=0;
 int first_line=1;
 @z
 
-We must know if %&-line is used, before |copy_limbo| is started in phase two. This is done with
-setting |tex_format| on phase one and checking it in cweav-mac.ch right before phase two.
+We must know if '\input ...' is used, before |copy_limbo| is started in phase two. This is done with
+setting |custom_cweb_macros| on phase one and checking it in cweav-mac.ch right before phase two.
 @x
   return(1);
 @y
   if (!changing && first_line) {
-    if (limit-buffer == 9 && strncmp(buffer, "%&lhplain", 9) == 0) {
-      if (phase==1) tex_format=1;
-      if (phase==2) limit=buffer; /* empty the input line */
-    }
+    if (limit-buffer > 7 && strncmp(buffer, "\\input ", 7) == 0)
+      custom_cweb_macros=1;
     first_line=0;
   }
   return(1);
