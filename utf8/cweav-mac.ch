@@ -3,7 +3,7 @@
 @y
 @<Global variables@>@/
 extern int first_line;
-extern int tex_format;
+extern int custom_cweb_macros;
 @z
 
 @x
@@ -15,13 +15,11 @@ extern int tex_format;
 @x
 @.Writing the output file...@>
 @y
-if (tex_format==1) {
-  tex_printf("\\input cwebmac-lh");
-  out_ptr=out_buf; limit=buffer; *buffer='@@'; out_line++; /* make |finish_line| not to print
-    newline after '\input cwebmac-lh' for it to take the place of the emptied
-    first input line */
-  first_line=1; /* make the code which empties first input line in comm-mac.ch work */
+if (custom_cweb_macros) {
+  out_ptr=out_buf; limit=buffer; *buffer='@@'; /* avoid outputting "c\n":
+    we just |return| from |finish_line| --- see \S79 */
 }
-else tex_printf("\\input cwebma");
+else
+  tex_printf("\\input cwebma");
 @.Writing the output file...@>
 @z
