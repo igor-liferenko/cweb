@@ -12,7 +12,7 @@ setting |custom_cweb_macros| on phase one and checking it in cweav-mac.ch right 
   return(1);
 @y
   if (!changing && first_line) {
-    if (limit-buffer > 7 && strncmp(buffer, "\\input ", 7) == 0)
+    if (limit-buffer > 14 && strncmp(buffer, "\\input cwebmac", 14) == 0)
       custom_cweb_macros=1;
     first_line=0;
   }
