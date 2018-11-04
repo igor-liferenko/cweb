@@ -15,10 +15,10 @@ extern int custom_cwebmac;
 @x
 @.Writing the output file...@>
 @y
-if (!custom_cwebmac) {
+if (!custom_cwebmac)
   tex_printf("\\input cwebma");
 else {
-  out_ptr=out_buf; limit=buffer; *buffer='@@'; /* avoid outputting "c\n":
+  out_ptr=out_buf; *buffer='@@'; /* avoid outputting "c\n":
     we just |return| from |finish_line| --- see \S79 */
 }
 @.Writing the output file...@>
