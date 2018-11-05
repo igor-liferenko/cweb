@@ -18,14 +18,10 @@ finish_line() /* do this at the end of a line */
 @z
 
 @x
-out_ptr=out_buf+1; out_line=1; active_file=tex_file;
-*out_ptr='c'; tex_printf("\\input cwebma");
+tex_printf("\\input cwebma");
 @y
-out_line=1; active_file=tex_file;
-if (!custom_cwebmac) {
-  out_ptr=out_buf+1;
-  *out_ptr='c'; tex_printf("\\input cwebma");
-}
+if (!custom_cwebmac)
+  tex_printf("\\input cwebma");
 else
   out_ptr=out_buf;
 @z
