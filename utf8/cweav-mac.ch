@@ -25,5 +25,5 @@ tex_printf("\\input cwebma");
 if (!custom_cwebmac)
   tex_printf("\\input cwebma");
 else
-  out_ptr=out_buf; /* undo ``tricky'' initialization */
+  out_ptr=out_buf; /* reinitialize in non-tricky way */
 @z
