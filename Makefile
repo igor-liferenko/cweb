@@ -20,8 +20,8 @@ print:
 	@/var/local/bin/cweave-git cweave cweave >/dev/null
 	@/var/local/bin/cweave-git cweave ctangle ctangle >/dev/null
 	@/var/local/bin/cweave-git common common >/dev/null
-	@tex cweave >/dev/null
-	@tex ctangle >/dev/null
+	@/usr/bin/tex cweave >/dev/null
+	@/usr/bin/tex ctangle >/dev/null
 	@tex common >/dev/null
 	@tex cwebman >/dev/null
 	@touch -d '-5 seconds' cweave.tex ctangle.tex common.tex # for 'test' in prt.fn
