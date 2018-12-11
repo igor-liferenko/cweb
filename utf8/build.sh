@@ -49,7 +49,7 @@ if ! tie -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/
 if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
-if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-show.ch $DIR/ctang-file.ch > build-cweb.out # ATTENTION: ctang-pp.ch must be after ctang-show.ch and ctang-file.ch
+if ! tie -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-show.ch $DIR/ctang-file.ch > build-cweb.out
   then cat build-cweb.out; exit; fi
 if ! ./ctangle ctangle.w ctang-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
 clang -g -w -c ctangle.c || exit
