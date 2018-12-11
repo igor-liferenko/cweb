@@ -1,0 +1,3 @@
+false preprocessor directives, which may contain #line directives, are not handled by compiler which makes #line directives issued by CWEB useless altogether
+
+we cannot set breakpoints in debugger by line numbers - only by functions, because line numbers are different in .w and .c file
