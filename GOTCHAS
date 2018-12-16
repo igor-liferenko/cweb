@@ -1,1 +1,1 @@
-we cannot set breakpoints in debugger by line numbers - only by functions, because line numbers are different in .w and .c file
+to set breakpoint by line number in debugger - find the line in .c file (because line numbers are different in .w and .c file) and calculate its number relative to previous #line directive
