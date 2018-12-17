@@ -12,6 +12,8 @@ when #line is output, increase global counter on each output of \n, and when you
 int myline=0;
 @z
 
+TODO: revert myputc and myprintf and increase counter if you encounter e then n then d ... i ... f in myputc and if myprintf is called, reset counter, and if the sequence is wrong in myputc, reset counter
+
 @x
 flush_buffer() /* writes one line to output file */
 {
