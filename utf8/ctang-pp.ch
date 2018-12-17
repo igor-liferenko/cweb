@@ -19,6 +19,7 @@ flush_buffer() /* writes one line to output file */
 @y
 flush_buffer() /* writes one line to output file */
 {
+  if (!myline) printf("add if myline check to printf debug\n");
   printf("DEBUG: line %d\n", myline);
   myline++;
   C_putc('\n');
@@ -29,6 +30,7 @@ FIXME: detect #endif here?
         /* fall through */
       default: C_putc(cur_char); out_state=normal; break;
 
+cur_line
 
 @x
 case section_number:
