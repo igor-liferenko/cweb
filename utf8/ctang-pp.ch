@@ -26,11 +26,11 @@ flush_buffer() /* writes one line to output file */
 @z
 
 
-FIXME: detect #endif here?
-        /* fall through */
+detect #endif here:
+
       default: C_putc(cur_char); out_state=normal; break;
 
-cur_line
+      if ((unsigned char)(*j)<0200) C_putc(*j);
 
 @x
 case section_number:
