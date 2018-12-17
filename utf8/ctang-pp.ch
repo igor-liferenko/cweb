@@ -25,6 +25,7 @@ flush_buffer() /* writes one line to output file */
 @z
 
 
+FIXME: detect #endif here?
         /* fall through */
       default: C_putc(cur_char); out_state=normal; break;
 
