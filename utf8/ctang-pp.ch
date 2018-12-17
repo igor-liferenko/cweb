@@ -6,13 +6,21 @@ This change-file must add #line after each #endif
 when #line is output, increase global counter on each output of \n, and when you output #endif, output #line
 
 @x
+@<Global variables@>@/
+@y
+@<Global variables@>@/
+int myline=0;
+@z
+
+@x
 flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
 @y
 flush_buffer() /* writes one line to output file */
 {
-  printf("DEBUG: newline\n");
+  printf("DEBUG: line %d\n", myline);
+  myline++;
   C_putc('\n');
 @z
 
@@ -75,7 +83,7 @@ case section_number:
     }
     C_printf("%s","\"\n");
     printf(" line %d\n", a);
-
+    myline=a;
   }
   break;
 @z
