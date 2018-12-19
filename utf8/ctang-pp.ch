@@ -1,9 +1,7 @@
 For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
 block). After you finish this change-file, remove test-pp.w
 
-This change-file must add #line after each #endif
-
-when #line is output, increase global counter on each output of \n, and when you output #endif, output #line
+This change-file outputs #line after each #endif.
 
 @x
 @<Global variables@>@/
