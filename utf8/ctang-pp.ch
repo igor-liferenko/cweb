@@ -7,6 +7,8 @@ This change-file outputs #line after each #endif.
 @<Global variables@>@/
 @y
 @<Global variables@>@/
+int myline=0;
+char myfile[100];
 int mycounter=0;
 void myputc(int c)
 {
@@ -29,9 +31,11 @@ flush_buffer() /* writes one line to output file */
 flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
+  if (!myline) printf("\nadd if myline check to printf debug\n");
+  myline++;
   if (mycounter==6) {
-    C_printf("#line %d \"",cur_line);
-    C_printf("%s",cur_file_name);
+    C_printf("#line %d \"",myline);
+    C_printf("%s",myfile);
     C_printf("%s","\"\n");
     mycounter=0;
   }
@@ -95,13 +99,16 @@ case section_number:
 @:line}{\.{\#line}@>
     cur_val=*cur_byte++;
     cur_val=0400*(cur_val-0200)+ *cur_byte++; /* points to the file name */
+    char *myfilep=myfile;
     for (j=(cur_val+name_dir)->byte_start, k=(cur_val+name_dir+1)->byte_start;
          j<k; j++) {
       if (*j=='\\' || *j=='"')
-        { C_putc('\\');  printf('\\'); }
-      myputc(*j);
+        { C_putc('\\');  *(myfilep++)='\\'; }
+      C_putc(*j); *(myfilep++)=*j;
     }
+    *myfilep='\0';
     C_printf("%s","\"\n");
+    myline=a;
   }
   break;
 @z
