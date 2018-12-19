@@ -31,7 +31,6 @@ flush_buffer() /* writes one line to output file */
 flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
-  if (!myline) printf("\nadd if myline check to printf debug\n");
   myline++;
   if (mycounter==6) {
     C_printf("#line %d \"",myline);
