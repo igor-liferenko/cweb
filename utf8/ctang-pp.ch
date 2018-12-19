@@ -10,9 +10,19 @@ when #line is output, increase global counter on each output of \n, and when you
 @y
 @<Global variables@>@/
 int myline=0;
+int mycounter=0;
+void myputc(int c)
+{
+  putc(c,C_file);
+  if (c=='#') mycounter=1;
+  else if (mycounter==1 && c=='e') mycounter=2;
+  else if (mycounter==2 && c=='n') mycounter=3;
+  else if (mycounter==3 && c=='d') mycounter=4;
+  else if (mycounter==4 && c=='i') mycounter=5;
+  else if (mycounter==5 && c=='f') printf("#endif detected\n");
+  else mycounter=0;
+}
 @z
-
-TODO: revert myputc and myprintf and increase counter if you encounter e then n then d ... i ... f in myputc and if myprintf is called, reset counter, and if the sequence is wrong in myputc, reset counter
 
 @x
 flush_buffer() /* writes one line to output file */
@@ -28,11 +38,17 @@ flush_buffer() /* writes one line to output file */
 @z
 
 
-detect #endif here:
-
+@x
       default: C_putc(cur_char); out_state=normal; break;
+@y
+      default: myputc(cur_char); out_state=normal; break;
+@z
 
-      if ((unsigned char)(*j)<0200) C_putc(*j);
+@x
+    if ((unsigned char)(*j)<0200) C_putc(*j);
+@y
+    if ((unsigned char)(*j)<0200) myputc(*j);
+@z
 
 @x
 case section_number:
