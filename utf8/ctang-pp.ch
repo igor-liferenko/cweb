@@ -9,7 +9,6 @@ when #line is output, increase global counter on each output of \n, and when you
 @<Global variables@>@/
 @y
 @<Global variables@>@/
-int myline=0;
 int mycounter=0;
 void myputc(int c)
 {
@@ -19,8 +18,8 @@ void myputc(int c)
   else if (mycounter==2 && c=='n') mycounter=3;
   else if (mycounter==3 && c=='d') mycounter=4;
   else if (mycounter==4 && c=='i') mycounter=5;
-  else if (mycounter==5 && c=='f') printf("#endif detected\n");
-  else mycounter=0;
+  else if (mycounter==5 && c=='f') mycounter=6;
+  else if (mycounter!=6) mycounter=0;
 }
 @z
 
@@ -31,19 +30,23 @@ flush_buffer() /* writes one line to output file */
 @y
 flush_buffer() /* writes one line to output file */
 {
-  if (!myline) printf("add if myline check to printf debug\n");
-  printf("DEBUG: line %d\n", myline);
-  myline++;
   C_putc('\n');
+  if (mycounter==6) {
+    C_printf("#line %d \"",cur_line);
+    C_printf("%s",cur_file_name);
+    C_printf("%s","\"\n");
+    mycounter=0;
+  }
 @z
 
-
+'#' is output by this
 @x
       default: C_putc(cur_char); out_state=normal; break;
 @y
       default: myputc(cur_char); out_state=normal; break;
 @z
 
+'endif' is output by this
 @x
     if ((unsigned char)(*j)<0200) C_putc(*j);
 @y
@@ -91,7 +94,6 @@ case section_number:
     a=0400* *cur_byte++;
     a+=*cur_byte++; /* gets the line number */
     C_printf("\n#line %d \"",a);
-    printf("DEBUG: ");
 @:line}{\.{\#line}@>
     cur_val=*cur_byte++;
     cur_val=0400*(cur_val-0200)+ *cur_byte++; /* points to the file name */
@@ -99,12 +101,9 @@ case section_number:
          j<k; j++) {
       if (*j=='\\' || *j=='"')
         { C_putc('\\');  printf('\\'); }
-      C_putc(*j);
-      putchar(*j);
+      myputc(*j);
     }
     C_printf("%s","\"\n");
-    printf(" line %d\n", a);
-    myline=a;
   }
   break;
 @z
