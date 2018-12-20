@@ -35,7 +35,8 @@ flush_buffer() /* writes one line to output file */
   C_putc('\n');
   myline++;
   if (mycounter==6) {
-    C_printf("#line %d \"",myline);
+    C_printf("#line %d \"",myline); /* not sure how |cur_line| works (it shows incorrect
+      line number), so use my own counter */
     C_printf("%s",myfile);
     C_printf("%s","\"\n");
     mycounter=0;
