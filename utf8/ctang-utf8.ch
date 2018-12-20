@@ -9,7 +9,7 @@ extern char *encTeX[];
 @x
   argc=ac; argv=av;
 @y
-//  setlocale(LC_CTYPE, "C.UTF-8");
+  setlocale(LC_CTYPE, "C.UTF-8");
   argc=ac; argv=av;
 @z
 
