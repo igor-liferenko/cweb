@@ -1,6 +1,3 @@
-For testing use test-pp.w, compiled with clang (go step-by-step in gdb with and without "#if-endif"
-block). After you finish this change-file, remove test-pp.w
-
 This change-file outputs #line after each #endif.
 
 This change-file is not integrated to cct because I'm not 100% sure that it is correct and it is good to see what changes it makes to be able to control them (for analogous reasons cweav-sub.ch is not integrated to ccw).
