@@ -1,3 +1,5 @@
+See FOPEN-FCLOSE.README
+
 @x
 phase_two() {
 @y

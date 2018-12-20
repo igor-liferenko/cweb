@@ -1,3 +1,5 @@
+See FOPEN-FCLOSE.README                                        
+
 @x
   @<Print the job |history|@>;
 @y
