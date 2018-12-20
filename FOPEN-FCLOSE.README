@@ -3,3 +3,5 @@ In reset_input() in phase_two() file is opened second time without being closed.
 But I guess this is OK because it is used only for reading. So, effectively
 previous handle is just hanging in memory without any references left for it,
 and closed by OS when program exits.
+(see also utf8/comm-fclose.ch and utf8/cweav-fclose.ch + sourceware.org/bugzilla/show_bug.cgi?i
+d=20568)
