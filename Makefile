@@ -18,7 +18,7 @@ test: all
 print:
 	@./build
 	@/var/local/bin/cweave-git cweave cweave >/dev/null
-	@/var/local/bin/cweave-git cweave ctangle ctangle >/dev/null
+	@/var/local/bin/cweave-git ctangle ctangle >/dev/null
 	@/var/local/bin/cweave-git common common >/dev/null
 	@/usr/bin/tex cweave >/dev/null
 	@/usr/bin/tex ctangle >/dev/null
