@@ -88,6 +88,8 @@ compressed form; then it shuffles and outputs the code.
 Please read the documentation for \.{common}, the set of routines common
 to \.{CTANGLE} and \.{CWEAVE}, before proceeding further.
 
+@d ctangle 0
+
 @c
 int main (ac, av)
 int ac;
@@ -120,8 +122,6 @@ change them in the file |"common.w"|.
 
 @ This and the following sections (till the end of introduction) contain
 stuff from the file |"common.w"|.
-
-@d ctangle 0
 
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>=
 typedef short boolean;
