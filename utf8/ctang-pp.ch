@@ -1,5 +1,7 @@
 TODO: see test-cweb - there were some bugs (use cwebtest.tar.gz from superbuild from 2018-06-19)
 
+TODO: after you complete this change-file, check if order of appliying this change-file in build.sh matters and add comment there if yes (check by putting it in all places one by one and running build-cweb)
+
 This change-file outputs #line after each #endif.
 
 This change-file is not integrated to cct because I'm not 100% sure that it is correct and it is good to see what changes it makes to be able to control them (for analogous reasons cweav-sub.ch is not integrated to ccw).
