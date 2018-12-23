@@ -118,10 +118,10 @@ change them in the file |"common.w"|.
 @d longest_name 10000 /* FIXME: maximum length of what does this determine? */
 @d stack_size 50 /* number of simultaneous levels of macro expansion */
 
-@ First comes general stuff:
+@ This and the following sections (till the end of introduction) contain
+stuff from the file |"common.w"|.
 
 @d ctangle 0
-@d cweave 1
 
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>=
 typedef short boolean;
@@ -255,6 +255,7 @@ extern check_complete(); /* checks that all changes were picked up */
 @ Code related to section numbers:
 @<Common code...@>=
 typedef unsigned short sixteen_bits;
+extern sixteen_bits section_count; /* the current section number */
 extern boolean changed_section[]; /* is the section changed? */
 extern boolean change_pending; /* is a decision about change still unclear? */
 extern boolean print_where; /* tells \.{CTANGLE} to print line and file info */
@@ -1054,7 +1055,7 @@ int no_where; /* suppress |print_where|? */
 @ As one might expect, |get_next| consists mostly of a big switch
 that branches to the various special cases that can arise.
 
-@d isxalpha(c) ((c)=='_' || (c)=='$') 
+@d isxalpha(c) ((c)=='_' || (c)=='$')
   /* non-alpha characters allowed in identifier */
 @d ishigh(c) ((unsigned char)(c)>0177)
 @^high-bit character handling@>
@@ -1512,10 +1513,7 @@ sensed in the input, and it proceeds until the end of that section.  It
 uses |section_count| to keep track of the current section number; with luck,
 \.{CWEAVE} and \.{CTANGLE} will both assign the same numbers to sections.
 
-@<Global...@>=
-extern sixteen_bits section_count; /* the current section number */
-
-@ The body of |scan_section| is a loop where we look for control codes
+The body of |scan_section| is a loop where we look for control codes
 that are significant to \.{CTANGLE}: those
 that delimit a definition, the \CEE/ part of a module, or a new module.
 
