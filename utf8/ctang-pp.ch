@@ -1,4 +1,4 @@
-TODO: see test-cweb - there were some bugs (use cwebtest.tar.gz from previous superbuilds, untill test-cweb will stop giving error)
+TODO: see test-cweb - there were some bugs (use cwebtest.tar.gz from superbuild from 2018-06-19)
 
 This change-file outputs #line after each #endif.
 
