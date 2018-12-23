@@ -1513,7 +1513,7 @@ sensed in the input, and it proceeds until the end of that section.  It
 uses |section_count| to keep track of the current section number; with luck,
 \.{CWEAVE} and \.{CTANGLE} will both assign the same numbers to sections.
 
-The body of |scan_section| is a loop where we look for control codes
+@ The body of |scan_section| is a loop where we look for control codes
 that are significant to \.{CTANGLE}: those
 that delimit a definition, the \CEE/ part of a module, or a new module.
 
