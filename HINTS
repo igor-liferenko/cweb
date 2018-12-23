@@ -1,0 +1,4 @@
+Check changes to ctangle.w here compared to original by doing
+"wmerge ctangle | sponge ctangle.w" in cweb/ and cweb-git/
+and then doing diff of the resulting ctangle.w files.
+(For cweave.w and common.w it is analogous.)
