@@ -1,4 +1,4 @@
-See FOPEN-FCLOSE.README                                        
+See FOPEN-FCLOSE.README
 
 @x
   @<Print the job |history|@>;
