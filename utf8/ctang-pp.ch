@@ -1,4 +1,4 @@
-TODO: see test-cweb - there were some bugs (use cwebtest.tar.gz from superbuild from 2018-06-19)
+TODO: see test-cweb - there were some bugs (use cwebtest.tar.gz from superbuild from 2018-06-19) HINT: is the following useful? case '\n': if (protect && out_state!=verbatim) C_putc(' ');
 
 TODO: after you complete this change-file, check if order of appliying this change-file in build.sh matters and add comment there if yes (check by putting it in all places one by one and running build-cweb)
 
