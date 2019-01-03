@@ -18,7 +18,7 @@ int endif=0;
 @y
     else if (c=='#' && loc==buffer+1) {
       preprocessing=1;
-      if (limit-loc>=5 && strncmp("endif",loc,limit-loc)==0)
+      if (limit-loc>=5 && strncmp("endif",loc,5)==0)
         endif=1;
     }
 @z
@@ -33,7 +33,7 @@ case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
   app_repl(a % 0400);
   if (endif) {
     if (id_loc-id_first==5) {
-      @<Insert the line number into |tok_mem|@>; break;
+      @<Insert the line number into |tok_mem|@>;
     }
     endif=0;
   }
