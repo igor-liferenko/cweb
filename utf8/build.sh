@@ -6,7 +6,8 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch and cweav-prod.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch and cweav-prod.ch from "tie -c cweav-merged.ch" and ctang-pp.ch
+# from "tie -c ctang-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cweb
