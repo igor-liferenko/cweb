@@ -1,6 +1,7 @@
 This change-file outputs #line after each #endif.
 
-This change-file is not integrated to cct because I'm not 100% sure that it is correct and it is good to see what changes it makes to be able to control them (for analogous reasons cweav-sub.ch is not integrated to ccw; FIXME: add cweav-prod.ch to ccw?).
+This change-file is not integrated to cct to ensure that it works correctly (besides, it is the only change-file that is not integrated to "cct", and it is easy to distinguish from possible differences that may appear in output of "cct").
+(for analogous reasons cweav-sub.ch is not integrated to ccw; FIXME: add cweav-prod.ch to ccw?)
 
 @x
 case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
