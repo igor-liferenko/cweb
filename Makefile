@@ -32,8 +32,8 @@ view:
 	@/var/local/bin/cweave-git cweave >/dev/null
 	@/var/local/bin/cweave-git ctangle >/dev/null
 	@/var/local/bin/cweave-git common >/dev/null
-	@tex cweave >/dev/null
-	@tex ctangle >/dev/null
+	@/usr/bin/tex cweave >/dev/null
+	@/usr/bin/tex ctangle >/dev/null
 	@tex common >/dev/null
 	@patch -s cwebman.tex cwebman-non-duplex.patch
 	@tex cwebman >/dev/null
