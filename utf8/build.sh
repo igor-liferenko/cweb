@@ -73,7 +73,7 @@ perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' co
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
 if ! ./ctangle common.w $DIR/comm-show.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
+clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit # WARNING: instead of "Cannot open include file" it can give "Include file name too long" error message
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
 perl -i -pe 's/  argc=ac; argv=av;/  setlocale(LC_CTYPE,"ru_RU.CP1251");\n$&/' cweave.w
 perl -i -pe 's/xislower\(/islower((unsigned char)/' cweave.w # if we do not use cast, islower('я') returns 0
