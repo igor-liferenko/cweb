@@ -12,7 +12,6 @@ id_lookup("int16_t",NULL,raw_int);
 id_lookup("uint32_t",NULL,raw_int);
 id_lookup("int32_t",NULL,raw_int);
 id_lookup("cchar_t",NULL,raw_int);
-id_lookup("pid_t",NULL,raw_int);
 id_lookup("pcre2_match_data",NULL,raw_int);
 id_lookup("pcre2_code",NULL,raw_int);
 id_lookup("sockaddr_in",NULL,raw_int);
@@ -30,3 +29,8 @@ void main(void)
 {
   pid_t x;
 }
+
+------------------------
+
+sigset_t: signal.h
+pid_t: unistd.h
