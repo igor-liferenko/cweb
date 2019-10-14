@@ -1,0 +1,28 @@
+#!/bin/bash
+for i in `awk '{ print $2 }' types.w`; do
+  if echo $i|grep -q _t$; then
+    X=$i
+  else
+    X="struct $i"
+  fi
+  H=$(grep "^$X:" ../utf8/cweav-type.ch|cut -d' ' -f2)
+  echo "DEBUG: type = $X; header = $H"
+  cat <<EOF >x.c
+#ifdef H
+#include <$H>
+#endif
+void main(void)
+{
+  $X x;
+}
+EOF
+  gcc -o /dev/null x.c 2>/dev/null
+  RET1=$?
+  gcc -DH -o /dev/null x.c 2>/dev/null
+  RET2=$?
+  if [ $RET1 != 0 ] && [ $RET2 = 0 ]; then
+    true
+  else
+    echo ' fail'
+  fi
+done
