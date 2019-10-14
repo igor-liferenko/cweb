@@ -5,8 +5,7 @@ for i in `awk '{ print $2 }' types.w`; do
   else
     X="struct $i"
   fi
-  H=$(grep "^$X:" ../utf8/cweav-type.ch|cut -d' ' -f2)
-  echo "DEBUG: type = $X; header = $H"
+  H=$(echo `grep "^$X:" ../utf8/cweav-type.ch|cut -d: -f2`)
   cat <<EOF >x.c
 #ifdef H
 #include <$H>
