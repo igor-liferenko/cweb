@@ -1,7 +1,7 @@
 #!/bin/bash
 for i in `awk '{ print $2 }' types.w`; do
   X=$(grep " $X:" headers|cut -d: -f1)
-  H=$(echo `grep " $X:" ../utf8/cweav-type.ch|cut -d: -f2`)
+  H=$(echo `grep " $X:" headers|cut -d: -f2`)
   echo "DEBUG: type = $X; header = $H"
   cat <<EOF >x.c
 #ifdef H
