@@ -1,8 +1,9 @@
 #!/bin/bash
 for i in `awk '{ print $2 }' types.w`; do
-  X=$(grep " $X:" headers|cut -d: -f1)
-  H=$(echo `grep " $X:" headers|cut -d: -f2`)
-  echo "DEBUG: type = $X; header = $H"
+  X=$(grep "$i\*\?:" headers|cut -d: -f1)
+  H=$(grep "$i\*\?:" headers|cut -d: -f2|cut -d' ' -f2)
+  A=$(grep "$i\*\?:" headers|cut -d: -f2|cut -d' ' -f3-)
+  echo "DEBUG $i: type = $X; header = $H; args = $A"
   cat <<EOF >x.c
 #ifdef H
 #include <$H>
@@ -12,9 +13,9 @@ void main(void)
   $X x;
 }
 EOF
-  gcc -o /dev/null x.c 2>/dev/null
+  gcc -o /dev/null x.c $A 2>/dev/null
   RET1=$?
-  gcc -DH -o /dev/null x.c 2>/dev/null
+  gcc -DH -o /dev/null x.c $A 2>/dev/null
   RET2=$?
   if [ $RET1 != 0 ] && [ $RET2 = 0 ]; then
     true
