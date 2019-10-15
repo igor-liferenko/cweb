@@ -1,0 +1,8 @@
+pcre2_code: pcre2.h
+sigset_t: signal.h
+pid_t: unistd.h
+struct termios: termios.h
+socklen_t: sys/socket.h
+struct in_addr: netdb.h
+struct sockaddr: sys/socket.h
+struct sockaddr_in: netdb.h

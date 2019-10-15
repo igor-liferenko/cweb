@@ -1,11 +1,8 @@
 #!/bin/bash
 for i in `awk '{ print $2 }' types.w`; do
-  if echo $i|grep -q _t$; then
-    X=$i
-  else
-    X="struct $i"
-  fi
-  H=$(echo `grep "^$X:" ../utf8/cweav-type.ch|cut -d: -f2`)
+  X=$(grep " $X:" headers|cut -d: -f1)
+  H=$(echo `grep " $X:" ../utf8/cweav-type.ch|cut -d: -f2`)
+  echo "DEBUG: type = $X; header = $H"
   cat <<EOF >x.c
 #ifdef H
 #include <$H>
