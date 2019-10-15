@@ -2,7 +2,7 @@ pcre2_code*: pcre2.h -DPCRE2_CODE_UNIT_WIDTH=32 -lpcre2-32
 sigset_t: signal.h
 pid_t: unistd.h
 struct termios: termios.h
-socklen_t: sys/socket.h
-struct in_addr: netdb.h
+socklen_t: unistd.h
+struct in_addr: netinet/in.h
 struct sockaddr: sys/socket.h
-struct sockaddr_in: netdb.h
+struct sockaddr_in: netinet/in.h
