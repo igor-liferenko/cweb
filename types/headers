@@ -7,5 +7,10 @@ struct in_addr: netinet/in.h
 struct sockaddr: sys/socket.h
 struct sockaddr_in: netinet/in.h
 wchar_t: stddef.h
+uint8_t: stdint.h
+int8_t: stdint.h
 uint16_t: stdint.h
+int16_t: stdint.h
+uint32_t: stdint.h
+int32_t: stdint.h
 size_t: stddef.h
