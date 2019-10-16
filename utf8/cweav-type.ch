@@ -4,6 +4,11 @@ FIXME: does it make any difference if @s is used in limbo or in middle part?
 TODO: move from here to types.w which do not compile without any includes (see example in end of file)
 
 @x
+id_lookup("size_t",NULL,raw_int);
+@y
+@z
+
+@x
 id_lookup("wchar_t",NULL,raw_int);
 @y
 id_lookup("sigaction",NULL,raw_int);

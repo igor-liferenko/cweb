@@ -7,6 +7,7 @@
 @s sockaddr_in int
 @s pcre2_code int
 @s pcre2_match_data int
+@s size_t int
 @s ssize_t int
 @s uint8_t int
 @s int8_t int
