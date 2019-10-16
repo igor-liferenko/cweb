@@ -1,8 +1,8 @@
 #!/bin/bash
 for i in `awk '{ print $2 }' types.w`; do
-  X=$(grep "$i\*\?:" headers|cut -d: -f1)
-  H=$(grep "$i\*\?:" headers|cut -d: -f2|cut -d' ' -f2)
-  A=$(grep "$i\*\?:" headers|cut -d: -f2|cut -d' ' -f3-)
+  X=$(grep "\b$i\*\?:" headers|cut -d: -f1)
+  H=$(grep "\b$i\*\?:" headers|cut -d: -f2|cut -d' ' -f2)
+  A=$(grep "\b$i\*\?:" headers|cut -d: -f2|cut -d' ' -f3-)
   #echo "DEBUG $i: type = $X; header = $H; args = $A"
   cat <<EOF >x.c
 #ifdef H
