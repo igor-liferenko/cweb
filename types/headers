@@ -13,4 +13,5 @@ uint16_t: stdint.h
 int16_t: stdint.h
 uint32_t: stdint.h
 int32_t: stdint.h
-size_t: stddef.h
+size_t: sys/types.h
+ssize_t: sys/types.h
