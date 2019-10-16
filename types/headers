@@ -5,7 +5,7 @@ socklen_t: sys/socket.h
 struct in_addr: netinet/in.h
 struct sockaddr: sys/socket.h
 struct sockaddr_in: netinet/in.h
-wchar_t: stddef.h
+wchar_t: wchar.h
 uint8_t: stdint.h
 int8_t: stdint.h
 uint16_t: stdint.h
