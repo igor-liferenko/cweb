@@ -6,7 +6,6 @@ TODO: move from here to types.w which do not compile without any includes (see e
 @x
 id_lookup("wchar_t",NULL,raw_int);
 @y
-id_lookup("wchar_t",NULL,raw_int);
 id_lookup("sigaction",NULL,raw_int);
 @z
 

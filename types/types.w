@@ -15,4 +15,4 @@
 @s uint32_t int
 @s int32_t int
 @s cchar_t int
-
+@s wchar_t int
