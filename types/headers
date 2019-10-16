@@ -6,4 +6,4 @@ socklen_t: unistd.h
 struct in_addr: netinet/in.h
 struct sockaddr: sys/socket.h
 struct sockaddr_in: netinet/in.h
-wchar_t: stddef.h
+wchar_t: wchar.h
