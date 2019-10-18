@@ -29,6 +29,7 @@ id_lookup("sockaddr",NULL,raw_int);
 id_lookup("in_addr",NULL,raw_int);
 id_lookup("socklen_t",NULL,raw_int);
 id_lookup("termios",NULL,raw_int);
+id_lookup("sigaction",NULL,raw_int);
 @z
 
 NOTE: keywords which are manipulated via @t + @: (like sigaction) cannot be used via @s - only here (because they will be added to index where they are changed via @t - there is no way to remove them from index; but if they are added here, they are not put to index; this creates problems for naming the included types after #include - to track them. There is no workaround for this, except adding @: explicitly everywhere where they occur)
