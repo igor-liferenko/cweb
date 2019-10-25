@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in `awk '{ print $2 }' types`; do
+for i in `cat types`; do
   X=$(grep "\b$i\*\?:" headers|cut -d: -f1)
   H=$(grep "\b$i\*\?:" headers|cut -d: -f2|cut -d' ' -f2)
   A=$(grep "\b$i\*\?:" headers|cut -d: -f2|cut -d' ' -f3-)

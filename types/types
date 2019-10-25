@@ -1,19 +1,19 @@
-@s sigset_t int
-@s pid_t int
-@s termios int
-@s socklen_t int
-@s in_addr int
-@s sockaddr int
-@s sockaddr_in int
-@s pcre2_code int
-@s pcre2_match_data int
-@s size_t int
-@s ssize_t int
-@s uint8_t int
-@s int8_t int
-@s uint16_t int
-@s int16_t int
-@s uint32_t int
-@s int32_t int
-@s cchar_t int
-@s wchar_t int
+sigset_t
+pid_t
+termios
+socklen_t
+in_addr
+sockaddr
+sockaddr_in
+pcre2_code
+pcre2_match_data
+size_t
+ssize_t
+uint8_t
+int8_t
+uint16_t
+int16_t
+uint32_t
+int32_t
+cchar_t
+wchar_t
