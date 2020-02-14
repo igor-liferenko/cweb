@@ -1,7 +1,9 @@
 @x
 @d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
+@d longest_name 10000
 @y
 @d buf_size 5000 /* for \.{CWEAVE} and \.{CTANGLE} */
+@d longest_name 10000
 @z
 
 @x

@@ -1,4 +1,10 @@
 @x
+If you change |max_bytes|, |max_names|, or |hash_size| you should also
+@y
+If you change |max_bytes|, |max_names|, |buf_size| or |hash_size| you should also
+@z
+
+@x
 @d max_bytes 90000 /* the number of bytes in identifiers,
 @y
 @d max_bytes 150000 /* the number of bytes in identifiers,
