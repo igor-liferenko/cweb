@@ -1233,7 +1233,7 @@ must be filled.
 \noindent Here is where \.{TIE} starts, and where it ends.
 
 @<The main function@>=
-main(argc,argv)
+int main(argc,argv)
         int argc; string *argv;
 {{@<Local variables for initialisation@>@;
   @<Set initial...@>@;
