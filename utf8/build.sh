@@ -38,6 +38,7 @@ cd /tmp/cwebbuild/
 cp -r /home/user/cweb/* .
 clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
+sed -i 's/wrap_up(){/wrap_up(){if(show_happiness)/' common.c
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
 /home/user/ctex/tie -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch $DIR/comm-exten.ch $DIR/comm-show.ch $DIR/comm-fclose.ch || exit
@@ -67,6 +68,7 @@ cd /tmp/cwebbuild/
 cp -r /home/user/cweb/* .
 clang -g -w -c ctangle.c
 perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
+sed -i 's/wrap_up(){/wrap_up(){if(show_happiness)/' common.c
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
 ./ctangle -bhp common.w $DIR/comm-show.ch || exit
