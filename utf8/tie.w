@@ -113,6 +113,10 @@ This can be used more or less for any \Cl\ program.
 @<Global |#include|s@>@;
 @<Global constants@>@;
 @<Global types@>@;
+int flags[128];
+#define show_banner flags['b']
+#define show_happiness flags['h']
+#define show_progress flags['p']
 @<Global variables@>@;
 @<Error handling functions@>@;
 @<Internal functions@>@;
@@ -678,7 +682,7 @@ of lines is shown.
 
 @<Increment the line number and print ...@>=
 incr(inp_desc->line);
-if (inp_desc->type_of_file==master && inp_desc->line % 100==0) {
+if (inp_desc->type_of_file==master && inp_desc->line % 100==0 && show_progress) {
    if (inp_desc->line % 500 == 0)  print2("%ld",inp_desc->line);
    else  print_c('.');
    update_terminal;
@@ -812,8 +816,10 @@ into the buffer, if we could open it.
    if (input_organization[0]->the_file==NULL)
     fatal_error("! Could not open master file");
 @.Could not open master file@>
+if (show_progress) {
    print2("(%s)",input_organization[0]->name_of_file);
    term_new_line;
+}
    input_organization[0]->type_of_file=master;
    get_line(0);
 }
@@ -831,8 +837,10 @@ This is done by |init_change_file|.
     if (input_organization[i]->the_file==NULL)
 	fatal_error("!Could not open change file");
 @.Could not open change file@>
+if (show_progress) {
     print2("(%s)",input_organization[i]->name_of_file);
     term_new_line;
+}
     init_change_file(i,true);
     incr(i);
   }
@@ -1176,11 +1184,14 @@ yet found the output file name.
 
 @<Scan the parameters@>=
 {int act_arg;
-    if ( argc < 5  ||  argc > max_file_index+4-1 )  usage();
+    int gargc = argc;
     no_ch = -1; /* fill this part of |input_organization| */
     for ( act_arg=1 ; act_arg<argc ; act_arg++ ) {
-	if (argv[act_arg][0]=='-') @<Set a flag@>@;
-	else @<Get a file name@>@;
+	if (argv[act_arg][0]=='-') { gargc--; @<Set a flag@>@; }
+	else {
+          if ( argc < 5  ||  gargc > max_file_index+4-1 )  usage();
+          else @<Get a file name@>@;
+        }
     }
     if (no_ch<=0|| prod_chf==unknown)  usage();
 }
@@ -1200,6 +1211,9 @@ else
       case 'C': prod_chf=chf;  break;
       case 'm':
       case 'M':	prod_chf=master;  break;
+      case 'b': show_banner=0; break;
+      case 'h': show_happiness=0; break;
+      case 'p': show_progress=0; break;
       default:  usage(); 
       }
 
@@ -1235,14 +1249,17 @@ must be filled.
 @<The main function@>=
 int main(argc,argv)
         int argc; string *argv;
-{{@<Local variables for initialisation@>@;
+{show_banner=show_progress=show_happiness=1;
+{@<Local variables for initialisation@>@;
   @<Set initial...@>@;
  }
-  print_ln(banner); /* print a ``banner line'' */
-  print_ln(copyright); /* include the copyright notice */
   actual_input=0;
   out_mode=normal;
   @<Scan the parameters@>@;
+if (show_banner){
+  print_ln(banner); /* print a ``banner line'' */
+  print_ln(copyright); /* include the copyright notice */
+}
   @<Prepare the output file@>@;
   @<Get the master file started@>@;
   @<Prepare the change files@>@;
@@ -1261,12 +1278,13 @@ be ``{\mc UNIX}'' style---but we are in best companion: \.{WEB} and
 @<Print the job |history|@>=
 {string msg;
    switch (history) {
-      case spotless: msg="No errors were found"; break;
+      case spotless: if (!show_happiness) goto out; else msg="No errors were found"; break;
       case troublesome: msg="Pardon me, but I think I spotted something wrong.";
 	        break;
       case fatal: msg="That was a fatal error, my friend";  break;
       } /* there are no other cases */
    print2_nl("(%s.)",msg);  term_new_line;
+out:
    exit ( history == spotless  ?  0 : 1 );
 }
 
