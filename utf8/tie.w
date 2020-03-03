@@ -145,7 +145,7 @@ applications of \.{TIE}.
 
 @<Global constants@>=
 #define buf_size 512 /* maximum length of one input line */
-#define max_file_index 9
+#define max_file_index 19
 /* we don't think that anyone needs more than 9 change files,
     but \dots\ just change it */
 
@@ -1185,13 +1185,11 @@ yet found the output file name.
 @<Scan the parameters@>=
 {int act_arg;
     int gargc = argc;
+    if ( argc < 5  ||  gargc > max_file_index+4-1 )  usage();
     no_ch = -1; /* fill this part of |input_organization| */
     for ( act_arg=1 ; act_arg<argc ; act_arg++ ) {
-	if (argv[act_arg][0]=='-') { gargc--; @<Set a flag@>@; }
-	else {
-          if ( argc < 5  ||  gargc > max_file_index+4-1 )  usage();
-          else @<Get a file name@>@;
-        }
+	if (argv[act_arg][0]=='-') @<Set a flag@>@;
+        else @<Get a file name@>@;
     }
     if (no_ch<=0|| prod_chf==unknown)  usage();
 }
