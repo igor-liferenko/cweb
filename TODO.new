@@ -1,2 +1,0 @@
-git diff 7cd68da..838b4b7
-^^^^^^^^^^^^^^^^^ + read what is in the end of this file + what is in types/ + see tel-agi.w as etalon + do ftmod_zt.w like this + explain the removed @x and understand what removed TODO was about + see git lg -- 0000-git/cweb/types.w
