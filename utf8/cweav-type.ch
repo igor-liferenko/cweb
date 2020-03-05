@@ -1,5 +1,5 @@
 Do not use @s to define common type names (@s puts type name to index).
-FIXME: does it make any difference if @s is used in limbo or in middle part?
+
 @x
 id_lookup("wchar_t",NULL,raw_int);
 @y
