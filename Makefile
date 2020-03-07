@@ -3,12 +3,12 @@
 # is produced
 all:
 	@./build
-	@/var/local/bin/ctangle-git common
+	@/var/local/bin/ctangle-git -bhp common
 	@clang -g -w -c common.c
-	@/var/local/bin/ctangle-git ctangle
+	@/var/local/bin/ctangle-git -bhp ctangle
 	@clang -g -w -c ctangle.c
 	@clang -g -o ctangle ctangle.o common.o
-	@/var/local/bin/ctangle-git cweave
+	@/var/local/bin/ctangle-git -bhp cweave
 	@clang -g -w -c cweave.c
 	@clang -g -o cweave cweave.o common.o
 
