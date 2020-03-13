@@ -17,3 +17,4 @@ ssize_t: sys/types.h
 cchar_t: ncursesw/curses.h -lncursesw -D_XOPEN_SOURCE=600
 pcre2_code*: pcre2.h -DPCRE2_CODE_UNIT_WIDTH=32 -lpcre2-32
 pcre2_match_data*: pcre2.h -DPCRE2_CODE_UNIT_WIDTH=32 -lpcre2-32
+time_t: time.h

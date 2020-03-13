@@ -17,3 +17,4 @@ uint32_t
 int32_t
 cchar_t
 wchar_t
+time_t
