@@ -15,9 +15,8 @@ cat <<'EOF' >comm-foo.ch
 This is necessary to suppress all the output with -bhp:
 @x
 int wrap_up() {
-  putchar('\n');
 @y
-int wrap_up() {
+int wrap_up() {if(show_happiness)
 @z
 EOF
 ./ctangle -bhp common.w comm-foo.ch || exit
