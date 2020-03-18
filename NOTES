@@ -1,0 +1,1 @@
+spaces at the end of lines don't influence ch-files (in @x-@y part spaces need not be if in cweb-file they are and spaces may be if in cweb-file they are not)
