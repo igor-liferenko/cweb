@@ -1,7 +1,0 @@
-CWEAVE reads each file twice.
-In reset_input() in phase_two() file is opened second time without being closed.
-But I guess this is OK because it is used only for reading. So, effectively
-previous handle is just hanging in memory without any references left for it,
-and closed by OS when program exits.
-(see also utf8/comm-fclose.ch and utf8/cweav-fclose.ch + sourceware.org/bugzilla/show_bug.cgi?id=20568)
-FIXME: probably this bug was fixed - see link above, so *-fclose.ch may be removed (but why only change-file is handled in *-fclose.ch, but no web-file? HINT: see git lg around the date when *-fclose.ch were added)

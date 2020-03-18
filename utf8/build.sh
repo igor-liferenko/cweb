@@ -41,11 +41,11 @@ perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' co
 sed -i 's/wrap_up(){/wrap_up(){if(show_happiness)/' common.c
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch $DIR/comm-exten.ch $DIR/comm-show.ch $DIR/comm-fclose.ch || exit
+tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-mac.ch $DIR/comm-exten.ch $DIR/comm-show.ch || exit
 ./ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit
-tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-sub.ch $DIR/cweav-format.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-fclose.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
+tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-sub.ch $DIR/cweav-format.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
 ./ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
