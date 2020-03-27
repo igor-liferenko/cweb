@@ -86,7 +86,7 @@ int mbsntowcslen(char *mbs, int len)
 @x
 char out_buf[line_length+1]; /* assembled characters */
 @y
-char out_buf[line_length*MB_LEN_MAX+1+1]; /* assembled characters */
+char out_buf[line_length*MB_LEN_MAX+1]; /* assembled characters */
 @z
 
 @x
@@ -101,7 +101,6 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
 @d out(c) {
   if (mbsntowcslen(out_buf+1, out_ptr-(out_buf+1)+1) >= line_length) break_out();
   *++out_ptr=c;
-  *(out_ptr+1)='\0';
 }
 @z
 
