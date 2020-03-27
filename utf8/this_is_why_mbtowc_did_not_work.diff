@@ -1,3 +1,5 @@
+old mosntowcs() is now mbsntowcslen() and it uses the same principle
+
 diff --git a/utf8/cweav-utf8.ch b/utf8/cweav-utf8.ch
 index dbe135c..eb2a7f3 100644
 --- a/utf8/cweav-utf8.ch
