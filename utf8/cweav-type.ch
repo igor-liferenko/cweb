@@ -21,4 +21,5 @@ id_lookup("sockaddr",NULL,raw_int);
 id_lookup("in_addr",NULL,raw_int);
 id_lookup("socklen_t",NULL,raw_int);
 id_lookup("termios",NULL,raw_int);
+id_lookup("passwd",NULL,raw_int);
 @z
