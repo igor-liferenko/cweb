@@ -18,6 +18,7 @@ void
 common_init()
 {
   /* this mapping table mirrors encTeX definitions */
+  /* TODO: do via `#include "mapping"' and `-I' */
   encTeX[0x80] = "А";
   encTeX[0xa0] = "а";
   encTeX[0x81] = "Б";
