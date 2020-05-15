@@ -24,3 +24,4 @@ id_lookup("termios",NULL,raw_int);
 id_lookup("passwd",NULL,raw_int);
 id_lookup("tm",NULL,raw_int);
 @z
+NOTE: don't use sigaction here - when it is used as a type, to make it bold use @=
