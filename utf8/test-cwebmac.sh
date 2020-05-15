@@ -10,16 +10,12 @@ git branch -D runall-/bin/-V runall-/usr/local/bin/-V &>/dev/null
 ./runall.sh -p /usr/local/bin/ &>/dev/null
 git checkout runall-/bin/-V &>/dev/null
 for i in *.mp; do mpost $i; done >/dev/null
-cp /usr/local/SUPER_DEBIAN/epsf.tex .
-cp /usr/local/SUPER_DEBIAN/lhplain.ini .
-perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
-tex -ini -jobname tex lhplain.ini >/dev/null
 cd /home/user/cweb/
 git rev-parse --abbrev-ref HEAD | grep -v master && exit
 git diff --exit-code HEAD || exit
 cd - >/dev/null
 cp /home/user/cweb/cwebmac.tex .
-for i in *.tex; do [ $i = cwebmac.tex ] && continue; [ $i = epsf.tex ] && continue; tex $i; done &>/dev/null
+for i in *.tex; do [ $i = cwebmac.tex ] && continue; echo '\nonstopmode \def\time{5} \input '$i | tex; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
 for i in *.toc; do perl -i -0777 -pe 's/\n(?=\\catcode `\\@=12\\relax)//' $i; done # after .dvi file is generated we can do whatever we want with .toc file
 git add .
@@ -36,11 +32,7 @@ patch tcb.tex <<EOF >/dev/null || exit # pdf mode is not used in my cwebmac
 -  \ifpdf\special{pdf: outline #1 << /Title (\the\toksE) /Dest
 -    [ @thispage /FitH @ypos ] >>}\fi
 EOF
-cp /usr/local/SUPER_DEBIAN/epsf.tex .
-cp /usr/local/SUPER_DEBIAN/lhplain.ini .
-perl -i -pe 's/(?=\\dump)/\\def\\time{5}\n/' lhplain.ini
-tex -ini -jobname tex lhplain.ini >/dev/null
-for i in *.tex; do [ $i = epsf.tex ] && continue; tex $i; done &>/dev/null
+for i in *.tex; do echo '\nonstopmode \def\time{5} \input '$i | tex; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
 git add .
 git commit -m 'tex' >/dev/null
