@@ -15,7 +15,7 @@ git rev-parse --abbrev-ref HEAD | grep -v master && exit
 git diff --exit-code HEAD || exit
 cd - >/dev/null
 cp /home/user/cweb/cwebmac.tex .
-for i in *.tex; do [ $i = cwebmac.tex ] && continue; echo '\nonstopmode \def\time{5} \input '$i | tex; done &>/dev/null
+for i in *.tex; do [ $i = cwebmac.tex ] && continue; echo '\def\time{5} \input '$i | tex; done &>/dev/null
 for i in *.dvi; do dvihash `basename $i .dvi`; done >hash.all
 for i in *.toc; do perl -i -0777 -pe 's/\n(?=\\catcode `\\@=12\\relax)//' $i; done # after .dvi file is generated we can do whatever we want with .toc file
 git add .
@@ -32,7 +32,7 @@ patch tcb.tex <<EOF >/dev/null || exit # pdf mode is not used in my cwebmac
 -  \ifpdf\special{pdf: outline #1 << /Title (\the\toksE) /Dest
 -    [ @thispage /FitH @ypos ] >>}\fi
 EOF
-for i in *.tex; do echo '\nonstopmode \def\time{5} \input '$i | tex; done &>/dev/null
+for i in *.tex; do echo '\def\time{5} \input '$i | tex; done &>/dev/null
 for i in *.dvi; do dvihash $i; done >hash.all
 git add .
 git commit -m 'tex' >/dev/null
