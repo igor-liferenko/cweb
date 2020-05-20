@@ -45,7 +45,7 @@ tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/com
 ./ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit
-tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-sub.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
+tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
 ./ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
@@ -87,26 +87,5 @@ clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o
 mkdir -p /var/local/bin/
 cp cweave ctangle /var/local/bin/
-cd /
-rm -fr /tmp/cwebbuild/
-
-# For /dev/null-sections:
-rm -fr /tmp/cwebbuild/
-mkdir /tmp/cwebbuild/
-cd /tmp/cwebbuild/
-cp -r /home/user/cweb/* .
-clang -g -w -c ctangle.c
-perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
-clang -g -w -c common.c
-clang -g -o ctangle ctangle.o common.o
-if ! tie -c comm-merged.ch common.w $DIR/../comm-opts.ch $DIR/../comm-out.ch $DIR/../comm-pipe.ch > build-cweb.out
-  then cat build-cweb.out; exit; fi
-if ! ./ctangle common.w comm-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
-if ! tie -c cweav-merged.ch cweave.w $DIR/../cweav-opts.ch $DIR/../cweav-tran.ch $DIR/../cweav-pipe.ch $DIR/cweav-prod.ch $DIR/cweav-type.ch > build-cweb.out
-  then cat build-cweb.out; exit; fi
-if ! ./ctangle cweave.w cweav-merged.ch > build-cweb.out; then cat build-cweb.out; exit; fi
-clang -g -w -c cweave.c || exit
-clang -g -o /var/local/bin/cweave-null cweave.o common.o
 cd /
 rm -fr /tmp/cwebbuild/
