@@ -6,7 +6,7 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch and cweav-order.ch from "tie -c cweav-merged.ch" and ctang-pp.ch
+# remove cweav-sort.ch from "tie -c cweav-merged.ch" and ctang-pp.ch
 # from "tie -c ctang-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
@@ -14,7 +14,7 @@
 # If everything is OK, no changes must be shown.
 
 # To test for compatibility of cwebmac.tex:
-# remove cweav-sort.ch and cweav-order.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
@@ -45,7 +45,7 @@ tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/com
 ./ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit
-tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-order.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
+tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
 ./ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
