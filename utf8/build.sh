@@ -6,7 +6,7 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch and cweav-prod.ch from "tie -c cweav-merged.ch" and ctang-pp.ch
+# remove cweav-sort.ch and cweav-order.ch from "tie -c cweav-merged.ch" and ctang-pp.ch
 # from "tie -c ctang-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
@@ -14,14 +14,14 @@
 # If everything is OK, no changes must be shown.
 
 # To test for compatibility of cwebmac.tex:
-# remove cweav-sort.ch and cweav-prod.ch from "tie -c cweav-merged.ch" in first
+# remove cweav-sort.ch and cweav-order.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
 # If everything is OK, no changes must be shown.
 
 # NOTE: to build woven outputs for all example programs, run "test-cwebmac >/dev/null"
-# (without modifying build.sh) and checkout runall-/bin/-V branch in cwebtest repo
+# (without modifying build.sh) and checkout runall-/usr/local/bin/cweb-dek/-V3.64 branch in cwebtest repo
 
 
 DIR=/home/user/cweb-git/utf8
@@ -45,7 +45,7 @@ tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/com
 ./ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit
-tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
+tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-order.ch $DIR/cweav-type.ch $DIR/cweav-show.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
 ./ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
@@ -78,7 +78,7 @@ perl -i -pe 's[\Q\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\31
 perl -i -pe 's[\Q\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337]'"'"'\322\323\324\325\326\327\330\331\332\333\334\335\336\337\340\341'"'" cweave.w
 perl -i -pe 's[\Q\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357]'"'"'\342\343\344\345\270\346\347\350\351\352\353\354\355\356\357\360'"'" cweave.w
 perl -i -pe 's[\Q\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377]'"'"'\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377\271'"'" cweave.w
-tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-prod.ch $DIR/cweav-type.ch $DIR/cweav-show.ch || exit
+tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-type.ch $DIR/cweav-show.ch || exit
 ./ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
