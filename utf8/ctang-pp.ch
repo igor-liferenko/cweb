@@ -3,7 +3,6 @@ This means that when the compiler gives you error messages, or when you debug yo
 the messages refer to wrong line numbers in the CWEB file.
 
 This change-file is not integrated to cct to ensure that it works correctly (besides, it is the only change-file that is not integrated to "cct", and it is easy to distinguish from other differences (if any - which "cct" was created to check for)).
-(for analogous reasons cweav-sub.ch is not integrated to ccw; FIXME: add cweav-prod.ch to ccw?)
 
 @x
 case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
