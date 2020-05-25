@@ -2,7 +2,7 @@ This change-file outputs #line after each #endif. It is necessary because if a s
 This means that when the compiler gives you error messages, or when you debug your program,
 the messages refer to wrong line numbers in the CWEB file.
 
-This change-file is not integrated to cct to ensure that it works correctly (besides, it is the only change-file that is not integrated to "cct", and it is easy to distinguish from other differences (if any - which "cct" was created to check for)).
+This change-file is the only one not integrated to cct (to ensure that it works correctly).
 
 @x
 case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
