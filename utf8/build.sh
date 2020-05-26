@@ -5,22 +5,16 @@
 # /usr/bin/ = by default from distribution (TeX Live)
 # /usr/local/bin/ = my (built in first part of this script)
 
-# To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
-# part of build.sh and run:
-#   build-cweb
+# To test for compatibility of cweave and ctangle in /usr/local/bin/ run:
 #   test-cweb
 # If everything is OK, no changes must be shown.
 
-# To test for compatibility of cwebmac.tex:
-# remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
-# part of build.sh and run:
-#   build-cweb
+# To test for compatibility of cwebmac.tex run:
 #   test-cwebmac # before running this ensure that test-cweb produces empty output
 # If everything is OK, no changes must be shown.
 
 # NOTE: to build woven outputs for all example programs, run "test-cwebmac >/dev/null"
-# (without modifying build.sh) and checkout runall-/usr/local/bin/cweb-dek/-V3.64 branch in cwebtest repo
+# and checkout runall-/usr/local/bin/cweb-dek/-V3.64 branch in cwebtest repo
 
 
 DIR=/home/user/cweb-git/utf8

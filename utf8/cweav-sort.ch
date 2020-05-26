@@ -35,7 +35,7 @@ equal length. We sort such list in ascending order (uppercase letter has lesser
 code value than corresponding lowercase letter).
 
 @<Output index...@>= {
-if (blink[sort_ptr->head-name_dir]!=NULL)
+if (flags['a'] && blink[sort_ptr->head-name_dir]!=NULL)
   @<Sort the list at |sort_ptr| before output@>@;
 @z
 
