@@ -8,6 +8,7 @@
 @x
         printf("Writing the output file (%s):",C_file_name);
 @y
+{
 iconv_t x = iconv_open("CP866", "UTF-8");
 if (x != (iconv_t) -1) {
   size_t C_file_name_size = strlen(C_file_name);
@@ -23,6 +24,7 @@ if (x != (iconv_t) -1) {
   iconv_close(x);
 }
 else printf("iconv_open failed\n");
+}
 @z
 
 @x
