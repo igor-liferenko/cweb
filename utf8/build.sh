@@ -75,7 +75,8 @@ tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-sort.ch $DIR/cweav-show.ch || ex
 ./ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
-./ctangle -bhp ctangle.w $DIR/ctang-show.ch || exit
+tie -bhp -c ctang-merged.ch ctangle.w $DIR/ctang-show.ch $DIR/ctang-iconv.ch || exit # ATTENTION: ctang-show.ch must be before ctang-iconv.ch
+./ctangle -bhp ctangle.w ctang-merged.ch || exit
 clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o
 mkdir -p /var/local/bin/
