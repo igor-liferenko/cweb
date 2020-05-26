@@ -6,7 +6,7 @@
 @z
 
 @x
-        printf("Writing the output file (%s):",C_file_name);
+        printf("\nWriting the output file (%s):",C_file_name);
 @y
 {
 iconv_t x = iconv_open("CP866", "UTF-8");
@@ -18,7 +18,7 @@ if (x != (iconv_t) -1) {
   char *bufoutp = bufout;
   if (iconv(x, &C_file_name_p, &C_file_name_size, &bufoutp, &bufout_size) != (size_t) -1) {
           bufout[C_file_name_size-bufout_size] = '\0';
-          printf("Writing the output file (%s):", bufout);
+          printf("\nWriting the output file (%s):", bufout);
   }
   else printf("iconv failed\n");
   iconv_close(x);
