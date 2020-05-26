@@ -3,13 +3,9 @@
 @y
 *out_ptr='c';
 char *web_file_name_p = web_file_name;
-while (*web_file_name_p) {
-  if (*web_file_name_p < 0) {
+while (*web_file_name_p)
+  if (*web_file_name_p++ < 0)
     *out_ptr = 'u';
-    break;
-  }
-  web_file_name_p++;
-}
 @z
 
 @x
