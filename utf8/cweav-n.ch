@@ -13,7 +13,7 @@ if (cat1==stmt||cat1==decl||cat1==function) {
   if (cat1==function) big_app(big_force);
   else if (cat1==decl) {
     if (flags['o']) big_app(force);
-    else big_app(force);
+    else big_app(big_force);
   }
   else if (force_lines) big_app(force);
   else big_app(break_space);

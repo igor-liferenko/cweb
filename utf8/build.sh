@@ -6,8 +6,7 @@
 # /usr/local/bin/ = my (built in first part of this script)
 
 # To test for compatibility of cweave and ctangle in /usr/local/bin/:
-# remove cweav-sort.ch from "tie -c cweav-merged.ch" and ctang-pp.ch
-# from "tie -c ctang-merged.ch" in first
+# remove cweav-sort.ch from "tie -c cweav-merged.ch" in first
 # part of build.sh and run:
 #   build-cweb
 #   test-cweb
@@ -41,7 +40,7 @@ perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' co
 sed -i 's/wrap_up(){/wrap_up(){if(show_happiness)/' common.c
 clang -g -w -c common.c
 clang -g -o ctangle ctangle.o common.o
-tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-exten.ch $DIR/comm-show.ch $DIR/comm-n.ch $DIR/comm-o.ch || exit
+tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-exten.ch $DIR/comm-show.ch || exit
 ./ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit

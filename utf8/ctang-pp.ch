@@ -12,7 +12,8 @@ case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
 case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
   app_repl((a / 0400)+0200);
   app_repl(a % 0400);
-  if (*buffer=='#' && id_first==buffer+1 && id_loc-id_first==5 && strncmp("endif",id_first,5)==0)
+  if (flags['l'] &&
+      *buffer=='#' && id_first==buffer+1 && id_loc-id_first==5 && strncmp("endif",id_first,5)==0)
     {@<Insert the line number into |tok_mem|@>}
   break;
 @z
