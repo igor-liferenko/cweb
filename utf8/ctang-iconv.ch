@@ -1,3 +1,5 @@
+Convert filenames (they are always UTF-8).
+
 @x
 @<Include files@>@/
 @y
