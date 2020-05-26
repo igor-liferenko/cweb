@@ -1,2 +1,0 @@
-when "sigaction" is used as a type, to make it bold (not putting to index) use @= trick
-and add @:sigaction}\&{sigaction@> to put it to index (if \noinx is not used)

@@ -1,1 +1,0 @@
-use @= trick for inner variables of structures from header files not to put them in index (in \noinx is not used)
