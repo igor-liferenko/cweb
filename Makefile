@@ -1,20 +1,3 @@
-# type 'make' and then 'gdb cweave'
-# to test compatibility with original cweb, type 'make test' - if everything OK, then no output
-# is produced
-
-all:
-	@/usr/local/bin/ctangle -bhp common
-	@clang -g -w -c common.c
-	@/usr/local/bin/ctangle -bhp ctangle
-	@clang -g -w -c ctangle.c
-	@clang -g -o ctangle ctangle.o common.o
-	@/usr/local/bin/ctangle -bhp cweave
-	@clang -g -w -c cweave.c
-	@clang -g -o cweave cweave.o common.o
-
-test: all
-	@./test
-
 print:
 	@/usr/local/bin/cweave cweave cweave >/dev/null
 	@/usr/local/bin/cweave ctangle ctangle >/dev/null
