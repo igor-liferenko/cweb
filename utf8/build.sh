@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# /var/local/bin/cweb-dek/ = original (for test-cweb.sh and test-cwebmac.sh)
-# /var/local/bin/ = original with minimal changes to work in ccw/cct (built in second part of this script)
-# /usr/bin/ = by default from distribution (TeX Live)
-# /usr/local/bin/ = my (built in first part of this script)
-
 # To test for compatibility of cweave and ctangle in /usr/local/bin/ run:
 #   test-cweb
 # If everything is OK, no changes must be shown.
@@ -14,7 +9,7 @@
 # If everything is OK, no changes must be shown.
 
 # NOTE: to build woven outputs for all example programs, run "test-cwebmac >/dev/null"
-# and checkout runall-/usr/local/bin/cweb-dek/-V3.64 branch in cwebtest repo
+# and checkout runall-/usr/local/bin/-V3.64 branch in cwebtest repo
 
 
 DIR=/home/user/cweb-git/utf8
