@@ -19,7 +19,7 @@ if (x != (iconv_t) -1) {
   char bufout[bufout_size+1];
   char *bufoutp = bufout;
   if (iconv(x, &C_file_name_p, &C_file_name_size, &bufoutp, &bufout_size) != (size_t) -1) {
-          bufout[C_file_name_size-bufout_size] = '\0';
+          bufout[sizeof bufout-1-bufout_size] = '\0';
           printf("\nWriting the output file (%s):", bufout);
   }
   else printf("iconv failed\n");
@@ -51,7 +51,7 @@ if (x != (iconv_t) -1) {
   char bufout[bufout_size+1];
   char *bufoutp = bufout;
   if (iconv(x, &bufinp, &C_file_name_size, &bufoutp, &bufout_size) != (size_t) -1) {
-          bufout[C_file_name_size-bufout_size] = '\0';
+          bufout[sizeof bufout-1-bufout_size] = '\0';
           C_printf("%s",bufout);
   }
   else printf("iconv failed\n");
