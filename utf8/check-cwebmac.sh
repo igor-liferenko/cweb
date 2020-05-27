@@ -10,11 +10,7 @@ git branch -D runall-/var/local/bin/-V3.64 runall-/usr/local/bin/-V3.64 &>/dev/n
 ./runall.sh -p /usr/local/bin/ &>/dev/null
 git checkout runall-/var/local/bin/-V3.64 &>/dev/null
 for i in *.mp; do mpost $i; done >/dev/null
-cd /home/user/cweb/
-git rev-parse --abbrev-ref HEAD | grep -v master && exit
-git diff --exit-code HEAD || exit
-cd - >/dev/null
-cp /home/user/cweb/cwebmac.tex .
+cp /usr/share/texlive/texmf-dist/tex/plain/cweb/cwebmac.tex .
 for i in *.tex; do [ $i = cwebmac.tex ] && continue; echo '\def\time{5} \input '$i | tex; done &>/dev/null
 for i in *.dvi; do dvihash `basename $i .dvi`; done >hash.all
 for i in *.toc; do perl -i -0777 -pe 's/\n(?=\\catcode `\\@=12\\relax)//' $i; done # after .dvi file is generated we can do whatever we want with .toc file
