@@ -17,7 +17,7 @@
 # If everything is OK, no changes must be shown.
 
 if [ $# = 0 ]; then
-  /home/user/cweb/utf8/test-cweb.sh
+  /home/user/cweb/utf8/check-cweb.sh
 else
   check-ctangle "$@"
   check-cweave "$@"
