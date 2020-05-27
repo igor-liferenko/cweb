@@ -1,14 +1,14 @@
 # type 'make' and then 'gdb cweave'
 # to test compatibility with original cweb, type 'make test' - if everything OK, then no output
 # is produced
+
 all:
-	@./build
-	@/var/local/bin/ctangle-git -bhp common
+	@/usr/local/bin/ctangle -bhp common
 	@clang -g -w -c common.c
-	@/var/local/bin/ctangle-git -bhp ctangle
+	@/usr/local/bin/ctangle -bhp ctangle
 	@clang -g -w -c ctangle.c
 	@clang -g -o ctangle ctangle.o common.o
-	@/var/local/bin/ctangle-git -bhp cweave
+	@/usr/local/bin/ctangle -bhp cweave
 	@clang -g -w -c cweave.c
 	@clang -g -o cweave cweave.o common.o
 
@@ -16,10 +16,9 @@ test: all
 	@./test
 
 print:
-	@./build
-	@/var/local/bin/cweave-git cweave cweave >/dev/null
-	@/var/local/bin/cweave-git ctangle ctangle >/dev/null
-	@/var/local/bin/cweave-git common common >/dev/null
+	@/usr/local/bin/cweave cweave cweave >/dev/null
+	@/usr/local/bin/cweave ctangle ctangle >/dev/null
+	@/usr/local/bin/cweave common common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
@@ -28,10 +27,9 @@ print:
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
 view:
-	@./build
-	@/var/local/bin/cweave-git cweave >/dev/null
-	@/var/local/bin/cweave-git ctangle >/dev/null
-	@/var/local/bin/cweave-git common >/dev/null
+	@/usr/local/bin/cweave cweave >/dev/null
+	@/usr/local/bin/cweave ctangle >/dev/null
+	@/usr/local/bin/cweave common >/dev/null
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
