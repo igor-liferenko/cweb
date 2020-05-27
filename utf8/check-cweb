@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# To test for compatibility of cweave and ctangle in /usr/local/bin/ run:
+#   check-cweb
+# If everything is OK, no changes must be shown.
+
+# To test for compatibility of ~/cweb/cwebmac.tex with original run:
+#   test-cwebmac # before running this ensure that check-cweb produces empty output
+# If everything is OK, no changes must be shown.
+
+# NOTE: to build woven outputs for all example programs in cwebtest repo, run 
+#   test-cwebmac >/dev/null
+# and checkout runall-/usr/local/bin/-V3.64 branch                 
+
+# To check a particular program run:
+#   check-cweb web-file [ch-file] [out-file]
+# If everything is OK, no changes must be shown.
+
+if [ $# = 0 ]; then
+  /home/user/cweb/utf8/test-cweb.sh
+else
+  check-ctangle "$@"
+  check-cweave "$@"
+fi
