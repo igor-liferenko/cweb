@@ -12,18 +12,13 @@
 # and checkout runall-/usr/local/bin/-V3.64 branch in cwebtest repo
 
 
-DIR=/home/user/cweb-git/utf8
-
-# NOTE: if you want to make temporary changes (for example, for adding printfs for tracing), remove the first part from this file and edit /home/user/cweb/ directly
+DIR=/home/user/cweb/utf8
 
 # Build UTF-8 CWEB from source:
-cd /home/user/cweb/
-git rev-parse --abbrev-ref HEAD | grep -v master && exit
-git diff --exit-code HEAD || exit
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
-cp -r /home/user/cweb/* .
+cp -r /home/user/cweb/cweb/* .
 tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-exten.ch $DIR/comm-show.ch || exit
 /usr/bin/ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
@@ -44,7 +39,7 @@ rm -fr /tmp/cwebbuild/
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
-cp -r /home/user/cweb/* .
+cp -r /home/user/cweb/cweb/* .
 /usr/bin/ctangle -bhp common.w || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit # WARNING: instead of "Cannot open include file" it can give "Include file name too long" error message
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
