@@ -11,7 +11,7 @@ tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/com
 /usr/bin/ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit
-tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-show.ch $DIR/cweav-y.ch $DIR/cweav-z.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
+tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-show.ch $DIR/cweav-c.ch $DIR/cweav-d.ch $DIR/cweav-y.ch $DIR/cweav-z.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
 /usr/bin/ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
