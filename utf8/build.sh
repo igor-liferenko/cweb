@@ -1,17 +1,5 @@
 #!/bin/bash
 
-# To test for compatibility of cweave and ctangle in /usr/local/bin/ run:
-#   test-cweb
-# If everything is OK, no changes must be shown.
-
-# To test for compatibility of cwebmac.tex run:
-#   test-cwebmac # before running this ensure that test-cweb produces empty output
-# If everything is OK, no changes must be shown.
-
-# NOTE: to build woven outputs for all example programs, run "test-cwebmac >/dev/null"
-# and checkout runall-/usr/local/bin/-V3.64 branch in cwebtest repo
-
-
 DIR=/home/user/cweb/utf8
 
 # Build UTF-8 CWEB from source:
@@ -35,7 +23,7 @@ cp cweave ctangle /usr/local/bin/
 cd /
 rm -fr /tmp/cwebbuild/
 
-# Build original CWEB with minimal changes for cct and ccw:
+# Build original CWEB with minimal changes for check-ctangle and check-cweave:
 rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
