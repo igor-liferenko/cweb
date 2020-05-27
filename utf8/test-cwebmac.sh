@@ -5,10 +5,10 @@ git reset >/dev/null
 git checkout -q .
 git clean -f >/dev/null
 git checkout master &>/dev/null
-git branch -D runall-/var/local/bin/cweb-dek/-V3.64 runall-/usr/local/bin/-V3.64 &>/dev/null
-./runall.sh -p /var/local/bin/cweb-dek/ &>/dev/null
+git branch -D runall-/var/local/bin/-V3.64 runall-/usr/local/bin/-V3.64 &>/dev/null
+./runall.sh -p /var/local/bin/ &>/dev/null
 ./runall.sh -p /usr/local/bin/ &>/dev/null
-git checkout runall-/var/local/bin/cweb-dek/-V3.64 &>/dev/null
+git checkout runall-/var/local/bin/-V3.64 &>/dev/null
 for i in *.mp; do mpost $i; done >/dev/null
 cd /home/user/cweb/
 git rev-parse --abbrev-ref HEAD | grep -v master && exit
@@ -37,4 +37,4 @@ for i in *.dvi; do dvihash $i; done >hash.all
 git add .
 git commit -m 'tex' >/dev/null
 git checkout master &>/dev/null
-git diff runall-/var/local/bin/cweb-dek/-V3.64 runall-/usr/local/bin/-V3.64 -- . ':!*.tex' ':!*.log' ':!*.dvi' ':!*.fmt' ':!*.600pk' ':!*.0' ':!*.1' ':!*.2' ':!*.3' ':!*.4' ':!*.5' ':!*.6' ':!*.7' ':!*.8' ':!*.9' ':!*.10' ':!*.11' ':!*.12' ':!*.13' ':!*.14' ':!*.20' ':!*.21' ':!*.22' ':!*.23' ':!*.24' ':!*.25' ':!*.30' ':!*.31' ':!*.32' ':!*.33' ':!*.34' ':!*.35' ':!*.36' ':!*.37' ':!*.38' ':!*.39' ':!*.40' ':!*.41' ':!*.42' ':!*.50' ':!*.51' ':!*.52' ':!*.81' ':!*.82' ':!*.84' ':!*.90' ':!*.91' ':!*.92' ':!*.93' ':!*.94' ':!*.95' ':!*.96' ':!*.97' ':!*.98' ':!*.99' ':!*.100' ':!*.101' ':!*.102' ':!*.103' ':!*.104' ':!*.105' ':!*.106' ':!*.107' ':!*.108' ':!*.109' ':!*.110' ':!*.200' ':!*.201' ':!*.202' ':!*.203' ':!*.204' ':!*.205' ':!*.206' ':!*.207'
+git diff runall-/var/local/bin/-V3.64 runall-/usr/local/bin/-V3.64 -- . ':!*.tex' ':!*.log' ':!*.dvi' ':!*.fmt' ':!*.600pk' ':!*.0' ':!*.1' ':!*.2' ':!*.3' ':!*.4' ':!*.5' ':!*.6' ':!*.7' ':!*.8' ':!*.9' ':!*.10' ':!*.11' ':!*.12' ':!*.13' ':!*.14' ':!*.20' ':!*.21' ':!*.22' ':!*.23' ':!*.24' ':!*.25' ':!*.30' ':!*.31' ':!*.32' ':!*.33' ':!*.34' ':!*.35' ':!*.36' ':!*.37' ':!*.38' ':!*.39' ':!*.40' ':!*.41' ':!*.42' ':!*.50' ':!*.51' ':!*.52' ':!*.81' ':!*.82' ':!*.84' ':!*.90' ':!*.91' ':!*.92' ':!*.93' ':!*.94' ':!*.95' ':!*.96' ':!*.97' ':!*.98' ':!*.99' ':!*.100' ':!*.101' ':!*.102' ':!*.103' ':!*.104' ':!*.105' ':!*.106' ':!*.107' ':!*.108' ':!*.109' ':!*.110' ':!*.200' ':!*.201' ':!*.202' ':!*.203' ':!*.204' ':!*.205' ':!*.206' ':!*.207'
