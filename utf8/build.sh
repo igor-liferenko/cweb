@@ -24,21 +24,16 @@ rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
 cp -r /home/user/cweb/* .
-clang -g -w -c ctangle.c
-perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
-sed -i 's/wrap_up(){/wrap_up(){if(show_happiness)/' common.c
-clang -g -w -c common.c
-clang -g -o ctangle ctangle.o common.o
 tie -bhp -c comm-merged.ch common.w $DIR/comm-utf8.ch $DIR/comm-file.ch $DIR/comm-exten.ch $DIR/comm-show.ch || exit
-./ctangle -bhp common.w comm-merged.ch || exit
+/usr/bin/ctangle -bhp common.w comm-merged.ch || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit
 tie -bhp -m comm-utf8.h common.h $DIR/comm-utf8.hch || exit
 tie -bhp -c cweav-merged.ch cweave.w $DIR/cweav-utf8.ch $DIR/cweav-sort.ch $DIR/cweav-show.ch $DIR/cweav-y.ch $DIR/cweav-z.ch $DIR/cweav-file.ch $DIR/cweav-mac.ch || exit # ATTENTION: cweav-file.ch must be before cweav-mac.ch
-./ctangle -bhp cweave.w cweav-merged.ch || exit
+/usr/bin/ctangle -bhp cweave.w cweav-merged.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
 tie -bhp -c ctang-merged.ch ctangle.w $DIR/ctang-utf8.ch $DIR/ctang-show.ch $DIR/ctang-file.ch $DIR/ctang-pp.ch || exit
-./ctangle -bhp ctangle.w ctang-merged.ch || exit
+/usr/bin/ctangle -bhp ctangle.w ctang-merged.ch || exit
 clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o
 cp cweave ctangle /usr/local/bin/
@@ -50,12 +45,7 @@ rm -fr /tmp/cwebbuild/
 mkdir /tmp/cwebbuild/
 cd /tmp/cwebbuild/
 cp -r /home/user/cweb/* .
-clang -g -w -c ctangle.c
-perl -i -pe '$m+=s/history> harmless_message/history > spotless/;END{$?=!$m}' common.c || echo revise regexp
-sed -i 's/wrap_up(){/wrap_up(){if(show_happiness)/' common.c
-clang -g -w -c common.c
-clang -g -o ctangle ctangle.o common.o
-./ctangle -bhp common.w || exit
+/usr/bin/ctangle -bhp common.w || exit
 clang -g -w -c -DCWEBINPUTS=\"/home/user/0000-git/cweb\" common.c || exit # WARNING: instead of "Cannot open include file" it can give "Include file name too long" error message
 perl -i -pe 's/^\@h/#include <locale.h>\n$&/' cweave.w
 perl -i -pe 's/  argc=ac; argv=av;/  setlocale(LC_CTYPE,"ru_RU.CP1251");\n$&/' cweave.w
@@ -66,10 +56,10 @@ perl -i -pe 's[\Q\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\31
 perl -i -pe 's[\Q\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337]'"'"'\322\323\324\325\326\327\330\331\332\333\334\335\336\337\340\341'"'" cweave.w
 perl -i -pe 's[\Q\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357]'"'"'\342\343\344\345\270\346\347\350\351\352\353\354\355\356\357\360'"'" cweave.w
 perl -i -pe 's[\Q\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377]'"'"'\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377\271'"'" cweave.w
-./ctangle -bhp cweave.w $DIR/cweav-sort.ch || exit
+/usr/bin/ctangle -bhp cweave.w $DIR/cweav-sort.ch || exit
 clang -g -w -c cweave.c || exit
 clang -g -o cweave cweave.o common.o
-./ctangle -bhp ctangle.w $DIR/ctang-iconv.ch || exit
+/usr/bin/ctangle -bhp ctangle.w $DIR/ctang-iconv.ch || exit
 clang -g -w -c ctangle.c || exit
 clang -g -o ctangle ctangle.o common.o
 mkdir -p /var/local/bin/
