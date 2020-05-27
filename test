@@ -6,6 +6,7 @@ git checkout -q .
 git clean -f >/dev/null
 git checkout master &>/dev/null
 git branch -D runall-/usr/local/bin/-V3.64 runall-/home/user/cweb/-V3.64 &>/dev/null
+sed -i '0,/^@ /s//@* Intro. /' reflect.w
 ./runall.sh -p /usr/local/bin/ >runall.log 2>/dev/null
 git checkout runall-/usr/local/bin/-V3.64 &>/dev/null
 git add runall.log
@@ -15,6 +16,6 @@ git checkout master &>/dev/null
 git checkout runall-/home/user/cweb/-V3.64 &>/dev/null
 git add runall.log
 git commit -m 'runall' >/dev/null
-git commit -m 'cwebmac' . >/dev/null
 git checkout master &>/dev/null
 git diff runall-/usr/local/bin/-V3.64 runall-/home/user/cweb/-V3.64
+git checkout -q reflect.w
