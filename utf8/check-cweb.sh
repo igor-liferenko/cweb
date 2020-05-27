@@ -6,7 +6,7 @@ git checkout -q .
 git clean -f >/dev/null
 git checkout master &>/dev/null
 git branch -D runall-/var/local/bin/-V3.64 runall-/usr/local/bin/-V3.64 &>/dev/null
-sed -i '0,/^@ /s//@* Intro. /' reflect.w # see tex/question2.tex
+sed -i '0,/^@ /s//@* Intro. /' reflect.w
 ./runall.sh -p /var/local/bin/ >runall.log 2>/dev/null
 git checkout runall-/var/local/bin/-V3.64 &>/dev/null
 git add runall.log
