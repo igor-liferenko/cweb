@@ -35,7 +35,6 @@ cwebman.dvi
 cwebman.log
 cwebman.ps
 cwebman.toc
-wmerge.c
 comm-merged.ch
 comm-utf8.h
 ctang-merged.ch
