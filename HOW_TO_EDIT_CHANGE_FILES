@@ -1,12 +1,9 @@
 Check that orig.w does not contain changes via "git diff orig.w"
 
-Check that existing change-file applies to original without errors:
-  wmerge orig change >/dev/null
+Apply change-file to orig.w via
+  [c]tie -i orig.w change.ch
 
-Apply existing change-file to original via
-  wmerge orig change|sponge orig.w
-
-Then edit orig.w and put "xxx" in the place where you edited.
+Then change orig.w and put "xxx" in the place where you edited.
 Then do "git diff orig.w" - search by string "xxx" - this
 way you will see by context to which place of change.ch to
 put the new change.
