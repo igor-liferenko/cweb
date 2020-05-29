@@ -3,7 +3,7 @@
 @y
 #include <locale.h>
 @<Include files@>@/
-extern char *encTeX[];
+extern char *xchr[];
 @z
 
 @x
@@ -25,9 +25,9 @@ extern char *encTeX[];
     else {
       unsigned char z;
       for(z = 0x80; z <= 0xff; z++)
-        if (encTeX[z] && (strncmp(j, encTeX[z], strlen(encTeX[z])) == 0))
+        if (xchr[z] && (strncmp(j, xchr[z], strlen(xchr[z])) == 0))
           break;
       C_printf("%s",translit[z-0200]);
-      j+=strlen(encTeX[z])-1;
+      j+=strlen(xchr[z])-1;
     }
 @z

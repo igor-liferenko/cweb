@@ -27,7 +27,7 @@ the first three cases must return -1, the last two 2
 #include <limits.h>
 #include <locale.h>
 @<Include files@>@/
-extern char *encTeX[];
+extern char *xchr[];
 unsigned char enc(char *p)
 {
   unsigned char z;
@@ -39,7 +39,7 @@ unsigned char enc(char *p)
   wctomb(mb, wc);
 
   for(z = 0x80; z <= 0xff; z++)
-    if (encTeX[z] && (strncmp(mb, encTeX[z], strlen(encTeX[z])) == 0))
+    if (xchr[z] && (strncmp(mb, xchr[z], strlen(xchr[z])) == 0))
       break;
 
   return z;

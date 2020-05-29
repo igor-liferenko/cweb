@@ -4,7 +4,7 @@
 #include <wchar.h>
 #include <limits.h>
 @<Include files@>@/
-char *encTeX[256];
+char *xchr[256];
 @z
 
 @x
@@ -17,74 +17,74 @@ common_init()
 void
 common_init()
 {
-  /* TODO: rename `encTeX' to `xchr' and do via `#include "mapping"' and `-I/home/user/tex' */
-  encTeX[0x80] = "А";
-  encTeX[0xa0] = "а";
-  encTeX[0x81] = "Б";
-  encTeX[0xa1] = "б";
-  encTeX[0x82] = "В";
-  encTeX[0xa2] = "в";
-  encTeX[0x83] = "Г";
-  encTeX[0xa3] = "г";
-  encTeX[0x84] = "Д";
-  encTeX[0xa4] = "д";
-  encTeX[0x85] = "Е";
-  encTeX[0xa5] = "е";
-  encTeX[0xf0] = "Ё";
-  encTeX[0xf1] = "ё";
-  encTeX[0x86] = "Ж";
-  encTeX[0xa6] = "ж";
-  encTeX[0x87] = "З";
-  encTeX[0xa7] = "з";
-  encTeX[0x88] = "И";
-  encTeX[0xa8] = "и";
-  encTeX[0x89] = "Й";
-  encTeX[0xa9] = "й";
-  encTeX[0x8a] = "К";
-  encTeX[0xaa] = "к";
-  encTeX[0x8b] = "Л";
-  encTeX[0xab] = "л";
-  encTeX[0x8c] = "М";
-  encTeX[0xac] = "м";
-  encTeX[0x8d] = "Н";
-  encTeX[0xad] = "н";
-  encTeX[0x8e] = "О";
-  encTeX[0xae] = "о";
-  encTeX[0x8f] = "П";
-  encTeX[0xaf] = "п";
-  encTeX[0x90] = "Р";
-  encTeX[0xe0] = "р";
-  encTeX[0x91] = "С";
-  encTeX[0xe1] = "с";
-  encTeX[0x92] = "Т";
-  encTeX[0xe2] = "т";
-  encTeX[0x93] = "У";
-  encTeX[0xe3] = "у";
-  encTeX[0x94] = "Ф";
-  encTeX[0xe4] = "ф";
-  encTeX[0x95] = "Х";
-  encTeX[0xe5] = "х";
-  encTeX[0x96] = "Ц";
-  encTeX[0xe6] = "ц";
-  encTeX[0x97] = "Ч";
-  encTeX[0xe7] = "ч";
-  encTeX[0x98] = "Ш";
-  encTeX[0xe8] = "ш";
-  encTeX[0x99] = "Щ";
-  encTeX[0xe9] = "щ";
-  encTeX[0x9a] = "Ъ";
-  encTeX[0xea] = "ъ";
-  encTeX[0x9b] = "Ы";
-  encTeX[0xeb] = "ы";
-  encTeX[0x9c] = "Ь";
-  encTeX[0xec] = "ь";
-  encTeX[0x9d] = "Э";
-  encTeX[0xed] = "э";
-  encTeX[0x9e] = "Ю";
-  encTeX[0xee] = "ю";
-  encTeX[0x9f] = "Я";
-  encTeX[0xef] = "я";
-  encTeX[0xfc] = "№";
+  /* TODO: rename `xchr' to `xchr' and do via `#include "mapping"' and `-I/home/user/tex' */
+  xchr[0x80] = "А";
+  xchr[0xa0] = "а";
+  xchr[0x81] = "Б";
+  xchr[0xa1] = "б";
+  xchr[0x82] = "В";
+  xchr[0xa2] = "в";
+  xchr[0x83] = "Г";
+  xchr[0xa3] = "г";
+  xchr[0x84] = "Д";
+  xchr[0xa4] = "д";
+  xchr[0x85] = "Е";
+  xchr[0xa5] = "е";
+  xchr[0xf0] = "Ё";
+  xchr[0xf1] = "ё";
+  xchr[0x86] = "Ж";
+  xchr[0xa6] = "ж";
+  xchr[0x87] = "З";
+  xchr[0xa7] = "з";
+  xchr[0x88] = "И";
+  xchr[0xa8] = "и";
+  xchr[0x89] = "Й";
+  xchr[0xa9] = "й";
+  xchr[0x8a] = "К";
+  xchr[0xaa] = "к";
+  xchr[0x8b] = "Л";
+  xchr[0xab] = "л";
+  xchr[0x8c] = "М";
+  xchr[0xac] = "м";
+  xchr[0x8d] = "Н";
+  xchr[0xad] = "н";
+  xchr[0x8e] = "О";
+  xchr[0xae] = "о";
+  xchr[0x8f] = "П";
+  xchr[0xaf] = "п";
+  xchr[0x90] = "Р";
+  xchr[0xe0] = "р";
+  xchr[0x91] = "С";
+  xchr[0xe1] = "с";
+  xchr[0x92] = "Т";
+  xchr[0xe2] = "т";
+  xchr[0x93] = "У";
+  xchr[0xe3] = "у";
+  xchr[0x94] = "Ф";
+  xchr[0xe4] = "ф";
+  xchr[0x95] = "Х";
+  xchr[0xe5] = "х";
+  xchr[0x96] = "Ц";
+  xchr[0xe6] = "ц";
+  xchr[0x97] = "Ч";
+  xchr[0xe7] = "ч";
+  xchr[0x98] = "Ш";
+  xchr[0xe8] = "ш";
+  xchr[0x99] = "Щ";
+  xchr[0xe9] = "щ";
+  xchr[0x9a] = "Ъ";
+  xchr[0xea] = "ъ";
+  xchr[0x9b] = "Ы";
+  xchr[0xeb] = "ы";
+  xchr[0x9c] = "Ь";
+  xchr[0xec] = "ь";
+  xchr[0x9d] = "Э";
+  xchr[0xed] = "э";
+  xchr[0x9e] = "Ю";
+  xchr[0xee] = "ю";
+  xchr[0x9f] = "Я";
+  xchr[0xef] = "я";
+  xchr[0xfc] = "№";
 @z
 
 @x
