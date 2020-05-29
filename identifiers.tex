@@ -1,8 +1,10 @@
-% when "sigaction" is used as a type, to make it bold use @= trick;
+% To make `sigaction' bold when it is used as a type, use this:
+% struct @t\beginbold@> @=sigaction@> @t\endbold@> sa;
 % as a bonus, it becomes a reserved word (i.e., not shows up in index)
 \def\beginbold{\egroup\bgroup\let\vb=\&\bgroup}
 \def\endbold{\egroup\egroup\bgroup}
 
-% use @= trick for inner variables of structures from header files not to put them in index
-% (if \noinx is not used)
+% Not to put inner variables of structures from header files to index
+% (if \noinx is not used), use this:
+% sa.@t\0@>@=sa_handler@>@t\0@> = child_handler;
 \def\0{\egroup\ifx\hideindex\undefined\bgroup\let\vb=\\\def\hideindex{}\else\egroup\fi\bgroup}
