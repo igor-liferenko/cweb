@@ -5,4 +5,4 @@
 
 % use @= trick for inner variables of structures from header files not to put them in index
 % (if \noinx is not used)
-\def\0{\ifx\hide\undefined\egroup\bgroup\let\vb=\\\def\hide{}\bgroup\else\egroup\egroup\bgroup}
+\def\0{\egroup\ifx\hideindex\undefined\bgroup\let\vb=\\\def\hideindex{}\else\egroup\fi\bgroup}
