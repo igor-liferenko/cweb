@@ -4,4 +4,4 @@
 
 % Not to put inner variables of structures from header files to index, use this:
 % sa.@t\0@>@=sa_handler@>@t\0@> = child_handler;
-\def\0{\egroup\ifx\hideindex\undefined\bgroup\let\vb=\\\def\hideindex{}\else\egroup\fi\bgroup}
+\def\0{\egroup\ifx\vb\\\egroup\else\bgroup\let\vb=\\\fi\bgroup}
