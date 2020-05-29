@@ -27,19 +27,17 @@ the first three cases must return -1, the last two 2
 #include <limits.h>
 #include <locale.h>
 @<Include files@>@/
-extern char *xchr[];
-unsigned char enc(char *p)
+extern wchar_t xchr[];
+unsigned char xord(char *p)
 {
   unsigned char z;
   wchar_t wc;
-  char mb[MB_CUR_MAX];
 
   mbtowc(&wc, p, MB_CUR_MAX);
   if (iswupper(wc)) wc=towlower(wc);
-  wctomb(mb, wc);
 
   for(z = 0x80; z <= 0xff; z++)
-    if (xchr[z] && (strncmp(mb, xchr[z], strlen(xchr[z])) == 0))
+    if (xchr[z] && xchr[z] == wc)
       break;
 
   return z;
@@ -161,7 +159,7 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
       if (xisupper(c)) c=tolower(c);
 @y
       if (xisupper(c)) c=tolower(c);
-      else if (ishigh(c)) c=enc(cur_name->byte_start);
+      else if (ishigh(c)) c=xord(cur_name->byte_start);
 @z
 
 Move 'ё' down next to 'е' and shift the rest of the sequence:
@@ -206,7 +204,7 @@ strcpy(collate+213,"\357\360\362\363\364\365\366\367\370\371\372\373\374\375\376
     else {
       c=(eight_bits) *cur_byte;
       if (xisupper(c)) c=tolower(c);
-      else if (ishigh(c)) c=enc(cur_byte);
+      else if (ishigh(c)) c=xord(cur_byte);
 @z
 
 @x

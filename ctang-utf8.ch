@@ -3,7 +3,7 @@
 @y
 #include <locale.h>
 @<Include files@>@/
-extern char *xchr[];
+extern wchar_t xchr[];
 @z
 
 @x
@@ -24,10 +24,12 @@ extern char *xchr[];
 @y
     else {
       unsigned char z;
+      wchar_t wc;
+      mbtowc(&wc, j, MB_CUR_MAX);
       for(z = 0x80; z <= 0xff; z++)
-        if (xchr[z] && (strncmp(j, xchr[z], strlen(xchr[z])) == 0))
+        if (xchr[z] && xchr[z] == wc)
           break;
       C_printf("%s",translit[z-0200]);
-      j+=strlen(xchr[z])-1;
+      j+=mblen(j,MB_CUR_MAX)-1;
     }
 @z
