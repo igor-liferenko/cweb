@@ -17,7 +17,7 @@ common_init()
 void
 common_init()
 {
-  /* TODO: rename `xchr' to `xchr' and do via `#include "mapping"' and `-I/home/user/tex' */
+  /* TODO: do via `#include "mapping"' and `-I/home/user/tex' */
   xchr[0x80] = "А";
   xchr[0xa0] = "а";
   xchr[0x81] = "Б";
