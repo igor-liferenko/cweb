@@ -4,6 +4,5 @@
 \def\endbold{\egroup\egroup\bgroup}
 
 % use @= trick for inner variables of structures from header files not to put them in index
-% (in \noinx is not used)
-\def\beginhide{\egroup\bgroup\let\vb=\\\bgroup}
-\def\endhide{\egroup\egroup\bgroup}
+% (if \noinx is not used)
+\def\0{\ifx\hide\undefined\egroup\bgroup\let\vb=\\\def\hide{}\bgroup\else\egroup\egroup\bgroup}
