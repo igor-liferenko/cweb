@@ -4,7 +4,7 @@ Apply change-file to orig.w via
   [c]tie -i orig.w change.ch
 
 Then change orig.w and put "xxx" in the place where you edited.
-Then do "git diff orig.w" - search by string "xxx" - this
+Then do "git difftool orig.w" (edit ~/.gitconfig to use -w -u flags to diff) - search by string "xxx" - this
 way you will see by context to which place of change.ch to
 put the new change.
 
