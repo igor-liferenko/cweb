@@ -6,7 +6,7 @@ out_ptr=out_buf+1; out_line=1; active_file=tex_file;
 *out_ptr='c'; tex_printf("\\input cwebma");
 @y
 out_ptr=out_buf+1; out_line=1;
-*out_ptr='c';
+*out_ptr=flags['r']?'u':'c';
 @z
 
 @x
@@ -17,5 +17,5 @@ if ((tex_file=fopen(tex_file_name,"w"))==NULL)
   fatal("! Cannot open output file ", tex_file_name);
 @.Cannot open output file@>
 active_file=tex_file;
-tex_printf("\\input cwebma");
+tex_printf(flags['r']?"\\input cwebmac-r":"\\input cwebma");
 @z

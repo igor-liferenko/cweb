@@ -3,7 +3,7 @@ all:
 	/usr/bin/ctangle -bhp common comm-merged
 	clang -g -w -c common.c -I/home/user/tex
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
-	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweav-show.ch cweav-c.ch cweav-d.ch cweav-y.ch cweav-z.ch cweav-file.ch cweav-mac.ch >/dev/null
+	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweav-show.ch cweav-c.ch cweav-d.ch cweav-y.ch cweav-z.ch cweav-file.ch >/dev/null
 	/usr/bin/ctangle -bhp cweave cweav-merged
 	clang -g -w -c cweave.c
 	clang -g -o cweave cweave.o common.o
