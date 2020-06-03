@@ -4,7 +4,7 @@
 #include <wchar.h>
 #include <limits.h>
 @<Include files@>@/
-char *xchr[256];
+wchar_t xchr[256];
 @z
 
 @x
