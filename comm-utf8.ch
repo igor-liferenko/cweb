@@ -17,7 +17,7 @@ common_init()
 void
 common_init()
 {
-  for (int i = 128; i < 256; i++) xchr[i] = L' ';
+  for (int i = 128; i < 256; i++) xchr[i] = 0;
   #include "mapping"
 @z
 

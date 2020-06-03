@@ -1,5 +1,5 @@
 Use the following program to see that mblen works as expected in mbstowcslen:
-
+TODO: see comment in git lg prog/test-locale.w (?) with explanation why things did not work before using mblen
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -30,7 +30,7 @@ the first three cases must return -1, the last two 2
 extern wchar_t xchr[];
 unsigned char xord(char *p)
 {
-  unsigned char z;
+  int z;
   wchar_t wc;
 
   mbtowc(&wc, p, MB_CUR_MAX);
@@ -40,7 +40,8 @@ unsigned char xord(char *p)
     if (xchr[z] && xchr[z] == wc)
       break;
 
-  return z;
+  return (unsigned char) z;
+//TODO: handle characters which are not in mapping
 }
 int mbsntowcslen(char *mbs, int len)
 {
