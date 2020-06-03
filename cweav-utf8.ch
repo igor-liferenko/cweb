@@ -30,18 +30,16 @@ the first three cases must return -1, the last two 2
 extern wchar_t xchr[];
 unsigned char xord(char *p)
 {
-  int z;
   wchar_t wc;
 
   mbtowc(&wc, p, MB_CUR_MAX);
   if (iswupper(wc)) wc=towlower(wc);
 
-  for(z = 0x80; z <= 0xff; z++)
-    if (xchr[z] && xchr[z] == wc)
-      break;
-
-  return (unsigned char) z;
-//TODO: handle characters which are not in mapping
+  int z;
+  for (z = 0x80; z <= 0xff; z++)
+    if (xchr[z] == wc)
+      return (unsigned char) z;
+  return 127;
 }
 int mbsntowcslen(char *mbs, int len)
 {
