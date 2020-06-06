@@ -27,10 +27,10 @@ extern wchar_t xchr[];
 
       j += mbtowc(&wc, j, MB_CUR_MAX) - 1;
 
-      int z;
+      unsigned char z;
       for (z = 0x80; z <= 0xff; z++)
         if (xchr[z] == wc)
           break;
-      if (z > 0xff) C_putc(127); else C_printf("%s",translit[z-0200]);
+      C_printf("%s",translit[z-0200]);
     }
 @z
