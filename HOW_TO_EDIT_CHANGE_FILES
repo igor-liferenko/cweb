@@ -1,11 +1,7 @@
-Check that orig.w does not contain changes via "git diff orig.w"
-
 Apply change-file to orig.w via
-  [c]tie -i orig.w change.ch
+  [c]tie /tmp/x orig.w change.ch
 
-Then change orig.w and put "xxx" in the place where you edited.
-Then do "git difftool orig.w" (edit ~/.gitconfig to use -w -u flags to diff) - search by string "xxx" - this
+Then change /tmp/x and put "xxx" in the place where you edited.
+Then do "colordiff -u -w orig.w /tmp/x" - search by string "xxx" - this
 way you will see by context to which place of change.ch to
 put the new change.
-
-Then do git checkout orig.w
