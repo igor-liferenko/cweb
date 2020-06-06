@@ -17,7 +17,7 @@ common_init()
 void
 common_init()
 {
-  #include "mapping"
+  #include "/home/user/tex/mapping"
 @z
 
 @x
