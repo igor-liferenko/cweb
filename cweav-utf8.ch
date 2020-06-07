@@ -204,3 +204,7 @@ strcpy(collate+213,"\357\360\362\363\364\365\366\367\370\371\372\373\374\375\376
         if (iswlower(wc)) goto lowcase;
       }
 @z
+
+TODO: treat buffer_end like in comm-utf8.ch
+while (loc<=buffer_end-7 && xisspace(*loc)) loc++;
+if (loc<=buffer_end-6 && strncmp(loc,"include",7)==0) sharp_include_line=1;
