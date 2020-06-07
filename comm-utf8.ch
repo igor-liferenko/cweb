@@ -5,6 +5,18 @@
 #include <limits.h>
 @<Include files@>@/
 wchar_t xchr[256];
+int mbsntowcslen(char *mbs, int len)
+{
+  int n = 0;
+  int l = 0;
+  int r;
+  while (l<len) {
+    if ((r=mblen(mbs+l, len-l))==-1) break;
+    l+=r;
+    n++;
+  }
+  return n;
+}
 @z
 
 @x
@@ -33,6 +45,15 @@ char *buffer_end=buffer+buf_size*MB_LEN_MAX-2; /* end of |buffer| */
 @z
 
 @x
+  while (k<=buffer_end && (c=getc(fp)) != EOF && c!='\n')
+    if ((*(k++) = c) != ' ') limit = k;
+  if (k>buffer_end)
+@y
+  while (mbsntowcslen(buffer,k-buffer)<buf_size-1 && (c=getc(fp)) != EOF && c!='\n')
+    if ((*(k++) = c) != ' ') limit = k;
+  if (mbsntowcslen(buffer,k-buffer)>=buf_size-1)
+@z
+
 int input_ln(fp) /* copies a line into |buffer| or returns 0 */
 FILE *fp; /* what file to read from */
 {
@@ -49,7 +70,7 @@ FILE *fp; /* what file to read from */
   }
   if (c==EOF && limit==buffer) return(0);  /* there was nothing after
     the last newline */
-@y
+ @y
 size_t wcsntombs(char *mbs, wchar_t *s, size_t len)
 {
   size_t n = 0;
@@ -96,7 +117,7 @@ FILE *fp; /* what file to read from */
   }
   if (c==WEOF && wlimit==wbuffer) return(0);  /* there was nothing after
     the last newline */
-@z
+ @z
 
 @x
 char change_buffer[buf_size]; /* next line of |change_file| */

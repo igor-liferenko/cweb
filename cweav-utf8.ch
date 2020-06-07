@@ -40,18 +40,7 @@ unsigned char xord(char *p)
     if (xchr[z] == wc)
       return (unsigned char) z;
 }
-int mbsntowcslen(char *mbs, int len)
-{
-  int n = 0;
-  int l = 0;
-  int r;
-  while (l<len) {
-    if ((r=mblen(mbs+l, len-l))==-1) break;
-    l+=r;
-    n++;
-  }
-  return n;
-}
+int mbsntowcslen(char *mbs, int len);
 @z
 
 @x
