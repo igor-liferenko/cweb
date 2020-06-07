@@ -38,7 +38,7 @@ unsigned char xord(char *p)
   unsigned char z;
   for (z = 0x80; z <= 0xff; z++)
     if (xchr[z] == wc)
-      return (unsigned char) z;
+      return z;
 }
 int mbsntowcslen(char *mbs, int len);
 @z
