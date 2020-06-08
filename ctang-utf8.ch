@@ -28,7 +28,7 @@ extern wchar_t xchr[];
       j += mbtowc(&wc, j, MB_CUR_MAX) - 1;
 
       unsigned char z;
-      for (z = 0x80; z <= 0xff; z++)
+      for (z = 0; z <= 0xff; z++)
         if (xchr[z] == wc)
           break;
       C_printf("%s",translit[z-0200]);

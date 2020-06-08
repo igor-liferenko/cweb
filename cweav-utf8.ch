@@ -36,7 +36,7 @@ unsigned char xord(char *p)
   if (iswupper(wc)) wc=towlower(wc);
 
   unsigned char z;
-  for (z = 0x80; z <= 0xff; z++)
+  for (z = 0; z <= 0xff; z++)
     if (xchr[z] == wc)
       return z;
 }
