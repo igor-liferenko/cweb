@@ -1,0 +1,1 @@
+if you need to restore cct/ccw, don't use cweav-sort.ch - just convert UTF-8 .idx to cp1251 with iconv and sort alphabetically and iconv back to UTF-8, and just sort second .idx alphabetically
