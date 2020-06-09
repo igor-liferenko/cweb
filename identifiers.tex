@@ -2,7 +2,7 @@
 % struct
 % @t\beginbold@> @=sigaction@> @t\endbold@>
 % sa;
-% "sigaction" never needs to be used in comment after #include ("sigaction" function will always be used if "sigaction" type is used, so "sigaction" function will be in the comment to protect signal.h), so the fact that it is not put to index is OK
+% "sigaction" type must be bold but "sigaction" function must not; CWEB allows to treat "sigaction" only one way - this concerns not only "boldness", but also index; but it is sufficient to put to index only "sigaction" function ("sigaction" function will always be used if "sigaction" type is used, so "sigaction" function will be in the comment after #include to protect signal.h); so, to make "sigaction" type bold we can use the trick which does not put it to index
 \def\beginbold{\egroup\bgroup\let\vb=\&\bgroup} \def\endbold{\egroup\egroup\bgroup}
 
 % Not to put inner variables of structures from header files to index, use this:
