@@ -1,16 +1,8 @@
 @x
 @<Include files@>@/
 @y
-#include <locale.h>
 @<Include files@>@/
 extern wchar_t xchr[];
-@z
-
-@x
-  argc=ac; argv=av;
-@y
-  setlocale(LC_CTYPE, "C.UTF-8");
-  argc=ac; argv=av;
 @z
 
 @x

@@ -2,6 +2,7 @@
 @<Include files@>@/
 @y
 #include <wchar.h>
+#include <locale.h>
 #include <limits.h>
 @<Include files@>@/
 wchar_t xchr[256];
@@ -29,6 +30,7 @@ common_init()
 void
 common_init()
 {
+  setlocale(LC_CTYPE, "C.UTF-8");
   #include "/home/user/tex/mapping"
 @z
 

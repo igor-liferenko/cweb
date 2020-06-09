@@ -25,7 +25,6 @@ the first three cases must return -1, the last two 2
 #include <wchar.h>
 #include <wctype.h>
 #include <limits.h>
-#include <locale.h>
 @<Include files@>@/
 extern wchar_t xchr[];
 unsigned char xord(char *p)
@@ -41,13 +40,6 @@ unsigned char xord(char *p)
       return z;
 }
 int mbsntowcslen(char *mbs, int len);
-@z
-
-@x
-  argc=ac; argv=av;
-@y
-  setlocale(LC_CTYPE, "C.UTF-8");
-  argc=ac; argv=av;
 @z
 
 @x
