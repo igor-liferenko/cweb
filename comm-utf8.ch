@@ -21,17 +21,13 @@ int mbsntowcslen(char *mbs, int len)
 @z
 
 @x
-@c
-void
 common_init()
 {
 @y
-@c
-void
 common_init()
 {
-  setlocale(LC_CTYPE, "C.UTF-8");
-  #include "/home/user/tex/mapping"
+setlocale(LC_CTYPE, "C.UTF-8");
+@i /home/user/tex/mapping
 @z
 
 @x
