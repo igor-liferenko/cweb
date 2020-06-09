@@ -1,23 +1,3 @@
-Use the following program to see that mblen works as expected in mbstowcslen:
-TODO: see comment in git lg prog/test-locale.w (?) with explanation why things did not work before using mblen
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-int main(void)
-{
-  setlocale(LC_CTYPE, "C.UTF-8");
-  char *s = "\320\215";
-  char *t = "\320";
-  printf("%d\n", mblen(t, 1));
-  printf("%d\n", mblen(t, MB_CUR_MAX));
-  printf("%d\n", mblen(s, 1));
-  printf("%d\n", mblen(s, 2));
-  printf("%d\n", mblen(s, MB_CUR_MAX));
-  return 0;
-}
-
-the first three cases must return -1, the last two 2
-
 @x
 @c @<Include files@>@/
 @y
