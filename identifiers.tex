@@ -2,6 +2,7 @@
 % struct
 % @t\beginbold@> @=sigaction@> @t\endbold@>
 % sa;
+% "sigaction" never needs to be used in comment after #include ("sigaction" function will always be used if "sigaction" type is used, so "sigaction" function will be in the comment to protect signal.h), so the fact that it is not put to index is OK
 \def\beginbold{\egroup\bgroup\let\vb=\&\bgroup} \def\endbold{\egroup\egroup\bgroup}
 
 % Not to put inner variables of structures from header files to index, use this:
