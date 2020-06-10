@@ -1,5 +1,5 @@
 all:
-	tie -c comm-merged.ch common.w comm-utf8.ch comm-file.ch comm-exten.ch comm-show.ch >/dev/null
+	tie -c comm-merged.ch common.w comm-utf8.ch comm-file.ch comm-show.ch >/dev/null
 	/usr/bin/ctangle -bhp common comm-merged
 	gcc -g -Og -w -c common.c
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
