@@ -26,8 +26,8 @@ common_init()
 @y
 common_init()
 {
-setlocale(LC_CTYPE, "C.UTF-8");
 @i /home/user/tex/mapping
+  setlocale(LC_CTYPE, "C.UTF-8");
 @z
 
 @x
