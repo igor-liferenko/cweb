@@ -1,5 +1,3 @@
-to comm-exten.ch add that .ch extension will be automatically used for ch-files
-
 cleanup changes from original cwebman.tex
 
 read ctangle.ch and do that 'make print' will work
