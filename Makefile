@@ -21,7 +21,6 @@ print:
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
 	@tex cwebman >/dev/null
-	@touch -d '-5 seconds' cweave.tex ctangle.tex common.tex # for 'test' in prt.fn
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
 view:
