@@ -3,11 +3,11 @@ all:
 	/usr/bin/ctangle -bhp common comm-merged
 	gcc -g -Og -w -c common.c
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
-	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweav-show.ch cweav-c.ch cweav-d.ch cweav-y.ch cweav-z.ch cweav-mac.ch >/dev/null
+	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweav-show.ch cweave+c.ch cweave+d.ch cweave+y.ch cweave+z.ch cweave+r.ch >/dev/null
 	/usr/bin/ctangle -bhp cweave cweav-merged
 	gcc -g -Og -w -c cweave.c
 	gcc -g -Og -o cweave cweave.o common.o
-	tie -c ctang-merged.ch ctangle.w ctang-utf8.ch ctang-show.ch ctang-pp.ch >/dev/null
+	tie -c ctang-merged.ch ctangle.w ctang-utf8.ch ctang-show.ch ctangle+l.ch >/dev/null
 	/usr/bin/ctangle -bhp ctangle ctang-merged
 	gcc -g -Og -w -c ctangle.c
 	gcc -g -Og -o ctangle ctangle.o common.o
