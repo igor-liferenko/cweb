@@ -14,9 +14,9 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
-	@/usr/local/bin/cweave cweave cweave >/dev/null
-	@/usr/local/bin/cweave ctangle ctangle >/dev/null
-	@/usr/local/bin/cweave common common >/dev/null
+	@/usr/local/bin/cweave -bhp cweave cweave
+	@/usr/local/bin/cweave -bhp ctangle ctangle
+	@/usr/local/bin/cweave -bhp common common
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
@@ -25,9 +25,9 @@ print:
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
 view:
-	@/usr/local/bin/cweave cweave >/dev/null
-	@/usr/local/bin/cweave ctangle >/dev/null
-	@/usr/local/bin/cweave common >/dev/null
+	@/usr/local/bin/cweave -bhp cweave my-cweave
+	@/usr/local/bin/cweave -bhp ctangle
+	@/usr/local/bin/cweave -bhp common my-common
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
