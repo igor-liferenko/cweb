@@ -1,14 +1,14 @@
 all:
 	tie -c comm-merged.ch common.w comm-utf8.ch comm-env.ch comm-bhp.ch >/dev/null
-	/usr/bin/ctangle -bhp common comm-merged
+	/bin/ctangle common comm-merged
 	gcc -g -Og -w -c common.c
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
 	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweave+c.ch cweave+d.ch cweave+y.ch cweave+z.ch cweave+r.ch >/dev/null
-	/usr/bin/ctangle -bhp cweave cweav-merged
+	/bin/ctangle cweave cweav-merged
 	gcc -g -Og -w -c cweave.c
 	gcc -g -Og -o cweave cweave.o common.o
 	tie -c ctang-merged.ch ctangle.w ctang-utf8.ch ctangle+l.ch >/dev/null
-	/usr/bin/ctangle -bhp ctangle ctang-merged
+	/bin/ctangle ctangle ctang-merged
 	gcc -g -Og -w -c ctangle.c
 	gcc -g -Og -o ctangle ctangle.o common.o
 	cp cweave ctangle /usr/local/bin/
