@@ -1,5 +1,5 @@
 all:
-	tie -c comm-merged.ch common.w comm-utf8.ch comm-show.ch comm-env.ch >/dev/null
+	tie -c comm-merged.ch common.w comm-utf8.ch comm-show.ch comm-env.ch comm-bhp.ch >/dev/null
 	/usr/bin/ctangle -bhp common comm-merged
 	gcc -g -Og -w -c common.c
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
@@ -14,9 +14,9 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
-	@/usr/local/bin/cweave -bhp cweave cweave
-	@/usr/local/bin/cweave -bhp ctangle ctangle
-	@/usr/local/bin/cweave -bhp common common
+	@/usr/local/bin/cweave cweave cweave
+	@/usr/local/bin/cweave ctangle ctangle
+	@/usr/local/bin/cweave common common
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
@@ -24,9 +24,9 @@ print:
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
 
 view:
-	@/usr/local/bin/cweave -bhp cweave my-cweave
-	@/usr/local/bin/cweave -bhp ctangle
-	@/usr/local/bin/cweave -bhp common my-common
+	@/usr/local/bin/cweave cweave my-cweave
+	@/usr/local/bin/cweave ctangle
+	@/usr/local/bin/cweave common my-common
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
