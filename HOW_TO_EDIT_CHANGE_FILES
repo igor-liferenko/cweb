@@ -1,5 +1,5 @@
 Apply change-file to orig.w via
-  [c]tie /tmp/x orig.w change.ch
+  [c]tie -m /tmp/x orig.w change.ch
 
 Then change /tmp/x and put "xxx" in the place where you edited.
 Then do "colordiff -u -w orig.w /tmp/x" - search by string "xxx" - this
