@@ -5,7 +5,10 @@
 #include <locale.h>
 #include <limits.h>
 @<Include files@>@/
-wchar_t xchr[256];
+wchar_t xchr[256]; /* it is used only for input (in reverse search, because array cannot be
+  indexed by 32-bit value); for output |translit| array is used in ctangle,
+  otherwise input is just copied to output - input is converted to
+  internal encoding just for analysis */
 int mbsntowcslen(char *mbs, int len)
 {
   int n = 0;
