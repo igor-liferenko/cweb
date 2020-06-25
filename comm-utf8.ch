@@ -9,7 +9,11 @@ wchar_t xchr[256]; /* it is used only for input (in reverse search, because arra
   indexed by 32-bit value); for output |translit| array is used in ctangle,
   otherwise input is just copied to output - input is converted to
   internal encoding just for analysis */
-int mbsntowcslen(char *mbs, int len)
+int mbsntowcslen(char *mbs, int len) /* it is used to check length of |buffer| on reading from file
+  and to check length of |out_buf| on preparing write to file; multibyte character may be
+  incomplete, because data is added byte-by-byte - we use `length' argument to |mblen| and
+  use its return value to check this - if multibyte sequence added so far is incomplete,
+  the effect is to ignore it */
 {
   int n = 0;
   int l = 0;
