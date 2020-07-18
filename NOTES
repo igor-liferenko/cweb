@@ -1,1 +1,1 @@
-don't comment a section (@<...@>) with #if 0 ... #endif
+don't comment a section (@<...@>) with #if 0 ... #endif - this is not supported - otherwise line numers in compiler errors and warnings will be wrong and gdb line numbers too
