@@ -9,7 +9,7 @@ finish_line() /* do this at the end of a line */
     if (!xisspace(*p)) break;
     p++;
   }
-  if (p > out_ptr) /* all spaces */
+  if (p > out_ptr) /* all spaces or empty */
     out_ptr = out_buf;
 @z
 
