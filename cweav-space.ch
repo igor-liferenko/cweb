@@ -4,10 +4,13 @@ finish_line() /* do this at the end of a line */
 @y
 finish_line() /* do this at the end of a line */
 {
-  int all_spaces = 1;
-  for (char *p = out_buf+1; p <= out_ptr; p++)
-    if (!xisspace(*p)) all_spaces = 0;
-  if (all_spaces) out_ptr = out_buf;
+  char *p = out_buf+1;
+  while (p <= out_ptr) {
+    if (!xisspace(*p)) break;
+    p++;
+  }
+  if (p > out_ptr) /* all spaces */
+    out_ptr = out_buf;
 @z
 
 @x
