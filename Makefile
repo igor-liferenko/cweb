@@ -22,19 +22,3 @@ print:
 	@tex common >/dev/null
 	@tex cwebman >/dev/null
 	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
-
-view:
-	@/usr/local/bin/cweave cweave my-cweave
-	@/usr/local/bin/cweave ctangle
-	@/usr/local/bin/cweave common my-common
-	@tex cweave >/dev/null
-	@tex ctangle >/dev/null
-	@tex common >/dev/null
-	@patch -s cwebman.tex cwebman-non-duplex.patch
-	@tex cwebman >/dev/null
-	@patch -s -R cwebman.tex cwebman-non-duplex.patch
-	@dvipdfmx -q -x 22.45mm -y 34.2mm cwebman
-	@dvipdfmx -q -x 22.45mm -y 34.2mm common
-	@dvipdfmx -q -x 22.45mm -y 34.2mm cweave
-	@dvipdfmx -q -x 22.45mm -y 34.2mm ctangle
-	@echo ctangle.pdf common.pdf cweave.pdf cwebman.pdf
