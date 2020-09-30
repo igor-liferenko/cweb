@@ -1,4 +1,4 @@
-NOTE: this file is used for "texdoc common"
+NOTE: this file is used in "texdoc common"
 
 Don't compare address of character with offset from the beginning of buffer.
 @x
