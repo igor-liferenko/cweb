@@ -33,4 +33,8 @@ view:
 	@patch -s cwebman.tex cwebman-non-duplex.patch
 	@tex cwebman >/dev/null
 	@patch -s -R cwebman.tex cwebman-non-duplex.patch
-	@echo everything is ready - use \"dvi ctangle\", \"dvi common\", \"dvi cweave\" and \"dvi cwebman\"
+	@dvipdfmx -q -x 22.45mm -y 34.2mm cwebman
+	@dvipdfmx -q -x 22.45mm -y 34.2mm common
+	@dvipdfmx -q -x 22.45mm -y 34.2mm cweave
+	@dvipdfmx -q -x 22.45mm -y 34.2mm ctangle
+	@echo ctangle.pdf common.pdf cweave.pdf cwebman.pdf
