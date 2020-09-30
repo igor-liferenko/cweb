@@ -1,3 +1,5 @@
+NOTE: this file is used in "texdoc cweave"
+
 Use |limit| instead of |buffer_end|.
 @x
 while (loc<=buffer_end-7 && xisspace(*loc)) loc++;

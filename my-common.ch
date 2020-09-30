@@ -1,3 +1,5 @@
+NOTE: this file is used for "texdoc common"
+
 Don't compare address of character with offset from the beginning of buffer.
 @x
 Trailing blanks are ignored. The value of |limit| must be strictly less
