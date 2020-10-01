@@ -1,4 +1,4 @@
-NOTE: this file is used in "texdoc cweave"
+NOTE: this file is used in texdoc.fn
 
 Use |limit| instead of |buffer_end|.
 @x
