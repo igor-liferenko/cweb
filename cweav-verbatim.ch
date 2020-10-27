@@ -1,15 +1,18 @@
+Spaces in the end of a line are never needed, but in the beginning
+of a line they may be important (e.g., for verbatim listing).
+So, we don't copy spaces or tab marks into the end of a line. This
+makes the test for empty lines in |finish_line| work.
+
 @x
 finish_line() /* do this at the end of a line */
 {
 @y
 finish_line() /* do this at the end of a line */
 {
-  char *p = out_buf+1;
-  while (p <= out_ptr) {
-    if (!xisspace(*p)) break;
-    p++;
+  while (out_ptr > out_buf) {
+    if (!xisspace(*out_ptr)) break;
+    out_ptr--;
   }
-  if (p > out_ptr) out_ptr = out_buf;
 @z
 
 @x
