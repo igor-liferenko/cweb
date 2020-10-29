@@ -1,9 +1,5 @@
 % This file generates the user manual; TeX it, don't read it!
 % update 14 Nov 2016 by DEK: corrected obsolete remarks re debugging info
-\let\oldshipout\shipout
-\def\shipout{\global\let\shipout\oldshipout\afterassignment\myboat\setbox255=}
-\def\myboat{\aftergroup\myship}
-\def\myship{\setbox255=\vbox{\special{header=config.duplong}\unvbox255}\shipout\box255}
 \def\tangref{3} % where the main explanation of CTANGLing is given
 \input cwebmac
 \hoffset=12.29mm % purely empirical - change if needed
