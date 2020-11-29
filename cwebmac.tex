@@ -213,8 +213,6 @@
 \def\takethree#1#2#3{#3}
 \def\nullsec{\eightrm\kern-2em} % the \kern-2em cancels \qquad in headers
 
-\newcount\abspageno
-
 \let\page=\pagebody \raggedbottom
 % \def\page{\box255 }\normalbottom % faster, but loses plain TeX footnotes
 \def\normaloutput#1#2#3{\ifodd\pageno\hoffset=\pageshift\fi
@@ -223,8 +221,7 @@
   \iftitle\global\titlefalse
   \else\hbox to\pagewidth{\vbox to10pt{}\ifodd\pageno #3\else#2\fi}\fi
   \vfill#1}} % parameter #1 is the page itself
-  \global\advance\pageno by1
-  \global\advance\abspageno by1}
+  \global\advance\pageno by1}
 
 \gtitle={\.{CWEB} output} % this running head is reset by starred sections
 \mark{\noexpand\nullsec0{\the\gtitle}}
@@ -301,16 +298,7 @@
   \def\I{\par\hangindent 2em}\let\*=*
   \readsections}
 \def\con{\par\vfill\eject % finish the section names
-  % if we are on even page and there is even number of pages in contents, insert empty page
-  \ifodd\pageno\else
-    \advance\pageno by -\abspageno % number of first page
-    \advance\pageno by -\contentspagenumber\relax % number of pages in contents
-    \ifodd\pageno\else
-      \advance\pageno by\contentspagenumber\relax % restore \count0 value for last
-      \advance\pageno by\abspageno                % page (stored in DVI file)
-      \titletrue\null\vfill\eject
-    \fi
-  \fi
+  \ifodd\pageno\else\titletrue\null\vfill\eject\fi
   \rightskip 0pt \hyphenpenalty 50 \tolerance 200
   \setpage \output={\normaloutput\page\lheader\rheader}
   \titletrue % prepare to output the table of contents

@@ -1,0 +1,1 @@
+Page numbering increases sequentially and contents must have its last page to be numbered 0 (document begins with page 1), so set \contentspagenumber{...} accordingly in .w file if contents is more than one page.

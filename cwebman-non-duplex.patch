@@ -1,8 +1,3 @@
-@@ -9,4 +4,0 @@
--\hoffset=12.29mm % purely empirical - change if needed
--\pageshift=210mm \advance\pageshift by-6.5in \advance\pageshift by-\hoffset
--\advance\hoffset by-22.45mm
--\advance\pageshift by-22.45mm
-@@ -96 +88 @@
+@@ -89 +89 @@
 -\pageno=-1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
 +\pageno=0 \titletrue\eject
