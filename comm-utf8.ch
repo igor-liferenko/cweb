@@ -27,7 +27,7 @@ int mbsntowcslen(char *mbs, int len) /* it is used to check length of |buffer| o
 }
 @z
 
-TO UNDERSTAND: how ctangle/cweave get away without mapping of no-break space (used only in the beginning of line)
+TO UNDERSTAND: how ctangle/cweave work without mapping of no-break space (used only in the beginning of line)
 @x
 common_init()
 {
