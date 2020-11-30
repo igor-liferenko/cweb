@@ -1,1 +1,3 @@
-Page numbering increases sequentially and contents must have its last page to be numbered 0 (document begins with page 1), so set \contentspagenumber{...} accordingly in .w file if contents is more than one page.
+Page numbering increases sequentially and document begins with page 1, so set
+\contentspagenumber{...} (default 0) to 1-<number of pages in TOC> in .w file
+if number of pages in TOC is more than one.

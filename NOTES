@@ -1,1 +1,4 @@
-a section (@<...@>) must not appear within #if 0 ... #endif - this is not supported - otherwise line numers in compiler errors and warnings will be wrong and gdb line numbers too - if this is the case, prevent section expansion by putting it to /*|...|*/ or just changing @< to @q
+a section (@<...@>) must not appear within #if 0 ... #endif - this is not supported - otherwise
+line numers in compiler errors and warnings will be wrong and gdb line numbers
+too - if this is the case, prevent section expansion by putting it to /*|...|*/ or
+changing @< to @=/* and @> to */@>
