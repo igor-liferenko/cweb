@@ -1,5 +1,0 @@
-% To make `sigaction' bold when it is used as a type, use this:
-% struct @t\0@>@= sigaction @> sa;
-% "sigaction" type must be bold but "sigaction" function must not; CWEB allows to treat "sigaction" only one way - this concerns not only "boldness", but also index; but it is sufficient to put to index only "sigaction" function ("sigaction" function will always be used if "sigaction" type is used, so "sigaction" function will be in the comment after #include to protect signal.h); so, to make "sigaction" type bold we can use the trick which does not put it to index (in cweave wrapper bold index entries which do not have underlined items are automatically removed from index anyway)
-% The same concerns "tm" because I cannot think of better name for variable of type "struct tm" ("localtime" function is used to protect time.h)
-\def\0{\egroup\begingroup\def\vb##1{\let\ =\relax\&{##1}\endgroup}\bgroup}
