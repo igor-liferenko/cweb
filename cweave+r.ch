@@ -1,5 +1,5 @@
 @x
-*out_ptr='c'; tex_printf("\\input cwebma");
+*out_ptr=flags['u']?'x':'c'; tex_printf(flags['u']?"\\input cwebmac \\input duple":"\\input cwebma");
 @y
-*out_ptr=flags['r']?'u':'c'; tex_printf(flags['r']?"\\input cwebmac-r":"\\input cwebma");
+*out_ptr=flags['u']?'x':'u'; tex_printf(flags['u']?"\\input cwebmac-ru \\input duple":"\\input cwebmac-r");
 @z
