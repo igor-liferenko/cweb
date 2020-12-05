@@ -14,9 +14,9 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
-	@/usr/local/bin/cweave -d cweave
-	@/usr/local/bin/cweave -d ctangle
-	@/usr/local/bin/cweave -d common
+	@/usr/local/bin/cweave +u cweave
+	@/usr/local/bin/cweave +u ctangle
+	@/usr/local/bin/cweave +u common
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
