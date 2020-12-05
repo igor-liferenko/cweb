@@ -1,3 +1,6 @@
+TODO: gcc/clang now support UTF-8 identifiers, so instead of
+translit impliment outputting UTF-8, and then replace
+sigаction to sigaction in bin/ctangle wrapper
 @x
   for (i=0;i<128;i++) sprintf(translit[i],"X%02X",(unsigned)(128+i));
 @y
