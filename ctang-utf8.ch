@@ -1,3 +1,8 @@
+TODO: gcc/clang now support UTF-8 identifiers, so instead of
+translit impliment outputting UTF-8, and then add replacing
+sigаction to sigaction to bin/ctangle wrapper
+and remove ctang-atl.ch and ctang-translit.ch
+
 @x
 @<Include files@>@/
 @y
