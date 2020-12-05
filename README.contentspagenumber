@@ -14,3 +14,7 @@ Maybe change cwebmac so that it will add one more empty page if last page of
 TOC was not 0, and then you will need to set \contentspagenumber{-1} as the
 default; for 2-page TOC it will be the same; for 3-page and 4-page TOC it
 will be -3, etc
+For now, a workaround is used:
+in cweave+u.ch \nocon is added after inputting cwebmac
+print TOC separately - to .w file temporarily add \input duplex and
+\contentspagenumber... and use -pp option to dvips to select TOC page(s)
