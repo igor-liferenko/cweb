@@ -6,3 +6,11 @@ TODO: add to cwebmac.tex code to output routine that if last page is not numbere
 give warning
 TODO: check what will be if there are two pages with the same \pageno
 in a document
+
+!!! The problem is that if only one page of TOC, then it is 0, which is even,
+so page shifting is wrong because it is the first page and hence must be  
+shifted as odd !!!
+Maybe change cwebmac so that it will add one more empty page if last page of
+TOC was not 0, and then you will need to set \contentspagenumber{-1} as the
+default; for 2-page TOC it will be the same; for 3-page and 4-page TOC it
+will be -3, etc
