@@ -1,3 +1,9 @@
-@@ -89 +89 @@
+Empty page is added after cover page in order that first page
+of the manual itself will be on odd page. This patch
+reverts this change, and disables including duplex.tex
+
+@@ -5 +4,0 @@
+-\input duplex
+@@ -89 +88 @@
 -\pageno=-1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
 +\pageno=0 \titletrue\eject
