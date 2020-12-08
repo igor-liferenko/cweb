@@ -1,3 +1,5 @@
+\ifnum\pageshift0 \else
+  \pdfhorigin=1.5cm \advance\pageshift-2\pdfhorigin \fi
 % This file is part of CWEB.
 % This program by Silvio Levy and Donald E. Knuth
 % is based on a program by Knuth.
