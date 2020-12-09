@@ -3,7 +3,7 @@ all:
 	/bin/ctangle common comm-merged
 	gcc -g -Og -w -c common.c
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
-	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweave+c.ch cweave+d.ch cweave+y.ch cweave+z.ch >/dev/null
+	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweave+c.ch cweave+d.ch cweave+r.ch cweave+y.ch cweave+z.ch >/dev/null
 	/bin/ctangle cweave cweav-merged
 	gcc -g -Og -w -c cweave.c
 	gcc -g -Og -o cweave cweave.o common.o
@@ -14,9 +14,10 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
-	@/usr/local/bin/cweave +u cweave
-	@/usr/local/bin/cweave +u ctangle
-	@/usr/local/bin/cweave +u common
+	@/usr/local/bin/cweave cweave
+	@/usr/local/bin/cweave ctangle
+	@/usr/local/bin/cweave common
+	@sed -i '0,/^\\input cwebmac$$/s//& \\pdfhorigin=1.5cm \\pageshift=\\pdfpagewidth \\advance\\pageshift-\\hsize \\advance\\pageshift-2\\pdfhorigin/' cweave.tex ctangle.tex common.tex cwebman.tex
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
