@@ -2,7 +2,6 @@
 % update 14 Nov 2016 by DEK: corrected obsolete remarks re debugging info
 \def\tangref{3} % where the main explanation of CTANGLing is given
 \input cwebmac
-\pdfhorigin=1.5cm \pageshift=210mm \advance\pageshift-\hsize \advance\pageshift-2\pdfhorigin
 \def\page{\box255 } \normalbottom
 \parskip 0pt plus 1pt
 \def\RA{\char'31 } % right arrow
@@ -45,48 +44,6 @@
   \tt \catcode`\!=0 \verbatimdefs \verbatimgobble}
 {\catcode`\^^M=13{\catcode`\ =13\gdef\verbatimdefs{\def^^M{\ \par}\let =\ }} %
   \gdef\verbatimgobble#1^^M{}}
-
-\null\vfill
-\centerline{\titlefont The {\ttitlefont CWEB} System of
-    Structured Documentation}
-\vskip 18pt\centerline{(Version 3.64 --- February 2002)}
-\vskip 24pt
-\centerline{\authorfont Donald E. Knuth and Silvio Levy}
-\vfill
-
-\noindent
-\TeX\ is a trademark of the American Mathematical Society.
-
-\noindent
-Acrobat Reader is a trademark of Adobe Systems Incorporated.
-
-\bigskip\noindent
-The printed form of this manual is copyright \copyright\ 1994
-  by Addison-Wesley Publishing Company, Inc.  All rights reserved.
-\smallskip\noindent
-The electronic form is copyright \copyright\ 1987, 1990, 1993, 2000
-  by Silvio Levy and Donald E. Knuth.
-
-\bigskip\noindent
-Permission is granted to make and distribute verbatim copies of the
-electronic form of this document provided that the electronic copyright
-notice and this permission notice are preserved on all copies.
-
-\smallskip\noindent
-Permission is granted to copy and distribute modified versions of the
-electronic form of this document under the conditions for verbatim copying,
-provided that the entire resulting derived work is distributed under the terms
-of a permission notice identical to this one.
-
-\smallskip\noindent
-Individuals may make copies of the documentation from the electronic files
-for their own personal use.
-
-\smallskip\noindent
-Internet page \.{http://www-cs-faculty.stanford.edu/\char`\~knuth/cweb.html}
-contains current info about \.{CWEB} and related topics.
-
-\pageno=-1 \titletrue\eject\null\vfill\titletrue\eject\pageno=1
 
 \titletrue
 \centerline{\titlefont The {\ttitlefont CWEB} System of
@@ -1564,9 +1521,7 @@ opposite sides of each sheet.
 in small caps; it is the job name unless redefined.
 
 \point 7. The first page usually is assigned page
-number 1. To start on page 16, with contents
-on page 15, say this: `\.{\\def\\contentspagenumber\{15\}}
-\.{\\pageno=\\contentspagenumber} \.{\\advance\\pageno by 1}'.
+number 1. To start on page 16 say `\.{\\pageno=16}'.
 
 \point 8. The macro \.{\\iftitle} will suppress the header line if it is
 defined by `\.{\\titletrue}'. The normal value is \.{\\titlefalse}
