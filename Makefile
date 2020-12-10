@@ -17,9 +17,7 @@ print:
 	@/usr/local/bin/cweave cweave
 	@/usr/local/bin/cweave ctangle
 	@/usr/local/bin/cweave common
-	@sed -i '0,/^\\input cwebmac$$/s//& \\pdfhorigin=1.5cm \\pageshift=\\pdfpagewidth \\advance\\pageshift-\\hsize \\advance\\pageshift-2\\pdfhorigin/' cweave.tex ctangle.tex common.tex cwebman.tex
 	@tex cweave >/dev/null
 	@tex ctangle >/dev/null
 	@tex common >/dev/null
 	@tex cwebman >/dev/null
-	@echo everything is ready - use \"prt ctangle\", \"prt common\", \"prt cweave\" and \"prt cwebman\"
