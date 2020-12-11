@@ -42,7 +42,6 @@ entire resulting derived work is given a different name and distributed
 under the terms of a permission notice identical to this one.
 }
 
-\pageno=1
 \let\maybe=\iftrue
 @s not_eq normal @q unreserve a C++ keyword @>
 
