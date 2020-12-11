@@ -1,6 +1,6 @@
-\pdfhorigin=1.5cm \pageshift=\pdfpagewidth \advance\pageshift-\hsize
-  \advance\pageshift-2\pdfhorigin
-
+%\pdfhorigin=1.5cm \pageshift=\pdfpagewidth \advance\pageshift-\hsize
+%  \advance\pageshift-2\pdfhorigin
+\def\contentspagenumber{62}
 % This file is part of CWEB.
 % This program by Silvio Levy and Donald E. Knuth
 % is based on a program by Knuth.
