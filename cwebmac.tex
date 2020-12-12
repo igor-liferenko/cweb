@@ -300,7 +300,7 @@
   \rightskip 0pt \hyphenpenalty 50 \tolerance 200
   \setpage \output={\normaloutput\page\lheader\rheader}
   \titletrue % prepare to output the table of contents
-  \immediate\write\cont{\noexpand\endinput \the\pageno \space \contentspagenumber}
+  \immediate\write\cont{\noexpand\endinput \the\pageno}
   \closeout\cont
   \pageno=\contentspagenumber
   \def\grouptitle{TABLE OF CONTENTS}
@@ -348,3 +348,8 @@
    \centerline{\covernote}
    \bigskip
    \leftline{\sc\today\ at \hours}}} % timestamps the contents page
+
+\ifx\xyz\undefined
+  \def\xyz{\pageno=1 }
+\fi
+\xyz
