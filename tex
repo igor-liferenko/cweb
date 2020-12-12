@@ -7,6 +7,6 @@ if [ -e $1.toc ] && grep -q '^\\endinput [0-9]\+ [0-9]\+$' $1.toc; then
   total=`sed -n 's/^Output written on .* (\([0-9]\+\) pages\?, [0-9]\+ bytes\?)\.$/\1/p' $1.log`
   num_pages_in_toc=`echo $total - $toc + 1 | bc`
   n=`echo $num_pages_in_toc + $contentspagenumber | bc`
-  printf %s%s '\batchmode \pageno='$n ' \input '$1 | /home/user/tex/plain >/dev/null
+  printf %s%s '\pageno='$n ' \input '$1 | /home/user/tex/plain >/dev/null
   #cut end and paste to beg
 fi
