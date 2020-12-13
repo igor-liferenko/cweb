@@ -300,8 +300,9 @@
   \rightskip 0pt \hyphenpenalty 50 \tolerance 200
   \setpage \output={\normaloutput\page\lheader\rheader}
   \titletrue % prepare to output the table of contents
-  \immediate\write\cont{\noexpand\endinput \the\pageno \space \contentspagenumber}
-  \closeout\cont
+  \immediate\write\cont{\noexpand\endinput}
+  \immediate\write\cont{\the\pageno \space \contentspagenumber}
+  \immediate\closeout\cont
   \pageno=\contentspagenumber
   \def\grouptitle{TABLE OF CONTENTS}
   \message{Table of contents:}
