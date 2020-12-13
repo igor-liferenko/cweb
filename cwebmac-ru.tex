@@ -296,12 +296,13 @@
   \def\Us{\note{Используется в секциях}} % crossref for uses of a section
   \def\I{\par\hangindent 2em}\let\*=*
   \readsections}
-\def\con{\par\vfill\eject % finish the section names
+\def\con{\write\cont{\noexpand\endinput}
+  \write\cont{lastpagenumber=\the\pageno \space contentspagenumber=\contentspagenumber}
+  \closeout\cont
+  \par\vfill\eject % finish the section names
   \rightskip 0pt \hyphenpenalty 50 \tolerance 200
   \setpage \output={\normaloutput\page\lheader\rheader}
   \titletrue % prepare to output the table of contents
-  \immediate\write\cont{\noexpand\endinput \the\pageno \space \contentspagenumber}
-  \closeout\cont
   \pageno=\contentspagenumber
   \def\grouptitle{СОДЕРЖАНИЕ}
   \message{Table of contents:}
