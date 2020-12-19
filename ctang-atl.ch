@@ -1,4 +1,10 @@
 @x
+char translit[128][translit_length];
+@y
+char translit[256][translit_length];
+@z
+
+@x
   for (i=0;i<128;i++) sprintf(translit[i],"X%02X",(unsigned)(128+i));
 @y
 sprintf(translit[0x80], "A");
@@ -68,4 +74,10 @@ sprintf(translit[0xee], "yu");
 sprintf(translit[0x9f], "YA");
 sprintf(translit[0xef], "ya");
 sprintf(translit[0xfc], "No");
+@z
+
+@x
+      C_printf("%s",translit[z-0200]);
+@y
+      C_printf("%s",translit[z]);
 @z
