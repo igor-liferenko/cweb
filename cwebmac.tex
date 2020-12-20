@@ -215,7 +215,7 @@
 
 \let\page=\pagebody \raggedbottom
 % \def\page{\box255 }\normalbottom % faster, but loses plain TeX footnotes
-\def\normaloutput#1#2#3{\ifodd\pageno\hoffset=\pageshift\fi
+\def\normaloutput#1#2#3{\ifodd\pageno\hoffset=0pt\fi
  \shipout\vbox{
   \vbox to\fullpageheight{
   \iftitle\global\titlefalse
@@ -235,7 +235,6 @@
 \newdimen\pagewidth \pagewidth=6.5in % the width of each page
 \newdimen\pageheight \pageheight=8.7in % the height of each page
 \newdimen\fullpageheight \fullpageheight=9in % page height including headlines
-\newdimen\pageshift \pageshift=0in % shift righthand pages wrt lefthand ones
 \def\magnify#1{\mag=#1\pagewidth=6.5truein\pageheight=8.7truein
   \fullpageheight=9truein\setpage}
 \def\setpage{\hsize\pagewidth\vsize\pageheight} % use after changing page size

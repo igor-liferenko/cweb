@@ -2,7 +2,7 @@
 % update 14 Nov 2016 by DEK: corrected obsolete remarks re debugging info
 \def\tangref{3} % where the main explanation of CTANGLing is given
 \input cwebmac
-\pdfhorigin=1.5cm \pageshift=\pdfpagewidth \advance\pageshift-\hsize \advance\pageshift-2\pdfhorigin
+\pdfhorigin=3.5cm \hoffset=\pdfpagewidth \advance\hoffset-\hsize \advance\hoffset-2\pdfhorigin
 \def\page{\box255 } \normalbottom
 \parskip 0pt plus 1pt
 \def\RA{\char'31 } % right arrow
@@ -1554,11 +1554,8 @@ were used to prepare this manual; \.{\\fullpageheight} is
 the top of each page. If you change any of these quantities, you should
 call the macro \.{\\setpage} immediately after making the change.
 
-\point 5. The \.{\\pageshift} macro defines an amount by which right-hand
-pages (i.e., odd-numbered pages) are shifted right with respect to
-left-hand (even-numbered) ones. By adjusting this amount you may be
-able to get two-sided output in which the page numbers line up on
-opposite sides of each sheet.
+\point 5. For duplex printing with non-equal margins set \.{\\hoffset}, as for usual
+\TeX\ documents.
 
 \point 6. The \.{\\title} macro will appear at the top of each page
 in small caps; it is the job name unless redefined.
