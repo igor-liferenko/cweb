@@ -41,15 +41,16 @@ common_init()
 @z
 
 @x
+@d longest_name 10000
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
 @y
-@d long_buf_size (buf_size*MB_LEN_MAX+longest_name*MB_LEN_MAX) /* for \.{CWEAVE} */
+@d longest_name 10000*MB_LEN_MAX
+@d long_buf_size (buf_size*MB_LEN_MAX+longest_name) /* for \.{CWEAVE} */
 @z
 
 @x
 char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
 @y
-char *buffer_end=buffer+buf_size*MB_LEN_MAX-2; /* end of |buffer| */
 @z
 
 @x

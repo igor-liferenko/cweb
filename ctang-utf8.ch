@@ -1,13 +1,14 @@
 @x
-@i common.h
+@<Include files@>@/
 @y
-@i comm-utf8.h
+@<Include files@>@/
+#include <limits.h>
 @z
 
 @x
-char output_file_name[longest_name]; /* name of the file */
+@d longest_name 10000 /* section names and strings shouldn't be longer than this */
 @y
-char output_file_name[longest_name*MB_LEN_MAX]; /* name of the file */
+@d longest_name 10000*MB_LEN_MAX /* section names and strings shouldn't be longer than this */
 @z
 
 @x

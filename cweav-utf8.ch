@@ -23,21 +23,25 @@ int mbsntowcslen(char *mbs, int len);
 @z
 
 @x
+@d longest_name 10000 /* section names and strings shouldn't be longer than this */
 @d long_buf_size (buf_size+longest_name)
 @y
-@d long_buf_size (buf_size*MB_LEN_MAX+longest_name*MB_LEN_MAX)
-@z
-
-@x
-@i common.h
-@y
-@i comm-utf8.h
+@d longest_name 10000*MB_LEN_MAX /* section names and strings shouldn't be longer than this */
+@d long_buf_size (buf_size*MB_LEN_MAX+longest_name)
 @z
 
 @x
 @d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+1)
 @y
 @d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+mblen((p)->byte_start,MB_CUR_MAX))
+@z
+
+@x
+while (loc<=buffer_end-7 && xisspace(*loc)) loc++;
+if (loc<=buffer_end-6 && strncmp(loc,"include",7)==0) sharp_include_line=1;
+@y
+while (loc<=limit-7 && xisspace(*loc)) loc++;
+if (loc<=limit-6 && strncmp(loc,"include",7)==0) sharp_include_line=1;
 @z
 
 @x
@@ -85,12 +89,6 @@ char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
       app_tok((eight_bits)(*id_first++));
     }
   }
-@z
-
-@x
-  char scratch[longest_name]; /* scratch area for section names */
-@y
-  char scratch[longest_name*MB_LEN_MAX]; /* scratch area for section names */
 @z
 
 @x
