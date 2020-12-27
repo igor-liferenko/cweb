@@ -5,6 +5,7 @@
 #include <limits.h>
 @z
 
+In ctangle this influences only output_file_name, section_text and section_text_end
 @x
 @d longest_name 10000 /* section names and strings shouldn't be longer than this */
 @y
