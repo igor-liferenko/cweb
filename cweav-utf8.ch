@@ -1,3 +1,6 @@
+TODO: maybe instead of current method use xord/xchr arrays as in WEAVE and then
+use the same method as in TeX
+
 @x
 @c @<Include files@>@/
 @y
