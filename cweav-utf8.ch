@@ -30,6 +30,13 @@ int mbsntowcslen(char *mbs, int len);
 @d long_buf_size (buf_size*MB_LEN_MAX+longest_name)
 @z
 
+Removes `extern char *buffer_end;'
+@x
+@i common.h
+@y
+@i comm-utf8.h
+@z
+
 @x
 @d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+1)
 @y
