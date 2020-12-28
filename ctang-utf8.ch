@@ -2,7 +2,7 @@
 @<Include files@>@/
 @y
 @<Include files@>@/
-#include <limits.h> /* this is for MB_LEN_MAX */
+#include <limits.h> /* |MB_LEN_MAX| */
 @z
 
 In ctangle this influences only output_file_name, section_text and section_text_end
