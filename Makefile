@@ -3,7 +3,7 @@ all:
 	/bin/ctangle common comm-merged
 	gcc -g -Og -w -c common.c
 	tie -m comm-utf8.h common.h comm-utf8.hch >/dev/null
-	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweave+c.ch cweave+d.ch cweave+y.ch cweave+z.ch >/dev/null
+	tie -c cweav-merged.ch cweave.w cweav-utf8.ch cweave+c.ch cweave+d.ch cweave+g.ch cweave+y.ch cweave+z.ch >/dev/null # TODO: check what is +g via pdfdiff
 	/bin/ctangle cweave cweav-merged
 	gcc -g -Og -w -c cweave.c
 	gcc -g -Og -o cweave cweave.o common.o
