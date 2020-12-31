@@ -14,7 +14,7 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
-	@#absolute path is used here to use default options
+	@#absolute path is used here to use original formatting (in wrapper, which is run from $PATH formatting options are used)
 	@/usr/local/bin/cweave cweave
 	@/usr/local/bin/cweave ctangle
 	@/usr/local/bin/cweave common
