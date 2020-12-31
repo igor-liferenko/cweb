@@ -14,6 +14,7 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
+	@#absolute path is used here to use default options
 	@/usr/local/bin/cweave cweave
 	@/usr/local/bin/cweave ctangle
 	@/usr/local/bin/cweave common
