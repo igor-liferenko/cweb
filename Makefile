@@ -15,6 +15,7 @@ all:
 
 print:
 # NOTE: explicit path is used to use original formatting (that's why --duplex is not used)
+#       (cwebman is duplex by default)
 	@/usr/local/bin/cweave cweave
 	@/usr/local/bin/cweave ctangle
 	@/usr/local/bin/cweave common
