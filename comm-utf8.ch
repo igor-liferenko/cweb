@@ -1,5 +1,3 @@
-TODO: move xchr to cweav-utf8.ch, because translit is not used in ctangle
-
 @x
 @<Include files@>@/
 @y
@@ -7,10 +5,7 @@ TODO: move xchr to cweav-utf8.ch, because translit is not used in ctangle
 #include <locale.h>
 #include <limits.h>
 @<Include files@>@/
-wchar_t xchr[256]; /* it is used only for input (in reverse search, because array cannot be
-  indexed by 32-bit value); for output |translit| array is used in ctangle,
-  otherwise input is just copied to output - input is converted to
-  internal encoding just for analysis */
+wchar_t xchr[256];
 int mbsntowcslen(char *mbs, int len) /* it is used to check length of |buffer| on reading from file
   and to check length of |out_buf| on preparing write to file; multibyte character may be
   incomplete, because data is added byte-by-byte - we use `length' argument to |mblen| and
@@ -29,7 +24,6 @@ int mbsntowcslen(char *mbs, int len) /* it is used to check length of |buffer| o
 }
 @z
 
-TO UNDERSTAND: how ctangle/cweave work without mapping of no-break space (used only in the beginning of line)
 @x
 common_init()
 {
