@@ -1554,8 +1554,8 @@ were used to prepare this manual; \.{\\fullpageheight} is
 the top of each page. If you change any of these quantities, you should
 call the macro \.{\\setpage} immediately after making the change.
 
-\point 5. For duplex printing with non-equal margins set \.{\\hoffset}, as for usual
-\TeX\ documents.
+\point 5. Verbatim listings are impossible (CWEAVE generates its own \TeX\ code,
+so line breaks may not be retained, etc. - see \\{line\_length} parameter).
 
 \point 6. The \.{\\title} macro will appear at the top of each page
 in small caps; it is the job name unless redefined.
