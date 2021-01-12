@@ -14,7 +14,7 @@ all:
 	cp cweave ctangle /usr/local/bin/
 
 print:
-# NOTE: use original cweave (without formatting options; no --duplex)
+# NOTE: use original cweave (not wrapper)
 	@/usr/local/bin/cweave cweave
 	@/usr/local/bin/cweave ctangle
 	@/usr/local/bin/cweave common
