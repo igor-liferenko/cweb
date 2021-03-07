@@ -1,5 +1,6 @@
-TODO: maybe instead of current method use xord/xchr arrays as in WEAVE and then
-use the same method as in TeX
+TODO: instead of current method use the same method as in TeX
+(HINT: CWEAVE is based on WEAVE, so search places where xord is used in WEAVE and use it in CWEAVE
+in analogous place; then use changes which were removed in commit c775b2147d53ea3f0183368cf261f4940955a619 of utf8/build.sh)
 
 @x
 @c @<Include files@>@/
