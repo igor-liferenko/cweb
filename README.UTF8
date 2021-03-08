@@ -1,1 +1,1 @@
-CP-1251 locale cannot be used (C.UTF-8 must be used)
+CP1251 locale cannot be used (C.UTF-8 must be used) - islower and isupper will not work, so you will have to hand-code xisupper and xislower using ranges
