@@ -927,7 +927,7 @@ get_next() /* produces the next input token */
     if (xisdigit(c) || c=='.') @<Get a constant@>@;
     else if (c=='\'' || c=='"' || (c=='L'&&(*loc=='\'' || *loc=='"')))
         @<Get a string@>@;
-    else if ((((eight_bits)c<0200) && iswalpha(xchr[c])) || isxalpha(c) || ishigh(c))
+    else if (iswalpha(xchr[(eight_bits) c]) || isxalpha(c) || ishigh(c))
       @<Get an identifier@>@;
     else if (c=='@@') @<Get control code and possible section name@>@;
     else if (xisspace(c)) {

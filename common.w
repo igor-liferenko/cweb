@@ -59,6 +59,7 @@ The file begins with a few basic definitions.
 
 @c
 @<Include files@>@/
+typedef char unsigned eight_bits;
 @h
 @<Definitions that should agree with \.{CTANGLE} and \.{CWEAVE}@>@/
 @<Other definitions@>@/
