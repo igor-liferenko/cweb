@@ -212,7 +212,6 @@ xchr[0176]= '~' ;@/
 @<Include files@>=
 #include <wchar.h>
 #include <locale.h>
-#include <stdint.h>
 
 @ A few character pairs are encoded internally as single characters,
 using the definitions below. These definitions are consistent with
@@ -275,7 +274,7 @@ char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
 char *limit=buffer; /* points to the last character in the buffer */
 char *loc=buffer; /* points to the next character to be read from the buffer */
 
-uint8_t xord[65536];
+unsigned char xord[65536];
 wchar_t xchr[256];
 
 @ @<Include files@>=
