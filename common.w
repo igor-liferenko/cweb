@@ -301,12 +301,12 @@ FILE *fp; /* what file to read from */
   }
   if (k>buffer_end) {
     c=fgetwc(fp);
-    if (!feof(fp)) if (c!=L'\n') {
+    if (!(feof(fp) || ferror(fp))) if (c!=L'\n') {
       ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
 @.Input line too long@>
     }
   }
-  if (feof(fp) && limit==buffer) return(0);  /* there was nothing after
+  if ((feof(fp) || ferror(fp)) && limit==buffer) return(0);  /* there was nothing after
     the last newline */
   return(1);
 }
