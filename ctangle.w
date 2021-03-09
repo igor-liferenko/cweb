@@ -728,7 +728,7 @@ case identifier:
   while (j<k) {
     if ((unsigned char)(*j)<0200) C_putc(*j);
 @^high-bit character handling@>
-    else C_printf("%s",translit[(unsigned char)(*j)-0200]);
+    else C_putc(*j);
     j++;
   }
   out_state=num_or_id; break;
@@ -890,7 +890,6 @@ name_pointer cur_section_name; /* name of section just scanned */
 int no_where; /* suppress |print_where|? */
 
 @ @<Include...@>=
-#include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <stdlib.h> /* definition of |exit| */
 
 @ As one might expect, |get_next| consists mostly of a big switch
@@ -928,7 +927,7 @@ get_next() /* produces the next input token */
     if (xisdigit(c) || c=='.') @<Get a constant@>@;
     else if (c=='\'' || c=='"' || (c=='L'&&(*loc=='\'' || *loc=='"')))
         @<Get a string@>@;
-    else if (isalpha(c) || isxalpha(c) || ishigh(c))
+    else if ((((eight_bits)c<0200) && iswalpha(xchr[c])) || isxalpha(c) || ishigh(c))
       @<Get an identifier@>@;
     else if (c=='@@') @<Get control code and possible section name@>@;
     else if (xisspace(c)) {

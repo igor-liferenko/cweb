@@ -175,10 +175,10 @@ extern boolean flags[]; /* an option for each 7-bit code */
 
 @ Code relating to output:
 @d update_terminal fflush(stdout) /* empty the terminal output buffer */
-@d new_line putchar('\n') @d putxchar putchar
+@d new_line putwchar(L'\n') @d putxchar(c) putwchar(xchr[(eight_bits) c])
 @d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
-@d C_printf(c,a) fprintf(C_file,c,a)
-@d C_putc(c) putc(c,C_file)
+@d C_printf(c,a) fwprintf(C_file,L"?")
+@d C_putc(c) fputwc(xchr[(eight_bits) c],C_file)
 
 @<Common code...@>=
 extern FILE *C_file; /* where output of \.{CTANGLE} goes */

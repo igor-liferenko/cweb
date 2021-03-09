@@ -264,8 +264,8 @@ some of \.{CWEB}'s routines use the fact that it is safe to refer to
 @d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
 @d longest_name 10000
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
-@d xisspace(c) (iswspace(xchr[(unsigned char) c]))
-@d xisupper(c) (iswupper(xchr[(unsigned char) c]))
+@d xisspace(c) (iswspace(xchr[(eight_bits) c]))
+@d xisupper(c) (iswupper(xchr[(eight_bits) c]))
 @d invalid_code 0177 /*ASCII code that many systems prohibit in text files*/ 
 
 @<Definitions...@>=
@@ -274,7 +274,7 @@ char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
 char *limit=buffer; /* points to the last character in the buffer */
 char *loc=buffer; /* points to the next character to be read from the buffer */
 
-unsigned char xord[65536];
+eight_bits xord[65536];
 wchar_t xchr[256];
 
 @ @<Include files@>=
@@ -389,7 +389,7 @@ while(1) {
   if (!input_ln(change_file)) return;
   if (limit<buffer+2) continue;
   if (buffer[0]!='@@') continue;
-  if (xisupper(buffer[1])) buffer[1]=xord[towlower(xchr[(unsigned char) buffer[1]])];
+  if (xisupper(buffer[1])) buffer[1]=xord[towlower(xchr[(eight_bits) buffer[1]])];
   if (buffer[1]=='x') break;
   if (buffer[1]=='y' || buffer[1]=='z' || buffer[1]=='i') {
     loc=buffer+2;
@@ -458,7 +458,7 @@ check_change() /* switches to |change_file| if the buffers match */
       return;
     }
     if (limit>buffer+1 && buffer[0]=='@@') {
-      char xyz_code=xisupper(buffer[1])? xord[towlower(xchr[(unsigned char)buffer[1]])]: buffer[1];
+      char xyz_code=xisupper(buffer[1])? xord[towlower(xchr[(eight_bits)buffer[1]])]: buffer[1];
       @<If the current line starts with \.{@@y},
         report any discrepancies and |return|@>;
     }
@@ -671,7 +671,7 @@ The remainder of the \.{@@i} line after the file name is ignored.
     }
     *limit=' ';
     if (buffer[0]=='@@') {
-      if (xisupper(buffer[1])) buffer[1]=xord[towlower(xchr[(unsigned char) buffer[1]])];
+      if (xisupper(buffer[1])) buffer[1]=xord[towlower(xchr[(eight_bits) buffer[1]])];
       if (buffer[1]=='x' || buffer[1]=='y') {
         loc=buffer+2;
         err_print("! Where is the matching @@z?");
@@ -1519,10 +1519,10 @@ translate from \.{CWEB}'s code into the external character code,
 and |printf| when we just want to print strings.
 Several macros make other kinds of output convenient.
 @^system dependencies@>
-@d new_line putchar('\n') @d putxchar putchar
+@d new_line putwchar(L'\n') @d putxchar(c) putwchar(xchr[(eight_bits) c])
 @d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
-@d C_printf(c,a) fprintf(C_file,c,a)
-@d C_putc(c) putc(c,C_file) /* isn't \CEE/ wonderfully consistent? */
+@d C_printf(c,a) fwprintf(C_file,L"?")
+@d C_putc(c) fputwc(xchr[(eight_bits) c],C_file) /* isn't \CEE/ wonderfully consistent? */
 
 @ We predeclare several standard system functions here instead of including
 their system header files, because the names of the header files are not as
