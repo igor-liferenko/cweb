@@ -295,7 +295,7 @@ FILE *fp; /* what file to read from */
   limit = k = buffer;  /* beginning of buffer */
   while (k<=buffer_end) {
     c=fgetwc(fp);
-    if (feof(fp)) break;
+    if (feof(fp) || ferror(fp)) break;
     if (c==L'\n') break;
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
