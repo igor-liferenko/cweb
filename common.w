@@ -212,6 +212,7 @@ xchr[0176]= '~' ;@/
 
 @<Include files@>=
 #include <wchar.h>
+#include <wctype.h>
 #include <locale.h>
 
 @ A few character pairs are encoded internally as single characters,
@@ -485,7 +486,7 @@ if (xyz_code=='x' || xyz_code=='z') {
 else if (xyz_code=='y') {
   if (n>0) {
     loc=buffer+2;
-    printf("\n! Hmm... %d ",n);
+    wprintf(L"\n! Hmm... %d ",n);
     err_print("of the preceding lines failed to match");
 @.Hmm... n of the preceding...@>
   }
@@ -1064,10 +1065,10 @@ while (p) { /* compare shortest prefix of |p| with new name */
     p=(c==less?p->llink:p->rlink);
   } else { /* new name matches |p| */
     if (r!=NULL) {  /* and also |r|: illegal */
-      printf("\n! Ambiguous prefix: matches <");
+      wprintf(L"\n! Ambiguous prefix: matches <");
 @.Ambiguous prefix ... @>
       print_prefix_name(p);
-      printf(">\n and <");
+      wprintf(L">\n and <");
       print_prefix_name(r);
       err_print(">");
       return name_dir; /* the unsection */
@@ -1093,7 +1094,7 @@ switch(section_name_cmp(&first,name_len,r)) {
               /* compare all of |r| with new name */
   case prefix:
     if (!ispref) {
-      printf("\n! New name is a prefix of <");
+      wprintf(L"\n! New name is a prefix of <");
 @.New name is a prefix...@>
       print_section_name(r);
       err_print(">");
@@ -1105,16 +1106,16 @@ switch(section_name_cmp(&first,name_len,r)) {
         extend_section_name(r,first,last+1,ispref);
       return r;
   case bad_extension:
-      printf("\n! New name extends <");
+      wprintf(L"\n! New name extends <");
 @.New name extends...@>
       print_section_name(r);
       err_print(">");
     return r;
   default: /* no match: illegal */
-    printf("\n! Section name incompatible with <");
+    wprintf(L"\n! Section name incompatible with <");
 @.Section name incompatible...@>
     print_prefix_name(r);
-    printf(">,\n which abbreviates <");
+    wprintf(L">,\n which abbreviates <");
     print_section_name(r);
     err_print(">");
     return r;
@@ -1220,7 +1221,7 @@ err_print(s) /* prints `\..' and location of error message */
 char *s;
 {
   char *k,*l; /* pointers into |buffer| */
-  printf(*s=='!'? "\n%s" : "%s",s);
+  wprintf(*s=='!'? L"\n%s" : L"%s",s);
   if(web_file_open) @<Print error location based on input buffer@>;
   update_terminal; mark_error;
 }
@@ -1236,20 +1237,20 @@ has special line-numbering conventions.
 
 @<Print error location based on input buffer@>=
 {if (changing && include_depth==change_depth)
-  printf(". (l. %d of change file)\n", change_line);
-else if (include_depth==0) printf(". (l. %d)\n", cur_line);
-  else printf(". (l. %d of include file %s)\n", cur_line, cur_file_name);
+  wprintf(L". (l. %d of change file)\n", change_line);
+else if (include_depth==0) wprintf(L". (l. %d)\n", cur_line);
+  else wprintf(L". (l. %d of include file %s)\n", cur_line, cur_file_name);
 l= (loc>=limit? limit: loc);
 if (l>buffer) {
   for (k=buffer; k<l; k++)
-    if (*k=='\t') putchar(' ');
-    else putchar(*k); /* print the characters already read */
-  putchar('\n');
-  for (k=buffer; k<l; k++) putchar(' '); /* space out the next line */
+    if (*k=='\t') putwchar(L' ');
+    else putwchar(xchr[(eight_bits) *k]); /* print the characters already read */
+  putwchar(L'\n');
+  for (k=buffer; k<l; k++) putwchar(L' '); /* space out the next line */
 }
-for (k=l; k<limit; k++) putchar(*k); /* print the part not yet read */
-if (*limit=='|') putchar('|'); /* end of \CEE/ text in section names */
-putchar(' '); /* to separate the message from future asterisks */
+for (k=l; k<limit; k++) putwchar(xchr[(eight_bits) *k]); /* print the part not yet read */
+if (*limit=='|') putwchar(L'|'); /* end of \CEE/ text in section names */
+putwchar(L' '); /* to separate the message from future asterisks */
 }
 
 @ When no recovery from some error has been provided, we have to wrap
@@ -1271,7 +1272,7 @@ a status of 0 if and only if only harmless messages were printed.
 
 @c
 int wrap_up() {
-  putchar('\n');
+  putwchar(L'\n');
   if (show_stats)
     print_stats(); /* print statistics about memory usage */
   @<Print the job |history|@>;
@@ -1281,12 +1282,12 @@ int wrap_up() {
 
 @ @<Print the job |history|@>=
 switch (history) {
-case spotless: if (show_happiness) printf("(No errors were found.)\n"); break;
+case spotless: if (show_happiness) wprintf(L"(No errors were found.)\n"); break;
 case harmless_message:
-  printf("(Did you see the warning message above?)\n"); break;
+  wprintf(L"(Did you see the warning message above?)\n"); break;
 case error_message:
-  printf("(Pardon me, but I think I spotted something wrong.)\n"); break;
-case fatal_message: printf("(That was a fatal error, my friend.)\n");
+  wprintf(L"(Pardon me, but I think I spotted something wrong.)\n"); break;
+case fatal_message: wprintf(L"(That was a fatal error, my friend.)\n");
 } /* there are no other cases */
 
 @ When there is no way to recover from an error, the |fatal| subroutine is
@@ -1302,7 +1303,7 @@ concatenated to print the final error message.
 fatal(s,t)
   char *s,*t;
 {
-  if (*s) printf(s);
+  if (*s) wprintf(L"%s",s);
   err_print(t);
   history=fatal_message; exit(wrap_up());
 }
@@ -1313,7 +1314,7 @@ fatal(s,t)
 overflow(t)
   char *t;
 {
-  printf("\n! Sorry, %s capacity exceeded",t); fatal("","");
+  wprintf(L"\n! Sorry, %s capacity exceeded",t); fatal("","");
 }
 @.Sorry, capacity exceeded@>
 
@@ -1521,8 +1522,9 @@ and |printf| when we just want to print strings.
 Several macros make other kinds of output convenient.
 @^system dependencies@>
 @d new_line putwchar(L'\n') @d putxchar(c) putwchar(xchr[(eight_bits) c])
-@d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
-@d C_printf(c,a) fwprintf(C_file,L"?")
+@d term_write(a,b) do { fflush(stdout); 
+  for (int i = 0; i < b; i++) putwchar(xchr[(eight_bits) *(a+i)]); } while (0)
+@d C_printf(c,a) fwprintf(C_file,c,a)
 @d C_putc(c) fputwc(xchr[(eight_bits) c],C_file) /* isn't \CEE/ wonderfully consistent? */
 
 @ We predeclare several standard system functions here instead of including

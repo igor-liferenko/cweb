@@ -68,7 +68,7 @@ Crusius, and others who have contributed improvements.
 The ``banner line'' defined here should be changed whenever \.{CWEAVE}
 is modified.
 
-@d banner "This is CWEAVE (Version 3.64)\n"
+@d banner L"This is CWEAVE (Version 3.64)\n"
 
 @c @<Include files@>@/
 extern wchar_t xchr[];
@@ -109,7 +109,7 @@ char **av; /* argument values */
   make_xrefs=force_lines=make_pb=1; /* controlled by command-line options */
   common_init();
   @<Set initial values@>;
-  if (show_banner) printf(banner); /* print a ``banner line'' */
+  if (show_banner) wprintf(banner); /* print a ``banner line'' */
   @<Store all the reserved words@>;
   phase_one(); /* read all the user's text and store the cross-references */
   phase_two(); /* read all the text again and translate it to \TEX/ form */
@@ -684,7 +684,8 @@ name_pointer cur_section; /* name of section just scanned */
 char cur_section_char; /* the character just before that name */
 
 @ @<Include...@>=
-#include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
+#include <wchar.h>
+#include <wctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <stdlib.h> /* definition of |exit| */
 
 @ As one might expect, |get_next| consists mostly of a big switch
@@ -837,7 +838,7 @@ are pointers into the array |section_text|, not into |buffer|.
   }
   while (*loc=='u' || *loc=='U' || *loc=='l' || *loc=='L'
          || *loc=='f' || *loc=='F') {
-    *id_loc++='$'; *id_loc++=toupper(*loc); loc++;
+    *id_loc++='$'; *id_loc++=xord[towupper(xchr[(eight_bits) *loc])]; loc++;
   }
   return(constant);
 }
@@ -879,10 +880,10 @@ convention, but do not allow the string to be longer than |longest_name|.
     if (++id_loc<=section_text_end) *id_loc=c;
   }
   if (id_loc>=section_text_end) {
-    printf("\n! String too long: ");
+    wprintf(L"\n! String too long: ");
 @.String too long@>
     term_write(section_text+1,25);
-    printf("..."); mark_error;
+    wprintf(L"..."); mark_error;
   }
   id_loc++;
   return(string);
@@ -946,10 +947,10 @@ while (1) {
 *k=c;
 }
 if (k>=section_text_end) {
-  printf("\n! Section name too long: ");
+  wprintf(L"\n! Section name too long: ");
 @.Section name too long@>
   term_write(section_text+1,25);
-  printf("..."); mark_harmless;
+  wprintf(L"..."); mark_harmless;
 }
 if (*k==' ' && k>section_text) k--;
 
@@ -1047,7 +1048,7 @@ phase_one() {
   changed_section[section_count]=changing;
      /* it will become 1 if any line changes */
   if (*(loc-1)=='*' && show_progress) {
-    printf("*%d",section_count);
+    wprintf(L"*%d",section_count);
     update_terminal; /* print a progress report */
   }
   @<Store cross-references in the \TEX/ part of a section@>;
@@ -1281,12 +1282,12 @@ name_pointer p; /* print anomalies in subtree |p| */
     if (cur_xref->num==file_flag) {an_output=1; cur_xref=cur_xref->xlink;}
     else an_output=0;
     if (cur_xref->num <def_flag) {
-      printf("\n! Never defined: <"); print_section_name(p); putchar('>'); mark_harmless;
+      wprintf(L"\n! Never defined: <"); print_section_name(p); putwchar(L'>'); mark_harmless;
 @.Never defined: <section name>@>
     }
     while (cur_xref->num >=cite_flag) cur_xref=cur_xref->xlink;
     if (cur_xref==xmem && !an_output) {
-      printf("\n! Never used: <"); print_section_name(p); putchar('>'); mark_harmless;
+      wprintf(L"\n! Never used: <"); print_section_name(p); putwchar(L'>'); mark_harmless;
 @.Never used: <section name>@>
     }
     section_check(p->rlink);
@@ -1318,10 +1319,11 @@ if the |carryover| parameter is true, a |"%"| in that line will be
 carried over to the next line (so that \TEX/ will ignore the completion
 of commented-out text).
 
-@d c_line_write(c) fflush(active_file),fwrite(out_buf+1,sizeof(char),c,active_file)
-@d tex_putc(c) putc(c,active_file)
-@d tex_new_line putc('\n',active_file)
-@d tex_printf(c) fprintf(active_file,c)
+@d c_line_write(c) fflush(active_file); for (int i = 0; i < c; i++)
+  fputwc(xchr[(eight_bits) *(out_buf+1+i)], active_file)
+@d tex_putc(c) fputwc(xchr[(eight_bits) c],active_file)
+@d tex_new_line fputwc(L'\n',active_file)
+@d tex_printf(c) for (char *i = c; *i != '\0'; i++) tex_putc(*i)
 
 @c
 void
@@ -1429,7 +1431,7 @@ line by putting a |'%'| just before the last character.
 
 @<Print warning message...@>=
 {
-  printf("\n! Line had to be broken (output l. %d):\n",out_line);
+  wprintf(L"\n! Line had to be broken (output l. %d):\n",out_line);
 @.Line had to be broken@>
   term_write(out_buf+1, out_ptr-out_buf-1);
   new_line; mark_harmless;
@@ -1789,7 +1791,8 @@ void
 print_cat(c) /* symbolic printout of a category */
 eight_bits c;
 {
-  printf(cat_name[c]);
+  for (char *i = cat_name[c]; *i != '\0'; i++)
+    putwchar(xchr[(eight_bits) *i]);
 }
 
 @ The token lists for translated \TEX/ output contain some special control
@@ -2146,18 +2149,18 @@ text_pointer p;
 {
   token_pointer j; /* index into |tok_mem| */
   sixteen_bits r; /* remainder of token after the flag has been stripped off */
-  if (p>=text_ptr) printf("BAD");
+  if (p>=text_ptr) wprintf(L"BAD");
   else for (j=*p; j<*(p+1); j++) {
     r=*j%id_flag;
     switch (*j/id_flag) {
-      case 1: printf("\\\\{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
+      case 1: wprintf(L"\\\\{"@q}@>); print_id((name_dir+r)); wprintf(@q{@>L"}");
         break; /* |id_flag| */
-      case 2: printf("\\&{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
+      case 2: wprintf(L"\\&{"@q}@>); print_id((name_dir+r)); wprintf(@q{@>L"}");
         break; /* |res_flag| */
-      case 3: printf("<"); print_section_name((name_dir+r)); printf(">");
+      case 3: wprintf(L"<"); print_section_name((name_dir+r)); wprintf(L">");
         break; /* |section_flag| */
-      case 4: printf("[[%d]]",r); break; /* |tok_flag| */
-      case 5: printf("|[[%d]]|",r); break; /* |inner_tok_flag| */
+      case 4: wprintf(L"[[%d]]",r); break; /* |tok_flag| */
+      case 5: wprintf(L"|[[%d]]|",r); break; /* |inner_tok_flag| */
       default: @<Print token |r| in symbolic form@>;
     }
   }
@@ -2166,20 +2169,20 @@ text_pointer p;
 
 @ @<Print token |r|...@>=
 switch (r) {
-  case math_rel: printf("\\mathrel{"@q}@>); break;
-  case big_cancel: printf("[ccancel]"); break;
-  case cancel: printf("[cancel]"); break;
-  case indent: printf("[indent]"); break;
-  case outdent: printf("[outdent]"); break;
-  case backup: printf("[backup]"); break;
-  case opt: printf("[opt]"); break;
-  case break_space: printf("[break]"); break;
-  case force: printf("[force]"); break;
-  case big_force: printf("[fforce]"); break;
-  case preproc_line: printf("[preproc]"); break;
-  case quoted_char: j++; printf("[%o]",(unsigned)*j); break;
-  case end_translation: printf("[quit]"); break;
-  case inserted: printf("[inserted]"); break;
+  case math_rel: wprintf(L"\\mathrel{"@q}@>); break;
+  case big_cancel: wprintf(L"[ccancel]"); break;
+  case cancel: wprintf(L"[cancel]"); break;
+  case indent: wprintf(L"[indent]"); break;
+  case outdent: wprintf(L"[outdent]"); break;
+  case backup: wprintf(L"[backup]"); break;
+  case opt: wprintf(L"[opt]"); break;
+  case break_space: wprintf(L"[break]"); break;
+  case force: wprintf(L"[force]"); break;
+  case big_force: wprintf(L"[fforce]"); break;
+  case preproc_line: wprintf(L"[preproc]"); break;
+  case quoted_char: j++; wprintf(L"[%o]",(unsigned)*j); break;
+  case end_translation: wprintf(L"[quit]"); break;
+  case inserted: wprintf(L"[inserted]"); break;
   default: putxchar(r);
 }
 
@@ -3100,16 +3103,16 @@ int tracing; /* can be used to show parsing details */
 @ @<Print a snapsh...@>=
 { scrap_pointer k; /* pointer into |scrap_info| */
   if (tracing==2) {
-    printf("\n%d:",n);
+    wprintf(L"\n%d:",n);
     for (k=scrap_base; k<=lo_ptr; k++) {
-      if (k==pp) putxchar('*'); else putxchar(' ');
-      if (k->mathness %4 ==  yes_math) putchar('+');
-      else if (k->mathness %4 ==  no_math) putchar('-');
+      if (k==pp) putwchar(L'*'); else putwchar(L' ');
+      if (k->mathness %4 ==  yes_math) putwchar(L'+');
+      else if (k->mathness %4 ==  no_math) putwchar(L'-');
       print_cat(k->cat);
-      if (k->mathness /4 ==  yes_math) putchar('+');
-      else if (k->mathness /4 ==  no_math) putchar('-');
+      if (k->mathness /4 ==  yes_math) putwchar(L'+');
+      else if (k->mathness /4 ==  no_math) putwchar(L'-');
     }
-    if (hi_ptr<=scrap_ptr) printf("..."); /* indicate that more is coming */
+    if (hi_ptr<=scrap_ptr) wprintf(L"..."); /* indicate that more is coming */
   }
 }
 
@@ -3157,20 +3160,20 @@ where appropriate.
 
 @ @<If semi-tracing, show the irreducible scraps@>=
 if (lo_ptr>scrap_base && tracing==1) {
-  printf("\nIrreducible scrap sequence in section %d:",section_count);
+  wprintf(L"\nIrreducible scrap sequence in section %d:",section_count);
 @.Irreducible scrap sequence...@>
   mark_harmless;
   for (j=scrap_base; j<=lo_ptr; j++) {
-    printf(" "); print_cat(j->cat);
+    wprintf(L" "); print_cat(j->cat);
   }
 }
 
 @ @<If tracing,...@>=
 if (tracing==2) {
-  printf("\nTracing after l. %d:\n",cur_line); mark_harmless;
+  wprintf(L"\nTracing after l. %d:\n",cur_line); mark_harmless;
 @.Tracing after...@>
   if (loc>buffer+50) {
-    printf("...");
+    wprintf(L"...");
     term_write(loc-51,51);
   }
   else term_write(buffer,loc-buffer);
@@ -3906,9 +3909,9 @@ while (k<k_limit) {
 
 @ @<Skip next char...@>=
 if (*k++!='@@') {
-  printf("\n! Illegal control code in section name: <");
+  wprintf(L"\n! Illegal control code in section name: <");
 @.Illegal control code...@>
-  print_section_name(cur_section_name); printf("> "); mark_error;
+  print_section_name(cur_section_name); wprintf(L"> "); mark_error;
 }
 
 @ The \CEE/ text enclosed in \pb\ should not contain `\.{\v}' characters,
@@ -3921,9 +3924,9 @@ equals the delimiter that began the string being copied.
 j=limit+1; *j='|'; delim=0;
 while (1) {
   if (k>=k_limit) {
-    printf("\n! C text in section name didn't end: <");
+    wprintf(L"\n! C text in section name didn't end: <");
 @.C text...didn't end@>
-    print_section_name(cur_section_name); printf("> "); mark_error; break;
+    print_section_name(cur_section_name); wprintf(L"> "); mark_error; break;
   }
   b=*(k++);
   if (b=='@@' || (b=='\\' && delim!=0))
@@ -3958,7 +3961,7 @@ void phase_two();
 @ @c
 void
 phase_two() {
-reset_input(); if (show_progress) printf("\nWriting the output file...");
+reset_input(); if (show_progress) wprintf(L"\nWriting the output file...");
 @.Writing the output file...@>
 section_count=0; format_visible=1; copy_limbo();
 finish_line(); flush_buffer(out_buf,0,0); /* insert a blank line, it looks nice */
@@ -4025,7 +4028,7 @@ else {
 @.\\N@>
   {@+ char s[32];@+sprintf(s,"{%d}",sec_depth+1);@+out_str(s);@+}
   if (show_progress)
-  printf("*%d",section_count); update_terminal; /* print a progress report */
+  wprintf(L"*%d",section_count); update_terminal; /* print a progress report */
 }
 out_str("{");out_section(section_count); out_str("}");
 
@@ -4308,7 +4311,7 @@ if (no_xref) {
   finish_line();
 }
 else {
-  phase=3; if (show_progress) printf("\nWriting the index...");
+  phase=3; if (show_progress) wprintf(L"\nWriting the index...");
 @.Writing the index...@>
   finish_line();
   if ((idx_file=fopen(idx_file_name,"w"))==NULL)
@@ -4339,7 +4342,7 @@ else {
   finish_line();
   fclose(active_file);
 }
-if (show_happiness) printf("\nDone.");
+if (show_happiness) wprintf(L"\nDone.");
 check_complete(); /* was all of the change file used? */
 }
 
@@ -4389,7 +4392,7 @@ for (h=hash; h<=hash_end; h++) {
     cur_name=next_name; next_name=cur_name->link;
     if (cur_name->xref!=(char*)xmem) {
       c=(eight_bits)((cur_name->byte_start)[0]);
-      if (xisupper(c)) c=tolower(c);
+      if (xisupper(c)) c=xord[towlower(xchr[(eight_bits) c])];
       blink[cur_name-name_dir]=bucket[c]; bucket[c]=cur_name;
     }
   }
@@ -4514,7 +4517,7 @@ while (sort_ptr>scrap_info) {
     if (cur_byte==(cur_name+1)->byte_start) c=0; /* hit end of the name */
     else {
       c=(eight_bits) *cur_byte;
-      if (xisupper(c)) c=tolower(c);
+      if (xisupper(c)) c=xord[towlower(xchr[(eight_bits) c])];
     }
   blink[cur_name-name_dir]=bucket[c]; bucket[c]=cur_name;
   } while (next_name);
@@ -4623,25 +4626,25 @@ rather than an |int|, we use \.{\%ld} to print these quantities.
 @c
 void
 print_stats() {
-  printf("\nMemory usage statistics:\n");
+  wprintf(L"\nMemory usage statistics:\n");
 @.Memory usage statistics:@>
-  printf("%ld names (out of %ld)\n",
+  wprintf(L"%ld names (out of %ld)\n",
             (long)(name_ptr-name_dir),(long)max_names);
-  printf("%ld cross-references (out of %ld)\n",
+  wprintf(L"%ld cross-references (out of %ld)\n",
             (long)(xref_ptr-xmem),(long)max_refs);
-  printf("%ld bytes (out of %ld)\n",
+  wprintf(L"%ld bytes (out of %ld)\n",
             (long)(byte_ptr-byte_mem),(long)max_bytes);
-  printf("Parsing:\n");
-  printf("%ld scraps (out of %ld)\n",
+  wprintf(L"Parsing:\n");
+  wprintf(L"%ld scraps (out of %ld)\n",
             (long)(max_scr_ptr-scrap_info),(long)max_scraps);
-  printf("%ld texts (out of %ld)\n",
+  wprintf(L"%ld texts (out of %ld)\n",
             (long)(max_text_ptr-tok_start),(long)max_texts);
-  printf("%ld tokens (out of %ld)\n",
+  wprintf(L"%ld tokens (out of %ld)\n",
             (long)(max_tok_ptr-tok_mem),(long)max_toks);
-  printf("%ld levels (out of %ld)\n",
+  wprintf(L"%ld levels (out of %ld)\n",
             (long)(max_stack_ptr-stack),(long)stack_size);
-  printf("Sorting:\n");
-  printf("%ld levels (out of %ld)\n",
+  wprintf(L"Sorting:\n");
+  wprintf(L"%ld levels (out of %ld)\n",
             (long)(max_sort_ptr-scrap_info),(long)max_scraps);
 }
 
