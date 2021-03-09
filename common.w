@@ -92,6 +92,114 @@ procedure later.
 void
 common_init()
 {
+  setlocale(LC_CTYPE, "C.UTF-8");
+
+xchr[040]= ' ' ;
+xchr[041]= '!' ;
+xchr[042]= '"' ;
+xchr[043]= '#' ;
+xchr[044]= '$' ;
+xchr[045]= '%' ;
+xchr[046]= '&' ;
+xchr[047]= '\'' ;@/
+xchr[050]= '(' ;
+xchr[051]= ')' ;
+xchr[052]= '*' ;
+xchr[053]= '+' ;
+xchr[054]= ',' ;
+xchr[055]= '-' ;
+xchr[056]= '.' ;
+xchr[057]= '/' ;@/
+xchr[060]= '0' ;
+xchr[061]= '1' ;
+xchr[062]= '2' ;
+xchr[063]= '3' ;
+xchr[064]= '4' ;
+xchr[065]= '5' ;
+xchr[066]= '6' ;
+xchr[067]= '7' ;@/
+xchr[070]= '8' ;
+xchr[071]= '9' ;
+xchr[072]= ':' ;
+xchr[073]= ';' ;
+xchr[074]= '<' ;
+xchr[075]= '=' ;
+xchr[076]= '>' ;
+xchr[077]= '?' ;@/
+xchr[0100]= '@@' ;
+xchr[0101]= 'A' ;
+xchr[0102]= 'B' ;
+xchr[0103]= 'C' ;
+xchr[0104]= 'D' ;
+xchr[0105]= 'E' ;
+xchr[0106]= 'F' ;
+xchr[0107]= 'G' ;@/
+xchr[0110]= 'H' ;
+xchr[0111]= 'I' ;
+xchr[0112]= 'J' ;
+xchr[0113]= 'K' ;
+xchr[0114]= 'L' ;
+xchr[0115]= 'M' ;
+xchr[0116]= 'N' ;
+xchr[0117]= 'O' ;@/
+xchr[0120]= 'P' ;
+xchr[0121]= 'Q' ;
+xchr[0122]= 'R' ;
+xchr[0123]= 'S' ;
+xchr[0124]= 'T' ;
+xchr[0125]= 'U' ;
+xchr[0126]= 'V' ;
+xchr[0127]= 'W' ;@/
+xchr[0130]= 'X' ;
+xchr[0131]= 'Y' ;
+xchr[0132]= 'Z' ;
+xchr[0133]= '[' ;
+xchr[0134]= '\\' ;
+xchr[0135]= ']' ;
+xchr[0136]= '^' ;
+xchr[0137]= '_' ;@/
+xchr[0140]= '`' ;
+xchr[0141]= 'a' ;
+xchr[0142]= 'b' ;
+xchr[0143]= 'c' ;
+xchr[0144]= 'd' ;
+xchr[0145]= 'e' ;
+xchr[0146]= 'f' ;
+xchr[0147]= 'g' ;@/
+xchr[0150]= 'h' ;
+xchr[0151]= 'i' ;
+xchr[0152]= 'j' ;
+xchr[0153]= 'k' ;
+xchr[0154]= 'l' ;
+xchr[0155]= 'm' ;
+xchr[0156]= 'n' ;
+xchr[0157]= 'o' ;@/
+xchr[0160]= 'p' ;
+xchr[0161]= 'q' ;
+xchr[0162]= 'r' ;
+xchr[0163]= 's' ;
+xchr[0164]= 't' ;
+xchr[0165]= 'u' ;
+xchr[0166]= 'v' ;
+xchr[0167]= 'w' ;@/
+xchr[0170]= 'x' ;
+xchr[0171]= 'y' ;
+xchr[0172]= 'z' ;
+xchr[0173]= '{' ;
+xchr[0174]= '|' ;
+xchr[0175]= '}' ;
+xchr[0176]= '~' ;@/
+
+  int i;
+  for (i=0; i<=037; i++) xchr[i]= ' ';
+  for (i=0177; i<=0377; i++) xchr[i]= ' ';
+
+@i mapping.w
+
+  for(i=0;i<=65535;i++)xord[i]= invalid_code;
+  for(i= 0200;i<=0377;i++)xord[xchr[i]]= i;
+  for(i= 0;i<=0176;i++)xord[xchr[i]]= i;
+
   @<Initialize pointers@>;
   @<Set the default options common to \.{CTANGLE} and \.{CWEAVE}@>;
   @<Scan arguments and open output files@>;
@@ -102,7 +210,9 @@ common_init()
 \.{ctype.h} header file.
 
 @<Include files@>=
-#include <ctype.h>
+#include <wchar.h>
+#include <locale.h>
+#include <stdint.h>
 
 @ A few character pairs are encoded internally as single characters,
 using the definitions below. These definitions are consistent with
@@ -155,14 +265,18 @@ some of \.{CWEB}'s routines use the fact that it is safe to refer to
 @d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
 @d longest_name 10000
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
-@d xisspace(c) (isspace(c)&&((unsigned char)c<0200))
-@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))
+@d xisspace(c) (iswspace(xchr[(unsigned char) c]))
+@d xisupper(c) (iswupper(xchr[(unsigned char) c]))
+@d invalid_code 0177 /*ASCII code that many systems prohibit in text files*/ 
 
 @<Definitions...@>=
 char buffer[long_buf_size]; /* where each line of input goes */
 char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
 char *limit=buffer; /* points to the last character in the buffer */
 char *loc=buffer; /* points to the next character to be read from the buffer */
+
+uint8_t xord[65536];
+wchar_t xchr[256];
 
 @ @<Include files@>=
 #include <stdio.h>
@@ -175,18 +289,24 @@ support |feof|, |getc|, and |ungetc| you may have to change things here.
 int input_ln(fp) /* copies a line into |buffer| or returns 0 */
 FILE *fp; /* what file to read from */
 {
-  register int  c=EOF; /* character read; initialized so some compilers won't complain */
+  wchar_t c; /* character read */
   register char *k;  /* where next character goes */
   if (feof(fp)) return(0);  /* we have hit end-of-file */
   limit = k = buffer;  /* beginning of buffer */
-  while (k<=buffer_end && (c=getc(fp)) != EOF && c!='\n')
-    if ((*(k++) = c) != ' ') limit = k;
-  if (k>buffer_end)
-    if ((c=getc(fp))!=EOF && c!='\n') {
-      ungetc(c,fp); loc=buffer; err_print("! Input line too long");
-@.Input line too long@>
+  while (k<=buffer_end) {
+    c=fgetwc(fp);
+    if (feof(fp)) break;
+    if (c==L'\n') break;
+    if ((*(k++) = xord[c]) != ' ') limit = k;
   }
-  if (c==EOF && limit==buffer) return(0);  /* there was nothing after
+  if (k>buffer_end) {
+    c=fgetwc(fp);
+    if (!feof(fp)) if (c!=L'\n') {
+      ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
+@.Input line too long@>
+    }
+  }
+  if (feof(fp) && limit==buffer) return(0);  /* there was nothing after
     the last newline */
   return(1);
 }
@@ -270,7 +390,7 @@ while(1) {
   if (!input_ln(change_file)) return;
   if (limit<buffer+2) continue;
   if (buffer[0]!='@@') continue;
-  if (xisupper(buffer[1])) buffer[1]=tolower(buffer[1]);
+  if (xisupper(buffer[1])) buffer[1]=xord[towlower(xchr[(unsigned char) buffer[1]])];
   if (buffer[1]=='x') break;
   if (buffer[1]=='y' || buffer[1]=='z' || buffer[1]=='i') {
     loc=buffer+2;
@@ -339,7 +459,7 @@ check_change() /* switches to |change_file| if the buffers match */
       return;
     }
     if (limit>buffer+1 && buffer[0]=='@@') {
-      char xyz_code=xisupper(buffer[1])? tolower(buffer[1]): buffer[1];
+      char xyz_code=xisupper(buffer[1])? xord[towlower(xchr[(unsigned char)buffer[1]])]: buffer[1];
       @<If the current line starts with \.{@@y},
         report any discrepancies and |return|@>;
     }
@@ -552,7 +672,7 @@ The remainder of the \.{@@i} line after the file name is ignored.
     }
     *limit=' ';
     if (buffer[0]=='@@') {
-      if (xisupper(buffer[1])) buffer[1]=tolower(buffer[1]);
+      if (xisupper(buffer[1])) buffer[1]=xord[towlower(xchr[(unsigned char) buffer[1]])];
       if (buffer[1]=='x' || buffer[1]=='y') {
         loc=buffer+2;
         err_print("! Where is the matching @@z?");

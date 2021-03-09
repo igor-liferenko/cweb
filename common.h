@@ -62,12 +62,12 @@ char *id_loc; /* just after the current identifier in the buffer */
 
 @ Code related to input routines:
 
-@d xisalpha(c) (isalpha(c)&&((eight_bits)c<0200))
-@d xisdigit(c) (isdigit(c)&&((eight_bits)c<0200))
-@d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
-@d xislower(c) (islower(c)&&((eight_bits)c<0200))
-@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
-@d xisxdigit(c) (isxdigit(c)&&((eight_bits)c<0200))
+@d xisalpha(c) (iswalpha(xchr[(unsigned char) c]))
+@d xisdigit(c) (iswdigit(xchr[(unsigned char) c]))
+@d xisspace(c) (iswspace(xchr[(unsigned char) c]))
+@d xislower(c) (iswlower(xchr[(unsigned char) c]))
+@d xisupper(c) (iswupper(xchr[(unsigned char)c]))
+@d xisxdigit(c) (iswxdigit(xchr[(unsigned char) c]))
 
 @<Common code...@>=
 extern char buffer[]; /* where each line of input goes */
