@@ -10,6 +10,7 @@ all:
 	/bin/ctangle ctangle ctang-merged
 	gcc -g -Og -w -c ctangle.c
 	gcc -g -Og -o ctangle ctangle.o common.o
+	cp cweave ctangle /usr/local/bin/
 
 print:
 # NOTE: use original cweave (not wrapper)
