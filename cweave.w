@@ -1322,7 +1322,7 @@ of commented-out text).
 @d c_line_write(c) fflush(active_file); for (int i = 0; i < c; i++)
   fprintf(active_file, "%lc",xchr[(eight_bits) *(out_buf+1+i)])
 @d tex_putc(c) putc(c,active_file)
-@d tex_new_line fputwc(L'\n',active_file)
+@d tex_new_line putc('\n',active_file)
 @d tex_printf(c) fprintf(active_file,c)
 
 @c
