@@ -485,7 +485,7 @@ if (xyz_code=='x' || xyz_code=='z') {
 else if (xyz_code=='y') {
   if (n>0) {
     loc=buffer+2;
-    wprintf(L"\n! Hmm... %d ",n);
+    printf("\n! Hmm... %d ",n);
     err_print("of the preceding lines failed to match");
 @.Hmm... n of the preceding...@>
   }
@@ -1064,10 +1064,10 @@ while (p) { /* compare shortest prefix of |p| with new name */
     p=(c==less?p->llink:p->rlink);
   } else { /* new name matches |p| */
     if (r!=NULL) {  /* and also |r|: illegal */
-      wprintf(L"\n! Ambiguous prefix: matches <");
+      printf("\n! Ambiguous prefix: matches <");
 @.Ambiguous prefix ... @>
       print_prefix_name(p);
-      wprintf(L">\n and <");
+      printf(">\n and <");
       print_prefix_name(r);
       err_print(">");
       return name_dir; /* the unsection */
@@ -1093,7 +1093,7 @@ switch(section_name_cmp(&first,name_len,r)) {
               /* compare all of |r| with new name */
   case prefix:
     if (!ispref) {
-      wprintf(L"\n! New name is a prefix of <");
+      printf("\n! New name is a prefix of <");
 @.New name is a prefix...@>
       print_section_name(r);
       err_print(">");
@@ -1105,16 +1105,16 @@ switch(section_name_cmp(&first,name_len,r)) {
         extend_section_name(r,first,last+1,ispref);
       return r;
   case bad_extension:
-      wprintf(L"\n! New name extends <");
+      printf("\n! New name extends <");
 @.New name extends...@>
       print_section_name(r);
       err_print(">");
     return r;
   default: /* no match: illegal */
-    wprintf(L"\n! Section name incompatible with <");
+    printf("\n! Section name incompatible with <");
 @.Section name incompatible...@>
     print_prefix_name(r);
-    wprintf(L">,\n which abbreviates <");
+    printf(">,\n which abbreviates <");
     print_section_name(r);
     err_print(">");
     return r;
@@ -1220,7 +1220,7 @@ err_print(s) /* prints `\..' and location of error message */
 char *s;
 {
   char *k,*l; /* pointers into |buffer| */
-  wprintf(*s=='!'? L"\n%s" : L"%s",s);
+  wprintf(*s=='!'? "\n%s" : "%s",s);
   if(web_file_open) @<Print error location based on input buffer@>;
   update_terminal; mark_error;
 }
@@ -1236,9 +1236,9 @@ has special line-numbering conventions.
 
 @<Print error location based on input buffer@>=
 {if (changing && include_depth==change_depth)
-  wprintf(L". (l. %d of change file)\n", change_line);
-else if (include_depth==0) wprintf(L". (l. %d)\n", cur_line);
-  else wprintf(L". (l. %d of include file %s)\n", cur_line, cur_file_name);
+  printf(". (l. %d of change file)\n", change_line);
+else if (include_depth==0) printf(". (l. %d)\n", cur_line);
+  else printf(". (l. %d of include file %s)\n", cur_line, cur_file_name);
 l= (loc>=limit? limit: loc);
 if (l>buffer) {
   for (k=buffer; k<l; k++)
@@ -1281,12 +1281,12 @@ int wrap_up() {
 
 @ @<Print the job |history|@>=
 switch (history) {
-case spotless: if (show_happiness) wprintf(L"(No errors were found.)\n"); break;
+case spotless: if (show_happiness) printf("(No errors were found.)\n"); break;
 case harmless_message:
-  wprintf(L"(Did you see the warning message above?)\n"); break;
+  printf("(Did you see the warning message above?)\n"); break;
 case error_message:
-  wprintf(L"(Pardon me, but I think I spotted something wrong.)\n"); break;
-case fatal_message: wprintf(L"(That was a fatal error, my friend.)\n");
+  printf("(Pardon me, but I think I spotted something wrong.)\n"); break;
+case fatal_message: printf("(That was a fatal error, my friend.)\n");
 } /* there are no other cases */
 
 @ When there is no way to recover from an error, the |fatal| subroutine is
@@ -1302,7 +1302,7 @@ concatenated to print the final error message.
 fatal(s,t)
   char *s,*t;
 {
-  if (*s) wprintf(L"%s",s);
+  if (*s) printf("%s",s);
   err_print(t);
   history=fatal_message; exit(wrap_up());
 }
@@ -1313,7 +1313,7 @@ fatal(s,t)
 overflow(t)
   char *t;
 {
-  wprintf(L"\n! Sorry, %s capacity exceeded",t); fatal("","");
+  printf("\n! Sorry, %s capacity exceeded",t); fatal("","");
 }
 @.Sorry, capacity exceeded@>
 

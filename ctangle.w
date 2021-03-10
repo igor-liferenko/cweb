@@ -61,7 +61,7 @@ Joachim Schrod, Lee Wittenberg, and others who have contributed improvements.
 The ``banner line'' defined here should be changed whenever \.{CTANGLE}
 is modified.
 
-@d banner L"This is CTANGLE (Version 3.64)\n"
+@d banner "This is CTANGLE (Version 3.64)\n"
 
 @c
 @<Include files@>@/
@@ -429,7 +429,7 @@ or the \CEE/ text may have been associated with a different name by mistake.
   a-=024000;
   if ((a+name_dir)->equiv!=(char *)text_info) push_level(a+name_dir);
   else if (a!=0) {
-    wprintf(L"\n! Not present: <");
+    printf("\n! Not present: <");
     print_section_name(a+name_dir); err_print(">");
 @.Not present: <section name>@>
   }
@@ -488,8 +488,8 @@ flush_buffer() /* writes one line to output file */
 {
   C_putc('\n');
   if (cur_line % 100 == 0 && show_progress) {
-    wprintf(L".");
-    if (cur_line % 500 == 0) wprintf(L"%d",cur_line);
+    printf(".");
+    if (cur_line % 500 == 0) printf("%d",cur_line);
     update_terminal; /* progress report */
   }
   cur_line++;
@@ -545,19 +545,19 @@ phase_two () {
   @<Initialize the output stacks@>;
   @<Output macro definitions if appropriate@>;
   if (text_info->text_link==0 && cur_out_file==end_output_files) {
-    wprintf(L"\n! No program text was specified."); mark_harmless;
+    printf("\n! No program text was specified."); mark_harmless;
 @.No program text...@>
   }
   else {
     if(cur_out_file==end_output_files) {
       if(show_progress)
-        wprintf(L"\nWriting the output file (%s):",C_file_name);
+        printf("\nWriting the output file (%s):",C_file_name);
     }
     else {
       if (show_progress) {
-        wprintf(L"\nWriting the output files:");
+        printf("\nWriting the output files:");
 @.Writing the output...@>
-        wprintf(L" (%s)",C_file_name);
+        printf(" (%s)",C_file_name);
         update_terminal;
       }
       if (text_info->text_link==0) goto writeloop;
@@ -565,7 +565,7 @@ phase_two () {
     while (stack_ptr>stack) get_output();
     flush_buffer();
 writeloop:   @<Write all the named output files@>;
-    if(show_happiness) wprintf(L"\nDone.");
+    if(show_happiness) printf("\nDone.");
   }
 }
 
@@ -581,7 +581,7 @@ for (an_output_file=end_output_files; an_output_file>cur_out_file;) {
     C_file=fopen(output_file_name,"w");
     if (C_file ==0) fatal("! Cannot open output file:",output_file_name);
 @.Cannot open output file@>
-    wprintf(L"\n(%s)",output_file_name); update_terminal;
+    printf("\n(%s)",output_file_name); update_terminal;
     cur_line=1;
     stack_ptr=stack+1;
     cur_name= (*an_output_file);
@@ -616,7 +616,7 @@ output_defs()
     if (cur_text->text_link==0) { /* |cur_text| is the text for a macro */
       cur_byte=cur_text->tok_start;
       cur_end=(cur_text+1)->tok_start;
-      C_printf(L"%s","#define ");
+      C_printf("%s","#define ");
       out_state=normal;
       protect=1; /* newlines should be preceded by |'\\'| */
       while (cur_byte<cur_end) {
@@ -735,8 +735,8 @@ case identifier:
 
 @ @<Case of a sec...@>=
 case section_number:
-  if (cur_val>0) C_printf(L"/*%d:*/",cur_val);
-  else if(cur_val<0) C_printf(L"/*:%d*/",-cur_val);
+  if (cur_val>0) C_printf("/*%d:*/",cur_val);
+  else if(cur_val<0) C_printf("/*:%d*/",-cur_val);
   else if (protect) {
     cur_byte +=4; /* skip line number and file name */
     cur_char = '\n';
@@ -745,7 +745,7 @@ case section_number:
     sixteen_bits a;
     a=0400* *cur_byte++;
     a+=*cur_byte++; /* gets the line number */
-    C_printf(L"\n#line %d \"",a);
+    C_printf("\n#line %d \"",a);
 @:line}{\.{\#line}@>
     cur_val=*cur_byte++;
     cur_val=0400*(cur_val-0200)+ *cur_byte++; /* points to the file name */
@@ -754,7 +754,7 @@ case section_number:
       if (*j=='\\' || *j=='"') C_putc('\\');
       C_putc(*j);
     }
-    C_printf(L"%s","\"\n");
+    C_printf("%s","\"\n");
   }
   break;
 
@@ -1040,7 +1040,7 @@ convention, but do not allow the string to be longer than |longest_name|.
     if (++id_loc<=section_text_end) *id_loc=c;
   }
   if (id_loc>=section_text_end) {
-    wprintf(L"\n! String too long: ");
+    printf("\n! String too long: ");
 @.String too long@>
     term_write(section_text+1,25);
     err_print("...");
@@ -1137,10 +1137,10 @@ while (1) {
 *k=c;
 }
 if (k>=section_text_end) {
-  wprintf(L"\n! Section name too long: ");
+  printf("\n! Section name too long: ");
 @.Section name too long@>
   term_write(section_text+1,25);
-  wprintf(L"..."); mark_harmless;
+  printf("..."); mark_harmless;
 }
 if (*k==' ' && k>section_text) k--;
 
@@ -1371,7 +1371,7 @@ scan_section()
   sixteen_bits a; /* token for left-hand side of definition */
   section_count++; @+ no_where=1;
   if (*(loc-1)=='*' && show_progress) { /* starred section */
-    wprintf(L"*%d",section_count); update_terminal;
+    printf("*%d",section_count); update_terminal;
   }
   next_control=0;
   while (1) {
@@ -1541,14 +1541,14 @@ but not an |int|, we use \.{\%ld} to print these quantities.
 @c
 void
 print_stats() {
-  wprintf(L"\nMemory usage statistics:\n");
-  wprintf(L"%ld names (out of %ld)\n",
+  printf("\nMemory usage statistics:\n");
+  printf("%ld names (out of %ld)\n",
           (long)(name_ptr-name_dir),(long)max_names);
-  wprintf(L"%ld replacement texts (out of %ld)\n",
+  printf("%ld replacement texts (out of %ld)\n",
           (long)(text_ptr-text_info),(long)max_texts);
-  wprintf(L"%ld bytes (out of %ld)\n",
+  printf("%ld bytes (out of %ld)\n",
           (long)(byte_ptr-byte_mem),(long)max_bytes);
-  wprintf(L"%ld tokens (out of %ld)\n",
+  printf("%ld tokens (out of %ld)\n",
           (long)(tok_ptr-tok_mem),(long)max_toks);
 }
 
