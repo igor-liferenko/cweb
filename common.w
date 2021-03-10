@@ -296,18 +296,17 @@ FILE *fp; /* what file to read from */
   limit = k = buffer;  /* beginning of buffer */
   while (k<=buffer_end) {
     c=fgetwc(fp);
-    if (feof(fp) || ferror(fp)) break;
-    if (c==L'\n') break;
+    if (feof(fp) || c==L'\n') break;
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
     c=fgetwc(fp);
-    if (!(feof(fp) || ferror(fp))) if (c!=L'\n') {
+    if (!(feof(fp) || c==L'\n')) {
       ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
 @.Input line too long@>
     }
   }
-  if ((feof(fp) || ferror(fp)) && limit==buffer) return(0);  /* there was nothing after
+  if (feof(fp) && limit==buffer) return(0);  /* there was nothing after
     the last newline */
   return(1);
 }
