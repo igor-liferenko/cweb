@@ -1,1 +1,4 @@
 cleanup changes from original cwebman.tex
+run cweb tests
+see README.UTF8
+non-ascii filenames may be a problem - check
