@@ -168,9 +168,8 @@ some of \.{CWEB}'s routines use the fact that it is safe to refer to
 @d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
 @d longest_name 10000
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
-@d xisspace(c) (iswspace(xchr[(eight_bits) c]))
-@d xisupper(c) (iswupper(xchr[(eight_bits) c]))
-
+@d xisspace(c) (isspace(c)&&((unsigned char)c<0200))
+@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))
 
 @<Definitions...@>=
 char buffer[long_buf_size]; /* where each line of input goes */
