@@ -1282,12 +1282,12 @@ name_pointer p; /* print anomalies in subtree |p| */
     if (cur_xref->num==file_flag) {an_output=1; cur_xref=cur_xref->xlink;}
     else an_output=0;
     if (cur_xref->num <def_flag) {
-      printf("\n! Never defined: <"); print_section_name(p); putwchar(L'>'); mark_harmless;
+      printf("\n! Never defined: <"); print_section_name(p); putchar('>'); mark_harmless;
 @.Never defined: <section name>@>
     }
     while (cur_xref->num >=cite_flag) cur_xref=cur_xref->xlink;
     if (cur_xref==xmem && !an_output) {
-      printf("\n! Never used: <"); print_section_name(p); putwchar(L'>'); mark_harmless;
+      printf("\n! Never used: <"); print_section_name(p); putchar('>'); mark_harmless;
 @.Never used: <section name>@>
     }
     section_check(p->rlink);
@@ -1792,7 +1792,7 @@ print_cat(c) /* symbolic printout of a category */
 eight_bits c;
 {
   for (char *i = cat_name[c]; *i != '\0'; i++)
-    putwchar(xchr[(eight_bits) *i]);
+    printf("%lc",xchr[(eight_bits) *i]);
 }
 
 @ The token lists for translated \TEX/ output contain some special control
@@ -3105,12 +3105,12 @@ int tracing; /* can be used to show parsing details */
   if (tracing==2) {
     printf("\n%d:",n);
     for (k=scrap_base; k<=lo_ptr; k++) {
-      if (k==pp) putwchar(L'*'); else putwchar(L' ');
-      if (k->mathness %4 ==  yes_math) putwchar(L'+');
-      else if (k->mathness %4 ==  no_math) putwchar(L'-');
+      if (k==pp) putchar('*'); else putchar(' ');
+      if (k->mathness %4 ==  yes_math) putchar('+');
+      else if (k->mathness %4 ==  no_math) putchar('-');
       print_cat(k->cat);
-      if (k->mathness /4 ==  yes_math) putwchar(L'+');
-      else if (k->mathness /4 ==  no_math) putwchar(L'-');
+      if (k->mathness /4 ==  yes_math) putchar('+');
+      else if (k->mathness /4 ==  no_math) putchar('-');
     }
     if (hi_ptr<=scrap_ptr) printf("..."); /* indicate that more is coming */
   }

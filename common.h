@@ -175,11 +175,11 @@ extern boolean flags[]; /* an option for each 7-bit code */
 
 @ Code relating to output:
 @d update_terminal fflush(stdout) /* empty the terminal output buffer */
-@d new_line putwchar(L'\n') @d putxchar(c) putwchar(xchr[(eight_bits) c])
+@d new_line putchar('\n') @d putxchar(c) printf("%lc",xchr[(eight_bits) c])
 @d term_write(a,b) do { fflush(stdout);
-  for (int i = 0; i < b; i++) putwchar(xchr[(eight_bits) *(a+i)]); } while (0)
-@d C_printf(c,a) fwprintf(C_file,c,a)
-@d C_putc(c) fputwc(xchr[(eight_bits) c],C_file)
+  for (int i = 0; i < b; i++) printf("%lc",xchr[(eight_bits) *(a+i)]); } while (0)
+@d C_printf(c,a) fprintf(C_file,c,a)
+@d C_putc(c) fprintf(C_file,"%lc",xchr[(eight_bits) c]) /* isn't \CEE/ wonderfully consistent? */
 
 @<Common code...@>=
 extern FILE *C_file; /* where output of \.{CTANGLE} goes */

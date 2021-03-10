@@ -1242,14 +1242,14 @@ else if (include_depth==0) printf(". (l. %d)\n", cur_line);
 l= (loc>=limit? limit: loc);
 if (l>buffer) {
   for (k=buffer; k<l; k++)
-    if (*k=='\t') putwchar(L' ');
-    else putwchar(xchr[(eight_bits) *k]); /* print the characters already read */
-  putwchar(L'\n');
-  for (k=buffer; k<l; k++) putwchar(L' '); /* space out the next line */
+    if (*k=='\t') putchar(' ');
+    else printf("%lc",xchr[(eight_bits) *k]); /* print the characters already read */
+  putchar('\n');
+  for (k=buffer; k<l; k++) putchar(' '); /* space out the next line */
 }
-for (k=l; k<limit; k++) putwchar(xchr[(eight_bits) *k]); /* print the part not yet read */
-if (*limit=='|') putwchar(L'|'); /* end of \CEE/ text in section names */
-putwchar(L' '); /* to separate the message from future asterisks */
+for (k=l; k<limit; k++) printf("%lc",xchr[(eight_bits) *k]); /* print the part not yet read */
+if (*limit=='|') putchar('|'); /* end of \CEE/ text in section names */
+putchar(' '); /* to separate the message from future asterisks */
 }
 
 @ When no recovery from some error has been provided, we have to wrap
@@ -1271,7 +1271,7 @@ a status of 0 if and only if only harmless messages were printed.
 
 @c
 int wrap_up() {
-  putwchar(L'\n');
+  putchar('\n');
   if (show_stats)
     print_stats(); /* print statistics about memory usage */
   @<Print the job |history|@>;
@@ -1520,11 +1520,11 @@ translate from \.{CWEB}'s code into the external character code,
 and |printf| when we just want to print strings.
 Several macros make other kinds of output convenient.
 @^system dependencies@>
-@d new_line putwchar(L'\n') @d putxchar(c) putwchar(xchr[(eight_bits) c])
+@d new_line putchar('\n') @d putxchar(c) printf("%lc",xchr[(eight_bits) c])
 @d term_write(a,b) do { fflush(stdout); 
-  for (int i = 0; i < b; i++) putwchar(xchr[(eight_bits) *(a+i)]); } while (0)
-@d C_printf(c,a) fwprintf(C_file,c,a)
-@d C_putc(c) fputwc(xchr[(eight_bits) c],C_file) /* isn't \CEE/ wonderfully consistent? */
+  for (int i = 0; i < b; i++) printf("%lc",xchr[(eight_bits) *(a+i)]); } while (0)
+@d C_printf(c,a) fprintf(C_file,c,a)
+@d C_putc(c) fprintf(C_file,"%lc",xchr[(eight_bits) c]) /* isn't \CEE/ wonderfully consistent? */
 
 @ We predeclare several standard system functions here instead of including
 their system header files, because the names of the header files are not as
