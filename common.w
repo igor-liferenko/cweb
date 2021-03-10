@@ -99,6 +99,7 @@ common_init()
   for (i=0; i<=037; i++) xchr[i]=' ';
   for (i=0177; i<=0377; i++) xchr[i]=' ';
 @i mapping.w
+  xord['\t']='\t';
   for(i=0200;i<=0377;i++) xord[xchr[i]]=i;
   for(i=0;i<=0176;i++) xord[xchr[i]]=i;
 
@@ -196,8 +197,7 @@ FILE *fp; /* what file to read from */
   while (k<=buffer_end) {
     c=fgetwc(fp);
     if (feof(fp) || c==L'\n') break;
-    if (c==L'\t') { *(k++) = '\t'; limit = k; }
-    else if ((*(k++) = xord[c]) != ' ') limit = k;
+    if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
     c=fgetwc(fp);
