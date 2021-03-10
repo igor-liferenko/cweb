@@ -196,7 +196,8 @@ FILE *fp; /* what file to read from */
   while (k<=buffer_end) {
     c=fgetwc(fp);
     if (feof(fp) || c==L'\n') break;
-    if ((*(k++) = xord[c]) != ' ') limit = k;
+    if (c==L'\t') { *(k++) = '\t'; limit = k; }
+    else if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
     c=fgetwc(fp);
