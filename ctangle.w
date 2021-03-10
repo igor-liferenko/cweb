@@ -890,6 +890,7 @@ name_pointer cur_section_name; /* name of section just scanned */
 int no_where; /* suppress |print_where|? */
 
 @ @<Include...@>=
+#include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <wchar.h>
 #include <wctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <stdlib.h> /* definition of |exit| */
