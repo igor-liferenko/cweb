@@ -1325,12 +1325,12 @@ code internally.
       if (xisdigit(*(id_first+1))) c=*(++id_first)-'0';
       else if (xisxdigit(*(id_first+1))) {
         ++id_first;
-        c=xord[towupper(xchr[(eight_bits) *id_first])]-'A'+10;
+        c=toupper(*id_first)-'A'+10;
       }
       if (xisdigit(*(id_first+1))) c=16*c+*(++id_first)-'0';
       else if (xisxdigit(*(id_first+1))) {
         ++id_first;
-        c=16*c+xord[towupper(xchr[(eight_bits) *id_first])]-'A'+10;
+        c=16*c+toupper(*id_first)-'A'+10;
       }
       break;
     case '\\':c='\\';@+break;
