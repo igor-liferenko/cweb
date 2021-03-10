@@ -177,10 +177,13 @@ extern boolean flags[]; /* an option for each 7-bit code */
 @d update_terminal fflush(stdout) /* empty the terminal output buffer */
 @d new_line putchar('\n') @d putxchar putchar
 @d term_write(a,b) do { fflush(stdout);
-  for (int i = 0; i < b; i++) printf("%lc",xchr[(eight_bits) *(a+i)]); } while (0)
+  for (int i = 0; i < b; i++)
+    if (*(a+i)!='\n') printf("%lc",xchr[(eight_bits) *(a+i)]);
+    else putchar(*(a+i));
+} while (0)
 @d C_printf(c,a) fprintf(C_file,c,a)
 @d C_putc(c) do {
-  if (isprint(c)) fprintf(C_file,"%lc",xchr[(eight_bits) c]);
+  if (c!='\n') fprintf(C_file,"%lc",xchr[(eight_bits) c]);
   else putc(c,C_file);
 } while (0)
 
