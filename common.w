@@ -113,6 +113,7 @@ common_init()
 \.{ctype.h} header file.
 
 @<Include files@>=
+#include <ctype.h>
 #include <wchar.h>
 #include <wctype.h>
 #include <locale.h>
