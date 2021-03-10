@@ -3104,7 +3104,7 @@ int tracing; /* can be used to show parsing details */
   if (tracing==2) {
     printf("\n%d:",n);
     for (k=scrap_base; k<=lo_ptr; k++) {
-      if (k==pp) putchar('*'); else putchar(' ');
+      if (k==pp) putxchar('*'); else putxchar(' ');
       if (k->mathness %4 ==  yes_math) putchar('+');
       else if (k->mathness %4 ==  no_math) putchar('-');
       print_cat(k->cat);
