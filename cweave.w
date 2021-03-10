@@ -838,7 +838,7 @@ are pointers into the array |section_text|, not into |buffer|.
   }
   while (*loc=='u' || *loc=='U' || *loc=='l' || *loc=='L'
          || *loc=='f' || *loc=='F') {
-    *id_loc++='$'; *id_loc++=xord[towupper(xchr[(eight_bits) *loc])]; loc++;
+    *id_loc++='$'; *id_loc++=toupper(*loc); loc++;
   }
   return(constant);
 }
