@@ -1423,13 +1423,13 @@ Several macros make other kinds of output convenient.
 @d new_line putchar('\n') @d putxchar putchar
 @d term_write(a,b) do { fflush(stdout);
   for (int i = 0; i < b; i++)
-    if (*(a+i)!='\n') printf("%lc",xchr[(eight_bits) *(a+i)]);
-    else putchar(*(a+i));
+    if (*(a+i)=='\n') putchar(*(a+i));
+    else printf("%lc",xchr[(eight_bits) *(a+i)]);
 } while (0)
 @d C_printf(c,a) fprintf(C_file,c,a)
 @d C_putc(c) do {
-  if (c!='\n') fprintf(C_file,"%lc",xchr[(eight_bits) c]);
-  else putc(c,C_file);
+  if (c=='\n') putc(c,C_file);
+  else fprintf(C_file,"%lc",xchr[(eight_bits) c]);
 } while (0)
 
 @ We predeclare several standard system functions here instead of including
