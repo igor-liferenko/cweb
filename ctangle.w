@@ -751,7 +751,7 @@ case section_number:
     for (j=(cur_val+name_dir)->byte_start, k=(cur_val+name_dir+1)->byte_start;
          j<k; j++) {
       if (*j=='\\' || *j=='"') C_putc('\\');
-      C_putc(*j);
+      putc(*j,C_file);
     }
     C_printf("%s","\"\n");
   }
