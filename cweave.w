@@ -4392,7 +4392,7 @@ for (h=hash; h<=hash_end; h++) {
     cur_name=next_name; next_name=cur_name->link;
     if (cur_name->xref!=(char*)xmem) {
       c=(eight_bits)((cur_name->byte_start)[0]);
-      if (xisupper(c)) c=xord[towlower(xchr[(eight_bits) c])];
+      if (xisupper(c)) c=tolower(c);
       blink[cur_name-name_dir]=bucket[c]; bucket[c]=cur_name;
     }
   }
@@ -4517,7 +4517,7 @@ while (sort_ptr>scrap_info) {
     if (cur_byte==(cur_name+1)->byte_start) c=0; /* hit end of the name */
     else {
       c=(eight_bits) *cur_byte;
-      if (xisupper(c)) c=xord[towlower(xchr[(eight_bits) c])];
+      if (xisupper(c)) c=tolower(c);
     }
   blink[cur_name-name_dir]=bucket[c]; bucket[c]=cur_name;
   } while (next_name);
