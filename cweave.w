@@ -684,6 +684,7 @@ name_pointer cur_section; /* name of section just scanned */
 char cur_section_char; /* the character just before that name */
 
 @ @<Include...@>=
+#include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <wchar.h>
 #include <wctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <stdlib.h> /* definition of |exit| */
