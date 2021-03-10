@@ -114,8 +114,6 @@ common_init()
 
 @<Include files@>=
 #include <ctype.h>
-#include <wchar.h>
-#include <wctype.h>
 #include <locale.h>
 
 @ A few character pairs are encoded internally as single characters,

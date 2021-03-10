@@ -685,8 +685,6 @@ char cur_section_char; /* the character just before that name */
 
 @ @<Include...@>=
 #include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
-#include <wchar.h>
-#include <wctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <stdlib.h> /* definition of |exit| */
 
 @ As one might expect, |get_next| consists mostly of a big switch
