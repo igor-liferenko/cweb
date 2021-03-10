@@ -179,7 +179,10 @@ extern boolean flags[]; /* an option for each 7-bit code */
 @d term_write(a,b) do { fflush(stdout);
   for (int i = 0; i < b; i++) printf("%lc",xchr[(eight_bits) *(a+i)]); } while (0)
 @d C_printf(c,a) fprintf(C_file,c,a)
-@d C_putc(c) fprintf(C_file,"%lc",xchr[(eight_bits) c])
+@d C_putc(c) do {
+  if (isprint(c)) fprintf(C_file,"%lc",xchr[(eight_bits) c]);
+  else putc(c,C_file);
+} while (0)
 
 @<Common code...@>=
 extern FILE *C_file; /* where output of \.{CTANGLE} goes */

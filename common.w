@@ -1424,7 +1424,10 @@ Several macros make other kinds of output convenient.
 @d term_write(a,b) do { fflush(stdout);
   for (int i = 0; i < b; i++) printf("%lc",xchr[(eight_bits) *(a+i)]); } while (0)
 @d C_printf(c,a) fprintf(C_file,c,a)
-@d C_putc(c) fprintf(C_file,"%lc",xchr[(eight_bits) c])
+@d C_putc(c) do {
+  if (isprint(c)) fprintf(C_file,"%lc",xchr[(eight_bits) c]);
+  else putc(c,C_file);
+} while (0)
 
 @ We predeclare several standard system functions here instead of including
 their system header files, because the names of the header files are not as
