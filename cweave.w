@@ -1320,10 +1320,10 @@ carried over to the next line (so that \TEX/ will ignore the completion
 of commented-out text).
 
 @d c_line_write(c) fflush(active_file); for (int i = 0; i < c; i++)
-  fputwc(xchr[(eight_bits) *(out_buf+1+i)], active_file)
-@d tex_putc(c) fputwc(xchr[(eight_bits) c],active_file)
+  fprintf(active_file, "%lc",xchr[(eight_bits) *(out_buf+1+i)])
+@d tex_putc(c) putc(c,active_file)
 @d tex_new_line fputwc(L'\n',active_file)
-@d tex_printf(c) for (char *i = c; *i != '\0'; i++) tex_putc(*i)
+@d tex_printf(c) fprintf(active_file,c)
 
 @c
 void
@@ -1791,8 +1791,7 @@ void
 print_cat(c) /* symbolic printout of a category */
 eight_bits c;
 {
-  for (char *i = cat_name[c]; *i != '\0'; i++)
-    printf("%lc",xchr[(eight_bits) *i]);
+  printf(cat_name[c]);
 }
 
 @ The token lists for translated \TEX/ output contain some special control
