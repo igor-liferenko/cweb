@@ -72,7 +72,6 @@ is modified.
 
 @c @<Include files@>@/
 extern wchar_t xchr[];
-extern unsigned char xord[];
 @h
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
 @<Typedef declarations@>@/
