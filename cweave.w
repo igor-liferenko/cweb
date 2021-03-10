@@ -803,7 +803,7 @@ switch(c) {
 
 @ @<Get an identifier@>= {
   id_first=--loc;
-  while (isalpha(*++loc) || isdigit(*loc) || isxalpha(*loc) || ishigh(*loc));
+  while (xisalpha(*++loc) || xisdigit(*loc) || isxalpha(*loc) || ishigh(*loc));
   id_loc=loc; return(identifier);
 }
 
