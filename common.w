@@ -1220,7 +1220,7 @@ err_print(s) /* prints `\..' and location of error message */
 char *s;
 {
   char *k,*l; /* pointers into |buffer| */
-  wprintf(*s=='!'? "\n%s" : "%s",s);
+  printf(*s=='!'? "\n%s" : "%s",s);
   if(web_file_open) @<Print error location based on input buffer@>;
   update_terminal; mark_error;
 }

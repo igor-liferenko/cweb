@@ -101,7 +101,7 @@ char **av;
   program=ctangle;
   @<Set initial values@>;
   common_init();
-  if (show_banner) wprintf(banner); /* print a ``banner line'' */
+  if (show_banner) printf(banner); /* print a ``banner line'' */
   phase_one(); /* read all the user's text and compress it into |tok_mem| */
   phase_two(); /* output the contents of the compressed tables */
   return wrap_up(); /* and exit gracefully */

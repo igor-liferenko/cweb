@@ -109,7 +109,7 @@ char **av; /* argument values */
   make_xrefs=force_lines=make_pb=1; /* controlled by command-line options */
   common_init();
   @<Set initial values@>;
-  if (show_banner) wprintf(banner); /* print a ``banner line'' */
+  if (show_banner) printf(banner); /* print a ``banner line'' */
   @<Store all the reserved words@>;
   phase_one(); /* read all the user's text and store the cross-references */
   phase_two(); /* read all the text again and translate it to \TEX/ form */
@@ -2153,9 +2153,9 @@ text_pointer p;
   else for (j=*p; j<*(p+1); j++) {
     r=*j%id_flag;
     switch (*j/id_flag) {
-      case 1: printf("\\\\{"@q}@>); print_id((name_dir+r)); wprintf(@q{@>"}");
+      case 1: printf("\\\\{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
         break; /* |id_flag| */
-      case 2: printf("\\&{"@q}@>); print_id((name_dir+r)); wprintf(@q{@>"}");
+      case 2: printf("\\&{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
         break; /* |res_flag| */
       case 3: printf("<"); print_section_name((name_dir+r)); printf(">");
         break; /* |section_flag| */
