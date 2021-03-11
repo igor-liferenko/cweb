@@ -925,7 +925,7 @@ get_next() /* produces the next input token */
     if (xisdigit(c) || c=='.') @<Get a constant@>@;
     else if (c=='\'' || c=='"' || (c=='L'&&(*loc=='\'' || *loc=='"')))
         @<Get a string@>@;
-    else if (xisalpha(c) || isxalpha(c) || ishigh(c))
+    else if (isalpha(c) || isxalpha(c) || ishigh(c))
       @<Get an identifier@>@;
     else if (c=='@@') @<Get control code and possible section name@>@;
     else if (xisspace(c)) {
@@ -972,9 +972,7 @@ switch(c) {
 
 @ @<Get an identifier@>= {
   id_first=--loc;
-  do {
-    loc++;
-  } while (xisalpha(*loc) || xisdigit(*loc) || isxalpha(*loc) || ishigh(*loc));
+  while (isalpha(*++loc) || xisdigit(*loc) || isxalpha(*loc) || ishigh(*loc));
   id_loc=loc; return(identifier);
 }
 
