@@ -727,7 +727,7 @@ case identifier:
   while (j<k) {
     if ((unsigned char)(*j)<0200) C_putc(*j);
 @^high-bit character handling@>
-    else C_putc(*j);
+    else C_putc(*j); /* don't use translit array */
     j++;
   }
   out_state=num_or_id; break;
