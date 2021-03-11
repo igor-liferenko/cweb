@@ -197,11 +197,13 @@ FILE *fp; /* what file to read from */
   limit = k = buffer;  /* beginning of buffer */
   while (k<=buffer_end) {
     c=fgetwc(fp);
+    if (ferror(fp)) { printf("UTF-8 error\n"); exit(1); }
     if (feof(fp) || c==L'\n') break;
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
     c=fgetwc(fp);
+    if (ferror(fp)) { printf("UTF-8 error\n"); exit(1); }
     if (!(feof(fp) || c==L'\n')) {
       ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
 @.Input line too long@>
