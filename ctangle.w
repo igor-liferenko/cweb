@@ -725,9 +725,7 @@ case identifier:
   j=(cur_val+name_dir)->byte_start;
   k=(cur_val+name_dir+1)->byte_start;
   while (j<k) {
-    if ((unsigned char)(*j)<0200) C_putc(*j);
-@^high-bit character handling@>
-    else C_putc(*j); /* don't use translit array */
+    fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
     j++;
   }
   out_state=num_or_id; break;
