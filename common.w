@@ -89,6 +89,7 @@ The global variable |phase| tells which phase we are in.
 \.{CWEAVE} off to a good start. We will fill in the details of this
 procedure later.
 
+@d invalid_code 0177 /*ASCII code that many systems prohibit in text files*/
 @c
 void
 common_init()
@@ -99,7 +100,7 @@ common_init()
   for (i=0; i<=037; i++) xchr[i]=' ';
   for (i=0177; i<=0377; i++) xchr[i]=' ';
 @i mapping.w
-  xord['\t']='\t';
+  for(i=0;i<=65535;i++) xord[i]=invalid_code;
   for(i=0200;i<=0377;i++) xord[xchr[i]]=i;
   for(i=0;i<=0176;i++) xord[xchr[i]]=i;
 
