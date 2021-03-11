@@ -71,6 +71,7 @@ is modified.
 @d banner "This is CWEAVE (Version 3.64)\n"
 
 @c @<Include files@>@/
+extern unsigned char xord[];
 extern wchar_t xchr[];
 @h
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
