@@ -3754,7 +3754,8 @@ if (a==identifier) {
 @.\\|@>
   else { delim='.';
     for (p=cur_name->byte_start;p<(cur_name+1)->byte_start;p++)
-      if (xislower(*p)) { /* not entirely uppercase */
+      if (xislower(*p) || (ishigh(*p) && iswlower(xchr[(eight_bits)*p]))) {
+                                                                       /* not entirely uppercase */
          delim='\\'; break;
       }
   out(delim);
@@ -4538,7 +4539,7 @@ switch (cur_name->ilk) {
   case normal: case func_template: if (is_tiny(cur_name)) out_str("\\|");
     else {char *j;
       for (j=cur_name->byte_start;j<(cur_name+1)->byte_start;j++)
-        if (xislower(*j)) goto lowcase;
+        if (xislower(*j) || (ishigh(*j) && iswlower(xchr[(eight_bits)*j]))) goto lowcase;
       out_str("\\."); break;
 lowcase: out_str("\\\\");
     }
