@@ -1,4 +1,0 @@
-@x
-extern char *buffer_end; /* end of |buffer| */
-@y
-@z

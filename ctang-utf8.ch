@@ -1,27 +1,20 @@
 @x
-@<Include files@>@/
+@h
 @y
-@<Include files@>@/
-#include <limits.h> /* |MB_LEN_MAX| */
+extern wchar_t xchr[];
+@h
 @z
 
-In ctangle this influences only output_file_name, section_text and section_text_end
 @x
-@d longest_name 10000 /* section names and strings shouldn't be longer than this */
+    C_putc(a); /* a high-bit character can occur in a string */
 @y
-@d longest_name 10000*MB_LEN_MAX /* section names and strings shouldn't be longer than this */
+    fprintf(C_file,"%lc",xchr[(eight_bits)a]); /* a high-bit character can occur in a string */
 @z
 
-Removes `extern char *buffer_end;'              
 @x
-@i common.h
-@y
-@i comm-utf8.h
-@z
-
-Modern compilers can handle UTF-8 identifiers (translit array should also be purged, but it is left to keep number of changes to minimum)
-@x
+    if ((unsigned char)(*j)<0200) C_putc(*j);
+@^high-bit character handling@>
     else C_printf("%s",translit[(unsigned char)(*j)-0200]);
 @y
-    else C_putc(*j);
+    fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
 @z

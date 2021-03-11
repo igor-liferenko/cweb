@@ -1,129 +1,35 @@
 @x
-@c @<Include files@>@/
+@h
 @y
-@c
-#include <wchar.h>
-#include <wctype.h>
-#include <limits.h>
-@<Include files@>@/
+extern unsigned char xord[];
 extern wchar_t xchr[];
-unsigned char xord(char *p)
-{
-  wchar_t wc;
-
-  mbtowc(&wc, p, MB_CUR_MAX);
-  if (iswupper(wc)) wc=towlower(wc);
-
-  unsigned char z;
-  for (z = 0; z <= 0xff; z++)
-    if (xchr[z] == wc)
-      return z;
-}
-int mbsntowcslen(char *mbs, int len);
+@h
 @z
 
 @x
-@d longest_name 10000 /* section names and strings shouldn't be longer than this */
-@d long_buf_size (buf_size+longest_name)
+#include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
 @y
-@d longest_name 10000*MB_LEN_MAX /* section names and strings shouldn't be longer than this */
-@d long_buf_size (buf_size*MB_LEN_MAX+longest_name)
+#include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
+#include <wctype.h>
 @z
-
-Removes `extern char *buffer_end;'
+ 
 @x
-@i common.h
+@d c_line_write(c) fflush(active_file),fwrite(out_buf+1,sizeof(char),c,active_file)
 @y
-@i comm-utf8.h
-@z
-
-@x
-@d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+1)
-@y
-@d is_tiny(p) ((p+1)->byte_start==(p)->byte_start+mblen((p)->byte_start,MB_CUR_MAX))
-@z
-
-@x
-while (loc<=buffer_end-7 && xisspace(*loc)) loc++;
-if (loc<=buffer_end-6 && strncmp(loc,"include",7)==0) sharp_include_line=1;
-@y
-while (loc<=(buffer+buf_size*MB_LEN_MAX-2)-7 && xisspace(*loc)) loc++;
-if (loc<=(buffer+buf_size*MB_LEN_MAX-2)-6 && strncmp(loc,"include",7)==0) sharp_include_line=1;
-@z
-
-@x
-char out_buf[line_length+1]; /* assembled characters */
-@y
-char out_buf[line_length*MB_LEN_MAX+1]; /* assembled characters */
-@z
-
-@x
-char *out_buf_end = out_buf+line_length; /* end of |out_buf| */
-@y
-char *out_buf_end = out_buf+line_length*MB_LEN_MAX; /* end of |out_buf| */
-@z
-
-@x
-@d out(c) {if (out_ptr>=out_buf_end) break_out(); *(++out_ptr)=c;}
-@y
-@d out(c) {
-  if (mbsntowcslen(out_buf+1, out_ptr-(out_buf+1)+1) >= line_length) break_out();
-  *++out_ptr=c;
-}
-@z
-
-@x
-  term_write(out_buf+1, out_ptr-out_buf-1);
-  new_line; mark_harmless;
-  flush_buffer(out_ptr-1,1,1); return;
-@y
-  k=out_ptr;
-  while (mblen(k,MB_CUR_MAX)==-1) k--;
-  term_write(out_buf+1, out_ptr-out_buf-mblen(k,MB_CUR_MAX));
-  new_line; mark_harmless;
-  flush_buffer(out_ptr-mblen(k,MB_CUR_MAX),1,1); return;
-@z
-
-@x
-  if((eight_bits)(*id_first)>0177) {
-    app_tok(quoted_char);
-    app_tok((eight_bits)(*id_first++));
-  }
-@y
-  if((eight_bits)(*id_first)>0177) {
-    for (int w = mblen(id_first,MB_CUR_MAX); w > 0; w--) {
-      app_tok(quoted_char);
-      app_tok((eight_bits)(*id_first++));
-    }
-  }
+@d c_line_write(c) fflush(active_file); for (int i = 0; i < c; i++)
+  fprintf(active_file, "%lc",xchr[(eight_bits) *(out_buf+1+i)])
 @z
 
 @x
       if (xislower(*p)) { /* not entirely uppercase */
-         delim='\\'; break;
-      }
 @y
-    {
-      wchar_t wc;
-      mbtowc(&wc, p, MB_CUR_MAX);
-      if (iswlower(wc)) { /* not entirely uppercase */
-        delim='\\'; break;
-      }
-    }
-@z
-
-@x
-  out((cur_name->byte_start)[0]);
-@y
-  for (int w = 0; w < mblen(cur_name->byte_start,MB_CUR_MAX); w++)
-    out(*(cur_name->byte_start + w));
+      if (iswlower(xchr[(eight_bits)*p])) { /* not entirely uppercase */
 @z
 
 @x
       if (xisupper(c)) c=tolower(c);
 @y
-      if (xisupper(c)) c=tolower(c);
-      else if (ishigh(c)) c=xord(cur_name->byte_start);
+      if (iswupper(xchr[(eight_bits) c])) c=xord[towlower(xchr[(eight_bits) c])];
 @z
 
 Move 'ё' down next to 'е' and shift the rest of the sequence:
@@ -155,29 +61,13 @@ strcpy(collate+213,"\357\360\362\363\364\365\366\367\370\371\372\373\374\375\376
 @z
 
 @x
-    cur_byte=cur_name->byte_start+cur_depth;
-    if (cur_byte==(cur_name+1)->byte_start) c=0; /* hit end of the name */
-    else {
-      c=(eight_bits) *cur_byte;
       if (xisupper(c)) c=tolower(c);
 @y
-    cur_byte=cur_name->byte_start;
-    for (int w = 0; w < cur_depth; w++)
-      cur_byte+=mblen(cur_byte,MB_CUR_MAX);
-    if (cur_byte==(cur_name+1)->byte_start) c=0; /* hit end of the name */
-    else {
-      c=(eight_bits) *cur_byte;
-      if (xisupper(c)) c=tolower(c);
-      else if (ishigh(c)) c=xord(cur_byte);
+      if (iswupper(xchr[(eight_bits) c])) c=xord[towlower(xchr[(eight_bits) c])];
 @z
 
 @x
-      for (j=cur_name->byte_start;j<(cur_name+1)->byte_start;j++)
         if (xislower(*j)) goto lowcase;
 @y
-      for (j=cur_name->byte_start;j<(cur_name+1)->byte_start;j++) {
-        wchar_t wc;
-        mbtowc(&wc, j, MB_CUR_MAX);
-        if (iswlower(wc)) goto lowcase;
-      }
+        if (iswlower(xchr[(eight_bits)*j])) goto lowcase;
 @z

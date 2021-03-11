@@ -1,64 +1,68 @@
 @x
-@<Include files@>@/
+@h
 @y
-#include <wchar.h>
 #include <locale.h>
-#include <limits.h>
-@<Include files@>@/
+#include <wchar.h>
+unsigned char xord[65536];
 wchar_t xchr[256];
-int mbsntowcslen(char *mbs, int len) /* it is used to check length of |buffer| on reading from file
-  and to check length of |out_buf| on preparing write to file; multibyte character may be
-  incomplete, because data is added byte-by-byte - we use `length' argument to |mblen| and
-  use its return value to check this - if multibyte sequence added so far is incomplete,
-  the effect is to ignore it */
-{
-  int n = 0;
-  int l = 0;
-  int r;
-  while (l<len) {
-    if ((r=mblen(mbs+l, len-l))==-1) break;
-    l+=r;
-    n++;
-  }
-  return n;
-}
+@h
 @z
 
 @x
+procedure later.
+
+@c
+void
 common_init()
 {
-@y
+@y 
+procedure later.
+@d invalid_code 0177 /*ASCII code that many systems prohibit in text files*/
+@c
+void
 common_init()
 {
-@i mapping.w
   setlocale(LC_CTYPE, "C.UTF-8");
+@i ASCII.w
+  int i;
+  for (i=0; i<=037; i++) xchr[i]=' ';
+  for (i=0177; i<=0377; i++) xchr[i]=' ';
+@i mapping.w
+  for(i=0;i<=65535;i++) xord[i]=invalid_code;
+  for(i=0200;i<=0377;i++) xord[xchr[i]]=i;
+  for(i=0;i<=0176;i++) xord[xchr[i]]=i;
 @z
 
 @x
-@d longest_name 10000
-@d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
+  register int  c=EOF; /* character read; initialized so some compilers won't complain */
 @y
-@d longest_name 10000*MB_LEN_MAX
-@d long_buf_size (buf_size*MB_LEN_MAX+longest_name) /* for \.{CWEAVE} */
-@z
-
-@x
-char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
-@y
+  wchar_t c; /* character read */
 @z
 
 @x
   while (k<=buffer_end && (c=getc(fp)) != EOF && c!='\n')
     if ((*(k++) = c) != ' ') limit = k;
   if (k>buffer_end)
+    if ((c=getc(fp))!=EOF && c!='\n') {
+      ungetc(c,fp); loc=buffer; err_print("! Input line too long");
 @y
-  while (mbsntowcslen(buffer,k-buffer)<buf_size-1 && (c=getc(fp)) != EOF && c!='\n')
-    if ((*(k++) = c) != ' ') limit = k;
-  if (mbsntowcslen(buffer,k-buffer)>=buf_size-1)
+  while (k<=buffer_end) {
+    c=fgetwc(fp);
+    if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
+    if (feof(fp) || c==L'\n') break;
+    if (xord[c] == invalid_code) { fprintf(stderr, "Invalid code\n"); exit(1); }
+    if ((*(k++) = xord[c]) != ' ') limit = k;
+  }
+  if (k>buffer_end) {
+    c=fgetwc(fp);
+    if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
+    if (!(feof(fp) || c==L'\n')) {
+      ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
+    }
 @z
 
 @x
-char change_buffer[buf_size]; /* next line of |change_file| */
+  if (c==EOF && limit==buffer) return(0);  /* there was nothing after
 @y
-char change_buffer[buf_size*MB_LEN_MAX]; /* next line of |change_file| */
+  if (feof(fp) && limit==buffer) return(0);  /* there was nothing after
 @z
