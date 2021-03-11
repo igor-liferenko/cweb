@@ -685,6 +685,7 @@ char cur_section_char; /* the character just before that name */
 @ @<Include...@>=
 #include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
 #include <stdlib.h> /* definition of |exit| */
+#include <wctype.h>
 
 @ As one might expect, |get_next| consists mostly of a big switch
 that branches to the various special cases that can arise.
@@ -3754,8 +3755,7 @@ if (a==identifier) {
 @.\\|@>
   else { delim='.';
     for (p=cur_name->byte_start;p<(cur_name+1)->byte_start;p++)
-      if (xislower(*p) || (ishigh(*p) && iswlower(xchr[(eight_bits)*p]))) {
-                                                                       /* not entirely uppercase */
+      if (iswlower(xchr[(eight_bits)*p])) { /* not entirely uppercase */
          delim='\\'; break;
       }
   out(delim);
@@ -4390,7 +4390,7 @@ for (h=hash; h<=hash_end; h++) {
     cur_name=next_name; next_name=cur_name->link;
     if (cur_name->xref!=(char*)xmem) {
       c=(eight_bits)((cur_name->byte_start)[0]);
-      if (xisupper(c)) c=tolower(c);
+      if (iswupper(xchr[(eight_bits) c])) c=xord[towlower(xchr[(eight_bits) c])];
       blink[cur_name-name_dir]=bucket[c]; bucket[c]=cur_name;
     }
   }
@@ -4515,7 +4515,7 @@ while (sort_ptr>scrap_info) {
     if (cur_byte==(cur_name+1)->byte_start) c=0; /* hit end of the name */
     else {
       c=(eight_bits) *cur_byte;
-      if (xisupper(c)) c=tolower(c);
+      if (iswupper(xchr[(eight_bits) c])) c=xord[towlower(xchr[(eight_bits) c])];
     }
   blink[cur_name-name_dir]=bucket[c]; bucket[c]=cur_name;
   } while (next_name);
@@ -4539,7 +4539,7 @@ switch (cur_name->ilk) {
   case normal: case func_template: if (is_tiny(cur_name)) out_str("\\|");
     else {char *j;
       for (j=cur_name->byte_start;j<(cur_name+1)->byte_start;j++)
-        if (xislower(*j) || (ishigh(*j) && iswlower(xchr[(eight_bits)*j]))) goto lowcase;
+        if (iswlower(xchr[(eight_bits)*j])) goto lowcase;
       out_str("\\."); break;
 lowcase: out_str("\\\\");
     }
