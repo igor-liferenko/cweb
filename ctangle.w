@@ -749,7 +749,7 @@ case section_number:
     for (j=(cur_val+name_dir)->byte_start, k=(cur_val+name_dir+1)->byte_start;
          j<k; j++) {
       if (*j=='\\' || *j=='"') C_putc('\\');
-      fprintf(C_file,"%c",*j); /* file name is already in UTF-8 */
+      C_putc(*j);
     }
     C_printf("%s","\"\n");
   }
