@@ -405,7 +405,7 @@ get_output() /* sends next token to |out_char| */
   }
   a=*cur_byte++;
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
-    C_putc(a); /* a high-bit character can occur in a string */
+    fprintf(C_file,"%lc",xchr[(eight_bits)a]); /* a high-bit character can occur in a string */
   else if (a<0200) out_char(a); /* one-byte token */
   else {
     a=(a-0200)*0400+*cur_byte++;
