@@ -59,7 +59,6 @@ The file begins with a few basic definitions.
 
 @c
 @<Include files@>@/
-typedef char unsigned eight_bits;
 @h
 @<Definitions that should agree with \.{CTANGLE} and \.{CWEAVE}@>@/
 @<Other definitions@>@/
@@ -177,7 +176,7 @@ char *buffer_end=buffer+buf_size-2; /* end of |buffer| */
 char *limit=buffer; /* points to the last character in the buffer */
 char *loc=buffer; /* points to the next character to be read from the buffer */
 
-eight_bits xord[65536];
+unsigned char xord[65536];
 wchar_t xchr[256];
 
 @ @<Include files@>=
@@ -1148,11 +1147,11 @@ l= (loc>=limit? limit: loc);
 if (l>buffer) {
   for (k=buffer; k<l; k++)
     if (*k=='\t') putchar(' ');
-    else printf("%lc",xchr[(eight_bits) *k]); /* print the characters already read */
+    else putchar(*k); /* print the characters already read */
   putchar('\n');
   for (k=buffer; k<l; k++) putchar(' '); /* space out the next line */
 }
-for (k=l; k<limit; k++) printf("%lc",xchr[(eight_bits) *k]); /* print the part not yet read */
+for (k=l; k<limit; k++) putchar(*k); /* print the part not yet read */
 if (*limit=='|') putchar('|'); /* end of \CEE/ text in section names */
 putchar(' '); /* to separate the message from future asterisks */
 }
