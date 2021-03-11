@@ -2,6 +2,7 @@
 @h
 @y
 #include <locale.h>
+#include <wchar.h>
 unsigned char xord[65536];
 wchar_t xchr[256];
 @h
