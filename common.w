@@ -1426,11 +1426,7 @@ and |printf| when we just want to print strings.
 Several macros make other kinds of output convenient.
 @^system dependencies@>
 @d new_line putchar('\n') @d putxchar putchar
-@d term_write(a,b) do { fflush(stdout);
-  for (int i = 0; i < b; i++)
-    if (*(a+i)=='\n') new_line;
-    else printf("%lc",xchr[(eight_bits) *(a+i)]);
-} while (0)
+@d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
 @d C_printf(c,a) fprintf(C_file,c,a)
 @d C_putc(c) do {
   if (c=='\n') putc(c,C_file);
