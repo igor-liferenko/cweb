@@ -1428,7 +1428,7 @@ Several macros make other kinds of output convenient.
 @d new_line putchar('\n') @d putxchar putchar
 @d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
 @d C_printf(c,a) fprintf(C_file,c,a)
-@d C_putc(c) putc(c,C_file)
+@d C_putc(c) putc(c,C_file) /* isn't \CEE/ wonderfully consistent? */
 
 @ We predeclare several standard system functions here instead of including
 their system header files, because the names of the header files are not as
