@@ -65,7 +65,6 @@ is modified.
 
 @c
 @<Include files@>@/
-extern wchar_t xchr[];
 @h
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
 @<Typedef declarations@>@/
@@ -405,7 +404,7 @@ get_output() /* sends next token to |out_char| */
   }
   a=*cur_byte++;
   if (out_state==verbatim && a!=string && a!=constant && a!='\n')
-    fprintf(C_file,"%lc",xchr[(eight_bits)a]); /* a high-bit character can occur in a string */
+    C_putc(a); /* a high-bit character can occur in a string */
   else if (a<0200) out_char(a); /* one-byte token */
   else {
     a=(a-0200)*0400+*cur_byte++;
@@ -725,7 +724,9 @@ case identifier:
   j=(cur_val+name_dir)->byte_start;
   k=(cur_val+name_dir+1)->byte_start;
   while (j<k) {
-    fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
+    if ((unsigned char)(*j)<0200) C_putc(*j);
+@^high-bit character handling@>
+    else C_printf("%s",translit[(unsigned char)(*j)-0200]);
     j++;
   }
   out_state=num_or_id; break;
