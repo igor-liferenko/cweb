@@ -9,19 +9,13 @@ wchar_t xchr[256];
 @z
 
 @x
-procedure later.
-
 @c
 void
 common_init()
 {
-@y 
-procedure later.
+@y
 @d invalid_code 0177 /*ASCII code that many systems prohibit in text files*/
-@c
-void
-common_init()
-{
+@c void common_init() {
   setlocale(LC_CTYPE, "C.UTF-8");
 @i ASCII.w
   int i;
@@ -50,7 +44,7 @@ common_init()
     c=fgetwc(fp);
     if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
     if (feof(fp) || c==L'\n') break;
-    if (xord[c] == invalid_code) { fprintf(stderr, "Invalid code\n"); exit(1); }
+    if (c>65535 || xord[c]==invalid_code) {fprintf(stderr, "Invalid character: %lc\n",c);exit(1);}
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
