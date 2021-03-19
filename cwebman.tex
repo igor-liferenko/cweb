@@ -1554,7 +1554,11 @@ were used to prepare this manual; \.{\\fullpageheight} is
 the top of each page. If you change any of these quantities, you should
 call the macro \.{\\setpage} immediately after making the change.
 
-\point 5. Verbatim listings are impossible (\.{CWEAVE} generates its own \TeX\ code).
+\point 5. \.{\\hoffset} defines an amount by which left-hand
+pages (i.e., even-numbered pages) are shifted left with respect to
+right-hand (odd-numbered) ones. By adjusting this amount you may be
+able to get two-sided output in which the page numbers line up on
+opposite sides of each sheet.
 
 \point 6. The \.{\\title} macro will appear at the top of each page
 in small caps; it is the job name unless redefined.
