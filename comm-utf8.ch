@@ -60,3 +60,27 @@ common_init()
 @y
   if (feof(fp) && limit==buffer) return(0);  /* there was nothing after
 @z
+
+@x
+    while (*loc!='"' && k<=cur_file_name_end) *k++=*loc++;
+@y
+    while (*loc!='"' && k<=cur_file_name_end) {
+      char mb[MB_CUR_MAX];
+      int len = wctomb(mb, xchr[(unsigned char)*loc++]);
+      if (k<=cur_file_name_end)
+        for (int i = 0; i < len; i++) *k++=mb[i];
+      else k=cur_file_name_end+1;
+    }
+@z
+
+@x
+    while (*loc!=' '&&*loc!='\t'&&*loc!='"'&&k<=cur_file_name_end) *k++=*loc++;
+@y
+    while (*loc!=' '&&*loc!='\t'&&*loc!='"'&&k<=cur_file_name_end) {
+      char mb[MB_CUR_MAX];
+      int len = wctomb(mb, xchr[(unsigned char)*loc++]);
+      if (k<=cur_file_name_end)
+        for (int i = 0; i < len; i++) *k++=mb[i];
+      else k=cur_file_name_end+1;
+    }
+@z
