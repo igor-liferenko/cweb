@@ -6,6 +6,12 @@ extern wchar_t xchr[];
 @z
 
 @x
+@i common.h
+@y
+@i comm-utf8.h
+@z
+
+@x
     C_putc(a); /* a high-bit character can occur in a string */
 @y
     fprintf(C_file,"%lc",xchr[(eight_bits)a]);
