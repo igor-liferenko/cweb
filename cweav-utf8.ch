@@ -7,12 +7,6 @@ extern wchar_t xchr[];
 @z
 
 @x
-@i common.h
-@y
-@i comm-utf8.h
-@z
-
-@x
 #include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
 @y
 #include <ctype.h> /* definition of |isalpha|, |isdigit| and so on */
