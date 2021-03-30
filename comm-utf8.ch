@@ -14,7 +14,7 @@ void
 common_init()
 {
 @y
-@d invalid_code 0177 /*ASCII code that many systems prohibit in text files*/
+@d invalid_code 0177 /* ASCII code that many systems prohibit in text files */
 @c void common_init() {
   setlocale(LC_CTYPE, "C.UTF-8");
 @i ASCII.w
@@ -30,7 +30,7 @@ common_init()
 @x
   register int  c=EOF; /* character read; initialized so some compilers won't complain */
 @y
-  wchar_t c; /* character read */
+  wchar_t c;
 @z
 
 @x
@@ -88,13 +88,13 @@ common_init()
 @x
     else putchar(*k); /* print the characters already read */
 @y
-    else printf("%lc",xchr[(unsigned char)*k]); /* print the characters already read */
+    else printf("%lc",xchr[(unsigned char)*k]);
 @z
 
 @x
 for (k=l; k<limit; k++) putchar(*k); /* print the part not yet read */
 @y
-for (k=l; k<limit; k++) printf("%lc",xchr[(unsigned char)*k]); /* print the part not yet read */
+for (k=l; k<limit; k++) printf("%lc",xchr[(unsigned char)*k]);
 @z
 
 @x
