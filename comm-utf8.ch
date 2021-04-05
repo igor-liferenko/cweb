@@ -50,7 +50,7 @@ common_init()
   if (k>buffer_end) {
     c=fgetwc(fp);
     if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
-    if (!(feof(fp) || c==L'\n')) {
+    if (!feof(fp) && c!=L'\n') {
       ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
     }
 @z
