@@ -2,7 +2,7 @@ all:
 	tie -c comm-merged.ch common.w common-utf8.ch comm-utf8.ch comm-env.ch comm-bhp.ch >/dev/null
 	/bin/ctangle common comm-merged
 	gcc -g -Og -w -c common.c
-	ctie -c cweav-merged.ch cweave.w common-utf8.ch cweav-utf8.ch cweave+c.ch cweave+d.ch cweave+g.ch cweave+y.ch cweave+z.ch >/dev/null # TODO: check what is +g via dvidiff
+	ctie -c cweav-merged.ch cweave.w common-utf8.ch cweav-utf8.ch cweav-sort.ch cweave+c.ch cweave+d.ch cweave+g.ch cweave+y.ch cweave+z.ch >/dev/null # TODO: check what is +g via dvidiff
 	/bin/ctangle cweave cweav-merged
 	gcc -g -Og -w -c cweave.c
 	gcc -g -Og -o cweave cweave.o common.o
