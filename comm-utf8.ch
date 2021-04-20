@@ -17,10 +17,9 @@ common_init()
 @d invalid_code 0177 /* ASCII code that many systems prohibit in text files */
 @c void common_init() {
   setlocale(LC_CTYPE, "C.UTF-8");
-@i ASCII.w
   int i;
-  for (i=0; i<32; i++) xchr[i]=invalid_code;
-  for (i=127; i<=255; i++) xchr[i]=invalid_code;
+  for (i=0; i<=255; i++) xchr[i]=invalid_code;
+@i ASCII.w
 @i mapping.w
   for(i=0;i<=65535;i++) xord[i]=invalid_code;
   for(i=0; i<=255; i++) xord[xchr[i]]=i;
