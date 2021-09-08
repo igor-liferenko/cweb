@@ -257,7 +257,9 @@
 \newbox\lbox % lefthand column in the index
 \def\inx{\par\vskip6pt plus 1fil % we are beginning the index
   \def\page{\box255 } \normalbottom
-  \write\cont{\catcode `\noexpand\@=12\relax}   % \makeatother
+  \write\cont{} % ensure that the contents file isn't empty
+       \write\cont{\catcode `\noexpand\@=12\relax}   % \makeatother
+  \closeout\cont % the contents information has been fully gathered
   \output{\ifpagesaved\normaloutput{\box\sbox}\lheader\rheader\fi
     \global\setbox\sbox=\page \global\pagesavedtrue}
   \pagesavedfalse \eject % eject the page-so-far and predecessors
