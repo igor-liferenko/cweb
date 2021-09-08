@@ -231,7 +231,7 @@
 \def\botofcontents{\vfill
   \centerline{\covernote}} % this material will end the table of contents page
 \def\covernote{}
-\def\contentspagenumber{1} % default page number for table of contents
+\def\contentspagenumber{0} % default page number for table of contents
 \newdimen\pagewidth \pagewidth=6.5in % the width of each page
 \newdimen\pageheight \pageheight=8.7in % the height of each page
 \newdimen\fullpageheight \fullpageheight=9in % page height including headlines
@@ -295,10 +295,8 @@
   \def\Us{\note{Used in sections}} % crossref for uses of a section
   \def\I{\par\hangindent 2em}\let\*=*
   \readsections}
-\def\con{\write\cont{\noexpand\endinput}
-  \write\cont{lastpagenumber=\the\pageno \space contentspagenumber=\contentspagenumber}
-  \closeout\cont
-  \par\vfill\eject % finish the section names
+\def\con{\par\vfill\eject % finish the section names
+% \ifodd\pageno\else\titletrue\null\vfill\eject\fi % for duplex printers
   \rightskip 0pt \hyphenpenalty 50 \tolerance 200
   \setpage \output={\normaloutput\page\lheader\rheader}
   \titletrue % prepare to output the table of contents
