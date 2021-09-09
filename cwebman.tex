@@ -1585,44 +1585,7 @@ and so on. The \.{\\topofcontents} macro could
 redefine \.{\\ZZ} so that the information appears in any desired format.
 (See also point~19 below.)
 
-\point 10. Sometimes it is necessary or desirable to divide the output of
-\.{CWEAVE} into subfiles that can be processed separately. For example,
-the listing of \TEX/ runs to more than 500 pages, and that is enough to
-exceed the capacity of many printing devices and/or their software.
-When an extremely large job isn't cut into smaller pieces, the entire
-process might be spoiled by a single error of some sort, making it
-necessary to start everything over.
-
-Here's a safe way to break a woven file into three parts:
-Say the pieces are $\alpha$,
-$\beta$, and $\gamma$, where each piece begins with a starred section.
-All macros should be defined in the opening limbo section of $\alpha$,
-and copies of this \TEX/ code should be placed at the
-beginning of $\beta$ and of $\gamma$. In order to process the parts
-separately, we need to take care of two things: The starting page
-numbers of $\beta$ and $\gamma$ need to be set up properly, and
-the table of contents data from all three runs needs to be
-accumulated.
-
-The \.{cwebmac} macros include two control sequences \.{\\contentsfile} and
-\.{\\readcontents} that facilitate the necessary processing.  We include
-`\.{\\def\\contentsfile\{cont1\}}' in the limbo section of $\alpha$, and
-we include `\.{\\def\\contentsfile\{cont2\}}' in the limbo section of
-$\beta$; this causes \TEX/ to write the contents data for $\alpha$ and $\beta$
-into \.{cont1.tex} and \.{cont2.tex}. Now in $\gamma$ we say
-$$\.{\\def\\readcontents\{\\input cont1 \\input cont2
-  \\input \\contentsfile\}}\,;$$
-this brings in the data from all three pieces, in the proper order.
-
-However, we still need to solve the page-numbering problem. One way to
-do it is to include the following in the limbo material for $\beta$:
-$$\lpile{\.{\\message\{Please type the last page number of part 1: \}}\cr
-  \.{\\read -1 to \\temp \\pageno=\\temp \\advance\\pageno by 1}\cr}$$
-Then you simply provide the necessary data when \TEX/ requests
-it; a similar construction is used at the beginning of $\gamma$.
-
-This method can, of course, be used to divide a woven file into
-any number of pieces.
+\point 10. N/A
 
 \point 11. Sometimes it is nice to include things in the index that are
 typeset in a special way. For example, we might want to have an
