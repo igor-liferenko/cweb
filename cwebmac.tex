@@ -298,11 +298,11 @@
   \def\I{\par\hangindent 2em}\let\*=*
   \readsections}
 \def\con{\par\vfill\eject % finish the section names
-% \ifodd\pageno\else\titletrue\null\vfill\eject\fi % for duplex printers
+  \ifx \duplex\undefined \else \ifodd\pageno\else\titletrue\null\vfill\eject\fi \fi
   \rightskip 0pt \hyphenpenalty 50 \tolerance 200
   \setpage \output={\normaloutput\page\lheader\rheader}
   \titletrue % prepare to output the table of contents
-  \pageno=\contentspagenumber
+  % \pageno=\contentspagenumber
   \def\grouptitle{TABLE OF CONTENTS}
   \message{Table of contents:}
   \topofcontents
