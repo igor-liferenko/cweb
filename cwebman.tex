@@ -1,8 +1,11 @@
+\pdfhorigin=3.5cm \hoffset=\pdfpagewidth \advance\hoffset-\hsize \advance\hoffset-2\pdfhorigin
+
 % This file generates the user manual; TeX it, don't read it!
 % update 14 Nov 2016 by DEK: corrected obsolete remarks re debugging info
+
 \def\tangref{3} % where the main explanation of CTANGLing is given
 \input cwebmac
-\pdfhorigin=3.5cm \hoffset=\pdfpagewidth \advance\hoffset-\hsize \advance\hoffset-2\pdfhorigin
+\acrofalse\pdffalse\pdftexfalse
 \def\page{\box255 } \normalbottom
 \parskip 0pt plus 1pt
 \def\RA{\char'31 } % right arrow
@@ -86,7 +89,7 @@ for their own personal use.
 Internet page \.{http://www-cs-faculty.stanford.edu/\char`\~knuth/cweb.html}
 contains current info about \.{CWEB} and related topics.
 
-\titletrue\eject
+\titletrue\eject \pageno=1
 
 \titletrue
 \centerline{\titlefont The {\ttitlefont CWEB} System of
@@ -802,9 +805,10 @@ macros in an unusual way, e.g., if two identifiers are adjacent.
 \@/ [MC] This control code causes a line break to occur within a \CEE/
 program formatted by \.{CWEAVE}. Line breaks
 are chosen automatically by \TEX/ according to a scheme that works 99\%\
-of the time, but sometimes you will prefer to force a line break.
-If a comment follows, say `\.{@/@,}' to break the line
-before the comment. FIXME: never encountered such a use case...
+of the time, but sometimes you will prefer to force a line break so that
+the program is segmented according to logical rather than visual
+criteria. If a comment follows, say `\.{@/@,}' to break the line
+before the comment.
 
 \@| [MC] This control code specifies an optional line break in the midst of
 an expression. For example, if you have
@@ -955,7 +959,7 @@ indentation and line breaking codes are omitted when the \pb\ text is
 translated from \CEE/ to \TEX/. Stick to simple expressions or
 statements.  If a \CEE/ preprocessor command is enclosed in \pb,
 the \.\# that introduces it must be at the beginning of a line,
-or \.{CWEAVE} won't print it correctly. FIXME: never encountered such a use case - what is this about?
+or \.{CWEAVE} won't print it correctly.
 
 5. Comments are not permitted in \pb\ text. After a `\.|'
 signals the change from \TEX/ text to \CEE/ text, the next `\.|' that is
