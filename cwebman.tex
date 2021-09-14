@@ -1562,9 +1562,9 @@ right-hand (odd-numbered) ones. By adjusting these amounts you may be
 able to get two-sided output in which the page numbers line up on
 opposite sides of each sheet.
 Call \.{cweave} with the option \.{--duplex}; without this option, \.{cweave}
-removes \.{\\pdfhorigin} and\.{\\hoffset} from resulting file. Also, this option
-adds defining \.{\\duplex} macro, which is used in \.{cwebmac.tex} to output an empty page
-before table of contents, if necessary.
+removes \.{\\pdfhorigin} and\.{\\hoffset} from resulting file. Also, with this option
+\.{cweave} adds to the resulting file the definition of \.{\\duplex} macro, which is
+used in \.{cwebmac.tex}.
 
 \point 6. The \.{\\title} macro will appear at the top of each page
 in small caps; it is the job name unless redefined.
