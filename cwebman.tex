@@ -1550,7 +1550,17 @@ were used to prepare this manual; \.{\\fullpageheight} is
 the top of each page. If you change any of these quantities, you should
 call the macro \.{\\setpage} immediately after making the change.
 
-\point 5. N/A
+\point 5. Define \.{\\pdfhorigin} and \.{\\hoffset} in \CWEB/ file.
+\.{\\pdfhorigin} defines left margin.
+\.{\\hoffset} defines an amount by which left-hand
+pages (i.e., even-numbered pages) are shifted left with respect to
+right-hand (odd-numbered) ones. By adjusting these amounts you may be
+able to get two-sided output in which the page numbers line up on
+opposite sides of each sheet.
+Call \.{cweave} with the option \.{--duplex}; without this option, setting
+\.{\\pdfhorigin} and\.{\\hoffset} is removed from \CWEB/ file. Also, this option
+adds defining \.{\\duplex} macro, which is used in \.{cwebmac.tex} to output an empty page
+before table of contents, if necessary.
 
 \point 6. The \.{\\title} macro will appear at the top of each page
 in small caps; it is the job name unless redefined.
