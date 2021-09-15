@@ -23,4 +23,4 @@ print:
 	@tex ctangle >/dev/null
 	@sed -i '1s/$$/ \\def\\duplex{}/' common.tex
 	@tex common >/dev/null
-	@tex cwebman >/dev/null # TODO: change cwebman.tex to add empty page after the title and use \pageno 1 for the title and in bin/texdoc revert this change
+	@tex cwebman >/dev/null # TODO: in cwebman.tex change pageno=0 to pageno=-1 and add empty page after the title and in bin/texdoc revert this change
