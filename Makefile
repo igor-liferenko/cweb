@@ -11,16 +11,3 @@ all:
 	gcc -w -c ctangle.c
 	gcc -o ctangle ctangle.o common.o
 	cp cweave ctangle /usr/local/bin/
-
-print:
-# NOTE: use original cweave (not wrapper)
-	@/usr/local/bin/cweave cweave
-	@/usr/local/bin/cweave ctangle
-	@/usr/local/bin/cweave common
-	@sed -i '1s/$$/ \\def\\duplex{}/' cweave.tex
-	@tex cweave >/dev/null
-	@sed -i '1s/$$/ \\def\\duplex{}/' ctangle.tex
-	@tex ctangle >/dev/null
-	@sed -i '1s/$$/ \\def\\duplex{}/' common.tex
-	@tex common >/dev/null
-	@tex cwebman >/dev/null # TODO: in cwebman.tex change pageno=0 to pageno=-1 and add empty page after the title and in bin/texdoc revert this change
