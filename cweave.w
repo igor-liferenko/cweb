@@ -1,6 +1,3 @@
-\pdfhorigin=3.5cm \hoffset=\pdfpagewidth \advance\hoffset-\hsize
-  \advance\hoffset-2\pdfhorigin
-
 % This file is part of CWEB.
 % This program by Silvio Levy and Donald E. Knuth
 % is based on a program by Knuth.
