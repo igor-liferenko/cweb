@@ -15,9 +15,9 @@ all:
 doc:
 # NOTE: use original cweave - not wrapper (i.e., without formatting options)
 	/usr/local/bin/cweave cweave
-	tex cweave >/dev/null
 	/usr/local/bin/cweave ctangle
-	tex ctangle >/dev/null
 	/usr/local/bin/cweave common
+	tex cweave >/dev/null
+	tex ctangle >/dev/null
 	tex common >/dev/null
 	tex cwebman >/dev/null
