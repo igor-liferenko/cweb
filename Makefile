@@ -11,3 +11,13 @@ all:
 	gcc -w -c ctangle.c
 	gcc -o ctangle ctangle.o common.o
 	cp cweave ctangle /usr/local/bin/
+
+doc:
+# NOTE: use original cweave - not wrapper (i.e., without formatting options)
+	/usr/local/bin/cweave cweave
+	tex cweave >/dev/null
+	/usr/local/bin/cweave ctangle
+	tex ctangle >/dev/null
+	/usr/local/bin/cweave common
+	tex common >/dev/null
+	tex cwebman >/dev/null
