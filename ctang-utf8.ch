@@ -18,7 +18,13 @@ extern wchar_t xchr[];
 @z
 
 @x
-    else C_printf("%s",translit[(unsigned char)(*j)-0200]);
+  for (i=0;i<128;i++) sprintf(translit[i],"X%02X",(unsigned)(128+i));
 @y
-    else fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
+@z
+
+@x
+    if ((unsigned char)(*j)<0200) C_putc(*j);
+@y
+    if ((unsigned char)(*j)<0200) C_putc(*j);
+    else if (!*(translit[(unsigned char)(*j)-0200])) fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
 @z
