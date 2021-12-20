@@ -20,6 +20,7 @@ extern wchar_t xchr[];
 @x
   for (i=0;i<128;i++) sprintf(translit[i],"X%02X",(unsigned)(128+i));
 @y
+  for (i=0;i<128;i++) *translit[i] = 0;
 @z
 
 @x
