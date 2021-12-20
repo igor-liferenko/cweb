@@ -23,8 +23,8 @@ extern wchar_t xchr[];
 @z
 
 @x
-    if ((unsigned char)(*j)<0200) C_putc(*j);
+    else C_printf("%s",translit[(unsigned char)(*j)-0200]);
 @y
-    if ((unsigned char)(*j)<0200) C_putc(*j);
-    else if (!*(translit[(unsigned char)(*j)-0200])) fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
+    else if (*translit[(unsigned char)(*j)-0200]) C_printf("%s",translit[(unsigned char)(*j)-0200]);
+    else fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
 @z
