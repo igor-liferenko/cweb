@@ -23,9 +23,12 @@ extern wchar_t xchr[];
   for (i=0;i<128;i++) *translit[i] = 0;
 @z
 
+If a program must be built by compiler which does not support UTF-8 identifiers,
+use @l control codes in such a program.
+
 @x
     else C_printf("%s",translit[(unsigned char)(*j)-0200]);
 @y
-    else if (*translit[(unsigned char)(*j)-0200]) C_printf("%s",translit[(unsigned char)(*j)-0200]);
+    else if (*translit[(unsigned char)(*j)-128]) C_printf("%s",translit[(unsigned char)(*j)-0200]);
     else fprintf(C_file, "%lc",xchr[(eight_bits) *j]);
 @z
