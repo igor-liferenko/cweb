@@ -17,6 +17,7 @@ extern wchar_t xchr[];
           fprintf(C_file,"%lc",xchr[(eight_bits)a]);
 @z
 
+Modern compilers support UTF-8 identifiers, so we do not need to use |translit| by default.
 @x
   for (i=0;i<128;i++) sprintf(translit[i],"X%02X",(unsigned)(128+i));
 @y
@@ -24,8 +25,7 @@ extern wchar_t xchr[];
 @z
 
 If a program must be built by compiler which does not support UTF-8 identifiers,
-use @l control codes in such a program.
-
+use @l control codes.
 @x
     else C_printf("%s",translit[(unsigned char)(*j)-0200]);
 @y
