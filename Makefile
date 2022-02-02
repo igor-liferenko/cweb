@@ -10,13 +10,11 @@ all:
 	/bin/ctangle ctangle ctang-merged
 	gcc -w -c ctangle.c
 	gcc -o ctangle ctangle.o common.o
-	cp cweave ctangle /usr/local/bin/
 
 doc:
-# NOTE: use original cweave - not wrapper (i.e., without formatting options)
-	/usr/local/bin/cweave cweave
-	/usr/local/bin/cweave ctangle
-	/usr/local/bin/cweave common
+	./cweave cweave
+	./cweave ctangle
+	./cweave common
 	tex cweave >/dev/null
 	tex ctangle >/dev/null
 	tex common >/dev/null
