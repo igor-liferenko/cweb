@@ -11,7 +11,7 @@ all:
 	gcc -w -c ctangle.c
 	gcc -o ctangle ctangle.o common.o
 	/bin/ctangle wmerge
-	gcc -DCWEBINPUTS=\"`pwd`\" -w -o /usr/local/bin/wmerge wmerge.c
+	gcc -w -o /usr/local/bin/wmerge wmerge.c
 
 doc:
 	./cweave cweave
