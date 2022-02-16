@@ -10,8 +10,6 @@ all:
 	/bin/ctangle ctangle ctang-merged
 	gcc -w -c ctangle.c
 	gcc -o ctangle ctangle.o common.o
-	/bin/ctangle wmerge wmerge
-	gcc -w -o /usr/local/bin/wmerge wmerge.c
 
 doc:
 	./cweave cweave
