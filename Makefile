@@ -6,7 +6,7 @@ all:
 	/bin/ctangle cweave cweav-merged
 	gcc -w -c cweave.c
 	gcc -o cweave cweave.o common.o
-	ctie -c ctang-merged.ch ctangle.w common-utf8.ch ctang-utf8.ch ctang-bhp.ch >/dev/null
+	ctie -c ctang-merged.ch ctangle.w common-utf8.ch ctang-utf8.ch ctang-bhp.ch ctang-pre.ch >/dev/null
 	/bin/ctangle ctangle ctang-merged
 	gcc -w -c ctangle.c
 	gcc -o ctangle ctangle.o common.o
