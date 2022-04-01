@@ -10,7 +10,6 @@ common.idx
 common.log
 common.pdf
 common.dvi
-common.arg
 common.scn
 common.tex
 common.toc
@@ -18,7 +17,6 @@ ctangle.idx
 ctangle.log
 ctangle.pdf
 ctangle.dvi
-ctangle.arg
 ctangle.scn
 ctangle.tex
 ctangle.toc
@@ -26,14 +24,12 @@ cweave.idx
 cweave.log
 cweave.pdf
 cweave.dvi
-cweave.arg
 cweave.scn
 cweave.tex
 cweave.toc
 cwebman.log
 cwebman.pdf
 cwebman.dvi
-cwebman.arg
 cwebman.toc
 comm-merged.ch
 ctang-merged.ch
