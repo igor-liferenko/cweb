@@ -1,0 +1,292 @@
+\input tugboat.sty
+\openin0=tugboat.dates
+\ifeof0 \let\writelastpage=\gobble
+\else \closein0 \input tugboat.dates \TUBfinal\fi
+
+%%% Start of metadata %%%
+\title * \acro{UTF}-8 installations of \acro{CWEB} *
+\author * Igor Liferenko *
+\address * \tt igor.liferenko (at) gmail dot com *
+%\address Ovrazhnaya 49-1
+%         Zelenogorsk, Krasnoyarsk krai, 663691
+%         RUSSIA
+%%% End of metadata %%%
+
+\article
+
+\head * Abstract *
+
+We show how to implement \UTF-8 support in \acro{CWEB} [1]
+by adding the arrays {\it xord\/} and {\it xchr\/}.
+Immediately after reading a Unicode character from an input file, we
+convert it to an 8-bit character using {\it xord\/}. On output the reverse
+operation is done using {\it xchr\/}.
+This allows us to leave core algorithms of \acro{CWEB} unchanged.
+
+Incidentally, the described method allows to
+{\font\tentex=cmtex10 \def\.#1{{\tt#1}}\def\\#1#2{`{\tentex\char'#1#2}'}%
+use the extended character set [1] of \acro{CWEB}: the characters
+\\13, \\01, \\31, \\32, \\34, \\35,
+\\36, \\37, \\04, \\20, and \\21
+can be typed as abbreviations for C~language digraphs `\.{++}', `\.{--}', `\.{->}',
+`\.{!=}', `\.{<=}', `\.{>=}', `\.{==}', `\.{\char'174 \char'174 }', `\.{\&\&}',
+`\.{<<}', and `\.{>>}',
+respectively.}
+
+\head * 1. Initialization *
+
+(For brevity, in the diffs following, the original code in the
+\acro{CWEB} source is preceded with |<| characters, and the
+new code with |>|. Both are sometimes reformatted for presentation
+in this article, and for readability we sometimes leave a blank line
+between the pieces. The actual implementation uses the change files
+|comm-utf8.ch|, |cweav-utf8.ch| and |ctang-utf8.ch|, together with
+|common-utf8.ch| [2].){\emergencystretch=1em\hbadness=2100\par}
+\smallskip
+First, we add global arrays {\it xord\/} and {\it xchr\/} to |common.w| [1].
+We declare the size of the {\it xord\/} array to be
+$2^{16}$ bytes. This means that only values from the
+basic multilingual plane (\acro{BMP}) of Unicode are permitted.
+We use the |wchar_t| data type
+for characters in input files
+to accommodate Unicode values.
+
+Background: this predefined C type allocates four bytes
+per character (on most systems). Character constants of this type are
+written as |L'...'|.
+
+\verbatim
+unsigned char xord[65536];
+wchar_t xchr[256];
+\endverbatim
+
+\noindent
+These same arrays must be used in |cweave.w| [1].
+\verbatim
+extern unsigned char xord[];
+extern wchar_t xchr[];
+\endverbatim
+
+\noindent
+In |ctangle.w| [1] only the {\it xchr\/} array is needed.
+||extern wchar_t xchr[];||
+
+We initialize the {\it xord\/} and {\it xchr\/} arrays
+in the {\it common\_init\/} function of |common.w|.
+%\medskip
+%
+First, in {\it xchr\/} we map all visible
+\acro{ASCII} characters to themselves, like this:
+\verbatim
+xchr[32] = ' ';
+\endverbatim
+\medskip
+
+Then we map the rest of the indexes of {\it xchr\/} to 127, which is
+the \acro{ASCII} character code ({\tt DEL}) that is prohibited in text files.
+\verbatim
+for (i=0; i<32; i++) xchr[i]=127;
+for (i=127; i<=255; i++) xchr[i]=127;
+\endverbatim
+%\medskip
+
+Elements in the {\it xchr\/} array
+are overridden using
+the file |mapping.w| [2].
+||@i mapping.w||
+This file specifies the character(s)
+required for a particular
+installation of \acro{CWEB}, for example:
+\smallskip
+\indent{\font\tt=cmtt9 \tt xchr[0xf1] = L'\"e';}
+\smallskip
+
+The initialization of {\it xord\/} comes next.
+All its indexes are mapped by default to 127.
+Then we make it contain the inverse of the information in {\it xchr\/}.
+\verbatim
+for (i=0;i<=65535;i++) xord[i]=127;
+for (i=0;i<=255;i++) xord[xchr[i]]=i;
+xord[127]=127;
+\endverbatim
+%\medskip
+It remains to set the |LC_CTYPE| locale category.
+The behavior of the C~library functions used below depends on this value.
+||setlocale(LC_CTYPE, "C.UTF-8");||
+Finally, we need the necessary headers.
+\verbatim
+#include <wchar.h>
+#include <locale.h>
+\endverbatim
+
+\head * 2. Input *
+
+For automatic conversion from \UTF-8 to Unicode,
+we change the {\it input\_ln\/} function to use
+{\it fgetwc\/} [3] instead of {\it getc\/}.
+Also, {\it ungetc\/} is changed to {\it ungetwc\/} [3]
+and |EOF| must be replaced with |WEOF| [3] (for this, |int|
+is changed to |wint_t| [3]).
+\verbatim
+< int c;
+> wint_t c;
+
+< while (k<=buffer_end && (c=getc(fp))
+<   != EOF && c!='\n')
+> while (k<=buffer_end && (c=fgetwc(fp))
+>   != WEOF && c!=L'\n')
+
+< if ((c=getc(fp))!=EOF && c!='\n') {
+> if ((c=fgetwc(fp))!=WEOF && c!=L'\n') {
+
+< ungetc(c,fp);
+> ungetwc(c,fp);
+
+< if (c==EOF && limit==buffer) return(0);
+> if (c==WEOF && limit==buffer) return(0);
+\endverbatim
+\medskip
+The conversion with {\it xord\/} is done immediately after a character
+is read.
+\verbatim
+< if ((*(k++) = c) != ' ') limit = k;
+> if ((*(k++) = xord[c]) != ' ') limit = k;
+\endverbatim
+
+\head * 3. Output *
+We use {\it xchr\/} and {\it printf\/} with |%lc| conversion specifier
+for characters, printed on terminal during error reporting.
+\verbatim
+< putchar(*k);
+> printf("%lc",xchr[(unsigned char)*k]);
+\endverbatim
+\medskip
+The {\it term\_write\/} macro uses the C~library function {\it fwrite\/} to output a range of
+characters. We must use {\it xchr\/} for each character (except the newline character),
+then convert it to \UTF-8
+via {\it printf\/}, using |%lc| conversion specifier.
+\verbatim
+< @d term_write(a,b) fflush(stdout),
+<      fwrite(a,sizeof(char),b,stdout)
+
+> @d term_write(a,b) do { fflush(stdout);
+>   for (int i = 0; i < b; i++)
+>     if (*(a+i)=='\n') new_line;
+>     else printf("%lc",xchr[(unsigned char)
+>       *(a+i)]); } while (0)
+\endverbatim
+\medskip
+
+In |cweave.w| all output to files is done via the {\it c\_line\_write\/} macro.
+This uses the C~library function {\it fwrite\/} to output a range of
+characters. Since {\it xchr\/} must be used for each character,
+we loop over this range and convert each character
+to the external encoding and then to \UTF-8
+via {\it fprintf}, using the |%lc| conversion specifier.
+\verbatim
+< fwrite(out_buf+1,sizeof(char),c,
+<   active_file)
+
+> for (int i = 0; i < c; i++)
+>   fprintf(active_file, "%lc",
+>     xchr[(eight_bits) *(out_buf+1+i)])
+\endverbatim
+\medskip
+Similarly, in |ctangle.w|, before outputting characters in C~string constants,
+convert each of them to the external encoding and then to \UTF-8 using
+the |%lc| conversion specifier of {\it fprintf\/}.{\hfuzz=1.4pt\par}
+\verbatim
+< C_putc(a);
+> fprintf(C_file,"%lc",xchr[(eight_bits)a]);
+\endverbatim
+\medskip
+We do not use the {\it translit\/} array when outputting non-\acro{ASCII}
+characters in C~identifiers.
+So, in |ctangle.w| we again convert each such character
+to the external encoding and then to \UTF-8 via {\it fprintf\/} using
+the |%lc| conversion specifier.
+\verbatim
+< C_printf("%s",
+<   translit[(unsigned char)(*j)-0200]);
+
+> fprintf(C_file, "%lc",
+>   xchr[(eight_bits) *j]);
+\endverbatim
+\medskip
+For other output code no special treatment is needed, since
+all other output data is in \acro{ASCII}, which is part of \UTF-8
+(except file names, which are already
+in \UTF-8).
+
+\head * 4. The file name buffer *
+File names must be in \UTF-8. So, before appending characters to {\it cur\_file\_name\/},
+we convert them to the external encoding and then to
+\UTF-8 via C~library function {\it wctomb\/} [3].
+\smallskip
+\verbatim
+< *k++=*loc++;
+
+> { char mb[MB_CUR_MAX]; int len =
+>   wctomb(mb,xchr[(unsigned char)*loc++]);
+> if (k<=cur_file_name_end)
+>   for (int i = 0; i<len; i++) *k++=mb[i];
+> else k=cur_file_name_end+1; }
+\endverbatim
+
+\head * 5. Locale considerations *
+
+|cweave.w| uses the locale-dependent C~library functions
+\hbox{\it islower\/}, \hbox{\it isupper\/} and \hbox{\it tolower\/}
+(the former two via {\it xislower\/} and {\it xisupper\/}
+macros respectively).
+But since we are assuming the \hbox{\UTF-8} locale, instead of these we must use
+{\it iswlower\/}, {\it iswupper\/} and {\it towlower\/}
+from |wctype.h| [3].
+The trick is to convert from the internal encoding
+to the external encoding before using these functions.
+\verbatim
+< xislower(*x)
+> iswlower(xchr[(eight_bits)*p])
+
+< xisupper(x)
+> iswupper(xchr[(eight_bits) x])
+\endverbatim
+\medskip
+For {\it towlower\/} the result must be converted
+back from the external encoding to the internal
+encoding.
+\verbatim
+< c=tolower(c)
+> c=xord[towlower(xchr[(eight_bits)c])]
+\endverbatim
+
+\head * References *
+
+\begingroup
+\vskip-1pt
+
+\frenchspacing
+\parindent=0pt
+\parskip=4pt plus4pt
+\def\\{\hfil\break}
+\everypar{\hangindent=1.5em\relax}
+\raggedright
+
+[1] Knuth, D. and Levy, S.
+The CWEB System of Structured Documentation, 1993.
+\\ISBN 0-201-57569-8
+
+[2] Source of the present implementation.\\
+{\tt https://github.com/igor-liferenko/cweb}
+
+[3] Single Unix Specification. Introduction to ISO~C Amendment 1
+(Multibyte Support Environment).\\
+{\tt\catcode`_=11 https://unix.org/version2/whatsnew/\\login_mse.html}
+
+\par\endgroup
+
+\vskip 14pt
+\advance\signaturewidth by 10pt
+\makesignature
+\writelastpage{+1}
+\endarticle
