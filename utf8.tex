@@ -1,16 +1,11 @@
-\input tugboat.sty
-\openin0=tugboat.dates
-\ifeof0 \let\writelastpage=\gobble
-\else \closein0 \input tugboat.dates \TUBfinal\fi
+\pdfpagewidth=8.5in \pdfpageheight=11in
+\pdfhorigin=1in \pdfvorigin=1in
 
-%%% Start of metadata %%%
+\input tugboat.sty
+
 \title * \acro{UTF}-8 installations of \acro{CWEB} *
 \author * Igor Liferenko *
 \address * \tt igor.liferenko (at) gmail dot com *
-%\address Ovrazhnaya 49-1
-%         Zelenogorsk, Krasnoyarsk krai, 663691
-%         RUSSIA
-%%% End of metadata %%%
 
 \article
 
@@ -288,5 +283,4 @@ The CWEB System of Structured Documentation, 1993.
 \vskip 14pt
 \advance\signaturewidth by 10pt
 \makesignature
-\writelastpage{+1}
 \endarticle
