@@ -195,19 +195,6 @@ the |%lc| conversion specifier of {\it fprintf\/}.{\hfuzz=1.4pt\par}
 > fprintf(C_file,"%lc",xchr[(eight_bits)a]);
 \endverbatim
 \medskip
-We do not use the {\it translit\/} array when outputting non-\acro{ASCII}
-characters in C~identifiers.
-So, in |ctangle.w| we again convert each such character
-to the external encoding and then to \UTF-8 via {\it fprintf\/} using
-the |%lc| conversion specifier.
-\verbatim
-< C_printf("%s",
-<   translit[(unsigned char)(*j)-0200]);
-
-> fprintf(C_file, "%lc",
->   xchr[(eight_bits) *j]);
-\endverbatim
-\medskip
 For other output code no special treatment is needed, since
 all other output data is in \acro{ASCII}, which is part of \UTF-8
 (except file names, which are already
