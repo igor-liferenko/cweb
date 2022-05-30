@@ -1,6 +1,7 @@
 @x
 @h
 @y
+#include <assert.h>
 #include <locale.h>
 #include <wchar.h>
 unsigned char xord[65536];
@@ -59,7 +60,8 @@ common_init()
     c=fgetwc(fp);
     if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
     if (!(!feof(fp) && c!=L'\n')) break;
-    if ((c & 0xffff) != c || xord[c] == invalid_code) {
+    assert((c & 0xffff) == c); 
+    if (xord[c] == invalid_code) {
       fprintf(stderr, "Invalid character: %lc\n",c);
       exit(1);
     }
