@@ -59,7 +59,10 @@ common_init()
     c=fgetwc(fp);
     if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
     if (!(!feof(fp) && c!=L'\n')) break;
-    if (c>65535 || xord[c]==invalid_code) {fprintf(stderr, "Invalid character: %lc\n",c);exit(1);}
+    if ((c & 0xffff) != c || xord[c] == invalid_code) {
+      fprintf(stderr, "Invalid character: %lc\n",c);
+      exit(1);
+    }
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
