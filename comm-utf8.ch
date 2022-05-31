@@ -61,10 +61,7 @@ common_init()
     if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
     if (!(!feof(fp) && c!=L'\n')) break;
     assert((c & 0xffff) == c); 
-    if (xord[c] == invalid_code) {
-      fprintf(stderr, "Invalid character: %lc\n",c);
-      exit(1);
-    }
+    assert(xord[c] != invalid_code);
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
   if (k>buffer_end) {
