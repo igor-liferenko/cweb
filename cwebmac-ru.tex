@@ -23,7 +23,7 @@
 \parskip 0pt % no stretch between paragraphs
 \parindent 1em % for paragraphs and for the first line of C text
 
-\font\ninerm=lhr9
+\font\ninerm=omr9
 \let\mc=\ninerm % medium caps
 \def\CEE/{{\mc C\spacefactor1000}}
 \def\UNIX/{{\mc U\kern-.05emNIX\spacefactor1000}}
@@ -33,14 +33,14 @@
 \def\9#1{}
  % with this definition of \9 you can say @:sort key}{TeX code@>
  % to alphabetize an index entry by the sort key but format with the TeX code
-\font\eightrm=lhr8
+\font\eightrm=omr8
 \let\sc=\eightrm % for smallish caps (NOT a caps-and-small-caps font)
 \let\mainfont=\tenrm
 \let\cmntfont\tenrm
 %\font\tenss=lhss10 \let\cmntfont\tenss % alternative comment font
-\font\titlefont=lhr7 scaled\magstep4 % title on the contents page
-\font\ttitlefont=lhtt10 scaled\magstep2 % typewriter type in title
-\font\tentex=lhtex10 % TeX extended character set (used in strings)
+\font\titlefont=omr7 scaled\magstep4 % title on the contents page
+\font\ttitlefont=omtt10 scaled\magstep2 % typewriter type in title
+\font\tentex=omtex10 % TeX extended character set (used in strings)
 \fontdimen7\tentex=0pt % no double space after sentences
 
 \def\\#1{\leavevmode\hbox{\it#1\/\kern.05em}} % italic type for identifiers
