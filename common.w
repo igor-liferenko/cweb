@@ -67,8 +67,7 @@ quite, the same thing.  In these cases we've written common code for
 both, differentiating between the two by means of the global variable
 |program|.
 
-@d ctangle 0
-@d cweave 1
+@i program.h
 
 @<Definitions...@>=
 typedef short boolean;
@@ -120,21 +119,7 @@ in those indexes.
 @^ASCII code dependencies@>
 @^system dependencies@>
 
-@d and_and 04 /* `\.{\&\&}'\,; corresponds to MIT's {\tentex\char'4} */
-@d lt_lt 020 /* `\.{<<}'\,;  corresponds to MIT's {\tentex\char'20} */
-@d gt_gt 021 /* `\.{>>}'\,;  corresponds to MIT's {\tentex\char'21} */
-@d plus_plus 013 /* `\.{++}'\,;  corresponds to MIT's {\tentex\char'13} */
-@d minus_minus 01 /* `\.{--}'\,;  corresponds to MIT's {\tentex\char'1} */
-@d minus_gt 031 /* `\.{->}'\,;  corresponds to MIT's {\tentex\char'31} */
-@d not_eq 032 /* `\.{!=}'\,;  corresponds to MIT's {\tentex\char'32} */
-@d lt_eq 034 /* `\.{<=}'\,;  corresponds to MIT's {\tentex\char'34} */
-@d gt_eq 035 /* `\.{>=}'\,;  corresponds to MIT's {\tentex\char'35} */
-@d eq_eq 036 /* `\.{==}'\,;  corresponds to MIT's {\tentex\char'36} */
-@d or_or 037 /* `\.{\v\v}'\,;  corresponds to MIT's {\tentex\char'37} */
-@d dot_dot_dot 016 /* `\.{...}'\,;  corresponds to MIT's {\tentex\char'16} */
-@d colon_colon 06 /* `\.{::}'\,;  corresponds to MIT's {\tentex\char'6} */
-@d period_ast 026 /* `\.{.*}'\,;  corresponds to MIT's {\tentex\char'26} */
-@d minus_gt_ast 027 /* `\.{->*}'\,;  corresponds to MIT's {\tentex\char'27} */
+@i charset.h
 
 @** Input routines.  The lowest level of input to the \.{CWEB} programs
 is performed by |input_ln|, which must be told which file to read from.
@@ -150,11 +135,11 @@ Since |buf_size| is strictly less than |long_buf_size|,
 some of \.{CWEB}'s routines use the fact that it is safe to refer to
 |*(limit+2)| without overstepping the bounds of the array.
 
-@d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
-@d longest_name 10000
-@d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
-@d xisspace(c) (isspace(c)&&((unsigned char)c<0200))
-@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))
+@i buf_size.ctangle+cweave
+@i longest_name.ctangle+cweave
+@i long_buf_size.cweave
+@i xisspace.h
+@i xisupper.h
 
 @<Definitions...@>=
 char buffer[long_buf_size]; /* where each line of input goes */
@@ -204,12 +189,9 @@ for the benefit of \.{CTANGLE}.
 @f line x /* make |line| an unreserved word */
 @d max_include_depth 10 /* maximum number of source files open
   simultaneously, not counting the change file */
-@d max_file_name_length 60
-@d cur_file file[include_depth] /* current file */
-@d cur_file_name file_name[include_depth] /* current file name */
-@d cur_line line[include_depth] /* number of current line in current file */
+@i max_file_name_length.h
 @d web_file file[0] /* main source file */
-@d web_file_name file_name[0] /* main source file name */
+@i file.h
 
 @<Definitions...@>=
 int include_depth; /* current level of nesting */
@@ -412,10 +394,10 @@ If we've just changed from the |cur_file| to the |change_file|, or if
 the |cur_file| has changed, we tell \.{CTANGLE} to print this
 information in the \CEE/ file by means of the |print_where| flag.
 
-@d max_sections 2000 /* number of identifiers, strings, section names;
-  must be less than 10240 */
+@i max_sections.cweave
 
 @<Defin...@>=
+typedef char unsigned eight_bits;
 typedef unsigned short sixteen_bits;
 sixteen_bits section_count; /* the current section number */
 boolean changed_section[max_sections]; /* is the section changed? */
@@ -586,10 +568,8 @@ elements are structures of type |name_info|, containing a pointer into
 the |byte_mem| array (the address where the name begins) and other data.
 A |name_pointer| variable is a pointer into |name_dir|.
 
-@d max_bytes 90000 /* the number of bytes in identifiers,
-  index entries, and section names; must be less than $2^{24}$ */
-@d max_names 4000 /* number of identifiers, strings, section names;
-  must be less than 10240 */
+@i max_bytes.ctangle+cweave
+@i max_names.ctangle+cweave
 
 @<Definitions that...@>=
 typedef struct name_info {
@@ -606,8 +586,8 @@ name_pointer name_dir_end = name_dir+max_names-1; /* end of |name_dir| */
 p| appears in positions |p->byte_start| to |(p+1)->byte_start-1|, inclusive.
 The |print_id| macro prints this text on the user's terminal.
 
-@d length(c) (c+1)->byte_start-(c)->byte_start /* the length of a name */
-@d print_id(c) term_write((c)->byte_start,length((c))) /* print identifier */
+@i length.h
+@i print_id.h
 
 @ The first unused position in |byte_mem| and |name_dir| is
 kept in |byte_ptr| and |name_ptr|, respectively.  Thus we
@@ -639,7 +619,7 @@ function |names_match|, which is slightly different in
 \.{CWEAVE} and \.{CTANGLE}.  If there is no match for the identifier,
 it is inserted into the table.
 
-@d hash_size 353 /* should be prime */
+@i hash_size.ctangle+cweave
 
 @<Defini...@>=
 typedef name_pointer *hash_pointer;
@@ -722,10 +702,7 @@ this will be the only information in |name_dir[0]|.
 Since the space used by |rlink| has a different function for
 identifiers than for section names, we declare it as a |union|.
 
-@d llink link /* left link in binary search tree for section names */
-@d rlink dummy.Rlink /* right link in binary search tree for section names */
-@d root name_dir->rlink /* the root of the binary search tree
-  for section names */
+@i link.h
 
 @<More elements of |name...@>=
 union {
@@ -1072,12 +1049,7 @@ terminated abnormally. The value of |history| does not influence the
 behavior of the program; it is simply computed for the convenience
 of systems that might want to use such information.
 
-@d spotless 0 /* |history| value for normal jobs */
-@d harmless_message 1 /* |history| value when non-serious info was printed */
-@d error_message 2 /* |history| value when an error was noted */
-@d fatal_message 3 /* |history| value when we had to stop prematurely */
-@d mark_harmless {if (history==spotless) history=harmless_message;}
-@d mark_error history=error_message
+@i error.h
 
 @<Definit...@>=
 int history=spotless; /* indicates how bad this run was */
@@ -1200,7 +1172,7 @@ and \.{CWEB} prints an error message that is really for the \.{CWEB}
 maintenance person, not the user. In such cases the program says
 |confusion("indication of where we are")|.
 
-@d confusion(s) fatal("! This can't happen: ",s)
+@i confusion.h
 @.This can't happen@>
 
 @** Command line arguments.
@@ -1212,10 +1184,8 @@ of the program. The various file name variables contain strings with
 the names of those files. Most of the 128 flags are undefined but available
 for future extensions.
 
-@d show_banner flags['b'] /* should the banner line be printed? */
-@d show_progress flags['p'] /* should progress reports be printed? */
 @d show_stats flags['s'] /* should statistics be printed at end of run? */
-@d show_happiness flags['h'] /* should lack of errors be announced? */
+@i args.h
 
 @<Defin...@>=
 int argc; /* copy of |ac| parameter to |main| */
@@ -1391,17 +1361,14 @@ to make sure that everything we have output to the terminal so far has
 actually left the computer's internal buffers and been sent.
 @^system dependencies@>
 
-@d update_terminal fflush(stdout) /* empty the terminal output buffer */
+@i update_terminal.h
 
 @ Terminal output uses |putchar| and |putc| when we have to
 translate from \.{CWEB}'s code into the external character code,
 and |printf| when we just want to print strings.
 Several macros make other kinds of output convenient.
 @^system dependencies@>
-@d new_line putchar('\n') @d putxchar putchar
-@d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
-@d C_printf(c,a) fprintf(C_file,c,a)
-@d C_putc(c) putc(c,C_file) /* isn't \CEE/ wonderfully consistent? */
+@i terminal.h
 
 @ We predeclare several standard system functions here instead of including
 their system header files, because the names of the header files are not as
