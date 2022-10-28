@@ -19,13 +19,12 @@ common_init()
 @c void common_init() {
   setlocale(LC_CTYPE, "C.UTF-8");
   int i;
-  for (i=0; i<=255; i++) xchr[i]=invalid_code;
-  xchr[9]=9;
-  for (i=32; i<127; i++) xchr[i]=i;
+  for (i=0; i<=0176; i++) xchr[i]=i;
+  for (i=0177; i<=0377; i++) xchr[i]=' ';
 @i mapping.w
   for(i=0;i<=65535;i++) xord[i]=invalid_code;
-  for(i=0; i<=255; i++) xord[xchr[i]]=i;
-  xord[invalid_code]=invalid_code;
+  for(i=0200; i<=0377; i++) xord[xchr[i]]=i;
+  for(i=0; i<=0176; i++) xord[xchr[i]]=i;
 @z
 
 @x
