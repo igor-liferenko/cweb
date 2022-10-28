@@ -24,6 +24,11 @@
 First comes general stuff:
 
 @i program.h
+@i max_bytes.h
+@i max_names.h
+@i hash_size.h
+@i buf_size.h
+@i longest_name.h
 
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>=
 typedef short boolean;
@@ -93,8 +98,10 @@ extern name_pointer section_lookup(); /* finds section name */
 extern void print_section_name(), sprint_section_name();
 
 @ Code related to error handling:
-@i error.h
-@i confusion.h
+@i spotless.h
+@i harmless_message.h
+@d mark_harmless {if (history==spotless) history=harmless_message;}
+@d confusion(s) fatal("! This can't happen: ",s)
 
 @<Common...@>=
 extern history; /* indicates how bad this run was */
@@ -147,7 +154,7 @@ extern boolean flags[]; /* an option for each 7-bit code */
 
 @ Code relating to output:
 @i update_terminal.h
-@i terminal.h
+@i term_write.h
 
 @<Common code...@>=
 extern FILE *C_file; /* where output of \.{CTANGLE} goes */

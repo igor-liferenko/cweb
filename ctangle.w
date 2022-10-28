@@ -107,14 +107,9 @@ char **av;
 handle \TEX/,
 so they should be sufficient for most applications of \.{CTANGLE}.
 
-@i max_bytes.ctangle+cweave
 @d max_toks 270000 /* number of bytes in compressed \CEE/ code */
-@i max_names.ctangle+cweave
-@d max_texts 2500 /* number of replacement texts, must be less than 10240 */
-@i hash_size.ctangle+cweave
-@i longest_name.ctangle+cweave
+@d max_texts 3500 /* number of replacement texts, must be less than 10240 */
 @d stack_size 50 /* number of simultaneous levels of macro expansion */
-@i buf_size.ctangle+cweave
 
 @ The next few sections contain stuff from the file |"common.w"| that must
 be included in both |"ctangle.w"| and |"cweave.w"|. It appears in
@@ -384,6 +379,8 @@ int cur_val; /* additional information corresponding to output token */
 |stack_ptr==stack|.
 @^high-bit character handling@>
 
+@d C_putc(c) putc(c,C_file)
+
 @c
 void
 get_output() /* sends next token to |out_char| */
@@ -598,7 +595,8 @@ boolean output_defs_seen=0;
 @ @<Predecl...@>=
 void output_defs();
 
-@ @c
+@ @d C_printf(c,a) fprintf(C_file,c,a)
+@c
 void
 output_defs()
 {

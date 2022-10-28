@@ -135,8 +135,8 @@ Since |buf_size| is strictly less than |long_buf_size|,
 some of \.{CWEB}'s routines use the fact that it is safe to refer to
 |*(limit+2)| without overstepping the bounds of the array.
 
-@i buf_size.ctangle+cweave
-@i longest_name.ctangle+cweave
+@i buf_size.h
+@i longest_name.h
 @i long_buf_size.cweave
 @i xisspace.h
 @i xisupper.h
@@ -568,8 +568,8 @@ elements are structures of type |name_info|, containing a pointer into
 the |byte_mem| array (the address where the name begins) and other data.
 A |name_pointer| variable is a pointer into |name_dir|.
 
-@i max_bytes.ctangle+cweave
-@i max_names.ctangle+cweave
+@i max_bytes.h
+@i max_names.h
 
 @<Definitions that...@>=
 typedef struct name_info {
@@ -619,7 +619,7 @@ function |names_match|, which is slightly different in
 \.{CWEAVE} and \.{CTANGLE}.  If there is no match for the identifier,
 it is inserted into the table.
 
-@i hash_size.ctangle+cweave
+@i hash_size.h
 
 @<Defini...@>=
 typedef name_pointer *hash_pointer;
@@ -1049,7 +1049,11 @@ terminated abnormally. The value of |history| does not influence the
 behavior of the program; it is simply computed for the convenience
 of systems that might want to use such information.
 
-@i error.h
+@i spotless.h
+@i harmless_message.h
+@i error_message.cweave
+@d fatal_message 3 /* |history| value when we had to stop prematurely */
+@i mark_error.cweave
 
 @<Definit...@>=
 int history=spotless; /* indicates how bad this run was */
@@ -1170,9 +1174,7 @@ overflow(t)
 @ Sometimes the program's behavior is far different from what it should be,
 and \.{CWEB} prints an error message that is really for the \.{CWEB}
 maintenance person, not the user. In such cases the program says
-|confusion("indication of where we are")|.
-
-@i confusion.h
+\\{confusion("indication of where we are")}.
 @.This can't happen@>
 
 @** Command line arguments.
@@ -1368,7 +1370,7 @@ translate from \.{CWEB}'s code into the external character code,
 and |printf| when we just want to print strings.
 Several macros make other kinds of output convenient.
 @^system dependencies@>
-@i terminal.h
+@i term_write.h
 
 @ We predeclare several standard system functions here instead of including
 their system header files, because the names of the header files are not as
