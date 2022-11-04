@@ -68,7 +68,9 @@ extern char *limit; /* points to the last character in the buffer */
 @ Code related to identifier and section name storage:
 @i length.h
 @i print_id.h
-@i link.h
+@i llink.h
+@i rlink.h
+@i root.h
 @d chunk_marker 0
 
 @<Common code...@>=
@@ -113,7 +115,10 @@ extern void overflow(); /* succumb because a table has overflowed */
 @ Code related to file handling:
 @f line x /* make |line| an unreserved word */
 @i max_file_name_length.h
-@i file.h
+@i cur_file.h
+@i cur_file_name.h
+@i web_file_name.h
+@i cur_line.h
 
 @<Common code...@>=
 extern include_depth; /* current level of nesting */
@@ -145,7 +150,9 @@ extern boolean change_pending; /* is a decision about change still unclear? */
 extern boolean print_where; /* tells \.{CTANGLE} to print line and file info */
 
 @ Code related to command line arguments:
-@i args.h
+@i show_banner.h
+@i show_progress.h
+@i show_happiness.h
 
 @<Common code...@>=
 extern int argc; /* copy of |ac| parameter to |main| */

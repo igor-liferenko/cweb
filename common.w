@@ -191,7 +191,10 @@ for the benefit of \.{CTANGLE}.
   simultaneously, not counting the change file */
 @i max_file_name_length.h
 @d web_file file[0] /* main source file */
-@i file.h
+@i cur_file.h 
+@i cur_file_name.h 
+@i web_file_name.h 
+@i cur_line.h 
 
 @<Definitions...@>=
 int include_depth; /* current level of nesting */
@@ -702,7 +705,9 @@ this will be the only information in |name_dir[0]|.
 Since the space used by |rlink| has a different function for
 identifiers than for section names, we declare it as a |union|.
 
-@i link.h
+@i llink.h
+@i rlink.h
+@i root.h
 
 @<More elements of |name...@>=
 union {
@@ -1187,7 +1192,9 @@ the names of those files. Most of the 128 flags are undefined but available
 for future extensions.
 
 @d show_stats flags['s'] /* should statistics be printed at end of run? */
-@i args.h
+@i show_banner.h
+@i show_progress.h
+@i show_happiness.h
 
 @<Defin...@>=
 int argc; /* copy of |ac| parameter to |main| */

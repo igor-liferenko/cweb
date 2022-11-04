@@ -11,7 +11,5 @@ cweave.c
 *.tex
 *.toc
 *.ps
-comm-merged.ch
-ctang-merged.ch
-cweav-merged.ch
+*-merged.ch
 .gdb_history

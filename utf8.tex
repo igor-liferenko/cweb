@@ -70,18 +70,16 @@ We initialize the {\it xord\/} and {\it xchr\/} arrays
 in the {\it common\_init\/} function of |common.w|.
 %\medskip
 %
-First, in {\it xchr\/} we map all visible
-\acro{ASCII} characters to themselves, like this:
+First, in {\it xchr\/} we map all
+\acro{ASCII} characters to themselves:
 \verbatim
-xchr[32] = ' ';
+for (i=0; i<=0176; i++) xchr[i]=i;
 \endverbatim
 \medskip
 
-Then we map the rest of the indexes of {\it xchr\/} to 127, which is
-the \acro{ASCII} character code ({\tt DEL}) that is prohibited in text files.
+Then we map the rest of the indexes of {\it xchr\/} to space.
 \verbatim
-for (i=0; i<32; i++) xchr[i]=127;
-for (i=127; i<=255; i++) xchr[i]=127;
+for (i=0177; i<=0377; i++) xchr[i]=' ';
 \endverbatim
 %\medskip
 
@@ -97,12 +95,13 @@ installation of \acro{CWEB}, for example:
 \smallskip
 
 The initialization of {\it xord\/} comes next.
-All its indexes are mapped by default to 127.
-Then we make it contain the inverse of the information in {\it xchr\/}.
+All its indexes are mapped by default to 127, which is
+the \acro{ASCII} character code ({\tt DEL}) that is prohibited in text files.
+Then we make {\it xord\/} contain the inverse of the information in {\it xchr\/}.
 \verbatim
 for (i=0;i<=65535;i++) xord[i]=127;
-for (i=0;i<=255;i++) xord[xchr[i]]=i;
-xord[127]=127;
+for(i=0200; i<=0377; i++) xord[xchr[i]]=i;
+for(i=0; i<=0176; i++) xord[xchr[i]]=i;
 \endverbatim
 %\medskip
 It remains to set the |LC_CTYPE| locale category.
@@ -166,7 +165,7 @@ via {\it printf\/}, using |%lc| conversion specifier.
 
 > @d term_write(a,b) do { fflush(stdout);
 >   for (int i = 0; i < b; i++)
->     if (*(a+i)=='\n') new_line;
+>     if (*(a+i)=='\n') putchar('\n');
 >     else printf("%lc",xchr[(unsigned char)
 >       *(a+i)]); } while (0)
 \endverbatim
