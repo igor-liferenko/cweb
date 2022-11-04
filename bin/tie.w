@@ -141,7 +141,7 @@ applications of \.{TIE}.
 
 @<Global constants@>=
 #define buf_size 512 /* maximum length of one input line */
-#define max_file_index 9
+#define max_file_index 32
 /* we don't think that anyone needs more than 9 change files,
     but \dots\ just change it */
 
