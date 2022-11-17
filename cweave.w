@@ -71,7 +71,7 @@ is modified.
 @c @<Include files@>@/
 @h
 #define new_line putchar('\n')
-#define putxchar putchar // TODO: add assert(c<0200)
+#define putxchar putchar
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
 @<Typedef declarations@>@/
 @<Global variables@>@/
@@ -2176,7 +2176,7 @@ switch (r) {
   case quoted_char: j++; printf("[%o]",(unsigned)*j); break;
   case end_translation: printf("[quit]"); break;
   case inserted: printf("[inserted]"); break;
-  default: putxchar(r);
+  default: putxchar(r); assert(r<0200); // TODO: why putxchar?
 }
 
 @ The production rules listed above are embedded directly into \.{CWEAVE},
