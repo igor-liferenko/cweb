@@ -69,6 +69,7 @@ is modified.
 @d banner "This is CWEAVE (Version 3.64)\n"
 
 @c @<Include files@>@/
+#include <assert.h>
 @h
 #define new_line putchar('\n')
 #define putxchar putchar
