@@ -64,6 +64,8 @@ is modified.
 @c
 @<Include files@>@/
 @h
+#define C_printf(c,a) fprintf(C_file,c,a)
+#define C_putc(c) putc(c,C_file)
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
 @<Typedef declarations@>@/
 @<Global variables@>@/
@@ -106,10 +108,17 @@ char **av;
 @ The following parameters were sufficient in the original \.{TANGLE} to
 handle \TEX/,
 so they should be sufficient for most applications of \.{CTANGLE}.
+If you change |max_bytes|, |max_names|, or |hash_size| you should also
+change them in the file |"common.w"|.
 
+@i max_bytes.h
 @d max_toks 270000 /* number of bytes in compressed \CEE/ code */
+@i max_names.h
 @d max_texts 3500 /* number of replacement texts, must be less than 10240 */
+@i hash_size.h
+@i longest_name.h
 @d stack_size 50 /* number of simultaneous levels of macro expansion */
+@i buf_size.h
 
 @ The next few sections contain stuff from the file |"common.w"| that must
 be included in both |"ctangle.w"| and |"cweave.w"|. It appears in
@@ -379,8 +388,6 @@ int cur_val; /* additional information corresponding to output token */
 |stack_ptr==stack|.
 @^high-bit character handling@>
 
-@d C_putc(c) putc(c,C_file)
-
 @c
 void
 get_output() /* sends next token to |out_char| */
@@ -595,8 +602,7 @@ boolean output_defs_seen=0;
 @ @<Predecl...@>=
 void output_defs();
 
-@ @d C_printf(c,a) fprintf(C_file,c,a)
-@c
+@ @c
 void
 output_defs()
 {

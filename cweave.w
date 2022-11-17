@@ -70,6 +70,8 @@ is modified.
 
 @c @<Include files@>@/
 @h
+#define new_line putchar('\n')
+#define putxchar putchar // TODO: add assert(c<0200)
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
 @<Typedef declarations@>@/
 @<Global variables@>@/
@@ -115,7 +117,16 @@ char **av; /* argument values */
 
 @ The following parameters were sufficient in the original \.{WEAVE} to
 handle \TEX/, so they should be sufficient for most applications of \.{CWEAVE}.
+If you change |max_bytes|, |max_names|, |hash_size|, or |buf_size|
+you have to change them also in the file |"common.w"|.
 
+@i max_bytes.h
+@i max_names.h
+@i max_sections.cweave
+@i hash_size.h
+@i buf_size.h
+@i longest_name.h
+@i long_buf_size.cweave
 @d line_length 80 /* lines of \TEX/ output have at most this many characters;
   should be less than 256 */
 @d max_refs 20000 /* number of cross-references; must be less than 65536 */
@@ -235,7 +246,6 @@ sixteen_bits xref_switch,section_xref_switch; /* either zero or |def_flag| */
 @ A section that is used for multi-file output (with the \.{@@(} feature)
 has a special first cross-reference whose |num| field is |file_flag|.
 
-@i max_sections.cweave
 @d file_flag (3*cite_flag)
 @d def_flag (2*cite_flag)
 @d cite_flag 10240 /* must be strictly larger than |max_sections| */
@@ -833,9 +843,6 @@ quotes, respectively, can contain newlines or instances of their own
 delimiters if they are protected by a backslash.  We follow this
 convention, but do not allow the string to be longer than |longest_name|.
 
-@i error_message.cweave
-@i mark_error.cweave
-
 @<Get a string@>= {
   char delim = c; /* what started the string */
   id_first = section_text+1;
@@ -1415,8 +1422,6 @@ break_out() /* finds a way to break the output line */
 consists of a string of backslashes followed by a string of nonblank
 non-backslashes. In such cases it is almost always safe to break the
 line by putting a |'%'| just before the last character.
-
-@d new_line putchar('\n')
 
 @<Print warning message...@>=
 {
@@ -2155,8 +2160,7 @@ text_pointer p;
   fflush(stdout);
 }
 
-@ @d putxchar putchar
-@<Print token |r|...@>=
+@ @<Print token |r|...@>=
 switch (r) {
   case math_rel: printf("\\mathrel{"@q}@>); break;
   case big_cancel: printf("[ccancel]"); break;
@@ -3908,8 +3912,6 @@ except within strings. We put a `\.{\v}' at the front of the buffer, so that an
 error message that displays the whole buffer will look a little bit sensible.
 The variable |delim| is zero outside of strings, otherwise it
 equals the delimiter that began the string being copied.
-
-@i long_buf_size.cweave
 
 @<Copy the \CEE/ text into...@>=
 j=limit+1; *j='|'; delim=0;

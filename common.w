@@ -190,11 +190,11 @@ for the benefit of \.{CTANGLE}.
 @d max_include_depth 10 /* maximum number of source files open
   simultaneously, not counting the change file */
 @i max_file_name_length.h
-@d web_file file[0] /* main source file */
 @i cur_file.h 
 @i cur_file_name.h 
-@i web_file_name.h 
 @i cur_line.h 
+@d web_file file[0] /* main source file */
+@i web_file_name.h 
 
 @<Definitions...@>=
 int include_depth; /* current level of nesting */
@@ -1054,11 +1054,7 @@ terminated abnormally. The value of |history| does not influence the
 behavior of the program; it is simply computed for the convenience
 of systems that might want to use such information.
 
-@i spotless.h
-@i harmless_message.h
-@i error_message.cweave
-@d fatal_message 3 /* |history| value when we had to stop prematurely */
-@i mark_error.cweave
+@i history.h
 
 @<Definit...@>=
 int history=spotless; /* indicates how bad this run was */
@@ -1179,7 +1175,9 @@ overflow(t)
 @ Sometimes the program's behavior is far different from what it should be,
 and \.{CWEB} prints an error message that is really for the \.{CWEB}
 maintenance person, not the user. In such cases the program says
-\\{confusion("indication of where we are")}.
+|confusion("indication of where we are")|.
+
+@d confusion(s) fatal("! This can't happen: ",s)
 @.This can't happen@>
 
 @** Command line arguments.
@@ -1191,10 +1189,7 @@ of the program. The various file name variables contain strings with
 the names of those files. Most of the 128 flags are undefined but available
 for future extensions.
 
-@d show_stats flags['s'] /* should statistics be printed at end of run? */
-@i show_banner.h
-@i show_progress.h
-@i show_happiness.h
+@i flags.h
 
 @<Defin...@>=
 int argc; /* copy of |ac| parameter to |main| */

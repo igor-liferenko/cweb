@@ -24,11 +24,6 @@
 First comes general stuff:
 
 @i program.h
-@i max_bytes.h
-@i max_names.h
-@i hash_size.h
-@i buf_size.h
-@i longest_name.h
 
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>=
 typedef short boolean;
@@ -100,9 +95,7 @@ extern name_pointer section_lookup(); /* finds section name */
 extern void print_section_name(), sprint_section_name();
 
 @ Code related to error handling:
-@i spotless.h
-@i harmless_message.h
-@d mark_harmless {if (history==spotless) history=harmless_message;}
+@i history.h
 @d confusion(s) fatal("! This can't happen: ",s)
 
 @<Common...@>=
@@ -150,9 +143,7 @@ extern boolean change_pending; /* is a decision about change still unclear? */
 extern boolean print_where; /* tells \.{CTANGLE} to print line and file info */
 
 @ Code related to command line arguments:
-@i show_banner.h
-@i show_progress.h
-@i show_happiness.h
+@i flags.h
 
 @<Common code...@>=
 extern int argc; /* copy of |ac| parameter to |main| */
