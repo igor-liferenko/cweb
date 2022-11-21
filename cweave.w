@@ -69,10 +69,7 @@ is modified.
 @d banner "This is CWEAVE (Version 3.64)\n"
 
 @c @<Include files@>@/
-#include <assert.h>
 @h
-#define new_line putchar('\n')
-#define putxchar putchar
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>@/
 @<Typedef declarations@>@/
 @<Global variables@>@/
@@ -1429,7 +1426,7 @@ line by putting a |'%'| just before the last character.
   printf("\n! Line had to be broken (output l. %d):\n",out_line);
 @.Line had to be broken@>
   term_write(out_buf+1, out_ptr-out_buf-1);
-  new_line; mark_harmless;
+  putchar('\n'); mark_harmless;
   flush_buffer(out_ptr-1,1,1); return;
 }
 
@@ -2177,7 +2174,7 @@ switch (r) {
   case quoted_char: j++; printf("[%o]",(unsigned)*j); break;
   case end_translation: printf("[quit]"); break;
   case inserted: printf("[inserted]"); break;
-  default: putxchar(r); assert(r<0200); // TODO: why putxchar?
+  default: putchar(r);
 }
 
 @ The production rules listed above are embedded directly into \.{CWEAVE},
@@ -3099,7 +3096,7 @@ int tracing; /* can be used to show parsing details */
   if (tracing==2) {
     printf("\n%d:",n);
     for (k=scrap_base; k<=lo_ptr; k++) {
-      if (k==pp) putxchar('*'); else putxchar(' ');
+      if (k==pp) putchar('*'); else putchar(' ');
       if (k->mathness %4 ==  yes_math) putchar('+');
       else if (k->mathness %4 ==  no_math) putchar('-');
       print_cat(k->cat);
