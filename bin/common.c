@@ -336,7 +336,7 @@ root= NULL;
 /*68:*/
 #line 1233 "common.w"
 
-#line 1235 "common.w"
+show_banner= show_happiness= show_progress= 1;
 
 /*:68*/
 #line 94 "common.w"
@@ -649,10 +649,8 @@ else{
 if((l= strlen(CWEBINPUTS))> max_file_name_length-2)too_long();
 strcpy(temp_file_name,CWEBINPUTS);
 #else
-#line 503 "common.w"
- l= 0;
+l= 0;
 #endif 
-#line 505 "common.w"
 }
 if(l> 0){
 if(k+l+2>=cur_file_name_end)too_long();
@@ -1036,9 +1034,7 @@ update_terminal;mark_error;
 /*:58*//*61:*/
 #line 1150 "common.w"
 
-#line 4 "comm-bhp.ch"
-int wrap_up(){if(show_happiness)
-#line 1152 "common.w"
+int wrap_up(){
 putchar('\n');
 if(show_stats)
 print_stats();
