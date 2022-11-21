@@ -336,7 +336,6 @@ root= NULL;
 /*68:*/
 #line 1233 "common.w"
 
-show_banner= show_happiness= show_progress= 1;
 
 /*:68*/
 #line 94 "common.w"
@@ -1034,7 +1033,7 @@ update_terminal;mark_error;
 /*:58*//*61:*/
 #line 1150 "common.w"
 
-int wrap_up(){
+int wrap_up(){if(flags['h'])
 putchar('\n');
 if(show_stats)
 print_stats();
