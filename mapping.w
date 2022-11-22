@@ -64,4 +64,6 @@ xchr[0x9e] = L'Ю';
 xchr[0xee] = L'ю';
 xchr[0x9f] = L'Я';
 xchr[0xef] = L'я';
-xchr[0xfc] = L'№';
+xchr[0xfa] = L'№';
+xchr[0xfe] = L'«';
+xchr[0xff] = L'»';
