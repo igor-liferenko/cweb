@@ -1,1 +1,0 @@
-@d long_buf_size (buf_size+longest_name)
