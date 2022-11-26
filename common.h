@@ -23,7 +23,8 @@
 
 First comes general stuff:
 
-@i program.h
+@d ctangle 0
+@d cweave 1
 
 @<Common code for \.{CWEAVE} and \.{CTANGLE}@>=
 typedef short boolean;
@@ -37,7 +38,21 @@ extern int phase; /* which phase are we in? */
 @ Code related to the character set:
 @^ASCII code dependencies@>
 
-@i charset.h
+@d and_and 04 /* `\.{\&\&}'\,; corresponds to MIT's {\tentex\char'4} */
+@d lt_lt 020 /* `\.{<<}'\,;  corresponds to MIT's {\tentex\char'20} */
+@d gt_gt 021 /* `\.{>>}'\,;  corresponds to MIT's {\tentex\char'21} */
+@d plus_plus 013 /* `\.{++}'\,;  corresponds to MIT's {\tentex\char'13} */
+@d minus_minus 01 /* `\.{--}'\,;  corresponds to MIT's {\tentex\char'1} */
+@d minus_gt 031 /* `\.{->}'\,;  corresponds to MIT's {\tentex\char'31} */
+@d not_eq 032 /* `\.{!=}'\,;  corresponds to MIT's {\tentex\char'32} */
+@d lt_eq 034 /* `\.{<=}'\,;  corresponds to MIT's {\tentex\char'34} */
+@d gt_eq 035 /* `\.{>=}'\,;  corresponds to MIT's {\tentex\char'35} */
+@d eq_eq 036 /* `\.{==}'\,;  corresponds to MIT's {\tentex\char'36} */
+@d or_or 037 /* `\.{\v\v}'\,;  corresponds to MIT's {\tentex\char'37} */
+@d dot_dot_dot 016 /* `\.{...}'\,;  corresponds to MIT's {\tentex\char'16} */
+@d colon_colon 06 /* `\.{::}'\,;  corresponds to MIT's {\tentex\char'6} */
+@d period_ast 026 /* `\.{.*}'\,;  corresponds to MIT's {\tentex\char'26} */
+@d minus_gt_ast 027 /* `\.{->*}'\,;  corresponds to MIT's {\tentex\char'27} */
 
 @<Common code...@>=
 char section_text[longest_name+1]; /* name being sought for */
@@ -49,9 +64,9 @@ char *id_loc; /* just after the current identifier in the buffer */
 
 @d xisalpha(c) (isalpha(c)&&((eight_bits)c<0200))
 @d xisdigit(c) (isdigit(c)&&((eight_bits)c<0200))
-@i xisspace.h
+@d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
 @d xislower(c) (islower(c)&&((eight_bits)c<0200))
-@i xisupper.h
+@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
 @d xisxdigit(c) (isxdigit(c)&&((eight_bits)c<0200))
 
 @<Common code...@>=
@@ -61,11 +76,12 @@ extern char *loc; /* points to the next character to be read from the buffer*/
 extern char *limit; /* points to the last character in the buffer */
 
 @ Code related to identifier and section name storage:
-@i length.h
-@i print_id.h
-@i llink.h
-@i rlink.h
-@i root.h
+@d length(c) (c+1)->byte_start-(c)->byte_start /* the length of a name */
+@d print_id(c) term_write((c)->byte_start,length((c))) /* print identifier */
+@d llink link /* left link in binary search tree for section names */
+@d rlink dummy.Rlink /* right link in binary search tree for section names */
+@d root name_dir->rlink /* the root of the binary search tree
+  for section names */
 @d chunk_marker 0
 
 @<Common code...@>=
@@ -95,7 +111,12 @@ extern name_pointer section_lookup(); /* finds section name */
 extern void print_section_name(), sprint_section_name();
 
 @ Code related to error handling:
-@i history.h
+@d spotless 0 /* |history| value for normal jobs */
+@d harmless_message 1 /* |history| value when non-serious info was printed */
+@d error_message 2 /* |history| value when an error was noted */
+@d fatal_message 3 /* |history| value when we had to stop prematurely */
+@d mark_harmless {if (history==spotless) history=harmless_message;}
+@d mark_error history=error_message
 @d confusion(s) fatal("! This can't happen: ",s)
 
 @<Common...@>=
@@ -108,10 +129,10 @@ extern void overflow(); /* succumb because a table has overflowed */
 @ Code related to file handling:
 @f line x /* make |line| an unreserved word */
 @i max_file_name_length.h
-@i cur_file.h
-@i cur_file_name.h
-@i web_file_name.h
-@i cur_line.h
+@d cur_file file[include_depth] /* current file */
+@d cur_file_name file_name[include_depth] /* current file name */
+@d web_file_name file_name[0] /* main source file name */
+@d cur_line line[include_depth] /* number of current line in current file */
 
 @<Common code...@>=
 extern include_depth; /* current level of nesting */
@@ -143,7 +164,9 @@ extern boolean change_pending; /* is a decision about change still unclear? */
 extern boolean print_where; /* tells \.{CTANGLE} to print line and file info */
 
 @ Code related to command line arguments:
-@i flags.h
+@d show_banner flags['b'] /* should the banner line be printed? */
+@d show_progress flags['p'] /* should progress reports be printed? */
+@d show_happiness flags['h'] /* should lack of errors be announced? */
 
 @<Common code...@>=
 extern int argc; /* copy of |ac| parameter to |main| */
@@ -151,8 +174,8 @@ extern char **argv; /* copy of |av| parameter to |main| */
 extern boolean flags[]; /* an option for each 7-bit code */
 
 @ Code relating to output:
-@i update_terminal.h
-@i term_write.h
+@d update_terminal fflush(stdout) /* empty the terminal output buffer */
+@d term_write(a,b) fflush(stdout),fwrite(a,sizeof(char),b,stdout)
 
 @<Common code...@>=
 extern FILE *C_file; /* where output of \.{CTANGLE} goes */

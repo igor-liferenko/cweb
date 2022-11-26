@@ -115,7 +115,7 @@ char **av; /* argument values */
 
 @ The following parameters were sufficient in the original \.{WEAVE} to
 handle \TEX/, so they should be sufficient for most applications of \.{CWEAVE}.
-If you change |max_bytes|, |max_names|, |hash_size|, or |buf_size|
+If you change |max_bytes|, |max_names|, |max_sections|, |hash_size|, |longest_name|, or |buf_size|
 you have to change them also in the file |"common.w"|.
 
 @i max_bytes.h
@@ -124,7 +124,7 @@ you have to change them also in the file |"common.w"|.
 @i hash_size.h
 @i buf_size.h
 @i longest_name.h
-@i long_buf_size.cweave
+@d long_buf_size (buf_size+longest_name)
 @d line_length 80 /* lines of \TEX/ output have at most this many characters;
   should be less than 256 */
 @d max_refs 20000 /* number of cross-references; must be less than 65536 */

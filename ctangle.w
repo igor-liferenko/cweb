@@ -108,8 +108,8 @@ char **av;
 @ The following parameters were sufficient in the original \.{TANGLE} to
 handle \TEX/,
 so they should be sufficient for most applications of \.{CTANGLE}.
-If you change |max_bytes|, |max_names|, or |hash_size| you should also
-change them in the file |"common.w"|.
+If you change |max_bytes|, |max_names|, |hash_size|, |longest_name|, or |buf_size|
+you should also change them in the file |"common.w"|.
 
 @i max_bytes.h
 @d max_toks 270000 /* number of bytes in compressed \CEE/ code */
