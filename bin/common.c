@@ -1033,7 +1033,7 @@ update_terminal;mark_error;
 /*:58*//*61:*/
 #line 1150 "common.w"
 
-int wrap_up(){if(flags['h'])
+int wrap_up(){if(show_happiness)
 putchar('\n');
 if(show_stats)
 print_stats();
