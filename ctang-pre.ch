@@ -1,3 +1,5 @@
+TODO: find out why spurious space appears in addition to #line directive
+
 @x
 case identifier: a=id_lookup(id_first,id_loc,0)-name_dir;
   app_repl((a / 0400)+0200);
