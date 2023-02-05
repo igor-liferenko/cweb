@@ -1,5 +1,3 @@
-// set the desired sorting order here (instead of changing 'collate' array)
-
 xchr[128] = L'А';
 xchr[129] = L'Б';
 xchr[130] = L'В';
