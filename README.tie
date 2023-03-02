@@ -1,0 +1,16 @@
+To add a new change to prog.ch, create yyy.ch which adds the line "YYY" in the place where you
+want to make the necessary change to prog.w, run
+`tie-c prog.w yyy.ch prog.ch' and search "YYY" to see the context in which the new change must be
+added to prog.ch
+
+#!/bin/sh
+tie -c /dev/stderr "$@" >/dev/null 2>&1 || exit
+tie -c /dev/stderr "$@" 2>&1 >/dev/null | less
+
+========================================================================
+
+Use `tie-m prog.w prog.ch' to check change-files.
+
+#!/bin/sh
+tie -m /dev/stderr "$@" >/dev/null 2>&1 || exit
+tie -m /dev/stderr "$@" 2>&1 >/dev/null | less
