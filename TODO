@@ -1,0 +1,26 @@
+Find out why running TeX after running cweave on the following file gives error:
+
+\let\a=\9
+
+@* Music menu.
+
+@* Menu items.
+
+@ @<z ...@>=
+
+@ @<y ...@>=
+
+@ @<x ...@>=
+
+@ @<w ...@>=
+
+@ @<v ...@>=
+
+@ @<u ...@>=
+
+@* Main program.
+
+@c
+@<\a{}---------------------------------------------------------------------------@>@;
+
+@ @<\a{}...@>=
