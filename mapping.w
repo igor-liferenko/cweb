@@ -67,3 +67,4 @@ xchr[0xc1] = L'я';
 xchr[0xc2] = L'№';
 xchr[0xc3] = L'«';
 xchr[0xc4] = L'»';
+xchr[0xc5] = L'\u2010';
