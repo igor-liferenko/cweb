@@ -1,2 +1,0 @@
-@d max_sections 2000 /* number of identifiers, strings, section names; greater than the total
-number of sections; must be less than 10240 */

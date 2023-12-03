@@ -128,7 +128,7 @@ extern void overflow(); /* succumb because a table has overflowed */
 
 @ Code related to file handling:
 @f line x /* make |line| an unreserved word */
-@i max_file_name_length.h
+@d max_file_name_length 200
 @d cur_file file[include_depth] /* current file */
 @d cur_file_name file_name[include_depth] /* current file name */
 @d web_file_name file_name[0] /* main source file name */
