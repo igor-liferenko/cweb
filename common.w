@@ -150,7 +150,7 @@ Since |buf_size| is strictly less than |long_buf_size|,
 some of \.{CWEB}'s routines use the fact that it is safe to refer to
 |*(limit+2)| without overstepping the bounds of the array.
 
-@d buf_size 500 /* maximum length of input line, plus one */
+@d buf_size 100 /* maximum length of input line, plus one */
 @d longest_name 10000 /* section names and strings shouldn't be longer than this */
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
 @d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
@@ -204,7 +204,7 @@ for the benefit of \.{CTANGLE}.
 @f line x /* make |line| an unreserved word */
 @d max_include_depth 10 /* maximum number of source files open
   simultaneously, not counting the change file */
-@d max_file_name_length 200
+@d max_file_name_length 60
 @d cur_file file[include_depth] /* current file */
 @d cur_file_name file_name[include_depth] /* current file name */
 @d cur_line line[include_depth] /* number of current line in current file */
@@ -589,7 +589,7 @@ A |name_pointer| variable is a pointer into |name_dir|.
 
 @d max_bytes 90000 /* the number of bytes in identifiers,
   index entries, and section names; must be less than $2^{24}$ */
-@d max_names 4500 /* number of identifiers, strings, section names;
+@d max_names 4000 /* number of identifiers, strings, section names;
   must be less than 10240 */
 
 @<Definitions that...@>=

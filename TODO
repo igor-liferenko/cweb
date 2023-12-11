@@ -1,7 +1,3 @@
-Do 'test -z' checking via .c files and put my constants to cweav,ctang,comm-constants.ch
-
-****************************************************************************************
-
 Find out why running TeX after running cweave on the following file gives error:
 
 \let\a=\9

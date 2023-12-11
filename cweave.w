@@ -120,12 +120,12 @@ you have to change them also in the file |"common.w"|.
 
 @d max_bytes 90000 /* the number of bytes in identifiers,
   index entries, and section names; must be less than $2^{24}$ */
-@d max_names 4500 /* number of identifiers, strings, section names;
+@d max_names 4000 /* number of identifiers, strings, section names;
   must be less than 10240 */
 @d max_sections 2000 /* number of identifiers, strings, section names; greater than the total
   number of sections; must be less than 10240 */
 @d hash_size 353 /* should be prime */
-@d buf_size 500 /* maximum length of input line, plus one */
+@d buf_size 100 /* maximum length of input line, plus one */
 @d longest_name 10000 /* section names and strings shouldn't be longer than this */
 @d long_buf_size (buf_size+longest_name)
 @d line_length 80 /* lines of \TEX/ output have at most this many characters;

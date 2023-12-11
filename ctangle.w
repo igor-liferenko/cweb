@@ -114,13 +114,13 @@ you should also change them in the file |"common.w"|.
 @d max_bytes 90000 /* the number of bytes in identifiers,
   index entries, and section names; must be less than $2^{24}$ */
 @d max_toks 270000 /* number of bytes in compressed \CEE/ code */
-@d max_names 4500 /* number of identifiers, strings, section names;
+@d max_names 4000 /* number of identifiers, strings, section names;
   must be less than 10240 */
-@d max_texts 3500 /* number of replacement texts, must be less than 10240 */
+@d max_texts 2500 /* number of replacement texts, must be less than 10240 */
 @d hash_size 353 /* should be prime */
 @d longest_name 10000 /* section names and strings shouldn't be longer than this */
 @d stack_size 50 /* number of simultaneous levels of macro expansion */
-@d buf_size 500 /* maximum length of input line, plus one */
+@d buf_size 100 /* maximum length of input line, plus one */
 
 @ The next few sections contain stuff from the file |"common.w"| that must
 be included in both |"ctangle.w"| and |"cweave.w"|. It appears in
