@@ -1,4 +1,4 @@
-we may use +u when compiler supports UTF-8
+we may use +u when compiler supports UTF-8 identifiers
 
 @x
     else C_printf("%s",translit[(unsigned char)(*j)-0200]);
