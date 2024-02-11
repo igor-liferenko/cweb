@@ -1,8 +1,8 @@
 Close files explicitly before exit - see explanation in tex/close.ch
 @x
-  @<Print the job |history|@>;
+  if (history > harmless_message) return(1);
 @y
-  @<Print the job |history|@>;
   if (web_file!=NULL) fclose(web_file);
   if (change_file!=NULL) fclose(change_file);
+  if (history > harmless_message) return(1);
 @z
