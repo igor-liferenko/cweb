@@ -137,7 +137,6 @@ extern void overflow(); /* succumb because a table has overflowed */
 @<Common code...@>=
 extern include_depth; /* current level of nesting */
 extern FILE *file[]; /* stack of non-change files */
-extern FILE *change_file; /* change file */
 extern char C_file_name[]; /* name of |C_file| */
 extern char tex_file_name[]; /* name of |tex_file| */
 extern char idx_file_name[]; /* name of |idx_file| */
