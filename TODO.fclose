@@ -1,5 +1,0 @@
-CWEAVE reads each file twice.
-In reset_input() in phase_two() file is opened second time without being closed.
-So, previous handle is just hanging in memory without any references left for it,
-and closed by OS when program exits. This may cause segfault.
-If this happens, add to comm-fclose.ch closing web-file and change-file in reset_input().
