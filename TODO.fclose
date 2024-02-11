@@ -1,28 +1,5 @@
 CWEAVE reads each file twice.
 In reset_input() in phase_two() file is opened second time without being closed.
 So, previous handle is just hanging in memory without any references left for it,
-and closed by OS when program exits. This may cause segfault for the same reason as in close.ch in tex repo.
-If this happens, see comm-fclose.ch and cweav-fclose.ch below (only change-file is closed - add closing
-web-file?)
-
-===========================
-
-comm-fclose.ch
-
-@x
-  @<Print the job |history|@>;
-@y
-  @<Print the job |history|@>;
-  if (change_file!=NULL) fclose(change_file);
-@z
-
-----------------
-
-cweav-fclose.ch
-
-@x
-phase_two() {
-@y
-phase_two() {
-if (change_file!=NULL) fclose(change_file);
-@z
+and closed by OS when program exits. This may cause segfault.
+If this happens, add to comm-fclose.ch closing web-file and change-file in reset_input().
