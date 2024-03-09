@@ -65,8 +65,6 @@ char *id_loc; /* just after the current identifier in the buffer */
 @d xisalpha(c) (isalpha(c)&&((eight_bits)c<0200))
 @d xisdigit(c) (isdigit(c)&&((eight_bits)c<0200))
 @d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
-@d xislower(c) (islower(c)&&((eight_bits)c<0200))
-@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
 @d xisxdigit(c) (isxdigit(c)&&((eight_bits)c<0200))
 
 @<Common code...@>=
@@ -82,7 +80,6 @@ extern char *limit; /* points to the last character in the buffer */
 @d rlink dummy.Rlink /* right link in binary search tree for section names */
 @d root name_dir->rlink /* the root of the binary search tree
   for section names */
-@d chunk_marker 0
 
 @<Common code...@>=
 typedef struct name_info {
@@ -98,9 +95,7 @@ typedef struct name_info {
 typedef name_info *name_pointer; /* pointer into array of \&{name\_info}s */
 typedef name_pointer *hash_pointer;
 extern char byte_mem[]; /* characters of names */
-extern char *byte_mem_end; /* end of |byte_mem| */
 extern name_info name_dir[]; /* information about names */
-extern name_pointer name_dir_end; /* end of |name_dir| */
 extern name_pointer name_ptr; /* first unused position in |name_dir| */
 extern char *byte_ptr; /* first unused position in |byte_mem| */
 extern name_pointer hash[]; /* heads of hash lists */
@@ -114,7 +109,6 @@ extern void print_section_name(), sprint_section_name();
 @d spotless 0 /* |history| value for normal jobs */
 @d harmless_message 1 /* |history| value when non-serious info was printed */
 @d error_message 2 /* |history| value when an error was noted */
-@d fatal_message 3 /* |history| value when we had to stop prematurely */
 @d mark_harmless {if (history==spotless) history=harmless_message;}
 @d mark_error history=error_message
 @d confusion(s) fatal("! This can't happen: ",s)
@@ -127,18 +121,13 @@ extern void fatal(); /* issue error message and die */
 extern void overflow(); /* succumb because a table has overflowed */
 
 @ Code related to file handling:
-@f line x /* make |line| an unreserved word */
 @d max_file_name_length 60
-@d cur_file file[include_depth] /* current file */
 @d cur_file_name file_name[include_depth] /* current file name */
-@d web_file_name file_name[0] /* main source file name */
 @d cur_line line[include_depth] /* number of current line in current file */
 
 @<Common code...@>=
 extern include_depth; /* current level of nesting */
-extern FILE *file[]; /* stack of non-change files */
 extern char C_file_name[]; /* name of |C_file| */
-extern char tex_file_name[]; /* name of |tex_file| */
 extern char idx_file_name[]; /* name of |idx_file| */
 extern char scn_file_name[]; /* name of |scn_file| */
 extern char file_name[][max_file_name_length];
@@ -159,7 +148,6 @@ extern check_complete(); /* checks that all changes were picked up */
 typedef unsigned short sixteen_bits;
 extern sixteen_bits section_count; /* the current section number */
 extern boolean changed_section[]; /* is the section changed? */
-extern boolean change_pending; /* is a decision about change still unclear? */
 extern boolean print_where; /* tells \.{CTANGLE} to print line and file info */
 
 @ Code related to command line arguments:
