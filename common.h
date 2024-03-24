@@ -121,6 +121,7 @@ extern void fatal(); /* issue error message and die */
 extern void overflow(); /* succumb because a table has overflowed */
 
 @ Code related to file handling:
+@f line x /* make |line| an unreserved word */
 @d max_file_name_length 60
 @d cur_file_name file_name[include_depth] /* current file name */
 @d cur_line line[include_depth] /* number of current line in current file */
