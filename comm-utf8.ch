@@ -30,36 +30,36 @@ common_init()
 @x
   register int  c=EOF; /* character read; initialized so some compilers won't complain */
 @y
-  wchar_t c;
+  wint_t c;
 @z
 
 @x
   while (k<=buffer_end && (c=getc(fp)) != EOF && c!='\n')
-    if ((*(k++) = c) != ' ') limit = k;
-  if (k>buffer_end)
-    if ((c=getc(fp))!=EOF && c!='\n') {
-      ungetc(c,fp); loc=buffer; err_print("! Input line too long");
 @y
-  while (k<=buffer_end) {
-    c=fgetwc(fp);
-    if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
-    if (!(!feof(fp) && c!=L'\n')) break;
-    assert((c & 0xffff) == c);
+  while (k<=buffer_end && (c=fgetwc(fp)) != WEOF && c!=L'\n')
+@z
+
+@x
+    if ((*(k++) = c) != ' ') limit = k;
+@y
+  {
     assert(xord[c] != invalid_code);
     if ((*(k++) = xord[c]) != ' ') limit = k;
   }
-  if (k>buffer_end) {
-    c=fgetwc(fp);
-    if (ferror(fp)) { fprintf(stderr, "File is not UTF-8\n"); exit(1); }
-    if (!feof(fp) && c!=L'\n') {
+@z
+
+@x
+    if ((c=getc(fp))!=EOF && c!='\n') {
+      ungetc(c,fp); loc=buffer; err_print("! Input line too long");
+@y
+    if ((c=fgetwc(fp))!=WEOF && c!=L'\n') {
       ungetwc(c,fp); loc=buffer; err_print("! Input line too long");
-    }
 @z
 
 @x
   if (c==EOF && limit==buffer) return(0);  /* there was nothing after
 @y
-  if (feof(fp) && limit==buffer) return(0);  /* there was nothing after
+  if (c==WEOF && limit==buffer) return(0);  /* there was nothing after
 @z
 
 @x
