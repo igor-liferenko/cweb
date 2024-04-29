@@ -1,4 +1,8 @@
-see explanation in tex/close.ch
+Close any open input files before exiting.
+Otherwise they will be closed automatically,
+which may result to "Segmentation fault" on
+old systems (due to the glibc bug in handling
+wide-character streams).
 
 @x
   @<Initialize pointers@>;
