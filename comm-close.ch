@@ -1,3 +1,5 @@
+see explanation in tex/close.ch
+
 @x
   @<Initialize pointers@>;
 @y
