@@ -4,6 +4,8 @@ which may result to "Segmentation fault" on
 old systems (due to the glibc bug in handling
 wide-character streams).
 
+See also cweav-close.ch
+
 @x
   if (history > harmless_message) return(1);
 @y

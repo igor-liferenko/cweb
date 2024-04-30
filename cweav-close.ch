@@ -1,13 +1,11 @@
 Close open input files before opening them second time.
-Otherwise they will be closed automatically (when the program exits),
-which may result to "Segmentation fault" on
-old systems (due to the glibc bug in handling
-wide-character streams).
+
+See also comm-close.ch
 
 @x
-@c @<Include files@>@/
+void phase_two();
 @y
-@c @<Include files@>@/
+void phase_two();
 extern FILE *file[];
 extern FILE *change_file;
 @z
