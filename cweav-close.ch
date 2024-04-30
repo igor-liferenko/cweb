@@ -5,9 +5,17 @@ old systems (due to the glibc bug in handling
 wide-character streams).
 
 @x
+@c @<Include files@>@/
+@y
+@c @<Include files@>@/
+extern FILE *file[];
+extern FILE *change_file;
+@z
+
+@x
 phase_two() {
 @y
 phase_two() {
-fclose(web_file);
+fclose(file[0]); /* web_file */
 fclose(change_file);
 @z
