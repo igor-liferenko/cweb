@@ -1,6 +1,7 @@
-Close open input files before opening them second time.
+see explanation in tex/close.ch
 
-See also comm-close.ch
+CWEAVE in phase_two() opens files second time without closing.
+So, previous handles just hang in memory without any references left for it.
 
 @x
 void phase_two();

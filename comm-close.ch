@@ -1,10 +1,6 @@
-Close open input files before exiting.
-Otherwise they will be closed automatically,
-which may result to "Segmentation fault" on
-old systems (due to the glibc bug in handling
-wide-character streams).
+see explanation in tex/close.ch
 
-See also cweav-close.ch
+Close files before exit.
 
 @x
   if (history > harmless_message) return(1);
