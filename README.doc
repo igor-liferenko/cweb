@@ -1,4 +1,0 @@
-For reading the documentation of CTANGLE/CWEAVE, create self-consistent ctangle.w/cweave.w this way:
-delete constants from common.w which are in 'test -z' in Makefile
-(except max_sections when CTANGLE), and put common.w into ctangle.w/cweave.w, and from
-ctangle.w/cweave.w delete '@i common.h'
