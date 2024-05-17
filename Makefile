@@ -4,10 +4,10 @@ all:
 	bin/ctangle common comm-merged
 	ctie -c cweav-merged.ch cweave.w common-utf8.ch cweav-utf8.ch common-constants.ch cweav-constants.ch cweav-close.ch >/dev/null
 	bin/ctangle cweave cweav-merged
-	gcc -std=c99 -w -o cweave cweave.c common.c
+	gcc -w -o cweave cweave.c common.c
 	ctie -c ctang-merged.ch ctangle.w common-utf8.ch ctang-utf8.ch ctang-bhp.ch common-constants.ch ctang-constants.ch >/dev/null
 	bin/ctangle ctangle ctang-merged
-	gcc -std=c99 -w -o ctangle ctangle.c common.c
+	gcc -w -o ctangle ctangle.c common.c
 	@test -z "$$(sed -n 's/\(#define max_sections [0-9]\+\).*/\1\\b/p' common.c | grep -L -f - cweave.c)"
 	@test -z "$$(sed -n 's/\(#define buf_size [0-9]\+\).*/\1\\b/p' common.c | grep -L -f - cweave.c ctangle.c)"
 	@test -z "$$(sed -n 's/\(#define longest_name [0-9]\+\).*/\1\\b/p' common.c|grep -L -f - cweave.c ctangle.c)"
