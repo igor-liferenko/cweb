@@ -14,5 +14,6 @@ extern wchar_t xchr[];
 @x
           C_putc(a); /* a high-bit character can occur in a string */
 @y
-          fprintf(C_file,"%lc",xchr[(eight_bits)a]); /* a high-bit character can occur in a string */
+          fprintf(C_file,"%lc",xchr[(eight_bits)a]);
+            /* a high-bit character can occur in a string */
 @z
