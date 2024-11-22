@@ -1,3 +1,119 @@
-Original CWEB with UTF-8 support.
+Original CWEB (with differences below) with UTF-8 support.
 
 See utf8.pdf - it contains improvements to https://tug.org/TUGboat/tb42-1/tb130liferenko-cweb.pdf
+
+=======================================================
+
+--- common.h
++++ common.h
+@@ -68,2 +67,0 @@
+-@d xislower(c) (islower(c)&&((eight_bits)c<0200))
+-@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
+@@ -85 +82,0 @@
+-@d chunk_marker 0
+@@ -101 +97,0 @@
+-extern char *byte_mem_end; /* end of |byte_mem| */
+@@ -103 +98,0 @@
+-extern name_pointer name_dir_end; /* end of |name_dir| */
+@@ -117 +111,0 @@
+-@d fatal_message 3 /* |history| value when we had to stop prematurely */
+@@ -132 +125,0 @@
+-@d cur_file file[include_depth] /* current file */
+@@ -134 +126,0 @@
+-@d web_file_name file_name[0] /* main source file name */
+@@ -139,2 +130,0 @@
+-extern FILE *file[]; /* stack of non-change files */
+-extern FILE *change_file; /* change file */
+@@ -142 +131,0 @@
+-extern char tex_file_name[]; /* name of |tex_file| */
+@@ -163 +151,0 @@
+-extern boolean change_pending; /* is a decision about change still unclear? */
+@@ -178 +165,0 @@
+-@d new_line putchar('\n') @d putxchar putchar
+@@ -180,2 +166,0 @@
+-@d C_printf(c,a) fprintf(C_file,c,a)
+-@d C_putc(c) putc(c,C_file)
+
+--- common.w
++++ common.w
+@@ -153,2 +153,2 @@
+-@d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
+-@d longest_name 10000
++@d buf_size 100 /* maximum length of input line, plus one */
++@d longest_name 10000 /* section names and strings shouldn't be longer than this */
+@@ -156,2 +156,2 @@
+-@d xisspace(c) (isspace(c)&&((unsigned char)c<0200))
+-@d xisupper(c) (isupper(c)&&((unsigned char)c<0200))
++@d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
++@d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
+@@ -415,2 +415,2 @@
+-@d max_sections 2000 /* number of identifiers, strings, section names;
+-  must be less than 10240 */
++@d max_sections 2000 /* number of identifiers, strings, section names; greater than the total
++  number of sections; must be less than 10240 */
+@@ -418,0 +419 @@
++typedef char unsigned eight_bits;
+@@ -1401 +1401,0 @@
+-@d new_line putchar('\n') @d putxchar putchar
+@@ -1403,2 +1402,0 @@
+-@d C_printf(c,a) fprintf(C_file,c,a)
+-@d C_putc(c) putc(c,C_file) /* isn't \CEE/ wonderfully consistent? */
+
+--- ctangle.w
++++ ctangle.w
+@@ -66,0 +67,2 @@
++#define C_printf(c,a) fprintf(C_file,c,a)
++#define C_putc(c) putc(c,C_file)
+@@ -109,2 +111,2 @@
+-If you change |max_bytes|, |max_names|, or |hash_size| you should also
+-change them in the file |"common.w"|.
++If you change |max_bytes|, |max_names|, |hash_size|, |longest_name|, or |buf_size|
++you should also change them in the file |"common.w"|.
+@@ -113 +115 @@
+-  index entries, and section names; used in |"common.w"| */
++  index entries, and section names; must be less than $2^{24}$ */
+@@ -116 +118 @@
+-  must be less than 10240; used in |"common.w"| */
++  must be less than 10240 */
+@@ -118 +120 @@
+-@d hash_size 353 /* should be prime; used in |"common.w"| */
++@d hash_size 353 /* should be prime */
+@@ -121 +123 @@
+-@d buf_size 100 /* for \.{CWEAVE} and \.{CTANGLE} */
++@d buf_size 100 /* maximum length of input line, plus one */
+
+--- cweave.w
++++ cweave.w
+@@ -118 +118 @@
+-If you change |max_bytes|, |max_names|, |hash_size|, or |buf_size|
++If you change |max_bytes|, |max_names|, |max_sections|, |hash_size|, |longest_name|, or |buf_size|
+@@ -122 +122 @@
+-  index entries, and section names */
++  index entries, and section names; must be less than $2^{24}$ */
+@@ -124,2 +124,3 @@
+-  must be less than 10240; used in |"common.w"| */
+-@d max_sections 2000 /* greater than the total number of sections */
++  must be less than 10240 */
++@d max_sections 2000 /* number of identifiers, strings, section names; greater than the total
++  number of sections; must be less than 10240 */
+@@ -1431 +1432 @@
+-  new_line; mark_harmless;
++  putchar('\n'); mark_harmless;
+@@ -2179 +2180 @@
+-  default: putxchar(r);
++  default: putchar(r);
+@@ -3101 +3102 @@
+-      if (k==pp) putxchar('*'); else putxchar(' ');
++      if (k==pp) putchar('*'); else putchar(' ');
+
+--- cwebmac.tex
++++ cwebmac.tex
+@@ -415 +415 @@
+-\newdimen\pageshift \pageshift=\hoffset
++\newdimen\pageshift \pageshift=0in
+
+--- cwebman.tex
++++ cwebman.tex
+@@ -1041 +1041 @@
+-(Off by default; has no effect on \.{CTANGLE}.)
++(On by default; has no effect on \.{CTANGLE}.)
