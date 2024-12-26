@@ -119,14 +119,14 @@ If you change |max_bytes|, |max_names|, |max_sections|, |hash_size|, |longest_na
 you have to change them also in the file |"common.w"|.
 
 @d max_bytes 90000 /* the number of bytes in identifiers,
-  index entries, and section names; must be less than $2^{24}$ */
+  index entries, and section names; must be less than $2^{24}$; used in |"common.w"| */
 @d max_names 4000 /* number of identifiers, strings, section names;
-  must be less than 10240 */
+  must be less than 10240; used in |"common.w"| */
 @d max_sections 2000 /* number of identifiers, strings, section names; greater than the total
-  number of sections; must be less than 10240 */
-@d hash_size 353 /* should be prime */
-@d buf_size 100 /* maximum length of input line, plus one */
-@d longest_name 10000 /* section names and strings shouldn't be longer than this */
+  number of sections; must be less than 10240; used in |"common.w"| */
+@d hash_size 353 /* should be prime; used in |"common.w"| */
+@d buf_size 100 /* maximum length of input line, plus one; used in |"common.w"| */
+@d longest_name 10000 /* section names and strings shouldn't be longer than this; used in |"common.w"| */
 @d long_buf_size (buf_size+longest_name)
 @d line_length 80 /* lines of \TEX/ output have at most this many characters;
   should be less than 256 */

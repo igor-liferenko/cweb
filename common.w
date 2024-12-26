@@ -150,8 +150,8 @@ Since |buf_size| is strictly less than |long_buf_size|,
 some of \.{CWEB}'s routines use the fact that it is safe to refer to
 |*(limit+2)| without overstepping the bounds of the array.
 
-@d buf_size 100 /* maximum length of input line, plus one */
-@d longest_name 10000 /* section names and strings shouldn't be longer than this */
+@d buf_size 100 /* maximum length of input line, plus one; for \.{CWEAVE} and \.{CTANGLE} */
+@d longest_name 10000 /* section names and strings shouldn't be longer than this; for \.{CWEAVE} and \.{CTANGLE} */
 @d long_buf_size (buf_size+longest_name) /* for \.{CWEAVE} */
 @d xisspace(c) (isspace(c)&&((eight_bits)c<0200))
 @d xisupper(c) (isupper(c)&&((eight_bits)c<0200))
@@ -413,7 +413,7 @@ the |cur_file| has changed, we tell \.{CTANGLE} to print this
 information in the \CEE/ file by means of the |print_where| flag.
 
 @d max_sections 2000 /* number of identifiers, strings, section names; greater than the total
-  number of sections; must be less than 10240 */
+  number of sections; must be less than 10240; for \.{CWEAVE} */
 
 @<Defin...@>=
 typedef char unsigned eight_bits;
@@ -588,9 +588,9 @@ the |byte_mem| array (the address where the name begins) and other data.
 A |name_pointer| variable is a pointer into |name_dir|.
 
 @d max_bytes 90000 /* the number of bytes in identifiers,
-  index entries, and section names; must be less than $2^{24}$ */
+  index entries, and section names; must be less than $2^{24}$; for \.{CWEAVE} and \.{CTANGLE} */
 @d max_names 4000 /* number of identifiers, strings, section names;
-  must be less than 10240 */
+  must be less than 10240; for \.{CWEAVE} and \.{CTANGLE} */
 
 @<Definitions that...@>=
 typedef struct name_info {
@@ -640,7 +640,7 @@ function |names_match|, which is slightly different in
 \.{CWEAVE} and \.{CTANGLE}.  If there is no match for the identifier,
 it is inserted into the table.
 
-@d hash_size 353 /* should be prime */
+@d hash_size 353 /* should be prime; for \.{CWEAVE} and \.{CTANGLE} */
 
 @<Defini...@>=
 typedef name_pointer *hash_pointer;
