@@ -11,7 +11,7 @@
 @z
 
 @x
-@d buf_size 100 /* maximum length of input line, plus one */
+@d buf_size 100 /* maximum length of input line, plus one; used in |"common.w"| */
 @y
-@d buf_size 500 /* maximum length of input line, plus one */
+@d buf_size 500 /* maximum length of input line, plus one; used in |"common.w"| */
 @z
