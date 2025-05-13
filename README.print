@@ -19,5 +19,3 @@ even: left margin = 1cm
 Print in two passes (reinsert ejected paper to printer after first pass
 if you need to start program on reverse side of TOC) - in first pass print
 page numbers of TOC, in second pass print page numbers of the rest.
----------------------------------------------------
-NOTE: \pageshift must be 0in in cwebmac.tex
