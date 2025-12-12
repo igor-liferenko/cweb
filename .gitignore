@@ -5,11 +5,9 @@ cweave
 cweave.c
 *.idx
 *.log
-*.pdf
 *.dvi
 *.scn
 *.tex
 *.toc
 *.ps
 *-merged.ch
-.gdb_history
