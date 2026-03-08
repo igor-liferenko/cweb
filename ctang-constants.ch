@@ -1,13 +1,19 @@
 @x
+@d max_bytes 90000 /* the number of bytes in identifiers,
+@y
+@d max_bytes 500000 /* the number of bytes in identifiers,
+@z
+
+@x
 @d max_names 4000 /* number of identifiers, strings, section names;
 @y
-@d max_names 4500 /* number of identifiers, strings, section names;
+@d max_names 10000 /* number of identifiers, strings, section names;
 @z
 
 @x
 @d max_texts 2500 /* number of replacement texts, must be less than 10240 */
 @y
-@d max_texts 3500 /* number of replacement texts, must be less than 10240 */
+@d max_texts 10000 /* number of replacement texts, must be less than 10240 */
 @z
 
 @x
