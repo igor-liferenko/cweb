@@ -134,7 +134,7 @@ you have to change them also in the file |"common.w"|.
 @d max_refs 20000 /* number of cross-references; must be less than 65536 */
 @d max_toks 20000 /* number of symbols in \CEE/ texts being parsed;
   must be less than 65536 */
-@d max_texts 4000 /* number of phrases in \CEE/ texts being parsed;
+@d max_texts_cweave 4000 /* number of phrases in \CEE/ texts being parsed;
   must be less than 10240 */
 @d max_scraps 2000 /* number of tokens in \CEE/ texts being parsed */
 @d stack_size 400 /* number of simultaneous output levels */
@@ -357,10 +357,10 @@ Thus, we usually have |*text_ptr==tok_ptr|.
 @<Global...@>=
 token tok_mem[max_toks]; /* tokens */
 token_pointer tok_mem_end = tok_mem+max_toks-1; /* end of |tok_mem| */
-token_pointer tok_start[max_texts]; /* directory into |tok_mem| */
+token_pointer tok_start[max_texts_cweave]; /* directory into |tok_mem| */
 token_pointer tok_ptr; /* first unused position in |tok_mem| */
 text_pointer text_ptr; /* first unused position in |tok_start| */
-text_pointer tok_start_end = tok_start+max_texts-1; /* end of |tok_start| */
+text_pointer tok_start_end = tok_start+max_texts_cweave-1; /* end of |tok_start| */
 token_pointer max_tok_ptr; /* largest value of |tok_ptr| */
 text_pointer max_text_ptr; /* largest value of |text_ptr| */
 
@@ -3117,10 +3117,10 @@ applies productions as much as
 possible. The result is a token list containing the translation of
 the given sequence of scraps.
 
-After calling |translate|, we will have |text_ptr+3<=max_texts| and
+After calling |translate|, we will have |text_ptr+3<=max_texts_cweave| and
 |tok_ptr+6<=max_toks|, so it will be possible to create up to three token
 lists with up to six tokens without checking for overflow. Before calling
-|translate|, we should have |text_ptr<max_texts| and |scrap_ptr<max_scraps|,
+|translate|, we should have |text_ptr<max_texts_cweave| and |scrap_ptr<max_scraps|,
 since |translate| might add a new text and a new scrap before it checks
 for overflow.
 
@@ -4633,7 +4633,7 @@ print_stats() {
   printf("%ld scraps (out of %ld)\n",
             (long)(max_scr_ptr-scrap_info),(long)max_scraps);
   printf("%ld texts (out of %ld)\n",
-            (long)(max_text_ptr-tok_start),(long)max_texts);
+            (long)(max_text_ptr-tok_start),(long)max_texts_cweave);
   printf("%ld tokens (out of %ld)\n",
             (long)(max_tok_ptr-tok_mem),(long)max_toks);
   printf("%ld levels (out of %ld)\n",

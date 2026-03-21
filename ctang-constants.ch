@@ -11,9 +11,9 @@
 @z
 
 @x
-@d max_texts 2500 /* number of replacement texts, must be less than 10240 */
+@d max_texts_ctangle 2500 /* number of replacement texts, must be less than 10240 */
 @y
-@d max_texts 3900 /* number of replacement texts, must be less than 10240 */
+@d max_texts_ctangle 3900 /* number of replacement texts, must be less than 10240 */
 @z
 
 @x

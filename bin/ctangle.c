@@ -22,7 +22,7 @@
 #define max_toks 270000
 #define max_names 4000 \
 
-#define max_texts 2500
+#define max_texts_ctangle 2500
 #define hash_size 353
 #define longest_name 10000
 #define stack_size 50
@@ -89,7 +89,7 @@
 
 #define equiv equiv_or_xref \
 
-#define section_flag max_texts \
+#define section_flag max_texts_ctangle \
 
 #define string 02
 #define join 0177
@@ -284,8 +284,8 @@ typedef output_state*stack_pointer;
 /*17:*/
 #line 159 "ctangle.w"
 
-text text_info[max_texts];
-text_pointer text_info_end= text_info+max_texts-1;
+text text_info[max_texts_ctangle];
+text_pointer text_info_end= text_info+max_texts_ctangle-1;
 text_pointer text_ptr;
 eight_bits tok_mem[max_toks];
 eight_bits*tok_mem_end= tok_mem+max_toks-1;
@@ -1569,7 +1569,7 @@ printf("\nMemory usage statistics:\n");
 printf("%ld names (out of %ld)\n",
 (long)(name_ptr-name_dir),(long)max_names);
 printf("%ld replacement texts (out of %ld)\n",
-(long)(text_ptr-text_info),(long)max_texts);
+(long)(text_ptr-text_info),(long)max_texts_ctangle);
 printf("%ld bytes (out of %ld)\n",
 (long)(byte_ptr-byte_mem),(long)max_bytes);
 printf("%ld tokens (out of %ld)\n",

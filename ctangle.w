@@ -116,7 +116,7 @@ you should also change them in the file |"common.w"|.
 @d max_toks 270000 /* number of bytes in compressed \CEE/ code */
 @d max_names 4000 /* number of identifiers, strings, section names;
   must be less than 10240; used in |"common.w"| */
-@d max_texts 2500 /* number of replacement texts, must be less than 10240 */
+@d max_texts_ctangle 2500 /* number of replacement texts, must be less than 10240 */
 @d hash_size 353 /* should be prime; used in |"common.w"| */
 @d longest_name 10000 /* section names and strings shouldn't be longer than this;
                          used in |"common.w"| */
@@ -160,8 +160,8 @@ typedef struct {
 typedef text *text_pointer;
 
 @ @<Glob...@>=
-text text_info[max_texts];
-text_pointer text_info_end=text_info+max_texts-1;
+text text_info[max_texts_ctangle];
+text_pointer text_info_end=text_info+max_texts_ctangle-1;
 text_pointer text_ptr; /* first unused position in |text_info| */
 eight_bits tok_mem[max_toks];
 eight_bits *tok_mem_end=tok_mem+max_toks-1;
@@ -225,7 +225,7 @@ name, and they also tie together all the \CEE/ texts of unnamed sections.
 The replacement text pointer for the first unnamed section appears in
 |text_info->text_link|, and the most recent such pointer is |last_unnamed|.
 
-@d section_flag max_texts /* final |text_link| in section replacement texts */
+@d section_flag max_texts_ctangle /* final |text_link| in section replacement texts */
 
 @<Glob...@>=
 text_pointer last_unnamed; /* most recent replacement text of unnamed section */
@@ -1543,7 +1543,7 @@ print_stats() {
   printf("%ld names (out of %ld)\n",
           (long)(name_ptr-name_dir),(long)max_names);
   printf("%ld replacement texts (out of %ld)\n",
-          (long)(text_ptr-text_info),(long)max_texts);
+          (long)(text_ptr-text_info),(long)max_texts_ctangle);
   printf("%ld bytes (out of %ld)\n",
           (long)(byte_ptr-byte_mem),(long)max_bytes);
   printf("%ld tokens (out of %ld)\n",
