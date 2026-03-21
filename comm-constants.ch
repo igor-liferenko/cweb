@@ -7,11 +7,11 @@
 @x
 @d max_bytes 90000 /* the number of bytes in identifiers,
 @y
-@d max_bytes 500000 /* the number of bytes in identifiers,
+@d max_bytes 99000 /* the number of bytes in identifiers,
 @z
 
 @x
 @d max_names 4000 /* number of identifiers, strings, section names;
 @y
-@d max_names 10000 /* number of identifiers, strings, section names;
+@d max_names 5500 /* number of identifiers, strings, section names;
 @z
