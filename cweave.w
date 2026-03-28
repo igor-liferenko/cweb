@@ -2124,7 +2124,7 @@ items for \TEX/ output.
 
 \item{$\bullet$}|res_flag+p| represents \.{\\\&\{{\rm identifier $p$}\}};
 
-\item{$\bullet$}|section_flag+p| represents section name |p|;
+\item{$\bullet$}|section_flag_cweave+p| represents section name |p|;
 
 \item{$\bullet$}|tok_flag+p| represents token list number |p|;
 
@@ -2133,7 +2133,7 @@ translated without line-break controls.
 
 @d id_flag 10240 /* signifies an identifier */
 @d res_flag 2*id_flag /* signifies a reserved word */
-@d section_flag 3*id_flag /* signifies a section name */
+@d section_flag_cweave 3*id_flag /* signifies a section name */
 @d tok_flag 4*id_flag /* signifies a token list */
 @d inner_tok_flag 5*id_flag /* signifies a token list in `\pb' */
 
@@ -2153,7 +2153,7 @@ text_pointer p;
       case 2: printf("\\&{"@q}@>); print_id((name_dir+r)); printf(@q{@>"}");
         break; /* |res_flag| */
       case 3: printf("<"); print_section_name((name_dir+r)); printf(">");
-        break; /* |section_flag| */
+        break; /* |section_flag_cweave| */
       case 4: printf("[[%d]]",r); break; /* |tok_flag| */
       case 5: printf("|[[%d]]|",r); break; /* |inner_tok_flag| */
       default: @<Print token |r| in symbolic form@>;
@@ -2433,7 +2433,7 @@ text_pointer p;
       case 4: case 5: /* |tok_flag| or |inner_tok_flag| */
         if ((q=find_first_ident(tok_start+r))!=no_ident_found)
           return q;
-      default: ; /* char, |section_flag|, fall thru: move on to next token */
+      default: ; /* char, |section_flag_cweave|, fall thru: move on to next token */
         if (*j==inserted) return no_ident_found; /* ignore inserts */
         else if (*j==qualifier) j++; /* bypass namespace qualifier */
     }
@@ -3216,7 +3216,7 @@ been appended:
 @<Make sure that there is room for the new scraps, tokens, and texts@>;
 switch (next_control) {
   case section_name:
-    app(section_flag+(int)(cur_section-name_dir));
+    app(section_flag_cweave+(int)(cur_section-name_dir));
     app_scrap(section_scrap,maybe_math);
     app_scrap(exp,yes_math);@+break;
   case string: case constant: case verbatim: @<Append a string or constant@>;
@@ -3637,7 +3637,7 @@ get_output() /* returns the next token of output */
     cur_name=a % id_flag + name_dir;
     switch (a / id_flag) {
       case 2: return(res_word); /* |a==res_flag+cur_name| */
-      case 3: return(section_code); /* |a==section_flag+cur_name| */
+      case 3: return(section_code); /* |a==section_flag_cweave+cur_name| */
       case 4: push_level(a % id_flag + tok_start); goto restart;
         /* |a==tok_flag+cur_name| */
       case 5: push_level(a % id_flag + tok_start); cur_mode=inner; goto restart;
@@ -4193,7 +4193,7 @@ if (next_control!='=' && next_control!=eq_eq)
 if (out_ptr>out_buf+1 && *out_ptr=='Y' && *(out_ptr-1)=='\\') app(backup);
     /* the section name will be flush left */
 @.\\Y@>
-app(section_flag+(int)(this_section-name_dir));
+app(section_flag_cweave+(int)(this_section-name_dir));
 cur_xref=(xref_pointer)this_section->xref;
 if(cur_xref->num==file_flag) cur_xref=cur_xref->xlink;
 app_str("${}");
@@ -4214,7 +4214,7 @@ if (next_control<section_name) {
   next_control=get_next();
 }
 else if (next_control==section_name) {
-  app(section_flag+(int)(cur_section-name_dir));
+  app(section_flag_cweave+(int)(cur_section-name_dir));
   app_scrap(section_scrap,maybe_math);
   next_control=get_next();
 }
@@ -4605,7 +4605,7 @@ name_pointer p;
     section_print(p->llink); out_str("\\I");
 @.\\I@>
     tok_ptr=tok_mem+1; text_ptr=tok_start+1; scrap_ptr=scrap_info; init_stack;
-    app(p-name_dir+section_flag); make_output();
+    app(p-name_dir+section_flag_cweave); make_output();
     footnote(cite_flag);
     footnote(0); /* |cur_xref| was set by |make_output| */
     finish_line();@/

@@ -89,7 +89,7 @@
 
 #define equiv equiv_or_xref \
 
-#define section_flag max_texts_ctangle \
+#define section_flag_ctangle max_texts_ctangle \
 
 #define string 02
 #define join 0177
@@ -534,7 +534,7 @@ void
 pop_level(flag)
 int flag;
 {
-if(flag&&cur_repl->text_link<section_flag){
+if(flag&&cur_repl->text_link<section_flag_ctangle){
 cur_repl= cur_repl->text_link+text_info;
 cur_byte= cur_repl->tok_start;cur_end= (cur_repl+1)->tok_start;
 return;
@@ -1472,11 +1472,11 @@ else if(p->equiv==(char*)text_info)p->equiv= (char*)cur_text;
 
 else{
 q= (text_pointer)p->equiv;
-while(q->text_link<section_flag)
+while(q->text_link<section_flag_ctangle)
 q= q->text_link+text_info;
 q->text_link= cur_text-text_info;
 }
-cur_text->text_link= section_flag;
+cur_text->text_link= section_flag_ctangle;
 
 
 /*:89*/

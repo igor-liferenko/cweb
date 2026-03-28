@@ -218,14 +218,14 @@ If $p$ points to a replacement text, |p->tok_start| is the |tok_mem| position
 of the first eight-bit code of that text. If |p->text_link==0|,
 this is the replacement text for a macro, otherwise it is the replacement
 text for a section. In the latter case |p->text_link| is either equal to
-|section_flag|, which means that there is no further text for this section, or
+|section_flag_ctangle|, which means that there is no further text for this section, or
 |p->text_link| points to a continuation of this replacement text; such
 links are created when several sections have \CEE/ texts with the same
 name, and they also tie together all the \CEE/ texts of unnamed sections.
 The replacement text pointer for the first unnamed section appears in
 |text_info->text_link|, and the most recent such pointer is |last_unnamed|.
 
-@d section_flag max_texts_ctangle /* final |text_link| in section replacement texts */
+@d section_flag_ctangle max_texts_ctangle /* final |text_link| in section replacement texts */
 
 @<Glob...@>=
 text_pointer last_unnamed; /* most recent replacement text of unnamed section */
@@ -360,7 +360,7 @@ void
 pop_level(flag) /* do this when |cur_byte| reaches |cur_end| */
 int flag; /* |flag==0| means we are in |output_defs| */
 {
-  if (flag && cur_repl->text_link<section_flag) { /* link to a continuation */
+  if (flag && cur_repl->text_link<section_flag_ctangle) { /* link to a continuation */
     cur_repl=cur_repl->text_link+text_info; /* stay on the same level */
     cur_byte=cur_repl->tok_start; cur_end=(cur_repl+1)->tok_start;
     return;
@@ -1453,11 +1453,11 @@ else if (p->equiv==(char *)text_info) p->equiv=(char *)cur_text;
   /* first section of this name */
 else {
   q=(text_pointer)p->equiv;
-  while (q->text_link<section_flag)
+  while (q->text_link<section_flag_ctangle)
     q=q->text_link+text_info; /* find end of list */
   q->text_link=cur_text-text_info;
 }
-cur_text->text_link=section_flag;
+cur_text->text_link=section_flag_ctangle;
   /* mark this replacement text as a nonmacro */
 
 @ @<Predec...@>=
